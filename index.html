@@ -416,6 +416,16 @@
         // Emergency Loading Screen Fallback - Inline execution
         console.log('🚑 Emergency fallback script loaded');
         
+        // Clear any existing service workers that might be causing loops
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    console.log('Unregistering problematic service worker...');
+                    registration.unregister();
+                }
+            });
+        }
+        
         // Force remove loading screen after 3 seconds if main script fails
         setTimeout(function() {
             const loadingScreen = document.getElementById('loading-screen');
@@ -426,7 +436,9 @@
             }
         }, 3000);
         
-        // Enhanced Service Worker registration with cache control
+        // DISABLED: Service Worker registration temporarily to stop refresh loops
+        // Will re-enable after fixing cache issues
+        /*
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js?cb=' + window.GLOBAL_CACHE_BUST)
                 .then(registration => {
@@ -441,6 +453,7 @@
                     console.log('SW registration failed:', error);
                 });
         }
+        */
         
         // Load main script with global cache-busting
         const mainScript = document.createElement('script');
