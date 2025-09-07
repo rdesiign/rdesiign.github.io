@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="mmm/MMM 1.png">
+    <link rel="preload" as="image" href="mmm/MMM 2.png">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Project Page Specific Styles */
@@ -123,6 +126,18 @@
             height: auto;
             object-fit: cover;
             display: block;
+        }
+        
+        /* Lazy loading placeholder */
+        .lazy-image {
+            background-color: #f0f0f0;
+            min-height: 300px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lazy-image.loaded {
+            opacity: 1;
         }
         
         /* Image Modal */
@@ -331,34 +346,34 @@
             <div class="gallery-container">
                 <div class="gallery-grid">
                     <div class="gallery-item" data-image="mmm/MMM 1.png" data-caption="Smart Home Assistant - Hero View">
-                        <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="lazy" />
+                        <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="eager" decoding="async" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 2.png" data-caption="Smart Home Assistant - Detail View">
-                        <img src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" />
+                        <img data-src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 3.png" data-caption="Smart Home Assistant - Interface Design">
-                        <img src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" />
+                        <img data-src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 4.png" data-caption="Smart Home Assistant - Components">
-                        <img src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" />
+                        <img data-src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 5.png" data-caption="Smart Home Assistant - Technical Drawings">
-                        <img src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" />
+                        <img data-src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 6.png" data-caption="Smart Home Assistant - Environment Integration">
-                        <img src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" />
+                        <img data-src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 7.png" data-caption="Smart Home Assistant - Color Variations">
-                        <img src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" />
+                        <img data-src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 8.png" data-caption="Smart Home Assistant - User Interaction">
-                        <img src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" />
+                        <img data-src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 9.png" data-caption="Smart Home Assistant - Lighting System">
-                        <img src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" />
+                        <img data-src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 10.png" data-caption="Smart Home Assistant - Final Product">
-                        <img src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" />
+                        <img data-src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" decoding="async" class="lazy-image" />
                     </div>
                 </div>
             </div>
@@ -381,7 +396,7 @@
         <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <script>
         // Image gallery functionality
         let currentImageIndex = 0;
@@ -402,6 +417,9 @@
             galleryItems.forEach((item, index) => {
                 item.addEventListener('click', () => openImageModal(index));
             });
+            
+            // Initialize lazy loading
+            initializeLazyLoading();
             
             // Close modal on escape key
             document.addEventListener('keydown', function(e) {
@@ -424,11 +442,50 @@
             });
         }
         
+        function initializeLazyLoading() {
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.onload = () => {
+                                    img.classList.add('loaded');
+                                };
+                                img.removeAttribute('data-src');
+                                observer.unobserve(img);
+                            }
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.01
+                });
+                
+                document.querySelectorAll('.lazy-image').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                document.querySelectorAll('.lazy-image').forEach(img => {
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                    }
+                });
+            }
+        }
+        
         function openImageModal(index) {
             currentImageIndex = index;
             const modal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const modalCaption = document.getElementById('modal-caption');
+            
+            // Preload current and adjacent images for faster navigation
+            preloadModalImages(index);
             
             modalImage.src = images[index].src;
             modalImage.alt = images[index].caption;
@@ -438,6 +495,25 @@
             // Prevent background scrolling
             document.body.style.overflow = 'hidden';
             document.documentElement.style.overflow = 'hidden';
+        }
+        
+        function preloadModalImages(currentIndex) {
+            // Preload current, next, and previous images
+            const indicesToPreload = [
+                currentIndex,
+                (currentIndex + 1) % images.length,
+                (currentIndex - 1 + images.length) % images.length
+            ];
+            
+            indicesToPreload.forEach(index => {
+                if (images[index] && !document.querySelector(`link[href="${images[index].src}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = images[index].src;
+                    document.head.appendChild(link);
+                }
+            });
         }
         
         function closeImageModal() {
@@ -461,6 +537,9 @@
         function updateModalImage() {
             const modalImage = document.getElementById('modal-image');
             const modalCaption = document.getElementById('modal-caption');
+            
+            // Preload adjacent images for smooth navigation
+            preloadModalImages(currentImageIndex);
             
             modalImage.src = images[currentImageIndex].src;
             modalImage.alt = images[currentImageIndex].caption;
