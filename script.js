@@ -1,4 +1,30 @@
-// Navigation functionality - VERSION 2.0 - NO LOADING SCREEN
+// Industrial Design Loading Screen - VERSION 3.0
+// Show loading screen for 2 seconds with industrial theme animation
+window.addEventListener('load', function() {
+    console.log('🏭 Industrial Loading Screen Initialized - 2 seconds');
+    
+    // Add loading class to body
+    document.body.classList.add('loading');
+    
+    // Remove loading screen after exactly 2 seconds
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            
+            // Remove loading screen from DOM after fade out completes
+            setTimeout(function() {
+                document.body.classList.remove('loading');
+                if (loadingScreen.parentNode) {
+                    loadingScreen.parentNode.removeChild(loadingScreen);
+                }
+                console.log('🎯 Loading screen removed after 2 seconds');
+            }, 500); // Wait for fade-out transition
+        }
+    }, 2000); // 2 seconds exactly
+});
+
+// Navigation functionality - VERSION 3.0 - WITH INDUSTRIAL LOADING SCREEN
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 SCRIPT VERSION 2.0 LOADED - LOADING SCREEN REMOVED!');
     
@@ -209,19 +235,7 @@ function initializeProjectModals() {
     });
 }
     
-    // Skill item animations
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-        
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.05)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+    // Skill item animations removed - no skill cards in About section
     
     // Contact link interactions
     const contactLinks = document.querySelectorAll('.contact-link');
@@ -260,7 +274,7 @@ function initializeProjectModals() {
         document.body.classList.add('loaded');
         
         // Add stagger animation to elements
-        const animatedElements = document.querySelectorAll('.skill-item, .project-card, .experience-item');
+        const animatedElements = document.querySelectorAll('.project-card, .experience-item');
         animatedElements.forEach((element, index) => {
             setTimeout(() => {
                 element.classList.add('fade-in');
