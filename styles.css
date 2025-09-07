@@ -1,3 +1,60 @@
+/* Font Face Declarations */
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Regular.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./assets/font/Product Sans Bold Italic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* Reset and base styles */
 * {
     margin: 0;
@@ -141,7 +198,7 @@ html {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 16px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Product Sans', sans-serif;
 }
 
 .progress-bar {
@@ -185,7 +242,7 @@ html {
     font-size: 12px;
     font-weight: 500;
     margin-top: 8px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Product Sans', sans-serif;
 }
 
 /* Animations */
@@ -218,7 +275,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;

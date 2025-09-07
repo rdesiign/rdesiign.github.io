@@ -92,6 +92,6 @@ Use this template to easily add your project details to the portfolio website.
 - **Primary Colors**: Auto Black/White (adapts to theme) with Cyan (#06b6d4) accent
 - **Background**: Dark theme (#0a0a0a)
 - **Text**: White with opacity variations
-- **Typography**: Inter font family
+- **Typography**: Product Sans font family (local fonts from assets/font/)
 - **Border Radius**: Consistent rounded corners (12px-40px)
 - **Glass Effect**: Backdrop blur with semi-transparent backgrounds
