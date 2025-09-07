@@ -137,22 +137,7 @@
             image-rendering: -webkit-optimize-contrast;
             image-rendering: optimize-contrast;
         }
-        
-        /* Lazy loading placeholder */
-        .lazy-image {
-            background-color: #f0f0f0;
-            min-height: 300px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIHN0cm9rZT0iI0NDQyIgc3Ryb2tlLXdpZHRoPSI0Ii8+CjxwYXRoIGQ9Ik0yMCAxMFYzME0xMCAyMEgzMCIgc3Ryb2tlPSIjQ0NDIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 40px 40px;
-        }
-        
-        .lazy-image.loaded {
-            opacity: 1;
-        }
+
         
         /* Image Modal */
         .image-modal {
@@ -363,31 +348,31 @@
                         <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="eager" decoding="async" fetchpriority="high" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 2.png" data-caption="Smart Home Assistant - Detail View">
-                        <img data-src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 3.png" data-caption="Smart Home Assistant - Interface Design">
-                        <img data-src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 4.png" data-caption="Smart Home Assistant - Components">
-                        <img data-src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 5.png" data-caption="Smart Home Assistant - Technical Drawings">
-                        <img data-src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 6.png" data-caption="Smart Home Assistant - Environment Integration">
-                        <img data-src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 7.png" data-caption="Smart Home Assistant - Color Variations">
-                        <img data-src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 8.png" data-caption="Smart Home Assistant - User Interaction">
-                        <img data-src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 9.png" data-caption="Smart Home Assistant - Lighting System">
-                        <img data-src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 10.png" data-caption="Smart Home Assistant - Final Product">
-                        <img data-src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
+                        <img src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" decoding="async" fetchpriority="low" />
                     </div>
                 </div>
             </div>
@@ -409,16 +394,6 @@
     <footer>
         <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
     </footer>
-
-    <script src="script.js" defer></script>
-    <script>
-        // Cache-busting for JavaScript file
-        const jsTimestamp = new Date().getTime();
-        const scriptElement = document.createElement('script');
-        scriptElement.src = 'script.js?v=' + jsTimestamp;
-        scriptElement.defer = true;
-        document.head.appendChild(scriptElement);
-    </script>
     <script>
         // Image gallery functionality
         let currentImageIndex = 0;
@@ -451,9 +426,6 @@
                 item.addEventListener('click', () => openImageModal(index));
             });
             
-            // Initialize lazy loading
-            initializeLazyLoading();
-            
             // Close modal on escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
@@ -474,50 +446,7 @@
                 }
             });
         }
-        
-        function initializeLazyLoading() {
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                // Create a new image to preload
-                                const newImg = new Image();
-                                newImg.onload = () => {
-                                    img.src = img.dataset.src;
-                                    img.classList.add('loaded');
-                                };
-                                newImg.onerror = () => {
-                                    // Fallback: still set src even if preload fails
-                                    img.src = img.dataset.src;
-                                    img.classList.add('loaded');
-                                };
-                                newImg.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                                observer.unobserve(img);
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '100px 0px', // Increased for better UX
-                    threshold: 0.01
-                });
-                
-                document.querySelectorAll('.lazy-image').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            } else {
-                // Fallback for browsers without IntersectionObserver
-                document.querySelectorAll('.lazy-image').forEach(img => {
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.classList.add('loaded');
-                        img.removeAttribute('data-src');
-                    }
-                });
-            }
-        }
+
         
         function openImageModal(index) {
             currentImageIndex = index;
