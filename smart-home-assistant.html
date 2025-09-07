@@ -16,9 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Preload critical images -->
-    <link rel="preload" as="image" href="mmm/MMM 1.png">
-    <link rel="preload" as="image" href="mmm/MMM 2.png">
+    <!-- Preload critical images with optimization hints -->
+    <link rel="preload" as="image" href="mmm/MMM 1.png" fetchpriority="high">
+    <link rel="prefetch" as="image" href="mmm/MMM 2.png">
     <link rel="stylesheet" href="styles.css">
     <script>
         // Add cache-busting timestamp to ensure latest versions
@@ -134,6 +134,8 @@
             height: auto;
             object-fit: cover;
             display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: optimize-contrast;
         }
         
         /* Lazy loading placeholder */
@@ -142,6 +144,10 @@
             min-height: 300px;
             opacity: 0;
             transition: opacity 0.3s ease;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIHN0cm9rZT0iI0NDQyIgc3Ryb2tlLXdpZHRoPSI0Ii8+CjxwYXRoIGQ9Ik0yMCAxMFYzME0xMCAyMEgzMCIgc3Ryb2tlPSIjQ0NDIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 40px 40px;
         }
         
         .lazy-image.loaded {
@@ -354,34 +360,34 @@
             <div class="gallery-container">
                 <div class="gallery-grid">
                     <div class="gallery-item" data-image="mmm/MMM 1.png" data-caption="Smart Home Assistant - Hero View">
-                        <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="eager" decoding="async" />
+                        <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="eager" decoding="async" fetchpriority="high" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 2.png" data-caption="Smart Home Assistant - Detail View">
-                        <img data-src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 3.png" data-caption="Smart Home Assistant - Interface Design">
-                        <img data-src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 4.png" data-caption="Smart Home Assistant - Components">
-                        <img data-src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 5.png" data-caption="Smart Home Assistant - Technical Drawings">
-                        <img data-src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 6.png" data-caption="Smart Home Assistant - Environment Integration">
-                        <img data-src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 7.png" data-caption="Smart Home Assistant - Color Variations">
-                        <img data-src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 8.png" data-caption="Smart Home Assistant - User Interaction">
-                        <img data-src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 9.png" data-caption="Smart Home Assistant - Lighting System">
-                        <img data-src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                     <div class="gallery-item" data-image="mmm/MMM 10.png" data-caption="Smart Home Assistant - Final Product">
-                        <img data-src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" decoding="async" class="lazy-image" />
+                        <img data-src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" decoding="async" class="lazy-image" fetchpriority="low" />
                     </div>
                 </div>
             </div>
@@ -421,6 +427,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize image gallery
             initializeImageGallery();
+            
+            // Register Service Worker for image caching
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('SW registration failed:', error);
+                    });
+            }
         });
         
         function initializeImageGallery() {
@@ -465,17 +482,25 @@
                         if (entry.isIntersecting) {
                             const img = entry.target;
                             if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.onload = () => {
+                                // Create a new image to preload
+                                const newImg = new Image();
+                                newImg.onload = () => {
+                                    img.src = img.dataset.src;
                                     img.classList.add('loaded');
                                 };
+                                newImg.onerror = () => {
+                                    // Fallback: still set src even if preload fails
+                                    img.src = img.dataset.src;
+                                    img.classList.add('loaded');
+                                };
+                                newImg.src = img.dataset.src;
                                 img.removeAttribute('data-src');
                                 observer.unobserve(img);
                             }
                         }
                     });
                 }, {
-                    rootMargin: '50px 0px',
+                    rootMargin: '100px 0px', // Increased for better UX
                     threshold: 0.01
                 });
                 

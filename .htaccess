@@ -17,21 +17,35 @@
     Header set Cache-Control "public, max-age=300"
 </Files>
 
-# Longer cache for images (can be cached longer as they change less frequently)
+# Optimized cache for images with compression hints
 <Files "*.png">
-    Header set Cache-Control "public, max-age=3600"
+    Header set Cache-Control "public, max-age=604800, immutable"
+    Header set Accept-Ranges "bytes"
+    # Image optimization hints
+    Header set Vary "Accept"
 </Files>
 
 <Files "*.jpg">
-    Header set Cache-Control "public, max-age=3600"
+    Header set Cache-Control "public, max-age=604800, immutable"
+    Header set Accept-Ranges "bytes"
+    Header set Vary "Accept"
 </Files>
 
 <Files "*.jpeg">
-    Header set Cache-Control "public, max-age=3600"
+    Header set Cache-Control "public, max-age=604800, immutable"
+    Header set Accept-Ranges "bytes"
+    Header set Vary "Accept"
+</Files>
+
+<Files "*.webp">
+    Header set Cache-Control "public, max-age=604800, immutable"
+    Header set Accept-Ranges "bytes"
+    Header set Vary "Accept"
 </Files>
 
 <Files "*.gif">
-    Header set Cache-Control "public, max-age=3600"
+    Header set Cache-Control "public, max-age=604800, immutable"
+    Header set Accept-Ranges "bytes"
 </Files>
 
 # Force HTTPS (if supported by hosting)

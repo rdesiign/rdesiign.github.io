@@ -24,7 +24,7 @@
         <div class="loading-container">
             <!-- GIF Container -->
             <div class="gif-container">
-                <img src="gil-cat.gif" alt="Loading cat..." class="loading-gif">
+                <img src="gil-cat.gif" alt="Loading cat..." class="loading-gif" loading="eager" decoding="async" fetchpriority="high">
             </div>
             
             <!-- Loading Bar -->
@@ -113,7 +113,7 @@
         
         <div class="about-content fade-in">
             <div class="about-image">
-                <img src="Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-photo">
+                <img src="Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-photo" loading="lazy" decoding="async" fetchpriority="low">
             </div>
             <div class="about-text">
                 <h3>Hello, I'm Rishi</h3>
@@ -366,6 +366,17 @@
 
     <script src="script.js"></script>
     <script>
+        // Register Service Worker for image caching
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+        
         // Cache-busting for JavaScript file
         const jsTimestamp = new Date().getTime();
         const scriptElement = document.createElement('script');
