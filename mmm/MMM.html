@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- Global Cache-Busting Meta Tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="If-Modified-Since" content="0">
+    <meta http-equiv="ETag" content="global-cb-v3">
     <title>MMM Project | Rishi Ramesh</title>
     <meta name="description" content="MMM Project showcase by Rishi Ramesh - Industrial Designer">
+    <!-- Global Cache-Buster - Load First -->
+    <script>
+        // Immediate cache-busting timestamp
+        window.GLOBAL_CACHE_BUST = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        console.log('🔄 Global Cache-Bust ID:', window.GLOBAL_CACHE_BUST);
+    </script>
+    <script src="../cache-buster.js"></script>
     <style>
         /* Font Face Declarations */
         @font-face {
