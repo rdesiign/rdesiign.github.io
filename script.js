@@ -1,5 +1,7 @@
-// Navigation functionality
+// Navigation functionality - VERSION 2.0 - NO LOADING SCREEN
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 SCRIPT VERSION 2.0 LOADED - LOADING SCREEN REMOVED!');
+    
     // Prevent browser from restoring scroll position
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
@@ -7,50 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
-    
-    // Show loading screen initially
-    const loadingScreen = document.getElementById('loading-screen');
-    
-    // Animate loading progress
-    if (loadingScreen) {
-        const progressFill = document.querySelector('.progress-fill');
-        const progressPercentage = document.querySelector('.progress-percentage');
-        let progress = 0;
-        
-        const updateProgress = () => {
-            progress += Math.random() * 15 + 5; // Random increment between 5-20
-            if (progress > 100) progress = 100;
-            
-            if (progressFill) {
-                progressFill.style.width = progress + '%';
-            }
-            if (progressPercentage) {
-                progressPercentage.textContent = Math.round(progress) + '%';
-            }
-            
-            if (progress < 100) {
-                setTimeout(updateProgress, 200 + Math.random() * 300); // Random delay 200-500ms
-            }
-        };
-        
-        // Start progress animation
-        setTimeout(updateProgress, 500);
-    }
-    
-    // Hide loading screen after content loads
-    window.addEventListener('load', function() {
-        setTimeout(() => {
-            if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
-                // Remove loading screen from DOM after animation
-                setTimeout(() => {
-                    if (loadingScreen.parentNode) {
-                        loadingScreen.parentNode.removeChild(loadingScreen);
-                    }
-                }, 500);
-            }
-        }, 4000); // Show loading screen for exactly 4 seconds
-    });
     
     // Remove no-js class as JavaScript is working
     document.documentElement.classList.remove('no-js');

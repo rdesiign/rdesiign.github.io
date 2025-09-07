@@ -132,148 +132,6 @@ html {
     transform: translateY(0) !important;
 }
 
-/* Loading Screen */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loading-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loading-container {
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-}
-
-/* GIF Container */
-.gif-container {
-    margin-bottom: 40px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loading-gif {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 12px;
-    display: block;
-    margin: 0 auto;
-    background-color: var(--bg-primary);
-}
-
-.gif-placeholder {
-    display: none; /* Hide placeholder since we have a GIF */
-}
-
-/* Loading Progress */
-.loading-progress {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.progress-label {
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 16px;
-    font-family: 'Product Sans', sans-serif;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: var(--bg-tertiary);
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: inset 0 1px 3px var(--accent-primary-10);
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #14b8a6, #4ECDC4);
-    border-radius: 4px;
-    width: 0%;
-    transition: width 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    animation: shimmer 2s infinite;
-}
-
-.progress-percentage {
-    color: var(--text-secondary);
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 8px;
-    font-family: 'Product Sans', sans-serif;
-}
-
-/* Animations */
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .loading-container {
-        max-width: 300px;
-    }
-    
-    .gif-placeholder,
-    .loading-gif {
-        width: 150px;
-        height: 150px;
-        max-width: 150px;
-        max-height: 150px;
-    }
-    
-    .progress-label {
-        font-size: 14px;
-    }
-}
-
 body {
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
@@ -1273,27 +1131,6 @@ footer {
         padding: 30px 15px;
         font-size: 14px;
     }
-    
-    /* Mobile Loading Screen */
-    .loading-container {
-        max-width: 300px;
-        padding: 15px;
-    }
-    
-    .loading-gif {
-        max-width: 150px;
-        max-height: 150px;
-    }
-    
-    .progress-label {
-        font-size: 14px;
-        margin-bottom: 12px;
-    }
-    
-    .progress-percentage {
-        font-size: 11px;
-        margin-top: 6px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1522,32 +1359,6 @@ footer {
     footer {
         padding: 24px 12px;
         font-size: 12px;
-    }
-    
-    /* Extra Small Loading Screen */
-    .loading-container {
-        max-width: 260px;
-        padding: 12px;
-        min-height: 40vh;
-    }
-    
-    .loading-gif {
-        max-width: 120px;
-        max-height: 120px;
-    }
-    
-    .progress-label {
-        font-size: 13px;
-        margin-bottom: 10px;
-    }
-    
-    .progress-percentage {
-        font-size: 10px;
-        margin-top: 5px;
-    }
-    
-    .gif-container {
-        margin-bottom: 30px;
     }
 }
 
