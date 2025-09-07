@@ -94,53 +94,131 @@
         
         /* Image Gallery */
         .image-gallery {
-            padding: 40px 20px 80px;
-            background: var(--bg-secondary);
+            padding: 0;
+            background: var(--bg-primary);
         }
         
         .gallery-container {
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
         }
         
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             margin-bottom: 40px;
+            width: 100%;
         }
         
         .gallery-item {
             position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            aspect-ratio: 16/10;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 20px 40px var(--shadow-color);
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 0;
         }
         
         .gallery-item img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
-            object-position: center;
-            transition: transform 0.3s ease;
+            display: block;
         }
         
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        /* Image Modal */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
         }
         
-        .gallery-item.large {
-            grid-column: span 2;
-            aspect-ratio: 21/9;
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-nav.prev {
+            left: -70px;
+        }
+        
+        .modal-nav.next {
+            right: -70px;
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            opacity: 0.8;
         }
         
         /* Back Navigation */
@@ -176,20 +254,29 @@
                 gap: 20px;
             }
             
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .gallery-item.large {
-                grid-column: span 1;
-                aspect-ratio: 16/10;
-            }
-            
             .back-nav {
                 top: 10px;
                 left: 10px;
                 padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .modal-nav {
+                display: none;
+            }
+            
+            .modal-close {
+                top: -40px;
+                right: 10px;
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+            
+            .modal-caption {
+                bottom: -60px;
+                left: 10px;
+                right: 10px;
                 font-size: 14px;
             }
         }
@@ -199,12 +286,9 @@
                 padding: 30px 12px;
             }
             
-            .gallery-grid {
-                gap: 16px;
-            }
-            
-            .image-gallery {
-                padding: 30px 12px 60px;
+            .modal-content {
+                max-width: 95vw;
+                max-height: 85vh;
             }
         }
     </style>
@@ -246,39 +330,50 @@
         <section class="image-gallery">
             <div class="gallery-container">
                 <div class="gallery-grid">
-                    <div class="gallery-item large">
+                    <div class="gallery-item" data-image="mmm/MMM 1.png" data-caption="Smart Home Assistant - Hero View">
                         <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 2.png" data-caption="Smart Home Assistant - Detail View">
                         <img src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 3.png" data-caption="Smart Home Assistant - Interface Design">
                         <img src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 4.png" data-caption="Smart Home Assistant - Components">
                         <img src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 5.png" data-caption="Smart Home Assistant - Technical Drawings">
                         <img src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" />
                     </div>
-                    <div class="gallery-item large">
+                    <div class="gallery-item" data-image="mmm/MMM 6.png" data-caption="Smart Home Assistant - Environment Integration">
                         <img src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 7.png" data-caption="Smart Home Assistant - Color Variations">
                         <img src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 8.png" data-caption="Smart Home Assistant - User Interaction">
                         <img src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 9.png" data-caption="Smart Home Assistant - Lighting System">
                         <img src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" />
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-image="mmm/MMM 10.png" data-caption="Smart Home Assistant - Final Product">
                         <img src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" />
                     </div>
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeImageModal()">&times;</button>
+            <button class="modal-nav prev" onclick="previousImage()">&#8249;</button>
+            <img id="modal-image" class="modal-image" src="" alt="">
+            <button class="modal-nav next" onclick="nextImage()">&#8250;</button>
+            <div id="modal-caption" class="modal-caption"></div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -287,5 +382,90 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Image gallery functionality
+        let currentImageIndex = 0;
+        let images = [];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize image gallery
+            initializeImageGallery();
+        });
+        
+        function initializeImageGallery() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            images = Array.from(galleryItems).map(item => ({
+                src: item.getAttribute('data-image'),
+                caption: item.getAttribute('data-caption')
+            }));
+            
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openImageModal(index));
+            });
+            
+            // Close modal on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                }
+                if (e.key === 'ArrowLeft') {
+                    previousImage();
+                }
+                if (e.key === 'ArrowRight') {
+                    nextImage();
+                }
+            });
+            
+            // Close modal on background click
+            document.getElementById('image-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeImageModal();
+                }
+            });
+        }
+        
+        function openImageModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalCaption = document.getElementById('modal-caption');
+            
+            modalImage.src = images[index].src;
+            modalImage.alt = images[index].caption;
+            modalCaption.textContent = images[index].caption;
+            
+            modal.classList.add('active');
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+        }
+        
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('active');
+            // Restore background scrolling
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        }
+        
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        }
+        
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateModalImage();
+        }
+        
+        function updateModalImage() {
+            const modalImage = document.getElementById('modal-image');
+            const modalCaption = document.getElementById('modal-caption');
+            
+            modalImage.src = images[currentImageIndex].src;
+            modalImage.alt = images[currentImageIndex].caption;
+            modalCaption.textContent = images[currentImageIndex].caption;
+        }
+    </script>
 </body>
 </html>
