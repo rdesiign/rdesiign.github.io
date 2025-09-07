@@ -413,6 +413,19 @@
     </div>
 
     <script>
+        // Emergency Loading Screen Fallback - Inline execution
+        console.log('🚑 Emergency fallback script loaded');
+        
+        // Force remove loading screen after 3 seconds if main script fails
+        setTimeout(function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                console.log('🚑 Emergency: Force removing loading screen after 3 seconds');
+                document.body.classList.remove('loading');
+                loadingScreen.style.display = 'none';
+            }
+        }, 3000);
+        
         // Enhanced Service Worker registration with cache control
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js?cb=' + window.GLOBAL_CACHE_BUST)
@@ -434,6 +447,17 @@
         mainScript.src = 'script.js?cb=' + window.GLOBAL_CACHE_BUST;
         mainScript.onload = function() {
             console.log('✅ Main script loaded with global cache-bust');
+        };
+        mainScript.onerror = function() {
+            console.error('❌ Main script failed to load - using emergency fallback');
+            // If main script fails, remove loading screen immediately
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    document.body.classList.remove('loading');
+                    loadingScreen.style.display = 'none';
+                }
+            }, 100);
         };
         document.head.appendChild(mainScript);
     </script>

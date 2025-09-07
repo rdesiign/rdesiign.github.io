@@ -1,32 +1,64 @@
-// Industrial Design Loading Screen - VERSION 3.0
-// Show loading screen for 2 seconds with industrial theme animation
-window.addEventListener('load', function() {
-    console.log('🏭 Industrial Loading Screen Initialized - 2 seconds');
-    
-    // Add loading class to body
-    document.body.classList.add('loading');
-    
-    // Remove loading screen after exactly 2 seconds
-    setTimeout(function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('fade-out');
-            
-            // Remove loading screen from DOM after fade out completes
-            setTimeout(function() {
-                document.body.classList.remove('loading');
-                if (loadingScreen.parentNode) {
-                    loadingScreen.parentNode.removeChild(loadingScreen);
-                }
-                console.log('🎯 Loading screen removed after 2 seconds');
-            }, 500); // Wait for fade-out transition
-        }
-    }, 2000); // 2 seconds exactly
-});
-
 // Navigation functionality - VERSION 3.0 - WITH INDUSTRIAL LOADING SCREEN
+(function() {
+    'use strict';
+    
+    // Immediate loading screen management
+    console.log('🚀 SCRIPT VERSION 3.0 LOADED - STARTING IMMEDIATELY');
+    
+    function initLoadingScreen() {
+        const loadingScreen = document.getElementById('loading-screen');
+        
+        if (loadingScreen) {
+            console.log('🏭 Loading Screen Found - Starting 2 second timer');
+            
+            // Ensure we start clean
+            document.body.classList.add('loading');
+            loadingScreen.classList.remove('fade-out');
+            
+            // Remove loading screen after exactly 2 seconds
+            const loadingTimer = setTimeout(function() {
+                console.log('🕰️ 2 seconds elapsed - Fading out loading screen');
+                loadingScreen.classList.add('fade-out');
+                
+                // Remove loading screen from DOM and body class after fade out completes
+                const cleanupTimer = setTimeout(function() {
+                    document.body.classList.remove('loading');
+                    if (loadingScreen && loadingScreen.parentNode) {
+                        loadingScreen.parentNode.removeChild(loadingScreen);
+                    }
+                    console.log('✅ Loading screen completely removed');
+                }, 500); // Wait for fade-out transition
+            }, 2000); // 2 seconds exactly
+            
+            // Emergency fallback - force remove after 4 seconds if something goes wrong
+            setTimeout(function() {
+                if (document.getElementById('loading-screen')) {
+                    console.warn('⚠️ Emergency cleanup - Force removing loading screen');
+                    document.body.classList.remove('loading');
+                    const screen = document.getElementById('loading-screen');
+                    if (screen && screen.parentNode) {
+                        screen.parentNode.removeChild(screen);
+                    }
+                }
+            }, 4000);
+        } else {
+            console.warn('⚠️ Loading screen element not found');
+            document.body.classList.remove('loading');
+        }
+    }
+    
+    // Run loading screen logic immediately
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLoadingScreen);
+    } else {
+        initLoadingScreen();
+    }
+    
+})();
+
+// Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 SCRIPT VERSION 2.0 LOADED - LOADING SCREEN REMOVED!');
+    console.log('📚 Main app initialization starting...');
     
     // Prevent browser from restoring scroll position
     if (history.scrollRestoration) {
