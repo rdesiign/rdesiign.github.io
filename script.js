@@ -1,64 +1,66 @@
-// Navigation functionality - VERSION 3.0 - WITH INDUSTRIAL LOADING SCREEN
+// Production-Ready Navigation and Loading Screen - VERSION 4.0
+// Optimized for GitHub Pages deployment
 (function() {
     'use strict';
     
-    // Immediate loading screen management
-    console.log('🚀 SCRIPT VERSION 3.0 LOADED - STARTING IMMEDIATELY');
+    // Production loading screen management
+    console.log('🌐 PRODUCTION SCRIPT v4.0 - GitHub Pages Ready');
     
-    function initLoadingScreen() {
+    function initProductionLoadingScreen() {
         const loadingScreen = document.getElementById('loading-screen');
         
         if (loadingScreen) {
-            console.log('🏭 Loading Screen Found - Starting 2 second timer');
+            console.log('🏭 Production Loading Screen - 2 second timer');
             
-            // Ensure we start clean
+            // Ensure clean start
             document.body.classList.add('loading');
             loadingScreen.classList.remove('fade-out');
             
-            // Remove loading screen after exactly 2 seconds
+            // Production-safe 2-second timer
             const loadingTimer = setTimeout(function() {
-                console.log('🕰️ 2 seconds elapsed - Fading out loading screen');
+                console.log('✅ 2 seconds complete - Removing loading screen');
                 loadingScreen.classList.add('fade-out');
                 
-                // Remove loading screen from DOM and body class after fade out completes
-                const cleanupTimer = setTimeout(function() {
+                // Clean removal after fade
+                setTimeout(function() {
                     document.body.classList.remove('loading');
                     if (loadingScreen && loadingScreen.parentNode) {
                         loadingScreen.parentNode.removeChild(loadingScreen);
                     }
-                    console.log('✅ Loading screen completely removed');
-                }, 500); // Wait for fade-out transition
-            }, 2000); // 2 seconds exactly
+                    console.log('🎆 Production loading complete');
+                }, 500);
+            }, 2000);
             
-            // Emergency fallback - force remove after 4 seconds if something goes wrong
+            // Production emergency cleanup (longer timeout for GitHub Pages)
             setTimeout(function() {
-                if (document.getElementById('loading-screen')) {
-                    console.warn('⚠️ Emergency cleanup - Force removing loading screen');
+                const screen = document.getElementById('loading-screen');
+                if (screen) {
+                    console.log('🚑 Production emergency cleanup');
                     document.body.classList.remove('loading');
-                    const screen = document.getElementById('loading-screen');
-                    if (screen && screen.parentNode) {
-                        screen.parentNode.removeChild(screen);
-                    }
+                    if (screen.parentNode) screen.parentNode.removeChild(screen);
                 }
-            }, 4000);
+            }, 5000); // Longer timeout for production
         } else {
-            console.warn('⚠️ Loading screen element not found');
+            console.log('⚠️ No loading screen found - continuing normally');
             document.body.classList.remove('loading');
         }
     }
     
-    // Run loading screen logic immediately
+    // Immediate execution for production
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLoadingScreen);
+        document.addEventListener('DOMContentLoaded', initProductionLoadingScreen);
     } else {
-        initLoadingScreen();
+        initProductionLoadingScreen();
     }
     
 })();
 
-// Main app initialization
+// Main app initialization - Production Ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📚 Main app initialization starting...');
+    console.log('🌐 Production app initialization - GitHub Pages');
+    
+    // Production environment setup
+    try {
     
     // Prevent browser from restoring scroll position
     if (history.scrollRestoration) {
@@ -314,6 +316,18 @@ function initializeProjectModals() {
             }, index * 100);
         });
     });
+    
+    } catch (error) {
+        console.error('🚑 Production Error:', error);
+        // Emergency cleanup on any error
+        document.body.classList.remove('loading');
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
+    } finally {
+        console.log('🎆 Production initialization complete');
+    }
 });
 
 // Utility functions

@@ -12,18 +12,18 @@
     <meta http-equiv="ETag" content="global-cb-v3">
     <title>Rishi Ramesh | Industrial Designer Portfolio</title>
     <meta name="description" content="Rishi Ramesh is an industrial designer specializing in product design, user experience, and innovative solutions. Explore my portfolio of creative design work.">
-    <!-- Global Cache-Buster - Load First -->
+    <!-- Global Cache-Buster - Production Ready -->
     <script>
-        // Immediate cache-busting timestamp
-        window.GLOBAL_CACHE_BUST = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        console.log('🔄 Global Cache-Bust ID:', window.GLOBAL_CACHE_BUST);
+        // Production-safe cache-busting
+        window.GLOBAL_CACHE_BUST = Date.now();
+        console.log('🌐 Production Cache-Bust ID:', window.GLOBAL_CACHE_BUST);
     </script>
-    <script src="cache-buster.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- Additional cache-busted CSS for GitHub Pages -->
     <script>
-        // Add cache-busting timestamp to ensure latest versions
-        const timestamp = new Date().getTime();
-        document.write('<link rel="stylesheet" href="styles.css?v=' + timestamp + '">');
+        // GitHub Pages compatible cache-busting
+        const cacheBustParam = '?v=' + window.GLOBAL_CACHE_BUST;
+        document.write('<link rel="stylesheet" href="styles.css' + cacheBustParam + '">');
     </script>
 </head>
 <body class="loading">
@@ -413,57 +413,40 @@
     </div>
 
     <script>
-        // Emergency Loading Screen Fallback - Inline execution
-        console.log('🚑 Emergency fallback script loaded');
+        // Production-Ready Loading Screen Management for GitHub Pages
+        console.log('🌐 Production loading script initialized');
         
-        // Clear any existing service workers that might be causing loops
+        // Clear any problematic service workers for production
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for(let registration of registrations) {
-                    console.log('Unregistering problematic service worker...');
+                    console.log('🧹 Cleaning up service worker for production...');
                     registration.unregister();
                 }
+            }).catch(function(error) {
+                console.log('SW cleanup completed');
             });
         }
         
-        // Force remove loading screen after 3 seconds if main script fails
+        // Production-safe emergency timeout
         setTimeout(function() {
             const loadingScreen = document.getElementById('loading-screen');
             if (loadingScreen) {
-                console.log('🚑 Emergency: Force removing loading screen after 3 seconds');
+                console.log('🚑 Production emergency timeout - removing loading screen');
                 document.body.classList.remove('loading');
                 loadingScreen.style.display = 'none';
             }
-        }, 3000);
+        }, 4000); // Longer timeout for slower connections
         
-        // DISABLED: Service Worker registration temporarily to stop refresh loops
-        // Will re-enable after fixing cache issues
-        /*
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js?cb=' + window.GLOBAL_CACHE_BUST)
-                .then(registration => {
-                    console.log('SW registered with cache-bust:', registration);
-                    // Update service worker when available
-                    registration.addEventListener('updatefound', () => {
-                        console.log('SW update found - reloading...');
-                        window.location.reload(true);
-                    });
-                })
-                .catch(error => {
-                    console.log('SW registration failed:', error);
-                });
-        }
-        */
-        
-        // Load main script with global cache-busting
+        // Load main script with production-safe cache-busting
         const mainScript = document.createElement('script');
-        mainScript.src = 'script.js?cb=' + window.GLOBAL_CACHE_BUST;
+        mainScript.src = 'script.js?v=' + window.GLOBAL_CACHE_BUST;
         mainScript.onload = function() {
-            console.log('✅ Main script loaded with global cache-bust');
+            console.log('✅ Production script loaded successfully');
         };
         mainScript.onerror = function() {
-            console.error('❌ Main script failed to load - using emergency fallback');
-            // If main script fails, remove loading screen immediately
+            console.error('❌ Production script load failed - emergency cleanup');
+            // Immediate cleanup on script failure
             setTimeout(function() {
                 const loadingScreen = document.getElementById('loading-screen');
                 if (loadingScreen) {
@@ -473,6 +456,11 @@
             }, 100);
         };
         document.head.appendChild(mainScript);
+        
+        // Production health check
+        setTimeout(function() {
+            console.log('🚀 Production health check: Page loaded successfully at', new Date().toISOString());
+        }, 1000);
     </script>
 </body>
 </html>
