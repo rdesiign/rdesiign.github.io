@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Rishi Ramesh | Industrial Designer Portfolio</title>
     <meta name="description" content="Rishi Ramesh is an industrial designer specializing in product design, user experience, and innovative solutions. Explore my portfolio of creative design work.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Add cache-busting timestamp to ensure latest versions
+        const timestamp = new Date().getTime();
+        document.write('<link rel="stylesheet" href="styles.css?v=' + timestamp + '">');
+    </script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -357,5 +365,12 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Cache-busting for JavaScript file
+        const jsTimestamp = new Date().getTime();
+        const scriptElement = document.createElement('script');
+        scriptElement.src = 'script.js?v=' + jsTimestamp;
+        document.head.appendChild(scriptElement);
+    </script>
 </body>
 </html>

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Smart Home Assistant Device | Rishi Ramesh</title>
     <meta name="description" content="A voice-activated home assistant with intuitive physical controls and ambient lighting designed for modern living spaces.">
     <!-- Mobile-specific meta tags -->
@@ -17,6 +20,11 @@
     <link rel="preload" as="image" href="mmm/MMM 1.png">
     <link rel="preload" as="image" href="mmm/MMM 2.png">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Add cache-busting timestamp to ensure latest versions
+        const timestamp = new Date().getTime();
+        document.write('<link rel="stylesheet" href="styles.css?v=' + timestamp + '">');
+    </script>
     <style>
         /* Project Page Specific Styles */
         .project-page {
@@ -397,6 +405,14 @@
     </footer>
 
     <script src="script.js" defer></script>
+    <script>
+        // Cache-busting for JavaScript file
+        const jsTimestamp = new Date().getTime();
+        const scriptElement = document.createElement('script');
+        scriptElement.src = 'script.js?v=' + jsTimestamp;
+        scriptElement.defer = true;
+        document.head.appendChild(scriptElement);
+    </script>
     <script>
         // Image gallery functionality
         let currentImageIndex = 0;
