@@ -70,7 +70,7 @@ Use this template to easily add your project details to the portfolio website.
 1. **Professional Portrait**: Replace "[Professional Portrait Placeholder]" in the about section
 2. **Project Images**: Replace "[Project Image Placeholder]" for each project
 3. **Fonts**: Currently using Inter from Google Fonts (free to use)
-4. **Colors**: Using purple-to-cyan gradient theme (#8b5cf6 to #06b6d4)
+4. **Colors**: Using auto black/white theme (adapts to light/dark mode) with cyan accent (#06b6d4)
 5. **Icons**: Using emoji placeholders that can be replaced with icon fonts
 
 ## How to Update Content
@@ -89,7 +89,7 @@ Use this template to easily add your project details to the portfolio website.
 
 ## Design System
 
-- **Primary Colors**: Purple (#8b5cf6) to Cyan (#06b6d4) gradient
+- **Primary Colors**: Auto Black/White (adapts to theme) with Cyan (#06b6d4) accent
 - **Background**: Dark theme (#0a0a0a)
 - **Text**: White with opacity variations
 - **Typography**: Inter font family

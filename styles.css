@@ -32,9 +32,12 @@ html {
     --card-border: rgba(0, 0, 0, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.1);
     --nav-bg: rgba(255, 255, 255, 0.9);
-    --accent-primary: #8b5cf6; /* Purple */
+    --accent-primary: #000000; /* Black */
     --accent-secondary: #06b6d4; /* Cyan */
     --nav-active: #14b8a6; /* Light turquoise for active nav */
+    --accent-primary-10: rgba(0, 0, 0, 0.1);
+    --accent-primary-30: rgba(0, 0, 0, 0.3);
+    --accent-primary-80: rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease;
 }
 
@@ -53,48 +56,17 @@ html {
     --card-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
     --nav-bg: rgba(10, 10, 10, 0.9);
-    --accent-primary: #8b5cf6; /* Purple */
+    --accent-primary: #ffffff; /* White */
     --accent-secondary: #06b6d4; /* Cyan */
     --nav-active: #14b8a6; /* Light turquoise for active nav */
+    --accent-primary-10: rgba(255, 255, 255, 0.1);
+    --accent-primary-30: rgba(255, 255, 255, 0.3);
+    --accent-primary-80: rgba(255, 255, 255, 0.8);
 }
 
 /* Smooth transitions for theme changes */
 * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-:root {
-    /* Light theme variables (default) */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #f1f3f4;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666666;
-    --text-tertiary: #999999;
-    --border-color: rgba(0, 0, 0, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.8);
-    --glass-border: rgba(0, 0, 0, 0.1);
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --card-border: rgba(0, 0, 0, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --nav-bg: rgba(255, 255, 255, 0.9);
-}
-
-[data-theme="dark"] {
-    /* Dark theme variables */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-tertiary: rgba(255, 255, 255, 0.5);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --nav-bg: rgba(10, 10, 10, 0.9);
 }
 
 /* Fallback for when JavaScript is disabled or not loaded */
@@ -179,7 +151,7 @@ html {
     border-radius: 4px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px var(--accent-primary-10);
 }
 
 .progress-fill {
@@ -293,7 +265,7 @@ html, body {
 }
 
 .logo:hover {
-    color: #8b5cf6;
+    color: var(--accent-primary);
 }
 
 .nav-links {
@@ -341,8 +313,8 @@ html, body {
 }
 
 .theme-toggle:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.3);
+    background: var(--accent-primary-10);
+    border-color: var(--accent-primary-30);
 }
 
 .theme-toggle:focus {
@@ -413,24 +385,24 @@ html, body {
 
 /* Background images for each slide */
 .slide:nth-child(1) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('Exploded Trial.142.png');
+    background-image: linear-gradient(var(--accent-primary-30), rgba(0, 0, 0, 0.5)), url('Exploded Trial.142.png');
     background-size: cover;
     background-position: center;
 }
 
 .slide:nth-child(2) {
     background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%2306b6d4"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Office Furniture Image]</text></svg>');
+    background-image: linear-gradient(var(--accent-primary-30), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%2306b6d4"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Office Furniture Image]</text></svg>');
 }
 
 .slide:nth-child(3) {
     background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%2310b981"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Medical Device Image]</text></svg>');
+    background-image: linear-gradient(var(--accent-primary-30), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%2310b981"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Medical Device Image]</text></svg>');
 }
 
 .slide:nth-child(4) {
     background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%230ea5e9"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Consumer Electronics Image]</text></svg>');
+    background-image: linear-gradient(var(--accent-primary-30), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%230ea5e9"/><text x="400" y="300" text-anchor="middle" font-size="24" fill="white">[Consumer Electronics Image]</text></svg>');
 }
 
 .slide-content {
@@ -468,7 +440,7 @@ html, body {
 }
 
 .slide-tag {
-    background: rgba(139, 92, 246, 0.8);
+    background: var(--accent-primary-80);
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
@@ -501,12 +473,12 @@ html, body {
 }
 
 .nav-dot.active {
-    background: #8b5cf6;
+    background: var(--accent-primary);
     transform: scale(1.2);
 }
 
 .nav-dot:hover {
-    background: #8b5cf6;
+    background: var(--accent-primary);
 }
 
 .nav-dot:focus {
@@ -536,8 +508,8 @@ html, body {
 }
 
 .slide-arrow:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.3);
+    background: var(--accent-primary-10);
+    border-color: var(--accent-primary-30);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -639,7 +611,7 @@ html, body {
 
 .skill-item:hover {
     transform: translateY(-5px);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-primary-30);
     box-shadow: 0 10px 30px var(--shadow-color);
 }
 
@@ -696,7 +668,7 @@ html, body {
 
 .project-card:hover {
     transform: translateY(-10px);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-primary-30);
     box-shadow: 0 20px 40px var(--shadow-color);
     text-decoration: none;
 }
@@ -853,7 +825,7 @@ html, body {
 }
 
 .experience-content .company {
-    color: #8b5cf6;
+    color: var(--accent-primary);
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -902,7 +874,7 @@ html, body {
 
 .contact-link:hover {
     color: var(--text-primary);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-primary-30);
     transform: translateY(-2px);
 }
 
@@ -1020,7 +992,7 @@ footer {
         padding: 20px;
         margin-top: 10px;
         gap: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 32px var(--accent-primary-10);
     }
     
     .nav-link {
@@ -1524,7 +1496,7 @@ footer {
 
 /* Utility Classes */
 .text-gradient {
-    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1546,12 +1518,12 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #7c3aed, #0891b2);
+    background: linear-gradient(135deg, var(--accent-primary), #0891b2);
 }
 
 /* Project Modal */
@@ -1562,7 +1534,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--accent-primary-80);
     backdrop-filter: blur(10px);
     z-index: 2000;
     opacity: 0;
@@ -1613,8 +1585,8 @@ footer {
 }
 
 .modal-close:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.3);
+    background: var(--accent-primary-10);
+    border-color: var(--accent-primary-30);
     transform: scale(1.1);
 }
 
