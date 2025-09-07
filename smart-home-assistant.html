@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Smart Home Assistant Device | Rishi Ramesh</title>
+    <meta name="description" content="A voice-activated home assistant with intuitive physical controls and ambient lighting designed for modern living spaces.">
+    <!-- Mobile-specific meta tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#8b5cf6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Project Page Specific Styles */
+        .project-page {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .project-hero {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .project-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+        
+        .project-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            text-align: center;
+        }
+        
+        .meta-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .meta-value {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 60px;
+        }
+        
+        .project-tag {
+            background: rgba(20, 184, 166, 0.2);
+            color: #14b8a6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+        
+        /* Image Gallery */
+        .image-gallery {
+            padding: 40px 20px 80px;
+            background: var(--bg-secondary);
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            aspect-ratio: 16/10;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item.large {
+            grid-column: span 2;
+            aspect-ratio: 21/9;
+        }
+        
+        /* Back Navigation */
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-nav:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .project-hero {
+                padding: 40px 15px;
+            }
+            
+            .project-meta {
+                gap: 20px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .gallery-item.large {
+                grid-column: span 1;
+                aspect-ratio: 16/10;
+            }
+            
+            .back-nav {
+                top: 10px;
+                left: 10px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .project-hero {
+                padding: 30px 12px;
+            }
+            
+            .gallery-grid {
+                gap: 16px;
+            }
+            
+            .image-gallery {
+                padding: 30px 12px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <a href="index.html" class="back-nav">← Back to Portfolio</a>
+
+    <!-- Project Page Content -->
+    <div class="project-page">
+        <!-- Project Hero Section -->
+        <section class="project-hero">
+            <h1 class="project-title">Smart Home Assistant Device</h1>
+            <p class="project-description">A voice-activated home assistant with intuitive physical controls and ambient lighting designed for seamless integration into modern living spaces. This project showcases the complete design process from initial concept to final product visualization.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Lead Industrial Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">8 months</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2023</div>
+                </div>
+            </div>
+            
+            <div class="project-tags">
+                <span class="project-tag">Product Design</span>
+                <span class="project-tag">IoT</span>
+                <span class="project-tag">User Interface</span>
+            </div>
+        </section>
+
+        <!-- Image Gallery -->
+        <section class="image-gallery">
+            <div class="gallery-container">
+                <div class="gallery-grid">
+                    <div class="gallery-item large">
+                        <img src="mmm/MMM 1.png" alt="Smart Home Assistant - Hero View" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 2.png" alt="Smart Home Assistant - Detail View" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 3.png" alt="Smart Home Assistant - Interface Design" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 4.png" alt="Smart Home Assistant - Components" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 5.png" alt="Smart Home Assistant - Technical Drawings" loading="lazy" />
+                    </div>
+                    <div class="gallery-item large">
+                        <img src="mmm/MMM 6.png" alt="Smart Home Assistant - Environment Integration" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 7.png" alt="Smart Home Assistant - Color Variations" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 8.png" alt="Smart Home Assistant - User Interaction" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 9.png" alt="Smart Home Assistant - Lighting System" loading="lazy" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="mmm/MMM 10.png" alt="Smart Home Assistant - Final Product" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
