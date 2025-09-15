@@ -582,7 +582,7 @@ body {
 /* Contact Section */
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column layout */
     gap: 60px;
     max-width: 1000px;
     margin: 0 auto;
@@ -592,6 +592,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically if needed */
 }
 
 .contact-link {
@@ -606,6 +608,9 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     background: var(--card-bg);
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit width */
+    justify-content: center; /* Center content within each button */
 }
 
 .contact-link:hover {
@@ -745,7 +750,7 @@ footer {
     }
     
     .hero-section {
-        height: 50vh; /* Increased from 40vh to 50vh */
+        height: 50vh;
     }
     
     .slide-title {
@@ -786,5 +791,6 @@ footer {
     .contact-link {
         padding: 14px;
         font-size: 15px;
+        max-width: 100%; /* Full width on mobile */
     }
 }
