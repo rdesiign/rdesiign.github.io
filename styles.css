@@ -582,7 +582,7 @@ body {
 /* Contact Section */
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 60px;
     max-width: 1000px;
     margin: 0 auto;
@@ -616,37 +616,6 @@ body {
 
 .contact-icon {
     font-size: 24px;
-}
-
-.contact-form {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
 }
 
 /* Footer */
@@ -821,9 +790,5 @@ footer {
     .contact-link {
         padding: 14px;
         font-size: 15px;
-    }
-    
-    .contact-form {
-        padding: 20px;
     }
 }

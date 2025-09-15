@@ -234,24 +234,6 @@ function updateNav() {
 
 // Contact form functionality
 function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // In a real implementation, you would send this data to a server
-            // For now, we'll just show an alert
-            alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
-            
-            // Reset form
-            contactForm.reset();
-        });
-    }
 }
 
 // Project card hover effects
