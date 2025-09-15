@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize components
     initializeTheme();
-    initializeSlideshow();
     initializeNavigation();
+    initializeContactForm();
     
     } catch (error) {
         console.error('Error in main initialization:', error);
@@ -46,35 +46,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Theme toggle functionality
 function initializeTheme() {
-    console.log('Initializing theme');
+    // Check for saved theme or default to dark
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
     
     // Set up theme toggle button event listener
     const themeToggle = document.getElementById('theme-toggle');
-    console.log('Theme toggle element:', themeToggle);
     if (themeToggle) {
-        // Remove any existing event listeners to prevent duplicates
-        themeToggle.removeEventListener('click', handleThemeToggle);
-        themeToggle.addEventListener('click', handleThemeToggle);
-        console.log('Theme toggle event listener added');
-    } else {
-        console.log('Theme toggle element not found');
+        themeToggle.addEventListener('click', toggleTheme);
     }
 }
 
-function handleThemeToggle(e) {
-    console.log('Theme toggle clicked');
-    toggleTheme();
-}
-
 function toggleTheme() {
-    console.log('Toggling theme');
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    console.log('Current theme:', currentTheme, 'New theme:', newTheme);
     
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
@@ -86,25 +72,20 @@ function toggleTheme() {
 }
 
 function updateThemeIcon(theme) {
-    console.log('Updating theme icon for theme:', theme);
     const themeIcon = document.getElementById('theme-icon');
     if (themeIcon) {
-        // Show sun for dark theme (to switch to light), moon for light theme (to switch to dark)
-        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-        console.log('Theme icon updated to:', themeIcon.textContent);
-    } else {
-        console.log('Theme icon element not found');
+        // Show sun for light theme, moon for dark theme
+        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
     }
 }
 
 // Navigation functionality
 function initializeNavigation() {
-    console.log('Initializing navigation');
     // Initialize navigation highlighting
     updateNav();
     
     // Scroll handler for navigation
-    var scrollTimer;
+    let scrollTimer;
     window.addEventListener('scroll', function() {
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(updateNav, 50);
@@ -116,19 +97,17 @@ function initializeNavigation() {
     });
     
     // Click handlers for navigation links
-    var navLinks = document.querySelectorAll('.nav-link');
-    console.log('Found nav links:', navLinks.length);
-    for (var i = 0; i < navLinks.length; i++) {
-        navLinks[i].addEventListener('click', function(e) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
-            var sectionId = this.getAttribute('data-section');
-            console.log('Nav link clicked:', sectionId);
-            var section = document.getElementById(sectionId);
+            const sectionId = this.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
             
             if (section) {
-                var offset = 0;
+                let offset = 0;
                 if (sectionId !== 'home') {
-                    var navbarHeight = document.querySelector('.floating-navbar').offsetHeight;
+                    const navbarHeight = document.querySelector('.floating-navbar').offsetHeight;
                     offset = section.offsetTop - navbarHeight - 20;
                 }
                 
@@ -141,7 +120,7 @@ function initializeNavigation() {
                 setTimeout(updateNav, 100);
             }
         });
-    }
+    });
     
     // Listen for theme changes to update navigation styling
     window.addEventListener('themeChange', function() {
@@ -161,24 +140,22 @@ function initializeNavigation() {
 }
 
 function updateNav() {
-    // Get scroll position
-    var scrollPos = window.scrollY + 100; // Add offset to detect sections early
+    // Get scroll position - using viewport middle for better detection
+    const scrollPos = window.scrollY + window.innerHeight / 3;
     
     // Get all nav links and remove active class
-    var navLinks = document.querySelectorAll('.nav-link');
-    for (var i = 0; i < navLinks.length; i++) {
-        navLinks[i].classList.remove('active');
-    }
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
     
     // Get sections
-    var homeSection = document.getElementById('home');
-    var aboutSection = document.getElementById('about');
-    var projectsSection = document.getElementById('projects');
-    var experienceSection = document.getElementById('experience');
-    var contactSection = document.getElementById('contact');
+    const homeSection = document.getElementById('home');
+    const aboutSection = document.getElementById('about');
+    const projectsSection = document.getElementById('projects');
+    const experienceSection = document.getElementById('experience');
+    const contactSection = document.getElementById('contact');
     
     // Determine active section based on scroll position
-    var activeSection = 'home'; // default
+    let activeSection = 'home';
     
     // Check sections from bottom to top for better accuracy
     if (contactSection && scrollPos >= contactSection.offsetTop) {
@@ -192,113 +169,45 @@ function updateNav() {
     }
     
     // Activate the correct nav link
-    var activeLink = document.querySelector('.nav-link[data-section="' + activeSection + '"]');
+    const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
     if (activeLink) {
         activeLink.classList.add('active');
     }
 }
 
-// Slideshow functionality
-let currentSlideIndex = 0;
-let slideInterval;
-
-window.changeSlide = function(n) {
-    currentSlideIndex += n;
-    showSlide(currentSlideIndex);
-    resetAutoSlide();
-};
-
-window.currentSlide = function(n) {
-    currentSlideIndex = n - 1;
-    showSlide(currentSlideIndex);
-    resetAutoSlide();
-};
-
-window.toggleTheme = toggleTheme;
-
-function initializeSlideshow() {
-    showSlide(currentSlideIndex);
-    
-    // Add touch gesture support
-    initializeTouchGestures();
-    
-    // Start auto-slide
-    startAutoSlide();
-    
-    // Pause auto-slide on hover
-    const slideshowContainer = document.querySelector('.slideshow-container');
-    if (slideshowContainer) {
-        slideshowContainer.addEventListener('mouseenter', stopAutoSlide);
-        slideshowContainer.addEventListener('mouseleave', startAutoSlide);
+// Contact form functionality
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real implementation, you would send this data to a server
+            // For now, we'll just show an alert
+            alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+            
+            // Reset form
+            contactForm.reset();
+        });
     }
 }
 
-function showSlide(n) {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.nav-dot');
+// Project card hover effects
+document.addEventListener('DOMContentLoaded', function() {
+    const projectCards = document.querySelectorAll('.project-card');
     
-    if (slides.length === 0) return;
-    
-    if (n >= slides.length) currentSlideIndex = 0;
-    if (n < 0) currentSlideIndex = slides.length - 1;
-    
-    // Remove active class from all slides and dots
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Add active class to current slide and dot
-    if (slides[currentSlideIndex]) {
-        slides[currentSlideIndex].classList.add('active');
-    }
-    if (dots[currentSlideIndex]) {
-        dots[currentSlideIndex].classList.add('active');
-    }
-}
-
-function startAutoSlide() {
-    slideInterval = setInterval(() => {
-        currentSlideIndex++;
-        showSlide(currentSlideIndex);
-    }, 5000);
-}
-
-function stopAutoSlide() {
-    if (slideInterval) {
-        clearInterval(slideInterval);
-    }
-}
-
-function resetAutoSlide() {
-    stopAutoSlide();
-    startAutoSlide();
-}
-
-// Touch gesture support for mobile slideshow
-function initializeTouchGestures() {
-    const slideshowContainer = document.querySelector('.slideshow-container');
-    if (!slideshowContainer) return;
-    
-    let startX = 0;
-    let endX = 0;
-    const minSwipeDistance = 50;
-    
-    slideshowContainer.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-        stopAutoSlide();
-    }, { passive: true });
-    
-    slideshowContainer.addEventListener('touchend', function(e) {
-        endX = e.changedTouches[0].clientX;
-        const deltaX = endX - startX;
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+        });
         
-        if (Math.abs(deltaX) > minSwipeDistance) {
-            if (deltaX > 0) {
-                changeSlide(-1); // Swipe right
-            } else {
-                changeSlide(1);  // Swipe left
-            }
-        }
-        
-        startAutoSlide();
-    }, { passive: true });
-}
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});

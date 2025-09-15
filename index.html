@@ -1,46 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Global Cache-Busting Meta Tags -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Last-Modified" content="0">
-    <meta http-equiv="If-Modified-Since" content="0">
-    <meta http-equiv="ETag" content="global-cb-v3">
     <title>Rishi Ramesh | Industrial Designer Portfolio</title>
     <meta name="description" content="Rishi Ramesh is an industrial designer specializing in product design, user experience, and innovative solutions. Explore my portfolio of creative design work.">
-    <!-- Global Cache-Buster - Production Ready -->
-    <script>
-        // Production-safe cache-busting
-        window.GLOBAL_CACHE_BUST = Date.now();
-        console.log('🌐 Production Cache-Bust ID:', window.GLOBAL_CACHE_BUST);
-        
-        // Completely disable service workers to prevent loading loops
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister();
-                }
-            }).catch(function() {
-                // Ignore errors
-            });
-            
-            // Disable service worker registration
-            navigator.serviceWorker.register = function() {
-                return Promise.reject(new Error('Service Worker registration disabled'));
-            };
-        }
-    </script>
     <link rel="stylesheet" href="styles.css">
-    <!-- Additional cache-busted CSS for GitHub Pages -->
-    <script>
-        // GitHub Pages compatible cache-busting
-        const cacheBustParam = '?v=' + window.GLOBAL_CACHE_BUST;
-        document.write('<link rel="stylesheet" href="styles.css' + cacheBustParam + '">');
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Floating Navigation Bar -->
@@ -57,139 +23,115 @@
         </div>
     </nav>
 
-    <!-- Banner Slideshow Section -->
-    <section id="home" class="banner-slideshow">
-        <div class="slideshow-container">
-            <!-- Slide 1 -->
-            <div class="slide active">
-                <div class="slide-content">
-                    <h2>Smart Home Assistant</h2>
-                    <p>Voice-activated home assistant with intuitive controls and ambient lighting for modern living spaces.</p>
-                </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Rishi Ramesh</h1>
+            <p class="hero-subtitle">Industrial Designer & Product Innovator</p>
+            <p class="hero-description">Creating meaningful products that blend aesthetic appeal with functional excellence</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
-            
-            <!-- Slide 2 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2>Sustainable Furniture</h2>
-                    <p>Modular workspace system made from recycled materials. Designed for flexibility and minimal impact.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2>Medical Device Interface</h2>
-                    <p>Redesigned interface for critical monitoring device, improving usability in high-stress environments.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 4 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2>Premium Audio Device</h2>
-                    <p>Portable audio with breakthrough battery technology. Focus on portability without compromising quality.</p>
-                </div>
-            </div>
-            
-            <!-- Navigation Arrows -->
-            <div class="slide-arrow prev" onclick="changeSlide(-1)">❮</div>
-            <div class="slide-arrow next" onclick="changeSlide(1)">❯</div>
-        </div>
-        
-        <!-- Slideshow Navigation Dots -->
-        <div class="slideshow-nav">
-            <div class="nav-dot active" onclick="currentSlide(1)"></div>
-            <div class="nav-dot" onclick="currentSlide(2)"></div>
-            <div class="nav-dot" onclick="currentSlide(3)"></div>
-            <div class="nav-dot" onclick="currentSlide(4)"></div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Hello, it's me!</h2>
-            <p class="section-subtitle">Passionate about designing products that make a difference</p>
-        </div>
-        
-        <div class="about-content fade-in">
-            <div class="about-image">
-                <img src="Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-photo" loading="lazy" decoding="async" fetchpriority="low">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about designing products that make a difference</p>
             </div>
-            <div class="about-text">
-                <h3>Hello, I'm Rishi</h3>
-                <p>As an industrial designer, I believe that great design is the perfect intersection of aesthetic appeal, functional excellence, and meaningful user experience. My approach combines deep user research, creative problem-solving, and technical expertise to create products that truly resonate with people.</p>
-                <p>With a background in mechanical engineering and design thinking, I bring both technical feasibility and creative vision to every project. I'm passionate about sustainable design practices and creating products that have a positive impact on both users and the environment.</p>
-                <p>When I'm not designing, you can find me sketching new ideas, exploring emerging technologies, or analyzing the design details of everyday objects around me.</p>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-placeholder">Profile Photo</div>
+                </div>
+                <div class="about-text">
+                    <h3>Hello, I'm Rishi</h3>
+                    <p>As an industrial designer, I believe that great design is the perfect intersection of aesthetic appeal, functional excellence, and meaningful user experience. My approach combines deep user research, creative problem-solving, and technical expertise to create products that truly resonate with people.</p>
+                    <p>With a background in mechanical engineering and design thinking, I bring both technical feasibility and creative vision to every project. I'm passionate about sustainable design practices and creating products that have a positive impact on both users and the environment.</p>
+                    <p>When I'm not designing, you can find me sketching new ideas, exploring emerging technologies, or analyzing the design details of everyday objects around me.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Product Design</span>
+                        <span class="skill-tag">UX Research</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">3D Modeling</span>
+                        <span class="skill-tag">Sustainable Design</span>
+                        <span class="skill-tag">Design Thinking</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">A selection of my recent design work</p>
-        </div>
-        
-        <div class="projects-grid fade-in">
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-placeholder">Smart Home Assistant</div>
-                </div>
-                <div class="project-content">
-                    <h3>Smart Home Assistant</h3>
-                    <p>Voice-activated home assistant with intuitive controls and ambient lighting for modern living spaces.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Product Design</span>
-                        <span class="project-tag">UI/UX</span>
-                        <span class="project-tag">IoT</span>
-                    </div>
-                </div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">A selection of my recent design work</p>
             </div>
             
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-placeholder">Sustainable Furniture</div>
-                </div>
-                <div class="project-content">
-                    <h3>Sustainable Furniture</h3>
-                    <p>Modular workspace system made from recycled materials. Designed for flexibility and minimal impact.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Furniture</span>
-                        <span class="project-tag">Sustainability</span>
-                        <span class="project-tag">Modular Design</span>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">Smart Home Assistant</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Smart Home Assistant</h3>
+                        <p>Voice-activated home assistant with intuitive controls and ambient lighting for modern living spaces.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Product Design</span>
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">IoT</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-placeholder">Medical Device</div>
-                </div>
-                <div class="project-content">
-                    <h3>Medical Device Interface</h3>
-                    <p>Redesigned interface for critical monitoring device, improving usability in high-stress environments.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Medical</span>
-                        <span class="project-tag">UI/UX</span>
-                        <span class="project-tag">Human Factors</span>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">Sustainable Furniture</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sustainable Furniture</h3>
+                        <p>Modular workspace system made from recycled materials. Designed for flexibility and minimal impact.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Furniture</span>
+                            <span class="project-tag">Sustainability</span>
+                            <span class="project-tag">Modular Design</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-placeholder">Audio Device</div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">Medical Device</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Medical Device Interface</h3>
+                        <p>Redesigned interface for critical monitoring device, improving usability in high-stress environments.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Medical</span>
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">Human Factors</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3>Premium Audio Device</h3>
-                    <p>Portable audio with breakthrough battery technology. Focus on portability without compromising quality.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Consumer Electronics</span>
-                        <span class="project-tag">Acoustics</span>
-                        <span class="project-tag">Portability</span>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">Audio Device</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Premium Audio Device</h3>
+                        <p>Portable audio with breakthrough battery technology. Focus on portability without compromising quality.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Consumer Electronics</span>
+                            <span class="project-tag">Acoustics</span>
+                            <span class="project-tag">Portability</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,85 +140,104 @@
 
     <!-- Experience Section -->
     <section id="experience" class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Experience</h2>
-            <p class="section-subtitle">My professional journey in design and innovation</p>
-        </div>
-        
-        <div class="experience-timeline fade-in">
-            <div class="experience-item">
-                <div class="experience-content">
-                    <h4>Senior Industrial Designer</h4>
-                    <div class="company">Innovation Design Corp</div>
-                    <div class="duration">2022 - Present</div>
-                    <p>Lead designer for consumer electronics products, managing full product development lifecycle from concept to production. Collaborated with cross-functional teams to deliver award-winning products.</p>
-                </div>
-                <div class="experience-dot"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">My professional journey in design and innovation</p>
             </div>
             
-            <div class="experience-item">
-                <div class="experience-content">
-                    <h4>Product Designer</h4>
-                    <div class="company">TechFlow Solutions</div>
-                    <div class="duration">2020 - 2022</div>
-                    <p>Designed IoT devices and smart home products with focus on user experience and manufacturing optimization. Reduced production costs by 25% through design improvements.</p>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h4>Senior Industrial Designer</h4>
+                        <div class="company">Innovation Design Corp</div>
+                        <div class="duration">2022 - Present</div>
+                        <p>Lead designer for consumer electronics products, managing full product development lifecycle from concept to production. Collaborated with cross-functional teams to deliver award-winning products.</p>
+                    </div>
+                    <div class="experience-dot"></div>
                 </div>
-                <div class="experience-dot"></div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="experience-content">
-                    <h4>Junior Industrial Designer</h4>
-                    <div class="company">Creative Design Studio</div>
-                    <div class="duration">2018 - 2020</div>
-                    <p>Worked on various product categories including furniture, medical devices, and consumer goods. Gained expertise in sustainable design practices and material selection.</p>
+                
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h4>Product Designer</h4>
+                        <div class="company">TechFlow Solutions</div>
+                        <div class="duration">2020 - 2022</div>
+                        <p>Designed IoT devices and smart home products with focus on user experience and manufacturing optimization. Reduced production costs by 25% through design improvements.</p>
+                    </div>
+                    <div class="experience-dot"></div>
                 </div>
-                <div class="experience-dot"></div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="experience-content">
-                    <h4>Design Intern</h4>
-                    <div class="company">Global Manufacturing Inc</div>
-                    <div class="duration">2017 - 2018</div>
-                    <p>Supported senior designers in product development projects, created technical drawings, and assisted in prototype testing and validation processes.</p>
+                
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h4>Junior Industrial Designer</h4>
+                        <div class="company">Creative Design Studio</div>
+                        <div class="duration">2018 - 2020</div>
+                        <p>Worked on various product categories including furniture, medical devices, and consumer goods. Gained expertise in sustainable design practices and material selection.</p>
+                    </div>
+                    <div class="experience-dot"></div>
                 </div>
-                <div class="experience-dot"></div>
+                
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h4>Design Intern</h4>
+                        <div class="company">Global Manufacturing Inc</div>
+                        <div class="duration">2017 - 2018</div>
+                        <p>Supported senior designers in product development projects, created technical drawings, and assisted in prototype testing and validation processes.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Let's Work Together</h2>
-            <p class="section-subtitle">Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.</p>
-        </div>
-        
-        <div class="contact-content fade-in">
-            <div class="contact-links">
-                <a href="mailto:hello@rishiramesh.com" class="contact-link">
-                    <span>📧</span>
-                    Email Me
-                </a>
-                <a href="https://linkedin.com/in/rishiramesh" class="contact-link" target="_blank">
-                    <span>💼</span>
-                    LinkedIn
-                </a>
-                <a href="tel:+1234567890" class="contact-link">
-                    <span>📱</span>
-                    Call Me
-                </a>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="section-subtitle">Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-links">
+                    <a href="mailto:hello@rishiramesh.com" class="contact-link">
+                        <span class="contact-icon">📧</span>
+                        <span class="contact-text">Email Me</span>
+                    </a>
+                    <a href="https://linkedin.com/in/rishiramesh" class="contact-link" target="_blank">
+                        <span class="contact-icon">💼</span>
+                        <span class="contact-text">LinkedIn</span>
+                    </a>
+                    <a href="tel:+1234567890" class="contact-link">
+                        <span class="contact-icon">📱</span>
+                        <span class="contact-text">Call Me</span>
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
+        <div class="container">
+            <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
+        </div>
     </footer>
-    
-    <!-- Script file -->
+
     <script src="script.js"></script>
 </body>
 </html>
