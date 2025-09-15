@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize components
     initializeTheme();
+    initializeSlideshow();
     initializeNavigation();
     initializeContactForm();
     
@@ -77,6 +78,62 @@ function updateThemeIcon(theme) {
         // Show sun for light theme, moon for dark theme
         themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
     }
+}
+
+// Slideshow functionality
+let slideIndex = 0;
+let slideInterval;
+
+function initializeSlideshow() {
+    showSlides();
+    startSlideShow();
+}
+
+function startSlideShow() {
+    slideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 5000); // Change slide every 5 seconds
+}
+
+function stopSlideShow() {
+    clearInterval(slideInterval);
+}
+
+function changeSlide(n) {
+    stopSlideShow();
+    slideIndex += n;
+    showSlides();
+    startSlideShow();
+}
+
+function currentSlide(n) {
+    stopSlideShow();
+    slideIndex = n - 1;
+    showSlides();
+    startSlideShow();
+}
+
+function showSlides() {
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+    
+    // Handle index boundaries
+    if (slideIndex >= slides.length) {slideIndex = 0}
+    if (slideIndex < 0) {slideIndex = slides.length - 1}
+    
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    
+    // Remove active class from all dots
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    
+    // Show current slide and activate corresponding dot
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
 }
 
 // Navigation functionality

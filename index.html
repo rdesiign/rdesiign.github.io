@@ -25,14 +25,55 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Rishi Ramesh</h1>
-            <p class="hero-subtitle">Industrial Designer & Product Innovator</p>
-            <p class="hero-description">Creating meaningful products that blend aesthetic appeal with functional excellence</p>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <div class="slideshow-container">
+            <div class="slide fade active">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1618556380924-4b68e7062b0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="slide-text">
+                        <h2>Product Design Excellence</h2>
+                        <p>Innovative solutions that blend form and function</p>
+                    </div>
+                </div>
             </div>
+            <div class="slide fade">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1547891710-a1dc8da965a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="slide-text">
+                        <h2>User-Centered Approach</h2>
+                        <p>Designing experiences that resonate with people</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide fade">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="slide-text">
+                        <h2>Sustainable Innovation</h2>
+                        <p>Creating products with environmental responsibility</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide fade">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="slide-text">
+                        <h2>Precision Engineering</h2>
+                        <p>Technical excellence in every detail</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation arrows -->
+            <a class="prev" onclick="changeSlide(-1)">❮</a>
+            <a class="next" onclick="changeSlide(1)">❯</a>
+        </div>
+        
+        <!-- Dots indicator -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
     </section>
 
