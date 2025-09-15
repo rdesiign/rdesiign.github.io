@@ -1,5 +1,5 @@
 // Service Worker for Asset Management with Global Cache-Busting
-const CACHE_VERSION = 'v3.0';
+const CACHE_VERSION = 'v3.1';
 const CACHE_NAME = 'portfolio-assets-' + CACHE_VERSION;
 const CRITICAL_RESOURCES = [
     'styles.css',
@@ -56,15 +56,8 @@ self.addEventListener('activate', event => {
             );
         }).then(() => {
             console.log('Service Worker activated and old caches cleared');
-            // Notify all clients to reload for fresh content
-            self.clients.matchAll().then(clients => {
-                clients.forEach(client => {
-                    client.postMessage({
-                        type: 'CACHE_UPDATED',
-                        version: CACHE_VERSION
-                    });
-                });
-            });
+            // REMOVED: Cache update notification that was causing page reloads
+            // This was causing page reload loops
             return self.clients.claim();
         })
     );

@@ -6,7 +6,6 @@
 This is a modern, responsive portfolio website for industrial designer Rishi Ramesh, optimized for GitHub Pages deployment.
 
 ### Key Features
-- **Industrial Design Loading Screen**: 2-second animated loading with technical elements
 - **Responsive Design**: Optimized for all devices and screen sizes
 - **Theme System**: Automatic black/white theme adaptation
 - **Local Fonts**: Product Sans font family loaded locally for performance

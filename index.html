@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,22 @@
         // Production-safe cache-busting
         window.GLOBAL_CACHE_BUST = Date.now();
         console.log('🌐 Production Cache-Bust ID:', window.GLOBAL_CACHE_BUST);
+        
+        // Completely disable service workers to prevent loading loops
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                }
+            }).catch(function() {
+                // Ignore errors
+            });
+            
+            // Disable service worker registration
+            navigator.serviceWorker.register = function() {
+                return Promise.reject(new Error('Service Worker registration disabled'));
+            };
+        }
     </script>
     <link rel="stylesheet" href="styles.css">
     <!-- Additional cache-busted CSS for GitHub Pages -->
@@ -26,103 +42,17 @@
         document.write('<link rel="stylesheet" href="styles.css' + cacheBustParam + '">');
     </script>
 </head>
-<body class="loading">
-    <!-- Industrial Design Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-container">
-            <!-- Technical Blueprint Background -->
-            <div class="blueprint-grid"></div>
-            
-            <!-- Central Loading Animation -->
-            <div class="loading-animation">
-                <!-- Rotating Gear Elements -->
-                <div class="gear-container">
-                    <div class="gear gear-1">
-                        <div class="gear-tooth" style="transform: rotate(0deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(30deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(60deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(90deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(120deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(150deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(180deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(210deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(240deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(270deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(300deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(330deg)"></div>
-                    </div>
-                    <div class="gear gear-2">
-                        <div class="gear-tooth" style="transform: rotate(15deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(45deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(75deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(105deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(135deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(165deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(195deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(225deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(255deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(285deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(315deg)"></div>
-                        <div class="gear-tooth" style="transform: rotate(345deg)"></div>
-                    </div>
-                </div>
-                
-                <!-- Technical Diagram Elements -->
-                <div class="technical-elements">
-                    <div class="dimension-line horizontal"></div>
-                    <div class="dimension-line vertical"></div>
-                    <div class="center-point"></div>
-                </div>
-                
-                <!-- Brand Text -->
-                <div class="loading-text">
-                    <h1 class="brand-name">Rishi Ramesh</h1>
-                    <p class="brand-subtitle">Industrial Designer</p>
-                    <div class="loading-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <span class="progress-text">Loading...</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Corner Technical Details -->
-            <div class="corner-details">
-                <div class="corner corner-tl">
-                    <div class="corner-lines"></div>
-                    <span class="corner-label">01</span>
-                </div>
-                <div class="corner corner-tr">
-                    <div class="corner-lines"></div>
-                    <span class="corner-label">02</span>
-                </div>
-                <div class="corner corner-bl">
-                    <div class="corner-lines"></div>
-                    <span class="corner-label">03</span>
-                </div>
-                <div class="corner corner-br">
-                    <div class="corner-lines"></div>
-                    <span class="corner-label">04</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Navigation -->
-    <nav class="navigation">
+<body>
+    <!-- Floating Navigation Bar -->
+    <nav class="floating-navbar" id="main-navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">Rishi Ramesh</a>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <button class="theme-toggle" onclick="toggleTheme()">
+            <a href="#home" class="nav-link active" data-section="home">Home</a>
+            <a href="#about" class="nav-link" data-section="about">About</a>
+            <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+            <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <span id="theme-icon">🌙</span>
             </button>
-            <button class="menu-toggle">☰</button>
         </div>
     </nav>
 
@@ -191,94 +121,6 @@
                 <p>As an industrial designer, I believe that great design is the perfect intersection of aesthetic appeal, functional excellence, and meaningful user experience. My approach combines deep user research, creative problem-solving, and technical expertise to create products that truly resonate with people.</p>
                 <p>With a background in mechanical engineering and design thinking, I bring both technical feasibility and creative vision to every project. I'm passionate about sustainable design practices and creating products that have a positive impact on both users and the environment.</p>
                 <p>When I'm not designing, you can find me sketching new ideas, exploring emerging technologies, or analyzing the design details of everyday objects around me.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">A selection of my recent design work and innovations</p>
-        </div>
-        
-        <div class="projects-grid fade-in">
-            <a href="smart-home-assistant.html" class="project-card project-link">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Smart Home Assistant Device</h4>
-                    <p>A voice-activated home assistant with intuitive physical controls and ambient lighting. Designed for seamless integration into modern living spaces.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Product Design</span>
-                        <span class="project-tag">IoT</span>
-                        <span class="project-tag">User Interface</span>
-                    </div>
-                </div>
-            </a>
-            
-            <div class="project-card" data-project="sustainable-furniture">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Sustainable Office Furniture</h4>
-                    <p>Modular workspace furniture system made from recycled materials. Designed for flexibility, comfort, and minimal environmental impact.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Sustainability</span>
-                        <span class="project-tag">Furniture Design</span>
-                        <span class="project-tag">Ergonomics</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card" data-project="medical-device">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Medical Device Interface</h4>
-                    <p>Redesigned user interface for a critical medical monitoring device, improving usability and reducing user error in high-stress environments.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Medical Design</span>
-                        <span class="project-tag">UX Design</span>
-                        <span class="project-tag">Safety</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card" data-project="consumer-electronics">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Consumer Electronics</h4>
-                    <p>Portable audio device with breakthrough battery technology and premium materials. Focus on portability without compromising audio quality.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Electronics</span>
-                        <span class="project-tag">Audio</span>
-                        <span class="project-tag">Premium Design</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card" data-project="transportation-solution">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Transportation Solution</h4>
-                    <p>Urban mobility concept combining electric scooters with smart docking stations. Designed for efficient city transportation and reduced congestion.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Transportation</span>
-                        <span class="project-tag">Urban Design</span>
-                        <span class="project-tag">Electric Mobility</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card" data-project="kitchen-innovation">
-                <div class="project-image">[Project Image Placeholder]</div>
-                <div class="project-content">
-                    <h4>Kitchen Innovation</h4>
-                    <p>Smart kitchen appliance that combines multiple cooking functions in a compact design. Emphasizes energy efficiency and intuitive operation.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Kitchen Design</span>
-                        <span class="project-tag">Smart Home</span>
-                        <span class="project-tag">Energy Efficiency</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -362,105 +204,8 @@
     <footer>
         <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
     </footer>
-
-    <!-- Project Modal -->
-    <div id="project-modal" class="project-modal">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-            <div class="modal-header">
-                <h2 id="modal-title">Project Title</h2>
-                <div id="modal-tags" class="modal-tags"></div>
-            </div>
-            <div class="modal-body">
-                <div class="modal-image">
-                    <img id="modal-img" src="" alt="Project Image" />
-                </div>
-                <div class="modal-details">
-                    <div class="detail-section">
-                        <h3>Project Overview</h3>
-                        <p id="modal-overview">Project overview will be displayed here.</p>
-                    </div>
-                    <div class="detail-section">
-                        <h3>Challenge</h3>
-                        <p id="modal-challenge">Project challenge will be displayed here.</p>
-                    </div>
-                    <div class="detail-section">
-                        <h3>Solution</h3>
-                        <p id="modal-solution">Project solution will be displayed here.</p>
-                    </div>
-                    <div class="detail-section">
-                        <h3>Key Features</h3>
-                        <ul id="modal-features"></ul>
-                    </div>
-                    <div class="detail-section">
-                        <h3>Impact</h3>
-                        <p id="modal-impact">Project impact will be displayed here.</p>
-                    </div>
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <strong>Role:</strong> <span id="modal-role">Industrial Designer</span>
-                        </div>
-                        <div class="meta-item">
-                            <strong>Duration:</strong> <span id="modal-duration">6 months</span>
-                        </div>
-                        <div class="meta-item">
-                            <strong>Team:</strong> <span id="modal-team">Solo project</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Production-Ready Loading Screen Management for GitHub Pages
-        console.log('🌐 Production loading script initialized');
-        
-        // Clear any problematic service workers for production
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    console.log('🧹 Cleaning up service worker for production...');
-                    registration.unregister();
-                }
-            }).catch(function(error) {
-                console.log('SW cleanup completed');
-            });
-        }
-        
-        // Production-safe emergency timeout
-        setTimeout(function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                console.log('🚑 Production emergency timeout - removing loading screen');
-                document.body.classList.remove('loading');
-                loadingScreen.style.display = 'none';
-            }
-        }, 4000); // Longer timeout for slower connections
-        
-        // Load main script with production-safe cache-busting
-        const mainScript = document.createElement('script');
-        mainScript.src = 'script.js?v=' + window.GLOBAL_CACHE_BUST;
-        mainScript.onload = function() {
-            console.log('✅ Production script loaded successfully');
-        };
-        mainScript.onerror = function() {
-            console.error('❌ Production script load failed - emergency cleanup');
-            // Immediate cleanup on script failure
-            setTimeout(function() {
-                const loadingScreen = document.getElementById('loading-screen');
-                if (loadingScreen) {
-                    document.body.classList.remove('loading');
-                    loadingScreen.style.display = 'none';
-                }
-            }, 100);
-        };
-        document.head.appendChild(mainScript);
-        
-        // Production health check
-        setTimeout(function() {
-            console.log('🚀 Production health check: Page loaded successfully at', new Date().toISOString());
-        }, 1000);
-    </script>
+    
+    <!-- Script file -->
+    <script src="script.js"></script>
 </body>
 </html>

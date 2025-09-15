@@ -163,7 +163,9 @@
         }
     }
     
-    // Force reload on focus (for when user returns to tab)
+    // DISABLED: Force reload on focus (for when user returns to tab)
+    // This was causing page reload loops
+    /*
     function setupFocusReload() {
         let isHidden = false;
         
@@ -183,8 +185,11 @@
         
         sessionStorage.setItem('lastCacheBust', CACHE_BUST);
     }
+    */
     
-    // Listen for service worker messages
+    // DISABLED: Listen for service worker messages
+    // This was causing page reload loops
+    /*
     function setupServiceWorkerListener() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.addEventListener('message', function(event) {
@@ -198,6 +203,7 @@
             });
         }
     }
+    */
     
     // Initialize cache-busting system
     function init() {
@@ -216,8 +222,8 @@
                     cacheBustBackgroundImages();
                 }, 100);
                 setupDynamicCacheBusting();
-                setupFocusReload();
-                setupServiceWorkerListener();
+                // DISABLED: setupFocusReload();
+                // DISABLED: setupServiceWorkerListener();
             });
         } else {
             cacheBustCSS();
@@ -227,8 +233,8 @@
                 cacheBustBackgroundImages();
             }, 100);
             setupDynamicCacheBusting();
-            setupFocusReload();
-            setupServiceWorkerListener();
+            // DISABLED: setupFocusReload();
+            // DISABLED: setupServiceWorkerListener();
         }
         
         console.log('✅ Cache-Busting System Initialized');
@@ -239,7 +245,9 @@
         version: VERSION,
         id: CACHE_BUST,
         refresh: function() {
-            window.location.reload(true);
+            // DISABLED: window.location.reload(true);
+            // Just refresh without cache busting to prevent loops
+            window.location.reload();
         },
         assets: function() {
             cacheBustImages();
