@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Remove no-js class as JavaScript is working
     document.documentElement.classList.remove('no-js');
     
-    // Initialize components
-    initializeTheme();
+    initializeComponents();
     initializeSlideshow();
     initializeNavigation();
     initializeContactForm();
@@ -44,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error in main initialization:', error);
     }
 });
+
+function initializeComponents() {
+    initializeTheme();
+}
 
 // Theme toggle functionality
 function initializeTheme() {
@@ -92,7 +95,7 @@ function initializeSlideshow() {
 function startSlideShow() {
     slideInterval = setInterval(() => {
         changeSlide(1);
-    }, 2500); // Change slide every 2.5 seconds (reduced from 5000)
+    }, 3000); // Change slide every 3 seconds (updated from 2500ms)
 }
 
 function stopSlideShow() {
