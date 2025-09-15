@@ -14,6 +14,20 @@
     }
 })();
 
+// Preload critical images
+function preloadImages() {
+    const imagesToPreload = [
+        'Projects/MMM/MMM8.png',
+        'Projects/MMM/MMM1.png',
+        'Assets/Profile raw 4.jpg'
+    ];
+    
+    imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
 // Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Main app initialization');
@@ -30,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    
+    // Preload critical images
+    preloadImages();
     
     initializeComponents();
     initializeSlideshow();
@@ -82,13 +99,40 @@ function updateThemeIcon(theme) {
     }
 }
 
-// Slideshow functionality
+// Slideshow functionality with performance optimizations
 let slideIndex = 0;
 let slideInterval;
+let slidesLoaded = false;
 
 function initializeSlideshow() {
-    showSlides();
-    startSlideShow();
+    // Preload slideshow images
+    const slideImages = document.querySelectorAll('.slide-image');
+    let loadedCount = 0;
+    
+    slideImages.forEach(slide => {
+        const bgImage = slide.style.backgroundImage;
+        if (bgImage && bgImage.includes('url')) {
+            const url = bgImage.match(/url\(['"]?(.*?)['"]?\)/)[1];
+            const img = new Image();
+            img.onload = function() {
+                loadedCount++;
+                if (loadedCount === slideImages.length) {
+                    slidesLoaded = true;
+                    showSlides();
+                    startSlideShow();
+                }
+            };
+            img.src = url;
+        }
+    });
+    
+    // Fallback in case images fail to load
+    setTimeout(() => {
+        if (!slidesLoaded) {
+            showSlides();
+            startSlideShow();
+        }
+    }, 3000);
 }
 
 function startSlideShow() {
