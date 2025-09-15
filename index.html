@@ -280,5 +280,30 @@
     </footer>
 
     <script src="script.js?v=1.0"></script>
+    
+    <!-- Debug script for theme toggle -->
+    <script>
+        // Additional debugging for theme toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug: DOM Content Loaded');
+            
+            // Check if theme toggle element exists
+            const themeToggle = document.getElementById('theme-toggle');
+            console.log('Debug: themeToggle element:', themeToggle);
+            
+            if (themeToggle) {
+                console.log('Debug: Adding event listener to theme toggle');
+                themeToggle.addEventListener('click', function() {
+                    console.log('Debug: Theme toggle clicked');
+                });
+            } else {
+                console.log('Debug: Theme toggle element not found');
+            }
+            
+            // Check if theme icon exists
+            const themeIcon = document.getElementById('theme-icon');
+            console.log('Debug: themeIcon element:', themeIcon);
+        });
+    </script>
 </body>
 </html>
