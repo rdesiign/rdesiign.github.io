@@ -197,9 +197,9 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px; /* Increased padding */
 }
 
 /* Floating Navigation Bar */
@@ -457,7 +457,12 @@ body {
 
 /* Sections */
 .section {
-    padding: 120px 0; /* Reduced from 150px to 120px */
+    padding: 80px 0; /* Reduced padding to decrease space between sections */
+}
+
+/* Slightly Smaller About Section */
+#about.section {
+    padding: 220px 0; /* Reduced padding to make section slightly smaller */
 }
 
 .section-header {
@@ -483,12 +488,14 @@ body {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 60px;
+    gap: 75px; /* Reduced gap to make section slightly smaller */
     align-items: center;
+    max-width: 1000px; /* Reduced width to make section slightly smaller */
+    margin: 0 auto;
 }
 
 .about-image {
-    width: 100%;
+    width: 110%; /* Reduced from 120% */
     border-radius: 6px; /* Reduced from 12px */
     overflow: hidden;
     background: var(--card-bg);
@@ -497,6 +504,7 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border-color);
+    margin: 0 auto; /* Center the image */
 }
 
 .profile-image {
@@ -510,27 +518,33 @@ body {
 }
 
 .about-text h3 {
-    font-size: 28px;
+    font-size: 26px; /* Reduced from 28px */
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 18px; /* Reduced from 20px */
     color: var(--text-primary);
 }
 
 .about-text p {
     color: var(--text-secondary);
-    margin-bottom: 20px;
-    line-height: 1.8;
+    margin-bottom: 18px; /* Reduced from 20px */
+    line-height: 1.7; /* Reduced from 1.8 */
+    font-size: 17px; /* Reduced from 18px */
 }
 
 .about-text .btn {
-    margin-top: 20px;
+    margin-top: 18px; /* Reduced from 20px */
+    padding: 12px 24px; /* Reduced button size */
+    font-size: 15px; /* Reduced font size */
 }
 
 /* Projects Section */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
+    gap: 30px; /* Restore original gap */
+    max-width: 1400px; /* Reduced max width for breathing room */
+    margin: 0 auto;
+    padding: 0 20px; /* Add breathing room on sides */
 }
 
 .project-card {
@@ -552,7 +566,7 @@ body {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 75%; /* 4:3 aspect ratio for better display */
+    padding-bottom: 75%; /* 4:3 aspect ratio maintained */
     overflow: hidden;
 }
 
@@ -577,8 +591,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 70%; /* Cover 70% of the width */
-    max-width: 350px; /* Maximum width of 350px */
+    width: 100%; /* Cover full width */
     background: transparent; /* No background */
     padding: 20px;
     opacity: 0;
@@ -596,18 +609,18 @@ body {
 }
 
 .project-content h3 {
-    font-size: 22px;
+    font-size: 24px; /* Slightly larger font */
     font-weight: 600;
     margin-bottom: 8px;
     color: white;
-    /* Removed text-shadow for better readability */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Restore text shadow for better readability */
 }
 
 .project-content p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin-bottom: 15px;
-    /* Removed text-shadow for better readability */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Restore text shadow for better readability */
 }
 
 .project-tags {
@@ -768,8 +781,13 @@ footer {
 @media (max-width: 1024px) {
     .about-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 85px; /* Reduced gap to make section slightly smaller */
         text-align: center;
+        max-width: 750px; /* Reduced width to make section slightly smaller */
+    }
+    
+    .about-image {
+        width: 100%; /* Increased from 90% on tablet */
     }
     
     .experience-timeline::before {
@@ -798,6 +816,14 @@ footer {
     
     .hero-section {
         height: 70vh;
+    }
+    
+    /* Keep 2 items per row on medium screens */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px; /* Restore original gap */
+        max-width: 1200px; /* Reduced max width for breathing room */
+        padding: 0 30px; /* Add breathing room on sides */
     }
 }
 
@@ -829,11 +855,13 @@ footer {
     }
     
     .section {
-        padding: 70px 0;
+        padding: 80px 0;
     }
     
     .projects-grid {
         grid-template-columns: 1fr; /* Single column on mobile */
+        max-width: 100%;
+        padding: 0 15px; /* Add breathing room on sides */
     }
     
     .experience-item {
@@ -861,6 +889,10 @@ footer {
         width: auto;
         border-radius: 30px;
         padding: 8px;
+    }
+    
+    .about-image {
+        width: 100%; /* Increased from 90% on mobile */
     }
     
     .nav-container {
@@ -894,7 +926,7 @@ footer {
     }
     
     .section {
-        padding: 50px 0;
+        padding: 60px 0;
     }
     
     .section-title {
@@ -902,7 +934,7 @@ footer {
     }
     
     .about-content {
-        gap: 30px;
+        gap: 60px; /* Reduced gap to make section smaller */
     }
     
     .experience-item {
