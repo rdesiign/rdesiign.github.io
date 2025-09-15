@@ -92,7 +92,7 @@ function initializeSlideshow() {
 function startSlideShow() {
     slideInterval = setInterval(() => {
         changeSlide(1);
-    }, 5000); // Change slide every 5 seconds
+    }, 2500); // Change slide every 2.5 seconds (reduced from 5000)
 }
 
 function stopSlideShow() {
