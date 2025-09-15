@@ -305,9 +305,9 @@ function initializeGraphBackground() {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
         
-        // Create a subtle parallax effect on the graph background
-        const xOffset = (x - 0.5) * 10;
-        const yOffset = (y - 0.5) * 10;
+        // Create a subtle parallax effect on the dotted background
+        const xOffset = (x - 0.5) * 5;
+        const yOffset = (y - 0.5) * 5;
         
         body.style.backgroundPosition = `${xOffset}px ${yOffset}px`;
     });

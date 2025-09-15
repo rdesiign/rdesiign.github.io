@@ -103,9 +103,8 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    background-image: 
-        linear-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+    /* Dotted notebook background */
+    background-image: radial-gradient(rgba(255, 107, 53, 0.2) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: 0 0;
     position: relative;
@@ -458,7 +457,7 @@ body {
 
 /* Sections */
 .section {
-    padding: 100px 0;
+    padding: 120px 0; /* Reduced from 150px to 120px */
 }
 
 .section-header {
