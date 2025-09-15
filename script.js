@@ -31,13 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     
-    // Remove no-js class as JavaScript is working
-    document.documentElement.classList.remove('no-js');
-    
     initializeComponents();
     initializeSlideshow();
     initializeNavigation();
     initializeContactForm();
+    initializeGraphBackground();
+    initializeBlueprintCursor();
     
     } catch (error) {
         console.error('Error in main initialization:', error);
@@ -253,3 +252,102 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Graph paper background with cursor interaction
+function initializeGraphBackground() {
+    const body = document.body;
+    
+    document.addEventListener('mousemove', function(e) {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        // Create a subtle parallax effect on the graph background
+        const xOffset = (x - 0.5) * 10;
+        const yOffset = (y - 0.5) * 10;
+        
+        body.style.backgroundPosition = `${xOffset}px ${yOffset}px`;
+    });
+}
+
+// Blueprint cursor with trails and rolling effect
+function initializeBlueprintCursor() {
+    // Create cursor elements
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    
+    const cursorInner = document.createElement('div');
+    cursorInner.className = 'cursor-inner';
+    
+    cursor.appendChild(cursorInner);
+    document.body.appendChild(cursor);
+    
+    // Track mouse movement
+    document.addEventListener('mousemove', function(e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Create trail effect
+        createTrail(e.clientX, e.clientY);
+    });
+    
+    // Click effect
+    document.addEventListener('click', function(e) {
+        createRollUpEffect();
+    });
+    
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', function() {
+        cursor.style.opacity = '0';
+    });
+    
+    document.addEventListener('mouseenter', function() {
+        cursor.style.opacity = '1';
+    });
+    
+    // Add special effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .nav-link');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+}
+
+function createTrail(x, y) {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = x + 'px';
+    trail.style.top = y + 'px';
+    
+    document.body.appendChild(trail);
+    
+    // Add active class for animation
+    setTimeout(() => {
+        trail.classList.add('active');
+    }, 10);
+    
+    // Remove trail after animation
+    setTimeout(() => {
+        trail.remove();
+    }, 1000);
+}
+
+function createRollUpEffect() {
+    const rollUp = document.createElement('div');
+    rollUp.className = 'roll-up';
+    document.body.appendChild(rollUp);
+    
+    // Add active class for animation
+    setTimeout(() => {
+        rollUp.classList.add('active');
+    }, 10);
+    
+    // Remove element after animation
+    setTimeout(() => {
+        rollUp.remove();
+    }, 1000);
+}

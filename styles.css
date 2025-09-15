@@ -103,6 +103,98 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    background-image: 
+        linear-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0;
+    position: relative;
+    cursor: none; /* Hide default cursor */
+}
+
+/* Custom Blueprint Cursor */
+.cursor {
+    width: 30px; /* Increased from 20px */
+    height: 30px; /* Increased from 20px */
+    border: 2px solid #ff6b35; /* Bright orange color */
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+}
+
+.cursor-inner {
+    width: 6px; /* Increased from 4px */
+    height: 6px; /* Increased from 4px */
+    background-color: #ff6b35; /* Bright orange color */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 4px; /* Increased from 2px */
+    height: 4px; /* Increased from 2px */
+    background-color: #ff6b35; /* Bright orange color */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    box-shadow: 0 0 10px #ff6b35, 0 0 20px #ff6b35; /* Bright orange glow */
+}
+
+.cursor-trail.active {
+    opacity: 1;
+    animation: trailFade 1s forwards;
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* Rolling Blueprint Effect */
+.roll-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 49%, #ff6b35 50%, #ff6b35 51%, transparent 52%),
+        linear-gradient(transparent 49%, #ff6b35 50%, #ff6b35 51%, transparent 52%);
+    background-size: 20px 20px;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: top center;
+}
+
+.roll-up.active {
+    animation: rollUp 1s forwards;
+}
+
+@keyframes rollUp {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
 }
 
 .container {
@@ -395,7 +487,7 @@ body {
 
 .about-image {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 6px; /* Reduced from 12px */
     overflow: hidden;
     background: var(--card-bg);
     aspect-ratio: 4/5;
@@ -409,7 +501,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 6px; /* Reduced from 12px */
 }
 
 .about-text h3 {
@@ -428,17 +520,18 @@ body {
 /* Projects Section */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
     gap: 30px;
 }
 
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 6px; /* Reduced from 12px */
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px var(--shadow-color);
+    position: relative;
 }
 
 .project-card:hover {
@@ -446,37 +539,63 @@ body {
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
-.project-image {
-    height: 200px;
-    background: var(--bg-tertiary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.project-image-container {
     position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* 4:3 aspect ratio for better display */
     overflow: hidden;
 }
 
-.project-placeholder {
-    color: var(--text-secondary);
-    font-size: 18px;
-    font-weight: 500;
+.project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-image {
+    filter: blur(2px); /* Slight blur on hover */
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70%; /* Cover 70% of the width */
+    max-width: 350px; /* Maximum width of 350px */
+    background: transparent; /* No background */
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
 }
 
 .project-content {
-    padding: 25px;
+    color: white;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
 }
 
 .project-content h3 {
     font-size: 22px;
     font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--text-primary);
+    margin-bottom: 8px;
+    color: white;
+    /* Removed text-shadow for better readability */
 }
 
 .project-content p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    /* Removed text-shadow for better readability */
 }
 
 .project-tags {
@@ -486,8 +605,8 @@ body {
 }
 
 .project-tag {
-    background: rgba(6, 182, 212, 0.2);
-    color: var(--accent-primary);
+    background: rgba(6, 182, 212, 0.3); /* Translucent teal background */
+    color: var(--accent-primary); /* Teal color text */
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 12px;
@@ -702,7 +821,7 @@ footer {
     }
     
     .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
     
     .experience-item {
