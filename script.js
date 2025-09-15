@@ -173,6 +173,7 @@ function updateNav() {
     // Get sections
     var homeSection = document.getElementById('home');
     var aboutSection = document.getElementById('about');
+    var projectsSection = document.getElementById('projects');
     var experienceSection = document.getElementById('experience');
     var contactSection = document.getElementById('contact');
     
@@ -184,6 +185,8 @@ function updateNav() {
         activeSection = 'contact';
     } else if (experienceSection && scrollPos >= experienceSection.offsetTop) {
         activeSection = 'experience';
+    } else if (projectsSection && scrollPos >= projectsSection.offsetTop) {
+        activeSection = 'projects';
     } else if (aboutSection && scrollPos >= aboutSection.offsetTop) {
         activeSection = 'about';
     }
