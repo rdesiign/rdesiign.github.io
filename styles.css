@@ -189,7 +189,7 @@ body {
 /* Hero Section */
 .hero-section {
     width: 100%;
-    height: 70vh; /* Reduced from 100vh to 70vh for a shorter banner */
+    height: 85vh; /* Increased from 70vh to 85vh for taller banner */
     position: relative;
     overflow: hidden;
     aspect-ratio: 16/9; /* 1920x1080 is 16:9 aspect ratio */
@@ -660,7 +660,7 @@ footer {
     }
     
     .hero-section {
-        height: 60vh; /* Reduced from 60vh to 50vh */
+        height: 70vh; /* Increased from 60vh to 70vh */
     }
 }
 
@@ -680,7 +680,7 @@ footer {
     }
     
     .hero-section {
-        height: 50vh; /* Reduced from 50vh to 40vh */
+        height: 60vh; /* Increased from 50vh to 60vh */
     }
     
     .slide-title {
@@ -745,7 +745,7 @@ footer {
     }
     
     .hero-section {
-        height: 40vh; /* Reduced from 40vh to 30vh */
+        height: 50vh; /* Increased from 40vh to 50vh */
     }
     
     .slide-title {
@@ -781,10 +781,6 @@ footer {
         left: 15px;
         width: 12px;
         height: 12px;
-    }
-    
-    .contact-content {
-        gap: 30px;
     }
     
     .contact-link {
