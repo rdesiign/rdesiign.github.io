@@ -349,14 +349,22 @@ function initializeBlueprintCursor() {
     });
     
     // Add special effects for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .nav-link');
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .nav-link, img, .project-image, .profile-image, .btn');
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', function() {
+            cursor.classList.add('target');
             cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            // Ensure cursor stays orange
+            cursor.style.borderColor = '#ff6b35';
+            cursorInner.style.backgroundColor = '#ff6b35';
         });
         
         element.addEventListener('mouseleave', function() {
+            cursor.classList.remove('target');
             cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            // Ensure cursor stays orange
+            cursor.style.borderColor = '#ff6b35';
+            cursorInner.style.backgroundColor = '#ff6b35';
         });
     });
 }
@@ -395,3 +403,184 @@ function createRollUpEffect() {
         rollUp.remove();
     }, 1000);
 }
+
+// Typing animation for About section - CURSOR BLINKS AT END & PROFILE PICTURE TRIGGER
+let aboutAnimationStarted = false;
+
+function typeTextMovingCursor(elements, texts, cursorElement, duration) {
+    const [heading, paragraph, button] = elements;
+    const [headingText, paragraphText, buttonText] = texts;
+    
+    // Calculate timing for each element
+    const totalLength = headingText.length + paragraphText.length + buttonText.length;
+    const headingDuration = (headingText.length / totalLength) * duration;
+    const paragraphDuration = (paragraphText.length / totalLength) * duration;
+    const buttonDuration = (buttonText.length / totalLength) * duration;
+    
+    let headingIndex = 0;
+    let paragraphIndex = 0;
+    let buttonIndex = 0;
+    
+    // Type heading
+    function typeHeading() {
+        if (headingIndex < headingText.length) {
+            // Move cursor to current element
+            if (cursorElement.parentNode !== heading) {
+                if (cursorElement.parentNode) cursorElement.parentNode.removeChild(cursorElement);
+                heading.appendChild(cursorElement);
+            }
+            
+            heading.textContent = headingText.substring(0, headingIndex);
+            heading.appendChild(cursorElement);
+            headingIndex++;
+            setTimeout(typeHeading, headingDuration / headingText.length);
+        } else {
+            heading.textContent = headingText;
+            setTimeout(typeParagraph, 0);
+        }
+    }
+    
+    // Type paragraph
+    function typeParagraph() {
+        if (paragraphIndex < paragraphText.length) {
+            // Move cursor to current element
+            if (cursorElement.parentNode !== paragraph) {
+                if (cursorElement.parentNode) cursorElement.parentNode.removeChild(cursorElement);
+                paragraph.appendChild(cursorElement);
+            }
+            
+            paragraph.textContent = paragraphText.substring(0, paragraphIndex);
+            paragraph.appendChild(cursorElement);
+            paragraphIndex++;
+            setTimeout(typeParagraph, paragraphDuration / paragraphText.length);
+        } else {
+            paragraph.textContent = paragraphText;
+            setTimeout(typeButton, 0);
+        }
+    }
+    
+    // Type button - with special handling to ensure all characters display
+    function typeButton() {
+        if (buttonIndex < buttonText.length) {
+            // Move cursor to current element
+            if (cursorElement.parentNode !== button) {
+                if (cursorElement.parentNode) cursorElement.parentNode.removeChild(cursorElement);
+                button.appendChild(cursorElement);
+            }
+            
+            // Ensure we're properly setting the text content
+            const currentText = buttonText.substring(0, buttonIndex);
+            button.textContent = currentText;
+            button.appendChild(cursorElement);
+            buttonIndex++;
+            setTimeout(typeButton, buttonDuration / buttonText.length);
+        } else {
+            // Animation complete - ensure the full text is displayed
+            button.textContent = buttonText;
+            
+            // Position cursor at the end of the paragraph (after "ideas") and ensure it continues blinking
+            if (cursorElement.parentNode) cursorElement.parentNode.removeChild(cursorElement);
+            // Make sure we're appending to the right element - it should be at the end of the paragraph
+            paragraph.appendChild(cursorElement);
+            
+            // Ensure cursor is visible and blinking at the end
+            cursorElement.style.display = 'inline-block';
+            cursorElement.style.visibility = 'visible';
+            
+            // Make sure the blinking animation continues by ensuring the class is present
+            if (!cursorElement.classList.contains('blinking-cursor')) {
+                cursorElement.classList.add('blinking-cursor');
+            }
+            
+            // Ensure the animation is not paused
+            cursorElement.style.animationPlayState = 'running';
+        }
+    }
+    
+    // Start the animation
+    typeHeading();
+}
+
+// Check if profile picture is in viewport
+function isProfilePictureInViewport() {
+    const profilePicture = document.querySelector('.profile-image');
+    if (profilePicture) {
+        const rect = profilePicture.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+    return false;
+}
+
+// Scroll event listener to trigger animation when profile picture is visible
+function checkProfilePictureVisibility() {
+    if (isProfilePictureInViewport() && !aboutAnimationStarted) {
+        const typewriterContainer = document.getElementById('about-typewriter');
+        if (typewriterContainer) {
+            const heading = typewriterContainer.querySelector('h3');
+            const paragraph = typewriterContainer.querySelector('p');
+            const button = typewriterContainer.querySelector('a');
+            
+            if (heading && paragraph && button) {
+                // Store original content
+                const originalHeading = heading.textContent;
+                const originalParagraph = paragraph.textContent;
+                const originalButton = "Download my CV"; // Explicitly set the button text to ensure the "V" is included
+                
+                // Clear content
+                heading.textContent = '';
+                paragraph.textContent = '';
+                button.textContent = '';
+                
+                // Show elements
+                heading.style.opacity = '1';
+                paragraph.style.opacity = '1';
+                button.style.opacity = '1';
+                
+                // Create cursor element
+                const cursorElement = document.createElement('span');
+                cursorElement.className = 'blinking-cursor';
+                heading.appendChild(cursorElement);
+                
+                // Start typing animation for 3 seconds
+                typeTextMovingCursor(
+                    [heading, paragraph, button], 
+                    [originalHeading, originalParagraph, originalButton], 
+                    cursorElement, 
+                    3000
+                );
+                
+                aboutAnimationStarted = true;
+            }
+        }
+    }
+}
+
+// Initialize scroll listener
+document.addEventListener('DOMContentLoaded', function() {
+    // Add scroll event listener
+    window.addEventListener('scroll', checkProfilePictureVisibility);
+    
+    // Check on initial load in case already in view
+    setTimeout(checkProfilePictureVisibility, 1000);
+});
+
+// Add functionality for the animated arrow to scroll to projects section
+document.addEventListener('DOMContentLoaded', function() {
+    const arrow = document.getElementById('arrow-down');
+    arrow.addEventListener('click', function(e) {
+        e.preventDefault();
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            const navbarHeight = document.querySelector('.floating-navbar').offsetHeight;
+            const offset = projectsSection.offsetTop - navbarHeight - 20;
+            
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        }
+    });
+});

@@ -122,7 +122,7 @@ body {
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease;
-    mix-blend-mode: difference;
+    background-color: transparent; /* Ensure transparent inside */
 }
 
 .cursor-inner {
@@ -134,6 +134,54 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+}
+
+/* Target cursor style */
+.cursor.target {
+    border: 2px solid #ff6b35;
+    background-color: transparent;
+}
+
+.cursor.target::before,
+.cursor.target::after {
+    content: '';
+    position: absolute;
+    background-color: #ff6b35;
+    border-radius: 2px;
+}
+
+/* Horizontal line of target */
+.cursor.target::before {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Vertical line of target */
+.cursor.target::after {
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Ensure cursor stays orange on all elements */
+a:hover .cursor,
+img:hover .cursor,
+button:hover .cursor,
+.nav-link:hover .cursor,
+.project-card:hover .cursor,
+* .cursor {
+    border-color: #ff6b35 !important;
+    background-color: transparent !important;
+}
+
+.cursor-inner:hover {
+    background-color: #ff6b35 !important;
 }
 
 .cursor-trail {
@@ -430,6 +478,8 @@ body {
     border: none;
     cursor: pointer;
     text-align: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Explicitly set font family */
+    letter-spacing: normal; /* Ensure normal letter spacing */
 }
 
 .btn-primary {
@@ -492,6 +542,7 @@ body {
     align-items: center;
     max-width: 1000px; /* Reduced width to make section slightly smaller */
     margin: 0 auto;
+    position: relative;
 }
 
 .about-image {
@@ -517,24 +568,68 @@ body {
     image-rendering: crisp-edges;
 }
 
-.about-text h3 {
-    font-size: 26px; /* Reduced from 28px */
+/* Typing animation for About section - MOVING CURSOR */
+#about-typewriter {
+    position: relative;
+}
+
+#about-typewriter h3, 
+#about-typewriter p, 
+#about-typewriter .btn {
+    opacity: 0;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: #ff6b35;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: top;
+    visibility: visible;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* About section typing effect */
+#about .about-text h3 {
+    font-size: 26px;
     font-weight: 600;
-    margin-bottom: 18px; /* Reduced from 20px */
+    margin-bottom: 18px;
     color: var(--text-primary);
 }
 
-.about-text p {
-    color: var(--text-secondary);
-    margin-bottom: 18px; /* Reduced from 20px */
-    line-height: 1.7; /* Reduced from 1.8 */
-    font-size: 17px; /* Reduced from 18px */
+/* Make "Rishi" the same color as the cursor */
+#about .about-text h3 span.highlight {
+    color: #ff6b35;
 }
 
-.about-text .btn {
-    margin-top: 18px; /* Reduced from 20px */
-    padding: 12px 24px; /* Reduced button size */
-    font-size: 15px; /* Reduced font size */
+#about .about-text p {
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+#about .btn {
+    margin-top: 18px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Ensure consistent font */
+    letter-spacing: normal; /* Ensure normal letter spacing */
+    text-transform: none; /* Ensure no text transformation */
+    font-variant: normal; /* Ensure normal font variant */
+    font-feature-settings: normal; /* Ensure normal font features */
+}
+
+/* Ensure the CV button text is clearly visible */
+#about .btn.btn-primary {
+    color: white;
+    text-shadow: none; /* Remove any text shadow that might affect visibility */
 }
 
 /* Projects Section */
@@ -545,7 +640,10 @@ body {
     max-width: 1400px; /* Reduced max width for breathing room */
     margin: 0 auto;
     padding: 0 20px; /* Add breathing room on sides */
+    position: relative;
 }
+
+
 
 .project-card {
     background: var(--card-bg);
@@ -684,7 +782,7 @@ body {
     margin-right: 50px;
 }
 
-.experience-item:nth-child(even) .experience-content {
+.experience-item:nth-child(even) . .experience-content {
     margin-left: 50px;
 }
 
@@ -731,7 +829,10 @@ body {
     gap: 60px;
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
 }
+
+
 
 .contact-links {
     display: flex;
@@ -870,8 +971,6 @@ footer {
     
     .experience-dot {
         left: 20px;
-        width: 16px;
-        height: 16px;
     }
     
     .contact-link {
@@ -912,6 +1011,7 @@ footer {
         height: 36px;
         font-size: 14px;
     }
+    
     
     .hero-section {
         height: 50vh;
