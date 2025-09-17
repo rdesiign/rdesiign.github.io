@@ -514,10 +514,7 @@ function checkIntroSectionVisibility() {
                 // Create cursor element
                 const cursorElement = document.createElement('span');
                 cursorElement.className = 'blinking-cursor';
-                cursorElement.textContent = '|'; // Add a visible character for the cursor
-                cursorElement.style.color = '#ff6b35'; // Orange color like the cursor
-                cursorElement.style.marginLeft = '5px';
-                cursorElement.style.animation = 'blink 1s infinite';
+                cursorElement.style.marginLeft = '2px';
                 cursorElement.style.verticalAlign = 'baseline'; // Align with text baseline
                 
                 // Start typing animation - heading first, then subtitle
@@ -557,6 +554,8 @@ function checkProfilePictureVisibility() {
                 // Create cursor element
                 const cursorElement = document.createElement('span');
                 cursorElement.className = 'blinking-cursor';
+                cursorElement.style.marginLeft = '2px';
+                cursorElement.style.verticalAlign = 'baseline';
                 heading.appendChild(cursorElement);
                 
                 // Start typing animation for 3 seconds
@@ -657,17 +656,24 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             heading1.innerHTML = heading1Text;
             heading2.innerHTML = heading2Text;
             
+            // Animation complete - ensure the full text is displayed
+            heading1.innerHTML = heading1Text;
+            heading2.innerHTML = heading2Text;
+            
             // Position cursor at the end and ensure it continues blinking
             heading2.appendChild(cursorElement);
             
             // Ensure cursor is visible and blinking at the end
-            cursorElement.style.display = 'inline';
+            cursorElement.style.display = 'inline-block';
             cursorElement.style.visibility = 'visible';
             
             // Make sure the blinking animation continues
             if (!cursorElement.classList.contains('blinking-cursor')) {
                 cursorElement.classList.add('blinking-cursor');
             }
+            
+            // Ensure the animation is not paused
+            cursorElement.style.animationPlayState = 'running';
         }
     }
     

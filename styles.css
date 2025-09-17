@@ -105,7 +105,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     /* Dotted notebook background */
-    background-image: radial-gradient(rgba(255, 107, 53, 0.2) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 107, 53, 0.25) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: 0 0;
     position: relative;
@@ -219,7 +219,7 @@ body {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 40px; /* Increased padding */
+    padding: 0 20px; /* Match project grid padding */
 }
 
 /* Floating Navigation Bar */
@@ -282,7 +282,7 @@ body {
 .nav-link.active {
     color: var(--accent-primary) !important;
     background: rgba(6, 182, 212, 0.2) !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     border-radius: 50px !important;
     box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.3) !important;
     padding: 10px 20px !important;
@@ -372,7 +372,7 @@ body {
 .slide-title {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 400;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -404,7 +404,7 @@ body {
     padding: 12px; /* Reduced from 16px */
     margin-top: -22px;
     color: white;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
@@ -455,7 +455,7 @@ body {
     padding: 14px 28px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     transition: all 0.3s ease;
     border: none;
@@ -511,7 +511,7 @@ body {
 
 .section-title {
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-weight: 400; /* Changed from 700 to 400 to unbold */
     margin-bottom: 20px;
     color: var(--text-primary);
 }
@@ -524,15 +524,17 @@ body {
 }
 
 #intro-typewriter {
-    max-width: 800px; /* Limit width for better readability */
-    margin: 0 auto 0 0; /* Align to left but with some centering on larger screens */
+    max-width: 1400px; /* Match the project grid max-width */
+    margin: 0 auto; /* Center the container */
     position: relative;
-    display: inline-block;
+    display: block;
+    padding: 0 20px; /* Match project grid padding */
+    box-sizing: content-box; /* Ensure padding doesn't affect width calculation */
 }
 
 #intro-typewriter h1 {
     font-size: clamp(2rem, 5vw, 3.5rem); /* Larger font for the main heading */
-    font-weight: 700;
+    font-weight: 400; /* Changed from 700 to 400 to unbold */
     margin: 0 0 20px 0;
     color: var(--text-primary);
     line-height: 1.2;
@@ -547,20 +549,21 @@ body {
 }
 
 #intro-typewriter .highlight {
-    color: #ff6b35; /* Orange color like the cursor */
-    font-weight: 700;
+    color: #ff6b35 !important; /* Orange color like the cursor - forced priority */
+    font-weight: 400;
 }
 
 /* Blinking cursor for typing animation */
 .blinking-cursor {
     display: inline-block;
-    width: 1px; /* Made cursor thinner */
-    height: 1em; /* Same height as text line */
+    width: 1px;
+    height: 1em;
     background-color: #ff6b35;
     margin-left: 2px;
     animation: blink 1s infinite;
-    vertical-align: baseline; /* Align with text baseline for better positioning */
+    vertical-align: baseline;
     visibility: visible;
+    opacity: 0.5 !important;
 }
 
 @keyframes blink {
@@ -590,7 +593,7 @@ body {
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 6px; /* Reduced from 12px */
+    border-radius: 0; /* Remove fillets from project cards */
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px var(--shadow-color);
@@ -650,7 +653,7 @@ body {
 
 .project-content h3 {
     font-size: 24px; /* Slightly larger font */
-    font-weight: 600;
+    font-weight: 400; /* Changed from 600 to 400 to unbold */
     margin-bottom: 8px;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Restore text shadow for better readability */
@@ -692,7 +695,7 @@ body {
 .about-image {
     width: 100%; /* Increased from 90% */
     max-width: 350px; /* Increased from 300px */
-    border-radius: 6px;
+    border-radius: 0; /* Remove fillets from about image */
     overflow: hidden;
     background: var(--card-bg);
     aspect-ratio: 4/5;
@@ -707,7 +710,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 0; /* Remove fillets from profile image */
     /* Add image optimization */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
@@ -725,26 +728,10 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.blinking-cursor {
-    display: inline-block;
-    width: 1px; /* Made cursor thinner */
-    height: 1em; /* Same height as text line */
-    background-color: #ff6b35;
-    margin-left: 2px;
-    animation: blink 1s infinite;
-    vertical-align: baseline; /* Align with text baseline for better positioning */
-    visibility: visible;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
 /* About section typing effect */
 #about .about-text h3 {
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 18px;
     color: var(--text-primary);
 }
