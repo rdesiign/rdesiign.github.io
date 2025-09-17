@@ -81,6 +81,7 @@
     --text-primary: #1a1a1a;
     --text-secondary: #666666;
     --text-tertiary: #999999;
+
     --border-color: rgba(0, 0, 0, 0.1);
     --accent-primary: #0e7490; /* Darker Teal */
     --accent-secondary: #e55a2b; /* Darker Orange */
@@ -98,7 +99,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -108,140 +109,111 @@ body {
     background-size: 20px 20px;
     background-position: 0 0;
     position: relative;
-    cursor: none; /* Hide default cursor */
+    /* Hide default cursor */
+    cursor: none;
 }
 
-/* Custom Blueprint Cursor */
-.cursor {
-    width: 30px; /* Increased from 20px */
-    height: 30px; /* Increased from 20px */
-    border: 2px solid #ff6b35; /* Bright orange color */
-    border-radius: 50%;
+/* Custom Cursor - Single Element Approach */
+.custom-cursor {
     position: fixed;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--accent-secondary);
+    border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
-    background-color: transparent; /* Ensure transparent inside */
+    display: none;
+    transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+    background: transparent;
+    box-shadow: 0 0 8px rgba(255, 107, 53, 0.5); /* Reduced glow for normal state */
 }
 
-.cursor-inner {
-    width: 6px; /* Increased from 4px */
-    height: 6px; /* Increased from 4px */
-    background-color: #ff6b35; /* Bright orange color */
-    border-radius: 50%;
+.custom-cursor-dot {
     position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-secondary);
+    border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: all 0.1s ease;
+    box-shadow: 0 0 4px rgba(255, 107, 53, 0.8);
+    z-index: 1;
+    transition: opacity 0.2s ease;
 }
 
-/* Target cursor style */
-.cursor.target {
-    border: 2px solid #ff6b35;
-    background-color: transparent;
+.custom-cursor.target {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    transform: translate(-50%, -50%) scale(1.1);
+    border: 2px solid var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.8); /* Reduced but still prominent glow */
 }
 
-.cursor.target::before,
-.cursor.target::after {
+.custom-cursor.target.no-dot .custom-cursor-dot {
+    opacity: 0; /* Hide dot for navigation links */
+}
+
+.custom-cursor.target::before,
+.custom-cursor.target::after {
     content: '';
     position: absolute;
-    background-color: #ff6b35;
-    border-radius: 2px;
+    background-color: var(--accent-secondary);
+    opacity: 1;
+    z-index: 0;
 }
 
-/* Horizontal line of target */
-.cursor.target::before {
-    width: 2px;
+.custom-cursor.target::before {
+    width: 1px; /* Reduced from 2px to 1px */
     height: 100%;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* Vertical line of target */
-.cursor.target::after {
+.custom-cursor.target::after {
     width: 100%;
-    height: 2px;
-    left: 0;
+    height: 1px; /* Reduced from 2px to 1px */
     top: 50%;
+    left: 0;
     transform: translateY(-50%);
 }
 
-/* Ensure cursor stays orange on all elements */
-a:hover .cursor,
-img:hover .cursor,
-button:hover .cursor,
-.nav-link:hover .cursor,
-.project-card:hover .cursor,
-* .cursor {
-    border-color: #ff6b35 !important;
-    background-color: transparent !important;
+/* Target cursor for light backgrounds (dark color) */
+.custom-cursor.target.light-bg {
+    border: 1px solid #1a1a1a;
 }
 
-.cursor-inner:hover {
-    background-color: #ff6b35 !important;
+.custom-cursor.target.light-bg::before,
+.custom-cursor.target.light-bg::after {
+    background-color: #1a1a1a;
+}
+
+/* Target cursor for dark backgrounds (light color) */
+.custom-cursor.target.dark-bg {
+    border: 1px solid #ffffff;
+}
+
+.custom-cursor.target.dark-bg::before,
+.custom-cursor.target.dark-bg::after {
+    background-color: #ffffff;
 }
 
 .cursor-trail {
     position: fixed;
-    width: 4px; /* Increased from 2px */
-    height: 4px; /* Increased from 2px */
-    background-color: #ff6b35; /* Bright orange color */
-    border-radius: 50%;
+    width: 20px; /* Much wider for line effect */
+    height: 4px; /* Shorter height */
+    background-color: var(--accent-secondary);
+    border-radius: 2px; /* Slightly rounded edges */
     pointer-events: none;
     z-index: 9998;
+    transform: translate(-50%, -50%);
     opacity: 0;
-    box-shadow: 0 0 10px #ff6b35, 0 0 20px #ff6b35; /* Bright orange glow */
-}
-
-.cursor-trail.active {
-    opacity: 1;
-    animation: trailFade 1s forwards;
-}
-
-@keyframes trailFade {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-}
-
-/* Rolling Blueprint Effect */
-.roll-up {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(90deg, transparent 49%, #ff6b35 50%, #ff6b35 51%, transparent 52%),
-        linear-gradient(transparent 49%, #ff6b35 50%, #ff6b35 51%, transparent 52%);
-    background-size: 20px 20px;
-    z-index: 10000;
-    opacity: 0;
-    pointer-events: none;
-    transform-origin: top center;
-}
-
-.roll-up.active {
-    animation: rollUp 1s forwards;
-}
-
-@keyframes rollUp {
-    0% {
-        opacity: 1;
-        transform: scaleY(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scaleY(0);
-    }
+    transition: opacity 0.2s ease;
+    box-shadow: 0 0 2px rgba(255, 107, 53, 0.5);
+    /* Simplified - no gradient for solid line effect */
 }
 
 .container {
@@ -257,7 +229,7 @@ button:hover .cursor,
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2); /* Darker background */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -267,7 +239,7 @@ button:hover .cursor,
 }
 
 [data-theme="dark"] .floating-navbar {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.3); /* Even darker for dark theme */
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -288,6 +260,18 @@ button:hover .cursor,
     border-radius: 50px;
     transition: all 0.3s ease;
     white-space: nowrap;
+    /* Custom cursor interaction */
+    cursor: none;
+    /* Auto-contrast text */
+    mix-blend-mode: difference;
+}
+
+[data-theme="light"] .nav-link:hover {
+    color: #000000;
+}
+
+[data-theme="light"] .nav-link.active {
+    color: var(--accent-primary) !important;
 }
 
 .nav-link:hover {
@@ -315,9 +299,11 @@ button:hover .cursor,
     border-radius: 50%;
     color: var(--text-primary);
     font-size: 16px;
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    /* Auto-contrast for theme toggle */
+    mix-blend-mode: difference;
 }
 
 .theme-toggle:hover {
@@ -329,11 +315,6 @@ button:hover .cursor,
 .hero-section {
     width: 100%;
     height: 85vh; /* Increased from 70vh to 85vh for taller banner */
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 16/9; /* 1920x1080 is 16:9 aspect ratio */
-    max-width: 1920px; /* Maximum width of 1920px */
-    margin: 0 auto; /* Center the section */
 }
 
 /* Slideshow Styles */
@@ -445,7 +426,7 @@ button:hover .cursor,
 /* Dots indicator */
 .dots-container {
     position: absolute;
-    bottom: 15px; /* Reduced from 20px */
+    bottom: 30px; /* Position within the slideshow area */
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
@@ -453,17 +434,19 @@ button:hover .cursor,
 
 .dot {
     cursor: pointer;
-    height: 12px; /* Reduced from 15px */
-    width: 12px; /* Reduced from 15px */
+    height: 8px; /* Reduced from 12px */
+    width: 8px; /* Reduced from 12px */
     margin: 0 2px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
+    opacity: 0.3; /* Low opacity for inactive dots */
 }
 
 .dot.active, .dot:hover {
     background-color: #fff;
+    opacity: 1; /* Full opacity for active dot */
 }
 
 /* Buttons */
@@ -478,7 +461,7 @@ button:hover .cursor,
     border: none;
     cursor: pointer;
     text-align: center;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Explicitly set font family */
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Use Product Sans */
     letter-spacing: normal; /* Ensure normal letter spacing */
 }
 
@@ -507,12 +490,18 @@ button:hover .cursor,
 
 /* Sections */
 .section {
-    padding: 80px 0; /* Reduced padding to decrease space between sections */
+    padding: 120px 0; /* Increased padding for all sections */
 }
 
 /* Slightly Smaller About Section */
 #about.section {
-    padding: 220px 0; /* Reduced padding to make section slightly smaller */
+    padding: 180px 0; /* Reduced padding to make section slightly smaller and reduce space before projects */
+}
+
+/* Intro Section */
+#intro.section {
+    padding: 200px 0 250px 0; /* Significantly increased padding for more breathing space */
+    text-align: left; /* Left align the text */
 }
 
 .section-header {
@@ -534,59 +523,43 @@ button:hover .cursor,
     margin: 0 auto;
 }
 
-/* About Section */
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 75px; /* Reduced gap to make section slightly smaller */
-    align-items: center;
-    max-width: 1000px; /* Reduced width to make section slightly smaller */
-    margin: 0 auto;
+#intro-typewriter {
+    max-width: 800px; /* Limit width for better readability */
+    margin: 0 auto 0 0; /* Align to left but with some centering on larger screens */
     position: relative;
+    display: inline-block;
 }
 
-.about-image {
-    width: 110%; /* Reduced from 120% */
-    border-radius: 6px; /* Reduced from 12px */
-    overflow: hidden;
-    background: var(--card-bg);
-    aspect-ratio: 4/5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border-color);
-    margin: 0 auto; /* Center the image */
+#intro-typewriter h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Larger font for the main heading */
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: var(--text-primary);
+    line-height: 1.2;
 }
 
-.profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 6px; /* Reduced from 12px */
-    /* Add image optimization */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+#intro-typewriter h2 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem); /* Smaller font for the subtitle */
+    font-weight: 400;
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
-/* Typing animation for About section - MOVING CURSOR */
-#about-typewriter {
-    position: relative;
+#intro-typewriter .highlight {
+    color: #ff6b35; /* Orange color like the cursor */
+    font-weight: 700;
 }
 
-#about-typewriter h3, 
-#about-typewriter p, 
-#about-typewriter .btn {
-    opacity: 0;
-}
-
+/* Blinking cursor for typing animation */
 .blinking-cursor {
     display: inline-block;
-    width: 3px;
-    height: 1.2em;
+    width: 1px; /* Made cursor thinner */
+    height: 1em; /* Same height as text line */
     background-color: #ff6b35;
     margin-left: 2px;
     animation: blink 1s infinite;
-    vertical-align: top;
+    vertical-align: baseline; /* Align with text baseline for better positioning */
     visibility: visible;
 }
 
@@ -595,44 +568,6 @@ button:hover .cursor,
     50% { opacity: 0; }
 }
 
-/* About section typing effect */
-#about .about-text h3 {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 18px;
-    color: var(--text-primary);
-}
-
-/* Make "Rishi" the same color as the cursor */
-#about .about-text h3 span.highlight {
-    color: #ff6b35;
-}
-
-#about .about-text p {
-    color: var(--text-secondary);
-    margin-bottom: 18px;
-    line-height: 1.7;
-    font-size: 17px;
-}
-
-#about .btn {
-    margin-top: 18px;
-    padding: 12px 24px;
-    font-size: 15px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Ensure consistent font */
-    letter-spacing: normal; /* Ensure normal letter spacing */
-    text-transform: none; /* Ensure no text transformation */
-    font-variant: normal; /* Ensure normal font variant */
-    font-feature-settings: normal; /* Ensure normal font features */
-}
-
-/* Ensure the CV button text is clearly visible */
-#about .btn.btn-primary {
-    color: white;
-    text-shadow: none; /* Remove any text shadow that might affect visibility */
-}
-
-/* Projects Section */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
@@ -640,10 +575,17 @@ button:hover .cursor,
     max-width: 1400px; /* Reduced max width for breathing room */
     margin: 0 auto;
     padding: 0 20px; /* Add breathing room on sides */
-    position: relative;
 }
 
-
+/* Creative Playground grid - 3 items per row */
+.creative-playground-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
 .project-card {
     background: var(--card-bg);
@@ -736,90 +678,170 @@ button:hover .cursor,
     font-weight: 500;
 }
 
-/* Experience Section */
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px; /* Increased gap */
+    align-items: flex-start;
+    max-width: 1200px; /* Increased max-width */
+    margin: 0 auto;
+    position: relative;
+}
+
+.about-image {
+    width: 100%; /* Increased from 90% */
+    max-width: 350px; /* Increased from 300px */
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--card-bg);
+    aspect-ratio: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    margin: 0;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    /* Add image optimization */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Typing animation for About section - MOVING CURSOR */
+#about-typewriter {
+    position: relative;
+}
+
+#about-typewriter h3, 
+#about-typewriter p, 
+#about-typewriter .btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 1px; /* Made cursor thinner */
+    height: 1em; /* Same height as text line */
+    background-color: #ff6b35;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: baseline; /* Align with text baseline for better positioning */
+    visibility: visible;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* About section typing effect */
+#about .about-text h3 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--text-primary);
+}
+
+/* Make "Rishi" the same color as the cursor */
+#about .about-text h3 span.highlight {
+    color: #ff6b35;
+}
+
+#about .about-text p {
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+#about .btn {
+    margin-top: 18px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+    font-variant: normal;
+    font-feature-settings: normal;
+}
+
+/* Ensure the CV button text is clearly visible */
+#about .btn.btn-primary {
+    color: white;
+    text-shadow: none;
+}
+
+/* Experience Timeline */
 .experience-timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
+    padding-left: 30px;
 }
 
 .experience-timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
     top: 0;
     bottom: 0;
+    left: 30px;
     width: 2px;
-    background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
-    transform: translateX(-50%);
+    background: var(--accent-secondary);
+    opacity: 0.3;
 }
 
 .experience-item {
     position: relative;
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
+    margin-bottom: 40px;
+    padding-left: 50px;
 }
 
 .experience-item:nth-child(odd) {
-    flex-direction: row;
+    text-align: left;
 }
 
 .experience-item:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-.experience-content {
-    width: 45%;
-    padding: 30px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow-color);
+    text-align: left;
 }
 
 .experience-item:nth-child(odd) .experience-content {
-    margin-right: 50px;
+    text-align: left;
 }
 
-.experience-item:nth-child(even) . .experience-content {
-    margin-left: 50px;
+.experience-item:nth-child(even) .experience-content {
+    text-align: left;
 }
 
-.experience-content h4 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--text-primary);
+.experience-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.experience-content .company {
-    color: var(--accent-primary);
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.experience-content .duration {
-    color: var(--text-tertiary);
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.experience-content p {
-    color: var(--text-secondary);
-    line-height: 1.6;
+.experience-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .experience-dot {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background: var(--accent-secondary);
+    left: 22px;
+    top: 30px;
     border: 3px solid var(--bg-primary);
-    z-index: 1;
 }
 
 /* Contact Section */
@@ -832,8 +854,6 @@ button:hover .cursor,
     position: relative;
 }
 
-
-
 .contact-links {
     display: flex;
     flex-direction: column;
@@ -845,18 +865,19 @@ button:hover .cursor,
 .contact-link {
     display: flex;
     align-items: center;
+    justify-content: center; /* Center content horizontally */
     gap: 15px;
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 18px;
     transition: all 0.3s ease;
-    padding: 20px;
+    padding: 20px 30px; /* More padding for pill shape */
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 50px; /* Pill-shaped borders */
     background: var(--card-bg);
     width: 100%; /* Full width */
     max-width: 300px; /* Limit width */
-    justify-content: center; /* Center content within each button */
+    text-align: center; /* Center text */
 }
 
 .contact-link:hover {
@@ -926,6 +947,14 @@ footer {
         max-width: 1200px; /* Reduced max width for breathing room */
         padding: 0 30px; /* Add breathing room on sides */
     }
+    
+    /* Creative Playground grid on medium screens */
+    .creative-playground-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        max-width: 1200px;
+        padding: 0 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -965,6 +994,13 @@ footer {
         padding: 0 15px; /* Add breathing room on sides */
     }
     
+    /* Creative Playground grid on mobile */
+    .creative-playground-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
     .experience-item {
         padding-left: 50px;
     }
@@ -974,8 +1010,9 @@ footer {
     }
     
     .contact-link {
-        padding: 16px;
+        padding: 16px 24px; /* Adjust padding for smaller screens */
         font-size: 16px;
+        max-width: 280px; /* Slightly smaller max width */
     }
 }
 
@@ -1053,8 +1090,10 @@ footer {
     }
     
     .contact-link {
-        padding: 14px;
+        padding: 14px 20px; /* Further adjust padding for mobile */
         font-size: 15px;
         max-width: 100%; /* Full width on mobile */
+        border-radius: 40px; /* Maintain pill shape */
     }
+    
 }

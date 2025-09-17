@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeContactForm();
     initializeGraphBackground();
-    initializeBlueprintCursor();
     
     } catch (error) {
         console.error('Error in main initialization:', error);
@@ -184,51 +183,125 @@ function showSlides() {
 
 // Navigation functionality
 function initializeNavigation() {
-    // Initialize navigation highlighting
-    updateNav();
-    
-    // Scroll handler for navigation
-    let scrollTimer;
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(updateNav, 50);
-    });
-    
-    // Also update navigation when window is resized
-    window.addEventListener('resize', function() {
-        setTimeout(updateNav, 100);
-    });
-    
-    // Click handlers for navigation links
+    // Get navigation elements
     const navLinks = document.querySelectorAll('.nav-link');
+    const navbar = document.getElementById('main-navbar');
+    
+    // Function to update active link based on scroll position
+    function updateActiveLink() {
+        // Remove active class from all links first
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Get current scroll position
+        const scrollPos = window.scrollY + 150; // Small offset for better detection
+        
+        // Define sections in the order they appear in the page
+        const sections = [
+            { id: 'home', element: document.getElementById('home') },
+            { id: 'intro', element: document.getElementById('intro') },
+            { id: 'projects', element: document.getElementById('projects') },
+            { id: 'experience', element: document.getElementById('experience') },
+            { id: 'contact', element: document.getElementById('contact') }
+        ].filter(section => section.element !== null); // Filter out any sections that don't exist
+        
+        // Find the section that's currently in view
+        let activeSection = 'home'; // Default to home
+        
+        // Special case: if we're at the very top of the page, make sure home is active
+        if (window.scrollY < 50) {
+            activeSection = 'home';
+        } else {
+            // Check if we're at the bottom of the page (for contact section)
+            const scrollBottom = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // If we're near the bottom of the page, activate contact section
+            if (scrollBottom >= documentHeight - 100) {
+                activeSection = 'contact';
+            } else {
+                // Check sections from bottom to top to find the first one that's in view
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    const sectionTop = section.element.offsetTop;
+                    
+                    if (scrollPos >= sectionTop) {
+                        activeSection = section.id;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Add active class to the corresponding link
+        const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        } else {
+            // Fallback: if no data-section link found, try to match by href
+            const fallbackLink = document.querySelector(`.nav-link[href="#${activeSection}"]`);
+            if (fallbackLink) {
+                fallbackLink.classList.add('active');
+            }
+        }
+    }
+    
+    // Set up scroll listener with throttling
+    let ticking = false;
+    function updateActiveLinkThrottled() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                updateActiveLink();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', updateActiveLinkThrottled);
+    
+    // Set up click handlers for smooth scrolling
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const sectionId = this.getAttribute('data-section');
-            const section = document.getElementById(sectionId);
             
-            if (section) {
-                let offset = 0;
-                if (sectionId !== 'home') {
-                    const navbarHeight = document.querySelector('.floating-navbar').offsetHeight;
-                    offset = section.offsetTop - navbarHeight - 20;
+            // Handle external links (About)
+            if (sectionId === 'about') {
+                return; // Let it navigate normally
+            }
+            
+            e.preventDefault();
+            
+            // Find target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                // Calculate offset (account for navbar height)
+                let offsetTop = targetSection.offsetTop;
+                if (sectionId !== 'home' && navbar) {
+                    offsetTop -= navbar.offsetHeight + 20;
                 }
                 
+                // Smooth scroll to section
                 window.scrollTo({
-                    top: offset,
+                    top: offsetTop,
                     behavior: 'smooth'
                 });
                 
-                // Update navigation after scrolling
-                setTimeout(updateNav, 100);
+                // Update active link after scroll
+                setTimeout(updateActiveLink, 100);
             }
         });
     });
     
+    // Initialize on load
+    setTimeout(updateActiveLink, 100);
+    
+    // Update on window resize
+    window.addEventListener('resize', function() {
+        setTimeout(updateActiveLink, 100);
+    });
+    
     // Listen for theme changes to update navigation styling
     window.addEventListener('themeChange', function() {
-        // Update navigation background based on theme
-        const navbar = document.querySelector('.floating-navbar');
         if (navbar) {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'dark') {
@@ -242,41 +315,7 @@ function initializeNavigation() {
     });
 }
 
-function updateNav() {
-    // Get scroll position - using viewport middle for better detection
-    const scrollPos = window.scrollY + window.innerHeight / 3;
-    
-    // Get all nav links and remove active class
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => link.classList.remove('active'));
-    
-    // Get sections
-    const homeSection = document.getElementById('home');
-    const aboutSection = document.getElementById('about');
-    const projectsSection = document.getElementById('projects');
-    const experienceSection = document.getElementById('experience');
-    const contactSection = document.getElementById('contact');
-    
-    // Determine active section based on scroll position
-    let activeSection = 'home';
-    
-    // Check sections from bottom to top for better accuracy
-    if (contactSection && scrollPos >= contactSection.offsetTop) {
-        activeSection = 'contact';
-    } else if (experienceSection && scrollPos >= experienceSection.offsetTop) {
-        activeSection = 'experience';
-    } else if (projectsSection && scrollPos >= projectsSection.offsetTop) {
-        activeSection = 'projects';
-    } else if (aboutSection && scrollPos >= aboutSection.offsetTop) {
-        activeSection = 'about';
-    }
-    
-    // Activate the correct nav link
-    const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active');
-    }
-}
+
 
 // Contact form functionality
 function initializeContactForm() {
@@ -313,99 +352,12 @@ function initializeGraphBackground() {
     });
 }
 
-// Blueprint cursor with trails and rolling effect
-function initializeBlueprintCursor() {
-    // Create cursor elements
-    const cursor = document.createElement('div');
-    cursor.className = 'cursor';
-    
-    const cursorInner = document.createElement('div');
-    cursorInner.className = 'cursor-inner';
-    
-    cursor.appendChild(cursorInner);
-    document.body.appendChild(cursor);
-    
-    // Track mouse movement
-    document.addEventListener('mousemove', function(e) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Create trail effect
-        createTrail(e.clientX, e.clientY);
-    });
-    
-    // Click effect
-    document.addEventListener('click', function(e) {
-        createRollUpEffect();
-    });
-    
-    // Hide cursor when leaving window
-    document.addEventListener('mouseleave', function() {
-        cursor.style.opacity = '0';
-    });
-    
-    document.addEventListener('mouseenter', function() {
-        cursor.style.opacity = '1';
-    });
-    
-    // Add special effects for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .nav-link, img, .project-image, .profile-image, .btn');
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            cursor.classList.add('target');
-            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            // Ensure cursor stays orange
-            cursor.style.borderColor = '#ff6b35';
-            cursorInner.style.backgroundColor = '#ff6b35';
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            cursor.classList.remove('target');
-            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            // Ensure cursor stays orange
-            cursor.style.borderColor = '#ff6b35';
-            cursorInner.style.backgroundColor = '#ff6b35';
-        });
-    });
-}
-
-function createTrail(x, y) {
-    const trail = document.createElement('div');
-    trail.className = 'cursor-trail';
-    trail.style.left = x + 'px';
-    trail.style.top = y + 'px';
-    
-    document.body.appendChild(trail);
-    
-    // Add active class for animation
-    setTimeout(() => {
-        trail.classList.add('active');
-    }, 10);
-    
-    // Remove trail after animation
-    setTimeout(() => {
-        trail.remove();
-    }, 1000);
-}
-
-function createRollUpEffect() {
-    const rollUp = document.createElement('div');
-    rollUp.className = 'roll-up';
-    document.body.appendChild(rollUp);
-    
-    // Add active class for animation
-    setTimeout(() => {
-        rollUp.classList.add('active');
-    }, 10);
-    
-    // Remove element after animation
-    setTimeout(() => {
-        rollUp.remove();
-    }, 1000);
-}
-
 // Typing animation for About section - CURSOR BLINKS AT END & PROFILE PICTURE TRIGGER
 let aboutAnimationStarted = false;
+
+// Typing animation for Intro section
+let introAnimationStarted = false;
+let hasScrolled = false; // Track if user has scrolled
 
 function typeTextMovingCursor(elements, texts, cursorElement, duration) {
     const [heading, paragraph, button] = elements;
@@ -514,6 +466,69 @@ function isProfilePictureInViewport() {
     return false;
 }
 
+// Check if intro section is in viewport
+function isIntroSectionInViewport() {
+    const introSection = document.getElementById('intro');
+    if (introSection) {
+        const rect = introSection.getBoundingClientRect();
+        const inViewport = (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+        // console.log('Intro section in viewport:', inViewport);
+        // console.log('Intro section rect:', rect);
+        return inViewport;
+    }
+    // console.log('Intro section not found');
+    return false;
+}
+
+// Scroll event listener to trigger animation when intro section is visible AND user has scrolled
+function checkIntroSectionVisibility() {
+    // Check if user has scrolled before triggering animation
+    if (hasScrolled && isIntroSectionInViewport() && !introAnimationStarted) {
+        // console.log('Intro section is in viewport, user has scrolled, and animation not started');
+        const typewriterContainer = document.getElementById('intro-typewriter');
+        if (typewriterContainer) {
+            // console.log('Typewriter container found');
+            const heading1 = typewriterContainer.querySelector('h1');
+            const heading2 = typewriterContainer.querySelector('h2');
+            
+            if (heading1 && heading2) {
+                // console.log('Heading elements found');
+                // Store original content - use innerHTML to preserve HTML tags
+                const originalHeading1 = heading1.innerHTML;
+                const originalHeading2 = heading2.innerHTML; // Changed from textContent to innerHTML
+                
+                // console.log('Original heading1:', originalHeading1);
+                // console.log('Original heading2:', originalHeading2);
+                
+                // Clear content
+                heading1.textContent = '';
+                heading2.textContent = '';
+                
+                // Show elements
+                heading1.style.opacity = '1';
+                heading2.style.opacity = '1';
+                
+                // Create cursor element
+                const cursorElement = document.createElement('span');
+                cursorElement.className = 'blinking-cursor';
+                cursorElement.textContent = '|'; // Add a visible character for the cursor
+                cursorElement.style.color = '#ff6b35'; // Orange color like the cursor
+                cursorElement.style.marginLeft = '5px';
+                cursorElement.style.animation = 'blink 1s infinite';
+                cursorElement.style.verticalAlign = 'baseline'; // Align with text baseline
+                
+                // Start typing animation - heading first, then subtitle
+                typeTextWithCursor([heading1, heading2], [originalHeading1, originalHeading2], cursorElement, 3000);
+                
+                introAnimationStarted = true;
+            }
+        }
+    }
+}
+
 // Scroll event listener to trigger animation when profile picture is visible
 function checkProfilePictureVisibility() {
     if (isProfilePictureInViewport() && !aboutAnimationStarted) {
@@ -558,13 +573,129 @@ function checkProfilePictureVisibility() {
     }
 }
 
+// Typing function for intro section with moving cursor
+function typeTextWithCursor(elements, texts, cursorElement, duration) {
+    // console.log('Starting typing animation');
+    // console.log('Elements:', elements);
+    // console.log('Texts:', texts);
+    
+    const [heading1, heading2] = elements;
+    const [heading1Text, heading2Text] = texts;
+    
+    // Calculate timing for each element
+    const totalLength = heading1Text.length + heading2Text.length;
+    const heading1Duration = (heading1Text.length / totalLength) * duration;
+    const heading2Duration = (heading2Text.length / totalLength) * duration;
+    
+    let heading1Index = 0;
+    let heading2Index = 0;
+    
+    // Type heading1
+    function typeHeading1() {
+        // console.log('Typing heading1, index:', heading1Index);
+        if (heading1Index < heading1Text.length) {
+            // Handle HTML tags properly
+            if (heading1Text.charAt(heading1Index) === '<') {
+                // Find the end of the tag
+                const tagEnd = heading1Text.indexOf('>', heading1Index) + 1;
+                const currentText = heading1Text.substring(0, heading1Index);
+                const tagText = heading1Text.substring(heading1Index, tagEnd);
+                
+                // Set the HTML content correctly
+                heading1.innerHTML = currentText + tagText;
+                heading1.appendChild(cursorElement);
+                
+                heading1Index = tagEnd;
+            } else {
+                const textBeforeCursor = heading1Text.substring(0, heading1Index);
+                const currentChar = heading1Text.charAt(heading1Index);
+                
+                // Reconstruct the HTML with cursor in the right place
+                heading1.innerHTML = textBeforeCursor + currentChar;
+                heading1.appendChild(cursorElement);
+                
+                heading1Index++;
+            }
+            setTimeout(typeHeading1, heading1Duration / heading1Text.length);
+        } else {
+            // Complete the heading1 text
+            heading1.innerHTML = heading1Text;
+            // Move to heading2
+            setTimeout(typeHeading2, 300);
+        }
+    }
+    
+    // Type heading2
+    function typeHeading2() {
+        // console.log('Typing heading2, index:', heading2Index);
+        if (heading2Index < heading2Text.length) {
+            // Handle HTML tags properly for heading2 as well
+            if (heading2Text.charAt(heading2Index) === '<') {
+                // Find the end of the tag
+                const tagEnd = heading2Text.indexOf('>', heading2Index) + 1;
+                const currentText = heading2Text.substring(0, heading2Index);
+                const tagText = heading2Text.substring(heading2Index, tagEnd);
+                
+                // Set the HTML content correctly
+                heading2.innerHTML = currentText + tagText;
+                heading2.appendChild(cursorElement);
+                
+                heading2Index = tagEnd;
+            } else {
+                const textBeforeCursor = heading2Text.substring(0, heading2Index);
+                const currentChar = heading2Text.charAt(heading2Index);
+                
+                // Reconstruct the HTML with cursor in the right place
+                heading2.innerHTML = textBeforeCursor + currentChar;
+                heading2.appendChild(cursorElement);
+                
+                heading2Index++;
+            }
+            setTimeout(typeHeading2, heading2Duration / heading2Text.length);
+        } else {
+            // Animation complete - ensure the full text is displayed
+            heading1.innerHTML = heading1Text;
+            heading2.innerHTML = heading2Text;
+            
+            // Position cursor at the end and ensure it continues blinking
+            heading2.appendChild(cursorElement);
+            
+            // Ensure cursor is visible and blinking at the end
+            cursorElement.style.display = 'inline';
+            cursorElement.style.visibility = 'visible';
+            
+            // Make sure the blinking animation continues
+            if (!cursorElement.classList.contains('blinking-cursor')) {
+                cursorElement.classList.add('blinking-cursor');
+            }
+        }
+    }
+    
+    // Start the animation with heading1
+    typeHeading1();
+}
+
 // Initialize scroll listener
 document.addEventListener('DOMContentLoaded', function() {
+    // Track initial scroll position
+    let initialScrollY = window.scrollY;
+    
     // Add scroll event listener
-    window.addEventListener('scroll', checkProfilePictureVisibility);
+    window.addEventListener('scroll', function() {
+        // Set hasScrolled to true when user scrolls
+        if (!hasScrolled && window.scrollY !== initialScrollY) {
+            hasScrolled = true;
+        }
+        
+        checkProfilePictureVisibility();
+        checkIntroSectionVisibility();
+    });
     
     // Check on initial load in case already in view
-    setTimeout(checkProfilePictureVisibility, 1000);
+    setTimeout(function() {
+        checkProfilePictureVisibility();
+        checkIntroSectionVisibility();
+    }, 1000);
 });
 
 // Add functionality for the animated arrow to scroll to projects section

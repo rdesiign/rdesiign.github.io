@@ -15,19 +15,25 @@
     <link rel="preload" href="Projects/MMM/MMM1.png" as="image">
 </head>
 <body>
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+
     <!-- Floating Navigation Bar -->
     <nav class="floating-navbar" id="main-navbar">
         <div class="nav-container">
             <a href="#home" class="nav-link active" data-section="home">Home</a>
-            <a href="#about" class="nav-link" data-section="about">About</a>
             <a href="#projects" class="nav-link" data-section="projects">Projects</a>
-            <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+            <a href="#experience" class="nav-link" data-section="experience">Creative Playground</a>
+            <a href="about.html" class="nav-link" data-section="about">About</a>
             <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <span id="theme-icon">🌙</span>
             </button>
         </div>
     </nav>
+
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
@@ -72,34 +78,23 @@
             <!-- Navigation arrows -->
             <a class="prev" onclick="changeSlide(-1)">❮</a>
             <a class="next" onclick="changeSlide(1)">❯</a>
-        </div>
-        
-        <!-- Dots indicator -->
-        <div class="dots-container">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
+            
+            <!-- Dots indicator -->
+            <div class="dots-container">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
+    <!-- Intro Text Section -->
+    <section id="intro" class="section">
         <div class="container">
-            <div class="section-header">
-            </div>
-            
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="Assets/Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-image" loading="lazy">
-                </div>
-                <div class="about-text">
-                    <div id="about-typewriter">
-                        <h3>Hello, I'm <span class="highlight">Rishi</span></h3>
-                        <p>I'm an Industrial Designer who enjoys working on thoughtful, hands-on projects that range from simple everyday tools to seamlessly integrated physical-digital experiences. I keep my design approach flexible; I like to adapt my choice of tools and methodologies to each project and the challenges it presents, rather than following a fixed process. This approach helps me broaden my skill set and keeps my process fresh, exciting, and open to new ideas.</p>
-                        <a href="Assets/Rishi_Ramesh_CV.pdf" class="btn btn-primary" download>Download my CV</a>
-                    </div>
-                </div>
+            <div id="intro-typewriter">
+                <h1><strong>Hello!</strong> I'm Rishi.</h1>
+                <h2>I design to make the complex simple and the simple <span class="highlight">exciting</span>.</h2>
             </div>
         </div>
     </section>
@@ -184,53 +179,65 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Creative Playground Section -->
     <section id="experience" class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Experience</h2>
-                <p class="section-subtitle">My professional journey in design and innovation</p>
+                <h2 class="section-title">Creative Playground</h2>
+                <p class="section-subtitle">Tinkering with concepts, prototypes, and ideas that are still finding their shape.</p>
             </div>
             
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <h4>Senior Industrial Designer</h4>
-                        <div class="company">Innovation Design Corp</div>
-                        <div class="duration">2022 - Present</div>
-                        <p>Lead designer for consumer electronics products, managing full product development lifecycle from concept to production. Collaborated with cross-functional teams to deliver award-winning products.</p>
+            <div class="creative-playground-grid">
+                <!-- Thumbnail 1 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Experimental Project 1" class="project-image" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Interactive Prototypes</h3>
+                                <p>Exploring new interaction paradigms</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="experience-dot"></div>
                 </div>
                 
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <h4>Product Designer</h4>
-                        <div class="company">TechFlow Solutions</div>
-                        <div class="duration">2020 - 2022</div>
-                        <p>Designed IoT devices and smart home products with focus on user experience and manufacturing optimization. Reduced production costs by 25% through design improvements.</p>
+                <!-- Thumbnail 2 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Experimental Project 2" class="project-image" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Conceptual Explorations</h3>
+                                <p>Early-stage design thinking</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="experience-dot"></div>
                 </div>
                 
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <h4>Junior Industrial Designer</h4>
-                        <div class="company">Creative Design Studio</div>
-                        <div class="duration">2018 - 2020</div>
-                        <p>Worked on various product categories including furniture, medical devices, and consumer goods. Gained expertise in sustainable design practices and material selection.</p>
+                <!-- Thumbnail 3 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1547891710-a1dc8da965a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Experimental Project 3" class="project-image" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Material Studies</h3>
+                                <p>Investigating new materials and textures</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="experience-dot"></div>
                 </div>
                 
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <h4>Design Intern</h4>
-                        <div class="company">Global Manufacturing Inc</div>
-                        <div class="duration">2017 - 2018</div>
-                        <p>Supported senior designers in product development projects, created technical drawings, and assisted in prototype testing and validation processes.</p>
+                <!-- Thumbnail 4 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Experimental Project 4" class="project-image" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Form Experiments</h3>
+                                <p>Playing with shapes and proportions</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="experience-dot"></div>
                 </div>
             </div>
         </div>
@@ -272,28 +279,239 @@
 
     <script src="script.js?v=1.0"></script>
     
-    <!-- Debug script for theme toggle -->
+    <!-- Custom Cursor JavaScript -->
     <script>
-        // Additional debugging for theme toggle
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Debug: DOM Content Loaded');
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .project-card, .theme-toggle');
             
-            // Check if theme toggle element exists
-            const themeToggle = document.getElementById('theme-toggle');
-            console.log('Debug: themeToggle element:', themeToggle);
+            // Array to store trail elements
+            const trails = [];
+            const trailCount = 30; // Reduced from 50 to make line effect more pronounced
             
-            if (themeToggle) {
-                console.log('Debug: Adding event listener to theme toggle');
-                themeToggle.addEventListener('click', function() {
-                    console.log('Debug: Theme toggle clicked');
+            // Create trail elements
+            for (let i = 0; i < trailCount; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                document.body.appendChild(trail);
+                trails.push({
+                    element: trail,
+                    x: 0,
+                    y: 0,
+                    opacity: 0,
+                    size: 4,
+                    rotation: 0
                 });
-            } else {
-                console.log('Debug: Theme toggle element not found');
             }
             
-            // Check if theme icon exists
-            const themeIcon = document.getElementById('theme-icon');
-            console.log('Debug: themeIcon element:', themeIcon);
+            // Function to get average brightness of background at cursor position
+            function getBackgroundBrightness(x, y) {
+                // Create a temporary element to get the background color
+                const tempElement = document.elementFromPoint(x, y);
+                if (!tempElement) return 128; // Default to middle brightness
+                
+                // Get the background color of the element
+                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
+                
+                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
+                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+                    let parent = tempElement.parentElement;
+                    while (parent) {
+                        const parentBg = window.getComputedStyle(parent).backgroundColor;
+                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+                            return calculateBrightness(parentBg);
+                        }
+                        parent = parent.parentElement;
+                    }
+                    // If we reach here, use body background
+                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+                    return calculateBrightness(bodyBg);
+                }
+                
+                return calculateBrightness(bgColor);
+            }
+            
+            // Function to calculate brightness from RGB values
+            function calculateBrightness(rgb) {
+                // Parse RGB values
+                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (!match) return 128; // Default to middle brightness
+                
+                const r = parseInt(match[1]);
+                const g = parseInt(match[2]);
+                const b = parseInt(match[3]);
+                
+                // Calculate brightness using luminance formula
+                return (r * 299 + g * 587 + b * 114) / 1000;
+            }
+            
+            // Function to update cursor color based on background
+            function updateCursorColor(x, y) {
+                const brightness = getBackgroundBrightness(x, y);
+                // Remove any existing background classes
+                cursor.classList.remove('light-bg', 'dark-bg');
+                
+                // Add appropriate class based on brightness
+                if (brightness > 128) {
+                    cursor.classList.add('light-bg');
+                } else {
+                    cursor.classList.add('dark-bg');
+                }
+            }
+            
+            // Mouse move event
+            let mouseX = 0;
+            let mouseY = 0;
+            let prevMouseX = 0;
+            let prevMouseY = 0;
+            let trailPositions = [];
+            let lastMoveTime = Date.now();
+            let moveTimer = null;
+            let lastTrailTime = 0;
+            let isMoving = false;
+            
+            document.addEventListener('mousemove', function(e) {
+                prevMouseX = mouseX;
+                prevMouseY = mouseY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                const now = Date.now();
+                lastMoveTime = now;
+                isMoving = true;
+                
+                // Calculate cursor speed (distance/time)
+                const distance = Math.sqrt(Math.pow(mouseX - prevMouseX, 2) + Math.pow(mouseY - prevMouseY, 2));
+                const timeDiff = now - (lastMoveTime || now);
+                const speed = timeDiff > 0 ? distance / timeDiff : 0;
+                
+                // Move main cursor immediately
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                
+                // Update cursor color based on background
+                updateCursorColor(mouseX, mouseY);
+                
+                // Store position for trail on every move for more consistent trail
+                trailPositions.push({
+                    x: mouseX, 
+                    y: mouseY,
+                    speed: speed,
+                    timestamp: now
+                });
+                if (trailPositions.length > trailCount) {
+                    trailPositions.shift();
+                }
+                
+                // Update trail positions more frequently for smoother effect
+                if (now - lastTrailTime > 8) { // ~120fps for trail updates (more frequent)
+                    // Update trail positions with delay
+                    trails.forEach((trail, index) => {
+                        if (trailPositions[index]) {
+                            const pos = trailPositions[index];
+                            const nextPos = trailPositions[index + 1] || pos;
+                            
+                            trail.element.style.left = pos.x + 'px';
+                            trail.element.style.top = pos.y + 'px';
+                            
+                            // Point trail in direction of movement
+                            if (nextPos && nextPos !== pos) {
+                                const angle = Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * 180 / Math.PI;
+                                trail.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                            }
+                            
+                            // Adjust trail appearance based on speed - more responsive to slow movement
+                            let speedFactor = 0;
+                            if (pos.speed > 0) {
+                                // More sensitive to slow movement
+                                speedFactor = Math.min(pos.speed / 3, 1); // Even lower divisor for better slow movement response
+                            }
+                            
+                            // Base opacity with minimum visibility for any movement
+                            const minOpacity = 0.4; // Increased minimum opacity
+                            const maxOpacity = 1.0;
+                            const opacity = minOpacity + (speedFactor * (maxOpacity - minOpacity));
+                            
+                            // Animate opacity with reversed fade (fading from end of path)
+                            const reversedIndex = trailCount - 1 - index;
+                            const fadeFactor = (1 - (reversedIndex / trailCount));
+                            trail.element.style.opacity = fadeFactor * opacity;
+                            
+                            // Adjust trail length based on speed
+                            const minLength = 10;
+                            const maxLength = 30;
+                            const length = minLength + (speedFactor * (maxLength - minLength));
+                            trail.element.style.width = length + 'px';
+                        }
+                    });
+                    
+                    lastTrailTime = now;
+                }
+                
+                // Clear any existing timer
+                if (moveTimer) {
+                    clearTimeout(moveTimer);
+                }
+                
+                // Set timer to hide trail when cursor stops
+                moveTimer = setTimeout(() => {
+                    isMoving = false;
+                    // Completely hide all trail elements
+                    trails.forEach(trail => {
+                        trail.element.style.opacity = '0';
+                        // Reset positions to prevent ghosting
+                        trail.element.style.left = '-100px';
+                        trail.element.style.top = '-100px';
+                    });
+                    // Clear trail positions
+                    trailPositions = [];
+                }, 100); // Hide trail 100ms after cursor stops
+            });
+            
+            // Show custom cursor
+            cursor.style.display = 'block';
+            
+            // Hover effects for clickable elements
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    // Transform cursor to target
+                    cursor.classList.add('target');
+                    
+                    // Check if this is a navigation link
+                    if (this.classList.contains('nav-link')) {
+                        // Add class to hide the dot for navigation links
+                        cursor.classList.add('no-dot');
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    // Transform cursor back to normal
+                    cursor.classList.remove('target');
+                    // Remove background color classes
+                    cursor.classList.remove('light-bg', 'dark-bg');
+                    // Remove no-dot class
+                    cursor.classList.remove('no-dot');
+                });
+            });
+            
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', function() {
+                isMoving = false;
+                cursor.style.display = 'none';
+                trails.forEach(trail => {
+                    trail.element.style.display = 'none';
+                    trail.element.style.opacity = '0';
+                });
+                // Clear trail positions
+                trailPositions = [];
+            });
+            
+            // Show cursor when entering window
+            document.addEventListener('mouseenter', function() {
+                cursor.style.display = 'block';
+                trails.forEach(trail => {
+                    trail.element.style.display = 'block';
+                });
+            });
         });
     </script>
 </body>

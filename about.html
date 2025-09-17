@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Rishi Ramesh | Industrial Designer Portfolio</title>
+    <meta name="description" content="Learn more about Rishi Ramesh, an industrial designer specializing in product design, user experience, and innovative solutions.">
+    <!-- Performance optimizations -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="styles.css?v=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="Assets/Profile raw 4.jpg" as="image">
+</head>
+<body>
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+
+    <!-- Floating Navigation Bar -->
+    <nav class="floating-navbar" id="main-navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="nav-link" data-section="home">Home</a>
+            <a href="index.html#projects" class="nav-link" data-section="projects">Projects</a>
+            <a href="index.html#experience" class="nav-link" data-section="experience">Creative Playground</a>
+            <a href="about.html" class="nav-link active" data-section="about">About</a>
+            <a href="index.html#contact" class="nav-link" data-section="contact">Contact</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="Assets/Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-image" loading="lazy">
+                </div>
+                <div class="about-text">
+                    <div id="about-typewriter">
+                        <h3>Hi, I'm <span class="highlight">Rishi</span></h3>
+                        <p>I'm an Industrial Designer who enjoys working on thoughtful, hands-on projects that range from simple everyday tools to seamlessly integrated physical-digital experiences. I keep my design approach flexible; I like to adapt my choice of tools and methodologies to each project and the challenges it presents, rather than following a fixed process. This approach helps me broaden my skill set and keeps my process fresh, exciting, and open to new ideas.</p>
+                        <p></p>
+                        <a href="#" class="btn btn-primary">Download my CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    
+    <!-- Initialize theme and other components for this page -->
+    <script>
+        // Flag to track if animation has started
+        let aboutPageAnimationStarted = false;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all components to ensure consistent behavior
+            if (typeof initializeComponents === 'function') {
+                initializeComponents();
+            }
+            
+            // Initialize theme - check if function exists
+            if (typeof initializeTheme === 'function') {
+                initializeTheme();
+            } else {
+                // Fallback: set dark mode as default (as per user preference)
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                const themeIcon = document.getElementById('theme-icon');
+                if (themeIcon) {
+                    themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+                }
+            }
+            
+            // Ensure dark mode is set as default if no saved theme
+            if (!localStorage.getItem('theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                const themeIcon = document.getElementById('theme-icon');
+                if (themeIcon) {
+                    themeIcon.textContent = '🌙';
+                }
+            }
+            
+            // Highlight the About link in navigation after a short delay to ensure DOM is fully ready
+            setTimeout(function() {
+                const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+                if (aboutLink) {
+                    // Remove active class from all nav links
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to About link
+                    aboutLink.classList.add('active');
+                }
+            }, 100);
+            
+            // Override navigation behavior to allow default link navigation on about page
+            setTimeout(function() {
+                // Remove any existing event listeners by cloning and replacing nav links
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    // Skip the About link as it should remain active
+                    if (link.getAttribute('data-section') === 'about') {
+                        return;
+                    }
+                    
+                    // Create a clone of the link to remove event listeners
+                    const clone = link.cloneNode(true);
+                    link.parentNode.replaceChild(clone, link);
+                });
+                
+                // Prevent script.js from modifying navbar styles
+                const navbar = document.getElementById('main-navbar');
+                if (navbar) {
+                    // Reset any inline styles that might have been added by script.js
+                    navbar.style.background = '';
+                    navbar.style.border = '';
+                }
+            }, 200);
+            
+            // Initialize typing animation for about section
+            function initializeAboutTypingAnimation() {
+                const typewriterContainer = document.getElementById('about-typewriter');
+                if (typewriterContainer) {
+                    const heading = typewriterContainer.querySelector('h3');
+                    const paragraph = typewriterContainer.querySelector('p');
+                    const button = typewriterContainer.querySelector('a');
+                    
+                    if (heading && paragraph && button) {
+                        // Store original content
+                        const originalHeading = heading.textContent;
+                        const originalParagraph = paragraph.textContent;
+                        const originalButton = button.textContent;
+                        
+                        // Clear content
+                        heading.textContent = '';
+                        paragraph.textContent = '';
+                        button.textContent = '';
+                        
+                        // Show elements
+                        heading.style.opacity = '1';
+                        paragraph.style.opacity = '1';
+                        button.style.opacity = '1';
+                        
+                        // Create cursor element
+                        const cursorElement = document.createElement('span');
+                        cursorElement.className = 'blinking-cursor';
+                        heading.appendChild(cursorElement);
+                        
+                        // Check if typing function exists
+                        if (typeof typeTextMovingCursor === 'function') {
+                            // Start typing animation for 3 seconds
+                            typeTextMovingCursor(
+                                [heading, paragraph, button], 
+                                [originalHeading, originalParagraph, originalButton], 
+                                cursorElement, 
+                                3000
+                            );
+                        } else {
+                            // Fallback: just show the content if typing function is not available
+                            heading.textContent = originalHeading;
+                            paragraph.textContent = originalParagraph;
+                            button.textContent = originalButton;
+                            // Add cursor at the end
+                            paragraph.appendChild(cursorElement);
+                            
+                            // Ensure cursor is visible and blinking
+                            cursorElement.style.display = 'inline-block';
+                            cursorElement.style.visibility = 'visible';
+                            
+                            // Make sure the blinking animation continues
+                            if (!cursorElement.classList.contains('blinking-cursor')) {
+                                cursorElement.classList.add('blinking-cursor');
+                            }
+                            
+                            // Ensure the animation is not paused
+                            cursorElement.style.animationPlayState = 'running';
+                        }
+                    }
+                }
+            }
+            
+            // Check if profile picture is in viewport
+            function isProfilePictureInViewport() {
+                const profilePicture = document.querySelector('.profile-image');
+                if (profilePicture) {
+                    const rect = profilePicture.getBoundingClientRect();
+                    return (
+                        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.bottom >= 0
+                    );
+                }
+                return false;
+            }
+            
+            // Scroll event listener to trigger animation when profile picture is visible
+            function checkProfilePictureVisibility() {
+                if (isProfilePictureInViewport() && !aboutPageAnimationStarted) {
+                    initializeAboutTypingAnimation();
+                    aboutPageAnimationStarted = true;
+                }
+            }
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', checkProfilePictureVisibility);
+            
+            // Check on initial load in case already in view
+            setTimeout(checkProfilePictureVisibility, 1000);
+            
+            // Set up theme toggle button event listener
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    
+                    const themeIcon = document.getElementById('theme-icon');
+                    if (themeIcon) {
+                        themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+                    }
+                });
+            }
+            
+            // Custom Cursor JavaScript
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .theme-toggle');
+            
+            // Array to store trail elements
+            const trails = [];
+            const trailCount = 30; // Reduced from 50 to make line effect more pronounced
+            
+            // Create trail elements
+            for (let i = 0; i < trailCount; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                document.body.appendChild(trail);
+                trails.push({
+                    element: trail,
+                    x: 0,
+                    y: 0,
+                    opacity: 0,
+                    size: 4,
+                    rotation: 0
+                });
+            }
+            
+            // Function to get average brightness of background at cursor position
+            function getBackgroundBrightness(x, y) {
+                // Create a temporary element to get the background color
+                const tempElement = document.elementFromPoint(x, y);
+                if (!tempElement) return 128; // Default to middle brightness
+                
+                // Get the background color of the element
+                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
+                
+                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
+                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+                    let parent = tempElement.parentElement;
+                    while (parent) {
+                        const parentBg = window.getComputedStyle(parent).backgroundColor;
+                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+                            return calculateBrightness(parentBg);
+                        }
+                        parent = parent.parentElement;
+                    }
+                    // If we reach here, use body background
+                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+                    return calculateBrightness(bodyBg);
+                }
+                
+                return calculateBrightness(bgColor);
+            }
+            
+            // Function to calculate brightness from RGB values
+            function calculateBrightness(rgb) {
+                // Parse RGB values
+                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (!match) return 128; // Default to middle brightness
+                
+                const r = parseInt(match[1]);
+                const g = parseInt(match[2]);
+                const b = parseInt(match[3]);
+                
+                // Calculate brightness using luminance formula
+                return (r * 299 + g * 587 + b * 114) / 1000;
+            }
+            
+            // Function to update cursor color based on background
+            function updateCursorColor(x, y) {
+                const brightness = getBackgroundBrightness(x, y);
+                // Remove any existing background classes
+                cursor.classList.remove('light-bg', 'dark-bg');
+                
+                // Add appropriate class based on brightness
+                if (brightness > 128) {
+                    cursor.classList.add('light-bg');
+                } else {
+                    cursor.classList.add('dark-bg');
+                }
+            }
+            
+            // Mouse move event
+            let mouseX = 0;
+            let mouseY = 0;
+            let prevMouseX = 0;
+            let prevMouseY = 0;
+            let trailPositions = [];
+            let lastMoveTime = Date.now();
+            let moveTimer = null;
+            let lastTrailTime = 0;
+            let isMoving = false;
+            
+            document.addEventListener('mousemove', function(e) {
+                prevMouseX = mouseX;
+                prevMouseY = mouseY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                const now = Date.now();
+                lastMoveTime = now;
+                isMoving = true;
+                
+                // Calculate cursor speed (distance/time)
+                const distance = Math.sqrt(Math.pow(mouseX - prevMouseX, 2) + Math.pow(mouseY - prevMouseY, 2));
+                const timeDiff = now - (lastMoveTime || now);
+                const speed = timeDiff > 0 ? distance / timeDiff : 0;
+                
+                // Move main cursor immediately
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                
+                // Update cursor color based on background
+                updateCursorColor(mouseX, mouseY);
+                
+                // Store position for trail on every move for more consistent trail
+                trailPositions.push({
+                    x: mouseX, 
+                    y: mouseY,
+                    speed: speed,
+                    timestamp: now
+                });
+                if (trailPositions.length > trailCount) {
+                    trailPositions.shift();
+                }
+                
+                // Update trail positions more frequently for smoother effect
+                if (now - lastTrailTime > 8) { // ~120fps for trail updates (more frequent)
+                    // Update trail positions with delay
+                    trails.forEach((trail, index) => {
+                        if (trailPositions[index]) {
+                            const pos = trailPositions[index];
+                            const nextPos = trailPositions[index + 1] || pos;
+                            
+                            trail.element.style.left = pos.x + 'px';
+                            trail.element.style.top = pos.y + 'px';
+                            
+                            // Point trail in direction of movement
+                            if (nextPos && nextPos !== pos) {
+                                const angle = Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * 180 / Math.PI;
+                                trail.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                            }
+                            
+                            // Adjust trail appearance based on speed - more responsive to slow movement
+                            let speedFactor = 0;
+                            if (pos.speed > 0) {
+                                // More sensitive to slow movement
+                                speedFactor = Math.min(pos.speed / 3, 1); // Even lower divisor for better slow movement response
+                            }
+                            
+                            // Base opacity with minimum visibility for any movement
+                            const minOpacity = 0.4; // Increased minimum opacity
+                            const maxOpacity = 1.0;
+                            const opacity = minOpacity + (speedFactor * (maxOpacity - minOpacity));
+                            
+                            // Animate opacity with reversed fade (fading from end of path)
+                            const reversedIndex = trailCount - 1 - index;
+                            const fadeFactor = (1 - (reversedIndex / trailCount));
+                            trail.element.style.opacity = fadeFactor * opacity;
+                            
+                            // Adjust trail length based on speed
+                            const minLength = 10;
+                            const maxLength = 30;
+                            const length = minLength + (speedFactor * (maxLength - minLength));
+                            trail.element.style.width = length + 'px';
+                        }
+                    });
+                    
+                    lastTrailTime = now;
+                }
+                
+                // Clear any existing timer
+                if (moveTimer) {
+                    clearTimeout(moveTimer);
+                }
+                
+                // Set timer to hide trail when cursor stops
+                moveTimer = setTimeout(() => {
+                    isMoving = false;
+                    // Completely hide all trail elements
+                    trails.forEach(trail => {
+                        trail.element.style.opacity = '0';
+                        // Reset positions to prevent ghosting
+                        trail.element.style.left = '-100px';
+                        trail.element.style.top = '-100px';
+                    });
+                    // Clear trail positions
+                    trailPositions = [];
+                }, 100); // Hide trail 100ms after cursor stops
+            });
+            
+            // Show custom cursor
+            cursor.style.display = 'block';
+            
+            // Hover effects for clickable elements
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    // Transform cursor to target
+                    cursor.classList.add('target');
+                    
+                    // Check if this is a navigation link
+                    if (this.classList.contains('nav-link')) {
+                        // Add class to hide the dot for navigation links
+                        cursor.classList.add('no-dot');
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    // Transform cursor back to normal
+                    cursor.classList.remove('target');
+                    // Remove background color classes
+                    cursor.classList.remove('light-bg', 'dark-bg');
+                    // Remove no-dot class
+                    cursor.classList.remove('no-dot');
+                });
+            });
+            
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', function() {
+                isMoving = false;
+                cursor.style.display = 'none';
+                trails.forEach(trail => {
+                    trail.element.style.display = 'none';
+                    trail.element.style.opacity = '0';
+                });
+                // Clear trail positions
+                trailPositions = [];
+            });
+            
+            // Show cursor when entering window
+            document.addEventListener('mouseenter', function() {
+                cursor.style.display = 'block';
+                trails.forEach(trail => {
+                    trail.element.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
