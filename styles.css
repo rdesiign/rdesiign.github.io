@@ -500,7 +500,7 @@ body {
 
 /* Intro Section */
 #intro.section {
-    padding: 200px 0 250px 0; /* Significantly increased padding for more breathing space */
+    padding: 180px 0 100px 0; /* Increased top padding to create more space after banner */
     text-align: left; /* Left align the text */
 }
 

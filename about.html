@@ -51,6 +51,21 @@
         </div>
     </section>
 
+    <!-- Override the main script to prevent navigation interference -->
+    <script>
+        // Completely override the initializeNavigation function to prevent it from running on this page
+        function initializeNavigation() {
+            // Do nothing - we want to keep the About link active
+            console.log('Navigation initialization overridden for about page');
+        }
+        
+        // Also override the updateActiveLink function
+        function updateActiveLink() {
+            // Do nothing - we want to keep the About link active
+            console.log('Active link update overridden for about page');
+        }
+    </script>
+    
     <script src="script.js"></script>
     
     <!-- Initialize theme and other components for this page -->
@@ -86,7 +101,7 @@
                 }
             }
             
-            // Highlight the About link in navigation after a short delay to ensure DOM is fully ready
+            // Highlight the About link in navigation and prevent it from being overridden
             setTimeout(function() {
                 const aboutLink = document.querySelector('.nav-link[data-section="about"]');
                 if (aboutLink) {
@@ -96,10 +111,13 @@
                     
                     // Add active class to About link
                     aboutLink.classList.add('active');
+                    
+                    // Add a special class to identify this as a standalone about page
+                    document.body.classList.add('about-page');
                 }
             }, 100);
             
-            // Override navigation behavior to allow default link navigation on about page
+            // Override navigation behavior to keep About link active
             setTimeout(function() {
                 // Remove any existing event listeners by cloning and replacing nav links
                 const navLinks = document.querySelectorAll('.nav-link');
@@ -215,7 +233,12 @@
             // Set up theme toggle button event listener
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
+                // Remove any existing event listeners by cloning the element
+                const newThemeToggle = themeToggle.cloneNode(true);
+                themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+                
+                // Add new event listener
+                newThemeToggle.addEventListener('click', function() {
                     const currentTheme = document.documentElement.getAttribute('data-theme');
                     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                     
@@ -226,7 +249,50 @@
                     if (themeIcon) {
                         themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
                     }
+                    
+                    // Dispatch a custom event to notify other components of theme change
+                    const event = new CustomEvent('themeChange', { detail: newTheme });
+                    window.dispatchEvent(event);
                 });
+            }
+            
+            // Also override the initializeTheme function to prevent conflicts
+            function initializeTheme() {
+                // Check for saved theme or default to dark
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+                
+                // Set up theme toggle button event listener
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    // Remove any existing event listeners by cloning the element
+                    const newThemeToggle = themeToggle.cloneNode(true);
+                    themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+                    
+                    // Add new event listener
+                    newThemeToggle.addEventListener('click', function() {
+                        const currentTheme = document.documentElement.getAttribute('data-theme');
+                        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                        
+                        document.documentElement.setAttribute('data-theme', newTheme);
+                        localStorage.setItem('theme', newTheme);
+                        updateThemeIcon(newTheme);
+                        
+                        // Dispatch a custom event to notify other components of theme change
+                        const event = new CustomEvent('themeChange', { detail: newTheme });
+                        window.dispatchEvent(event);
+                    });
+                }
+            }
+            
+            // Override the updateThemeIcon function as well
+            function updateThemeIcon(theme) {
+                const themeIcon = document.getElementById('theme-icon');
+                if (themeIcon) {
+                    // Show sun for light theme, moon for dark theme
+                    themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+                }
             }
             
             // Custom Cursor JavaScript
@@ -461,6 +527,124 @@
                 });
             });
         });
+        
+        // Prevent the main script.js navigation from overriding the About link
+        window.addEventListener('load', function() {
+            // Add a small delay to ensure our code runs after script.js
+            setTimeout(function() {
+                // Ensure the About link stays active
+                const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+                if (aboutLink) {
+                    // Remove active class from all nav links
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to About link
+                    aboutLink.classList.add('active');
+                }
+                
+                // Additional safeguard: Set up a MutationObserver to watch for changes
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const target = mutation.target;
+                            if (target.classList.contains('nav-link') && target.getAttribute('data-section') === 'about') {
+                                // Ensure the About link stays active
+                                if (!target.classList.contains('active')) {
+                                    target.classList.add('active');
+                                }
+                            }
+                        }
+                    });
+                });
+                
+                // Observe all nav links for class changes
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(function(link) {
+                    observer.observe(link, { attributes: true });
+                });
+            }, 500);
+        });
+        
+        // Additional override for scroll events
+        window.addEventListener('scroll', function(e) {
+            // Prevent the default scroll behavior from affecting navigation
+            e.stopImmediatePropagation();
+            
+            // But still allow the typing animation to work
+            const profilePicture = document.querySelector('.profile-image');
+            if (profilePicture) {
+                const rect = profilePicture.getBoundingClientRect();
+                const isInView = (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+                
+                if (isInView && !aboutPageAnimationStarted) {
+                    // Trigger typing animation
+                    const typewriterContainer = document.getElementById('about-typewriter');
+                    if (typewriterContainer) {
+                        const heading = typewriterContainer.querySelector('h3');
+                        const paragraph = typewriterContainer.querySelector('p');
+                        const button = typewriterContainer.querySelector('a');
+                        
+                        if (heading && paragraph && button) {
+                            // Store original content
+                            const originalHeading = heading.textContent;
+                            const originalParagraph = paragraph.textContent;
+                            const originalButton = button.textContent;
+                            
+                            // Clear content
+                            heading.textContent = '';
+                            paragraph.textContent = '';
+                            button.textContent = '';
+                            
+                            // Show elements
+                            heading.style.opacity = '1';
+                            paragraph.style.opacity = '1';
+                            button.style.opacity = '1';
+                            
+                            // Create cursor element
+                            const cursorElement = document.createElement('span');
+                            cursorElement.className = 'blinking-cursor';
+                            heading.appendChild(cursorElement);
+                            
+                            // Check if typing function exists
+                            if (typeof typeTextMovingCursor === 'function') {
+                                // Start typing animation for 3 seconds
+                                typeTextMovingCursor(
+                                    [heading, paragraph, button], 
+                                    [originalHeading, originalParagraph, originalButton], 
+                                    cursorElement, 
+                                    3000
+                                );
+                            } else {
+                                // Fallback: just show the content if typing function is not available
+                                heading.textContent = originalHeading;
+                                paragraph.textContent = originalParagraph;
+                                button.textContent = originalButton;
+                                // Add cursor at the end
+                                paragraph.appendChild(cursorElement);
+                                
+                                // Ensure cursor is visible and blinking
+                                cursorElement.style.display = 'inline-block';
+                                cursorElement.style.visibility = 'visible';
+                                
+                                // Make sure the blinking animation continues
+                                if (!cursorElement.classList.contains('blinking-cursor')) {
+                                    cursorElement.classList.add('blinking-cursor');
+                                }
+                                
+                                // Ensure the animation is not paused
+                                cursorElement.style.animationPlayState = 'running';
+                            }
+                            
+                            aboutPageAnimationStarted = true;
+                        }
+                    }
+                }
+            }
+        }, true); // Use capture to intercept the event early
     </script>
 </body>
 </html>
