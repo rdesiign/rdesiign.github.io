@@ -528,6 +528,11 @@ function checkIntroSectionVisibility() {
 
 // Scroll event listener to trigger animation when profile picture is visible
 function checkProfilePictureVisibility() {
+    // Only run on pages other than about.html
+    if (window.location.pathname.includes('about.html')) {
+        return;
+    }
+    
     if (isProfilePictureInViewport() && !aboutAnimationStarted) {
         const typewriterContainer = document.getElementById('about-typewriter');
         if (typewriterContainer) {
@@ -656,10 +661,6 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             heading1.innerHTML = heading1Text;
             heading2.innerHTML = heading2Text;
             
-            // Animation complete - ensure the full text is displayed
-            heading1.innerHTML = heading1Text;
-            heading2.innerHTML = heading2Text;
-            
             // Position cursor at the end and ensure it continues blinking
             heading2.appendChild(cursorElement);
             
@@ -693,14 +694,20 @@ document.addEventListener('DOMContentLoaded', function() {
             hasScrolled = true;
         }
         
-        checkProfilePictureVisibility();
-        checkIntroSectionVisibility();
+        // Only run these functions on pages other than about.html
+        if (!window.location.pathname.includes('about.html')) {
+            checkProfilePictureVisibility();
+            checkIntroSectionVisibility();
+        }
     });
     
     // Check on initial load in case already in view
     setTimeout(function() {
-        checkProfilePictureVisibility();
-        checkIntroSectionVisibility();
+        // Only run these functions on pages other than about.html
+        if (!window.location.pathname.includes('about.html')) {
+            checkProfilePictureVisibility();
+            checkIntroSectionVisibility();
+        }
     }, 1000);
 });
 

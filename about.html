@@ -40,7 +40,7 @@
                     <img src="Assets/Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-image" loading="lazy">
                 </div>
                 <div class="about-text">
-                    <div id="about-typewriter">
+                    <div id="about-content">
                         <h3>Hi, I'm <span class="highlight">Rishi</span></h3>
                         <p>I'm an Industrial Designer who enjoys working on thoughtful, hands-on projects that range from simple everyday tools to seamlessly integrated physical-digital experiences. I keep my design approach flexible; I like to adapt my choice of tools and methodologies to each project and the challenges it presents, rather than following a fixed process. This approach helps me broaden my skill set and keeps my process fresh, exciting, and open to new ideas.</p>
                         <p></p>
@@ -141,64 +141,29 @@
                 }
             }, 200);
             
-            // Initialize typing animation for about section
-            function initializeAboutTypingAnimation() {
-                const typewriterContainer = document.getElementById('about-typewriter');
-                if (typewriterContainer) {
-                    const heading = typewriterContainer.querySelector('h3');
-                    const paragraph = typewriterContainer.querySelector('p');
-                    const button = typewriterContainer.querySelector('a');
+            // Initialize fade-in animation for about section
+            function initializeAboutFadeInAnimation() {
+                const contentContainer = document.getElementById('about-content');
+                if (contentContainer) {
+                    const heading = contentContainer.querySelector('h3');
+                    const paragraph = contentContainer.querySelector('p');
+                    const button = contentContainer.querySelector('a');
                     
                     if (heading && paragraph && button) {
-                        // Store original content
-                        const originalHeading = heading.textContent;
-                        const originalParagraph = paragraph.textContent;
-                        const originalButton = button.textContent;
+                        // Set initial opacity to 0 for fade-in effect
+                        heading.style.opacity = '0';
+                        paragraph.style.opacity = '0';
+                        button.style.opacity = '0';
                         
-                        // Clear content
-                        heading.textContent = '';
-                        paragraph.textContent = '';
-                        button.textContent = '';
+                        // Add transition for smooth fade-in (faster timing)
+                        heading.style.transition = 'opacity 0.4s ease-in-out';
+                        paragraph.style.transition = 'opacity 0.4s ease-in-out 0.1s';
+                        button.style.transition = 'opacity 0.4s ease-in-out 0.2s';
                         
-                        // Show elements
+                        // Trigger fade-in immediately (removed delay)
                         heading.style.opacity = '1';
                         paragraph.style.opacity = '1';
                         button.style.opacity = '1';
-                        
-                        // Create cursor element
-                        const cursorElement = document.createElement('span');
-                        cursorElement.className = 'blinking-cursor';
-                        heading.appendChild(cursorElement);
-                        
-                        // Check if typing function exists
-                        if (typeof typeTextMovingCursor === 'function') {
-                            // Start typing animation for 3 seconds
-                            typeTextMovingCursor(
-                                [heading, paragraph, button], 
-                                [originalHeading, originalParagraph, originalButton], 
-                                cursorElement, 
-                                3000
-                            );
-                        } else {
-                            // Fallback: just show the content if typing function is not available
-                            heading.textContent = originalHeading;
-                            paragraph.textContent = originalParagraph;
-                            button.textContent = originalButton;
-                            // Add cursor at the end
-                            paragraph.appendChild(cursorElement);
-                            
-                            // Ensure cursor is visible and blinking
-                            cursorElement.style.display = 'inline-block';
-                            cursorElement.style.visibility = 'visible';
-                            
-                            // Make sure the blinking animation continues
-                            if (!cursorElement.classList.contains('blinking-cursor')) {
-                                cursorElement.classList.add('blinking-cursor');
-                            }
-                            
-                            // Ensure the animation is not paused
-                            cursorElement.style.animationPlayState = 'running';
-                        }
                     }
                 }
             }
@@ -219,7 +184,7 @@
             // Scroll event listener to trigger animation when profile picture is visible
             function checkProfilePictureVisibility() {
                 if (isProfilePictureInViewport() && !aboutPageAnimationStarted) {
-                    initializeAboutTypingAnimation();
+                    initializeAboutFadeInAnimation();
                     aboutPageAnimationStarted = true;
                 }
             }
@@ -227,8 +192,8 @@
             // Add scroll event listener
             window.addEventListener('scroll', checkProfilePictureVisibility);
             
-            // Check on initial load in case already in view
-            setTimeout(checkProfilePictureVisibility, 1000);
+            // Check on initial load in case already in view (faster timing)
+            setTimeout(checkProfilePictureVisibility, 100); // Reduced from 1000ms to 100ms
             
             // Set up theme toggle button event listener
             const themeToggle = document.getElementById('theme-toggle');
@@ -571,7 +536,7 @@
             // Prevent the default scroll behavior from affecting navigation
             e.stopImmediatePropagation();
             
-            // But still allow the typing animation to work
+            // But still allow the fade-in animation to work
             const profilePicture = document.querySelector('.profile-image');
             if (profilePicture) {
                 const rect = profilePicture.getBoundingClientRect();
@@ -581,63 +546,28 @@
                 );
                 
                 if (isInView && !aboutPageAnimationStarted) {
-                    // Trigger typing animation
-                    const typewriterContainer = document.getElementById('about-typewriter');
-                    if (typewriterContainer) {
-                        const heading = typewriterContainer.querySelector('h3');
-                        const paragraph = typewriterContainer.querySelector('p');
-                        const button = typewriterContainer.querySelector('a');
+                    // Trigger fade-in animation
+                    const contentContainer = document.getElementById('about-content');
+                    if (contentContainer) {
+                        const heading = contentContainer.querySelector('h3');
+                        const paragraph = contentContainer.querySelector('p');
+                        const button = contentContainer.querySelector('a');
                         
                         if (heading && paragraph && button) {
-                            // Store original content
-                            const originalHeading = heading.textContent;
-                            const originalParagraph = paragraph.textContent;
-                            const originalButton = button.textContent;
+                            // Set initial opacity to 0 for fade-in effect
+                            heading.style.opacity = '0';
+                            paragraph.style.opacity = '0';
+                            button.style.opacity = '0';
                             
-                            // Clear content
-                            heading.textContent = '';
-                            paragraph.textContent = '';
-                            button.textContent = '';
+                            // Add transition for smooth fade-in (faster timing)
+                            heading.style.transition = 'opacity 0.4s ease-in-out';
+                            paragraph.style.transition = 'opacity 0.4s ease-in-out 0.1s';
+                            button.style.transition = 'opacity 0.4s ease-in-out 0.2s';
                             
-                            // Show elements
+                            // Trigger fade-in immediately (removed delay)
                             heading.style.opacity = '1';
                             paragraph.style.opacity = '1';
                             button.style.opacity = '1';
-                            
-                            // Create cursor element
-                            const cursorElement = document.createElement('span');
-                            cursorElement.className = 'blinking-cursor';
-                            heading.appendChild(cursorElement);
-                            
-                            // Check if typing function exists
-                            if (typeof typeTextMovingCursor === 'function') {
-                                // Start typing animation for 3 seconds
-                                typeTextMovingCursor(
-                                    [heading, paragraph, button], 
-                                    [originalHeading, originalParagraph, originalButton], 
-                                    cursorElement, 
-                                    3000
-                                );
-                            } else {
-                                // Fallback: just show the content if typing function is not available
-                                heading.textContent = originalHeading;
-                                paragraph.textContent = originalParagraph;
-                                button.textContent = originalButton;
-                                // Add cursor at the end
-                                paragraph.appendChild(cursorElement);
-                                
-                                // Ensure cursor is visible and blinking
-                                cursorElement.style.display = 'inline-block';
-                                cursorElement.style.visibility = 'visible';
-                                
-                                // Make sure the blinking animation continues
-                                if (!cursorElement.classList.contains('blinking-cursor')) {
-                                    cursorElement.classList.add('blinking-cursor');
-                                }
-                                
-                                // Ensure the animation is not paused
-                                cursorElement.style.animationPlayState = 'running';
-                            }
                             
                             aboutPageAnimationStarted = true;
                         }

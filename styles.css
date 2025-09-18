@@ -105,7 +105,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     /* Dotted notebook background */
-    background-image: radial-gradient(rgba(255, 107, 53, 0.25) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 107, 53, 0.3) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: 0 0;
     position: relative;
@@ -152,10 +152,8 @@ body {
     box-shadow: 0 0 15px rgba(255, 107, 53, 0.8); /* Reduced but still prominent glow */
 }
 
-.custom-cursor.target.no-dot .custom-cursor-dot {
-    opacity: 0; /* Hide dot for navigation links */
-}
-
+/* Remove the cross lines within the circle */
+/*
 .custom-cursor.target::before,
 .custom-cursor.target::after {
     content: '';
@@ -166,7 +164,7 @@ body {
 }
 
 .custom-cursor.target::before {
-    width: 1px; /* Reduced from 2px to 1px */
+    width: 1px;
     height: 100%;
     top: 0;
     left: 50%;
@@ -175,30 +173,21 @@ body {
 
 .custom-cursor.target::after {
     width: 100%;
-    height: 1px; /* Reduced from 2px to 1px */
+    height: 1px;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
 }
+*/
 
 /* Target cursor for light backgrounds (dark color) */
 .custom-cursor.target.light-bg {
     border: 1px solid #1a1a1a;
 }
 
-.custom-cursor.target.light-bg::before,
-.custom-cursor.target.light-bg::after {
-    background-color: #1a1a1a;
-}
-
 /* Target cursor for dark backgrounds (light color) */
 .custom-cursor.target.dark-bg {
     border: 1px solid #ffffff;
-}
-
-.custom-cursor.target.dark-bg::before,
-.custom-cursor.target.dark-bg::after {
-    background-color: #ffffff;
 }
 
 .cursor-trail {
@@ -421,6 +410,46 @@ body {
 
 .prev:hover, .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Down Arrow */
+.arrow-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    animation: bounce 2s infinite;
+}
+
+.arrow-down::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 /* Dots indicator */
@@ -716,19 +745,23 @@ body {
     image-rendering: crisp-edges;
 }
 
-/* Typing animation for About section - MOVING CURSOR */
-#about-typewriter {
-    position: relative;
-}
-
-#about-typewriter h3, 
-#about-typewriter p, 
-#about-typewriter .btn {
+/* Fade-in animation for About section */
+#about-content h3, 
+#about-content p, 
+#about-content .btn {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease-in-out; /* Reduced from 0.8s to 0.4s */
 }
 
-/* About section typing effect */
+#about-content p {
+    transition-delay: 0.1s; /* Reduced from 0.2s to 0.1s */
+}
+
+#about-content .btn {
+    transition-delay: 0.2s; /* Reduced from 0.4s to 0.2s */
+}
+
+/* About section content styling */
 #about .about-text h3 {
     font-size: 26px;
     font-weight: 400;
