@@ -23,7 +23,7 @@
         <div class="nav-container">
             <a href="index.html#home" class="nav-link" data-section="home">Home</a>
             <a href="index.html#projects" class="nav-link" data-section="projects">Projects</a>
-            <a href="index.html#experience" class="nav-link" data-section="experience">Creative Playground</a>
+            <a href="index.html#experience" class="nav-link" data-section="experience">Concept Playground</a>
             <a href="about.html" class="nav-link active" data-section="about">About</a>
             <a href="index.html#contact" class="nav-link" data-section="contact">Contact</a>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -64,6 +64,27 @@
             // Do nothing - we want to keep the About link active
             console.log('Active link update overridden for about page');
         }
+        
+        // Override the click handlers for navigation links to ensure they work properly
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add a small delay to ensure DOM is fully loaded
+            setTimeout(function() {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    // Remove any existing event listeners by cloning
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    // For the About link, make sure it stays active
+                    if (newLink.getAttribute('data-section') === 'about') {
+                        newLink.classList.add('active');
+                    }
+                    
+                    // We don't add any click event listeners here to ensure default navigation behavior
+                    // The links should work with their href attributes
+                });
+            }, 100);
+        });
     </script>
     
     <script src="script.js"></script>
@@ -88,7 +109,7 @@
                 document.documentElement.setAttribute('data-theme', savedTheme);
                 const themeIcon = document.getElementById('theme-icon');
                 if (themeIcon) {
-                    themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+                    themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️️';
                 }
             }
             
@@ -117,153 +138,8 @@
                 }
             }, 100);
             
-            // Override navigation behavior to keep About link active
-            setTimeout(function() {
-                // Remove any existing event listeners by cloning and replacing nav links
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    // Skip the About link as it should remain active
-                    if (link.getAttribute('data-section') === 'about') {
-                        return;
-                    }
-                    
-                    // Create a clone of the link to remove event listeners
-                    const clone = link.cloneNode(true);
-                    link.parentNode.replaceChild(clone, link);
-                });
-                
-                // Prevent script.js from modifying navbar styles
-                const navbar = document.getElementById('main-navbar');
-                if (navbar) {
-                    // Reset any inline styles that might have been added by script.js
-                    navbar.style.background = '';
-                    navbar.style.border = '';
-                }
-            }, 200);
-            
-            // Initialize fade-in animation for about section
-            function initializeAboutFadeInAnimation() {
-                const contentContainer = document.getElementById('about-content');
-                if (contentContainer) {
-                    const heading = contentContainer.querySelector('h3');
-                    const paragraph = contentContainer.querySelector('p');
-                    const button = contentContainer.querySelector('a');
-                    
-                    if (heading && paragraph && button) {
-                        // Set initial opacity to 0 for fade-in effect
-                        heading.style.opacity = '0';
-                        paragraph.style.opacity = '0';
-                        button.style.opacity = '0';
-                        
-                        // Add transition for smooth fade-in (faster timing)
-                        heading.style.transition = 'opacity 0.4s ease-in-out';
-                        paragraph.style.transition = 'opacity 0.4s ease-in-out 0.1s';
-                        button.style.transition = 'opacity 0.4s ease-in-out 0.2s';
-                        
-                        // Trigger fade-in immediately (removed delay)
-                        heading.style.opacity = '1';
-                        paragraph.style.opacity = '1';
-                        button.style.opacity = '1';
-                    }
-                }
-            }
-            
-            // Check if profile picture is in viewport
-            function isProfilePictureInViewport() {
-                const profilePicture = document.querySelector('.profile-image');
-                if (profilePicture) {
-                    const rect = profilePicture.getBoundingClientRect();
-                    return (
-                        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                        rect.bottom >= 0
-                    );
-                }
-                return false;
-            }
-            
-            // Scroll event listener to trigger animation when profile picture is visible
-            function checkProfilePictureVisibility() {
-                if (isProfilePictureInViewport() && !aboutPageAnimationStarted) {
-                    initializeAboutFadeInAnimation();
-                    aboutPageAnimationStarted = true;
-                }
-            }
-            
-            // Add scroll event listener
-            window.addEventListener('scroll', checkProfilePictureVisibility);
-            
-            // Check on initial load in case already in view (faster timing)
-            setTimeout(checkProfilePictureVisibility, 100); // Reduced from 1000ms to 100ms
-            
-            // Set up theme toggle button event listener
-            const themeToggle = document.getElementById('theme-toggle');
-            if (themeToggle) {
-                // Remove any existing event listeners by cloning the element
-                const newThemeToggle = themeToggle.cloneNode(true);
-                themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
-                
-                // Add new event listener
-                newThemeToggle.addEventListener('click', function() {
-                    const currentTheme = document.documentElement.getAttribute('data-theme');
-                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    
-                    const themeIcon = document.getElementById('theme-icon');
-                    if (themeIcon) {
-                        themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-                    }
-                    
-                    // Dispatch a custom event to notify other components of theme change
-                    const event = new CustomEvent('themeChange', { detail: newTheme });
-                    window.dispatchEvent(event);
-                });
-            }
-            
-            // Also override the initializeTheme function to prevent conflicts
-            function initializeTheme() {
-                // Check for saved theme or default to dark
-                const savedTheme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                updateThemeIcon(savedTheme);
-                
-                // Set up theme toggle button event listener
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    // Remove any existing event listeners by cloning the element
-                    const newThemeToggle = themeToggle.cloneNode(true);
-                    themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
-                    
-                    // Add new event listener
-                    newThemeToggle.addEventListener('click', function() {
-                        const currentTheme = document.documentElement.getAttribute('data-theme');
-                        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                        
-                        document.documentElement.setAttribute('data-theme', newTheme);
-                        localStorage.setItem('theme', newTheme);
-                        updateThemeIcon(newTheme);
-                        
-                        // Dispatch a custom event to notify other components of theme change
-                        const event = new CustomEvent('themeChange', { detail: newTheme });
-                        window.dispatchEvent(event);
-                    });
-                }
-            }
-            
-            // Override the updateThemeIcon function as well
-            function updateThemeIcon(theme) {
-                const themeIcon = document.getElementById('theme-icon');
-                if (themeIcon) {
-                    // Show sun for light theme, moon for dark theme
-                    themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-                }
-            }
-            
             // Custom Cursor JavaScript
             const cursor = document.querySelector('.custom-cursor');
-            const links = document.querySelectorAll('a, button, .theme-toggle');
-            
             // Array to store trail elements
             const trails = [];
             const trailCount = 30; // Reduced from 50 to make line effect more pronounced
@@ -449,33 +325,44 @@
             // Show custom cursor
             cursor.style.display = 'block';
             
-            // Hover effects for clickable elements
-            links.forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    // Transform cursor to target
-                    cursor.classList.add('target');
-                    
-                    // Check if this is a navigation link
-                    if (this.classList.contains('nav-link')) {
-                        // Add class to hide the dot for navigation links
-                        cursor.classList.add('no-dot');
-                    }
-                });
+            // Handle all clickable elements with a single, clean approach
+            // This ensures no conflicts between different event handlers
+            document.addEventListener('mouseover', function(e) {
+                // Check if we have a cursor element
+                if (!cursor) return;
                 
-                link.addEventListener('mouseleave', function() {
-                    // Transform cursor back to normal
-                    cursor.classList.remove('target');
-                    // Remove background color classes
-                    cursor.classList.remove('light-bg', 'dark-bg');
-                    // Remove no-dot class
-                    cursor.classList.remove('no-dot');
-                });
+                // Check if the hovered element is a navigation link
+                if (e.target.classList && e.target.classList.contains('nav-link')) {
+                    cursor.classList.add('target');
+                    cursor.classList.add('no-dot');
+                }
+                // Check if the hovered element is any other clickable element
+                else if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || 
+                         (e.target.classList && e.target.classList.contains('theme-toggle'))) {
+                    cursor.classList.add('target');
+                    // Don't add 'no-dot' class for non-navigation elements
+                }
             });
+            
+            document.addEventListener('mouseout', function(e) {
+                // Check if we have a cursor element
+                if (!cursor) return;
+                
+                // Remove all cursor states when mouse leaves any element
+                cursor.classList.remove('target');
+                cursor.classList.remove('no-dot');
+                cursor.classList.remove('light-bg', 'dark-bg');
+            });
+            
+            // Make sure navigation links work properly by not preventing their default behavior
+            // The mouseover/mouseout events above only change cursor appearance and don't interfere with navigation
             
             // Hide cursor when leaving window
             document.addEventListener('mouseleave', function() {
                 isMoving = false;
-                cursor.style.display = 'none';
+                if (cursor) {
+                    cursor.style.display = 'none';
+                }
                 trails.forEach(trail => {
                     trail.element.style.display = 'none';
                     trail.element.style.opacity = '0';
@@ -486,18 +373,16 @@
             
             // Show cursor when entering window
             document.addEventListener('mouseenter', function() {
-                cursor.style.display = 'block';
+                if (cursor) {
+                    cursor.style.display = 'block';
+                }
                 trails.forEach(trail => {
                     trail.element.style.display = 'block';
                 });
             });
-        });
-        
-        // Prevent the main script.js navigation from overriding the About link
-        window.addEventListener('load', function() {
-            // Add a small delay to ensure our code runs after script.js
+            
+            // Override navigation behavior to keep About link active
             setTimeout(function() {
-                // Ensure the About link stays active
                 const aboutLink = document.querySelector('.nav-link[data-section="about"]');
                 if (aboutLink) {
                     // Remove active class from all nav links
@@ -529,52 +414,52 @@
                     observer.observe(link, { attributes: true });
                 });
             }, 500);
-        });
-        
-        // Additional override for scroll events
-        window.addEventListener('scroll', function(e) {
-            // Prevent the default scroll behavior from affecting navigation
-            e.stopImmediatePropagation();
             
-            // But still allow the fade-in animation to work
-            const profilePicture = document.querySelector('.profile-image');
-            if (profilePicture) {
-                const rect = profilePicture.getBoundingClientRect();
-                const isInView = (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.bottom >= 0
-                );
-                
-                if (isInView && !aboutPageAnimationStarted) {
-                    // Trigger fade-in animation
-                    const contentContainer = document.getElementById('about-content');
-                    if (contentContainer) {
-                        const heading = contentContainer.querySelector('h3');
-                        const paragraph = contentContainer.querySelector('p');
-                        const button = contentContainer.querySelector('a');
+            // Initialize fade-in animation for about section
+            function initializeAboutFadeInAnimation() {
+                const contentContainer = document.getElementById('about-content');
+                if (contentContainer) {
+                    const heading = contentContainer.querySelector('h3');
+                    const paragraph = contentContainer.querySelector('p');
+                    const button = contentContainer.querySelector('a');
+                    
+                    if (heading && paragraph && button) {
+                        // Set initial opacity to 0 for fade-in effect
+                        heading.style.opacity = '0';
+                        paragraph.style.opacity = '0';
+                        button.style.opacity = '0';
                         
-                        if (heading && paragraph && button) {
-                            // Set initial opacity to 0 for fade-in effect
-                            heading.style.opacity = '0';
-                            paragraph.style.opacity = '0';
-                            button.style.opacity = '0';
-                            
-                            // Add transition for smooth fade-in (faster timing)
-                            heading.style.transition = 'opacity 0.4s ease-in-out';
-                            paragraph.style.transition = 'opacity 0.4s ease-in-out 0.1s';
-                            button.style.transition = 'opacity 0.4s ease-in-out 0.2s';
-                            
-                            // Trigger fade-in immediately (removed delay)
+                        // Add transition for smooth fade-in (faster timing)
+                        heading.style.transition = 'opacity 0.4s ease-in-out';
+                        paragraph.style.transition = 'opacity 0.4s ease-in-out 0.1s';
+                        button.style.transition = 'opacity 0.4s ease-in-out 0.2s';
+                        
+                        // Trigger fade-in immediately (removed delay)
+                        setTimeout(() => {
                             heading.style.opacity = '1';
                             paragraph.style.opacity = '1';
                             button.style.opacity = '1';
-                            
-                            aboutPageAnimationStarted = true;
-                        }
+                        }, 100); // Small delay to ensure DOM is ready
                     }
                 }
             }
-        }, true); // Use capture to intercept the event early
+            
+            // Remove the scroll-dependent visibility check and trigger animation immediately
+            // Check on initial load
+            setTimeout(function() {
+                initializeAboutFadeInAnimation();
+            }, 100); // Reduced from 1000ms to 100ms for faster appearance
+            
+            // Remove the scroll event listener for the fade-in animation since we want it to happen automatically
+            // The original scroll event listener has been removed
+            
+            // Set up theme toggle button event listener
+
+        });
+        
+        // Remove the scroll event listener completely since we want the text to appear automatically
+        // The scroll event listener that was triggering the fade-in animation based on scrolling has been removed
+        // Text will now appear automatically when the page loads
     </script>
 </body>
 </html>

@@ -106,7 +106,7 @@ body {
     overflow-x: hidden;
     /* Dotted notebook background */
     background-image: radial-gradient(rgba(255, 107, 53, 0.3) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-size: 25px 25px;
     background-position: 0 0;
     position: relative;
     /* Hide default cursor */
@@ -152,33 +152,10 @@ body {
     box-shadow: 0 0 15px rgba(255, 107, 53, 0.8); /* Reduced but still prominent glow */
 }
 
-/* Remove the cross lines within the circle */
-/*
-.custom-cursor.target::before,
-.custom-cursor.target::after {
-    content: '';
-    position: absolute;
-    background-color: var(--accent-secondary);
-    opacity: 1;
-    z-index: 0;
+/* Hide dot when cursor is over navigation links */
+.custom-cursor.no-dot .custom-cursor-dot {
+    display: none;
 }
-
-.custom-cursor.target::before {
-    width: 1px;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.custom-cursor.target::after {
-    width: 100%;
-    height: 1px;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-}
-*/
 
 /* Target cursor for light backgrounds (dark color) */
 .custom-cursor.target.light-bg {
@@ -298,51 +275,6 @@ body {
 .theme-toggle:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
-}
-
-/* Hero Section */
-.hero-section {
-    width: 100%;
-    height: 85vh; /* Increased from 70vh to 85vh for taller banner */
-}
-
-/* Slideshow Styles */
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-}
-
-.slide {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.slide.active {
-    display: block;
-}
-
-.slide-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slide-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Add image optimization */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
 }
 
 .slide-info {
@@ -550,6 +482,51 @@ body {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* Hero Section */
+.hero-section {
+    width: 100%;
+    height: 85vh; /* Increased from 70vh to 85vh for taller banner */
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Add image optimization */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 #intro-typewriter {
