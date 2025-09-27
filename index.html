@@ -7,7 +7,7 @@
     <meta name="description" content="Rishi Ramesh is an industrial designer specializing in product design, user experience, and innovative solutions. Explore my portfolio of creative design work.">
     <!-- Performance optimizations -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="styles.css?v=1.0">
+    <link rel="stylesheet" href="styles.css?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Preload critical resources -->
     <link rel="preload" href="Assets/Profile raw 4.jpg" as="image">
@@ -23,93 +23,43 @@
     <!-- Floating Navigation Bar -->
     <nav class="floating-navbar" id="main-navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-link active" data-section="home">Home</a>
             <a href="#projects" class="nav-link" data-section="projects">Projects</a>
-            <a href="#experience" class="nav-link" data-section="experience">Concept Playground</a>
             <a href="about.html" class="nav-link" data-section="about">About</a>
             <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            <a href="#experience" class="nav-link" data-section="experience">More</a>
+            <!-- Theme Toggle Button -->
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <span id="theme-icon">🌙</span>
+                <span class="theme-icon"></span>
             </button>
         </div>
     </nav>
 
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="slideshow-container">
-            <div class="slide fade active">
-                <div class="slide-content">
-                    <div class="slide-image" style="background-image: url('Projects/MMM/MMM8.png');"></div>
-                    <div class="slide-info bottom-left">
-                        <h2 class="slide-title">Headway</h2>
-                        <p class="slide-subtitle">Migraine Medication Management System</p>
-                    </div>
-                </div>
-            </div>
-            <div class="slide fade">
-                <div class="slide-content">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1547891710-a1dc8da965a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="slide-info bottom-left">
-                        <h2 class="slide-title">Sustainable Furniture</h2>
-                        <p class="slide-subtitle">Modular workspace system from recycled materials</p>
-                    </div>
-                </div>
-            </div>
-            <div class="slide fade">
-                <div class="slide-content">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="slide-info bottom-left">
-                        <h2 class="slide-title">Medical Device Interface</h2>
-                        <p class="slide-subtitle">Redesigned for high-stress environments</p>
-                    </div>
-                </div>
-            </div>
-            <div class="slide fade">
-                <div class="slide-content">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="slide-info bottom-left">
-                        <h2 class="slide-title">Premium Audio Device</h2>
-                        <p class="slide-subtitle">Breakthrough battery technology in portable design</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation arrows -->
-            <a class="prev" onclick="changeSlide(-1)">❮</a>
-            <a class="next" onclick="changeSlide(1)">❯</a>
-            
-            <!-- Dots indicator -->
-            <div class="dots-container">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-            </div>
-        </div>
-        
-        <!-- Down Arrow -->
-        <div class="arrow-down" id="arrow-down"></div>
-    </section>
+    <!-- Logo Circle -->
+    <div class="logo-circle">
+        <span class="logo-text">R.</span>
+    </div>
 
     <!-- Intro Text Section -->
     <section id="intro" class="section">
+        <!-- Showreel Banner moved to the top and outside container for full width -->
+        <div id="showreel-banner">
+            <div class="showreel-placeholder">
+            </div>
+        </div>
         <div class="container">
-            <div id="intro-typewriter">
-                <h1>Hello! I'm Rishi.</h1>
-                <h2>I design to make the complex simple and the simple <span class="highlight">exciting</span>.</h2>
+            <div class="intro-content">
+                <div id="intro-typewriter">
+                    <!-- Content will be added by JavaScript -->
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Hero Section -->
 
     <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">A selection of my recent design work</p>
-            </div>
-            
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image-container">
@@ -286,7 +236,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const cursor = document.querySelector('.custom-cursor');
-            const links = document.querySelectorAll('a, button, .project-card, .theme-toggle');
+            const links = document.querySelectorAll('a, button, .project-card');
             
             // Array to store trail elements
             const trails = [];

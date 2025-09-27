@@ -49,199 +49,230 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadImages();
     
     initializeComponents();
-    initializeSlideshow();
     initializeNavigation();
     initializeContactForm();
     initializeGraphBackground();
+    initializeShowreelBanner(); // Add this line
     
     } catch (error) {
         console.error('Error in main initialization:', error);
     }
 });
 
+// Add this new function for handling the showreel banner
+function initializeShowreelBanner() {
+    // Handle the banner image
+    const bannerImage = document.querySelector('.showreel-image');
+    if (bannerImage) {
+        // Ensure the image is visible
+        bannerImage.style.display = 'block';
+        
+        // Add load event to confirm image is loaded
+        bannerImage.addEventListener('load', function() {
+            console.log('Banner image loaded successfully');
+            // Ensure the image is properly positioned
+            bannerImage.style.opacity = '1';
+        });
+        
+        // Handle error case
+        bannerImage.addEventListener('error', function(e) {
+            console.log('Banner image failed to load', e);
+            // Try to show the fallback image if available
+            const fallbackImage = document.querySelector('.showreel-image-fallback');
+            if (fallbackImage) {
+                fallbackImage.style.display = 'block';
+            }
+        });
+        
+        // Preload the image to ensure it displays
+        const img = new Image();
+        img.src = bannerImage.src;
+        img.onload = function() {
+            console.log('Banner image preloaded successfully');
+            bannerImage.style.opacity = '1';
+        };
+    }
+    
+    // Also handle the fallback image
+    const fallbackImage = document.querySelector('.showreel-image-fallback');
+    if (fallbackImage) {
+        fallbackImage.addEventListener('load', function() {
+            console.log('Fallback banner image loaded successfully');
+        });
+    }
+}
+
 function initializeComponents() {
+    // Initialize theme functionality
     initializeTheme();
 }
 
 // Theme toggle functionality
 function initializeTheme() {
-    // Check for saved theme or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    // Set up theme toggle button event listener
     const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Set the initial theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Update icon based on current theme
+    updateThemeIcon(currentTheme);
+    
+    // Add event listener to toggle theme
     if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Update the theme
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // Update the icon
+            updateThemeIcon(newTheme);
+            
+            // Save the theme to localStorage
+            localStorage.setItem('theme', newTheme);
+        });
     }
 }
 
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-    
-    // Dispatch a custom event to notify other components of theme change
-    const event = new CustomEvent('themeChange', { detail: newTheme });
-    window.dispatchEvent(event);
-}
-
+// Function to update theme icon based on current theme
 function updateThemeIcon(theme) {
-    const themeIcon = document.getElementById('theme-icon');
-    if (themeIcon) {
-        // Show sun for light theme, moon for dark theme
-        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-    }
-}
-
-// Slideshow functionality with performance optimizations
-let slideIndex = 0;
-let slideInterval;
-let slidesLoaded = false;
-
-function initializeSlideshow() {
-    // Preload slideshow images
-    const slideImages = document.querySelectorAll('.slide-image');
-    let loadedCount = 0;
-    
-    slideImages.forEach(slide => {
-        const bgImage = slide.style.backgroundImage;
-        if (bgImage && bgImage.includes('url')) {
-            const url = bgImage.match(/url\(['"]?(.*?)['"]?\)/)[1];
-            const img = new Image();
-            img.onload = function() {
-                loadedCount++;
-                if (loadedCount === slideImages.length) {
-                    slidesLoaded = true;
-                    showSlides();
-                    startSlideShow();
-                }
-            };
-            img.src = url;
-        }
-    });
-    
-    // Fallback in case images fail to load
-    setTimeout(() => {
-        if (!slidesLoaded) {
-            showSlides();
-            startSlideShow();
-        }
-    }, 3000);
-}
-
-function startSlideShow() {
-    slideInterval = setInterval(() => {
-        changeSlide(1);
-    }, 3000); // Change slide every 3 seconds (updated from 2500ms)
-}
-
-function stopSlideShow() {
-    clearInterval(slideInterval);
-}
-
-function changeSlide(n) {
-    stopSlideShow();
-    slideIndex += n;
-    showSlides();
-    startSlideShow();
-}
-
-function currentSlide(n) {
-    stopSlideShow();
-    slideIndex = n - 1;
-    showSlides();
-    startSlideShow();
-}
-
-function showSlides() {
-    const slides = document.getElementsByClassName("slide");
-    const dots = document.getElementsByClassName("dot");
-    
-    // Handle index boundaries
-    if (slideIndex >= slides.length) {slideIndex = 0}
-    if (slideIndex < 0) {slideIndex = slides.length - 1}
-    
-    // Hide all slides
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    
-    // Remove active class from all dots
-    for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    
-    // Show current slide and activate corresponding dot
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
+    // The icon is now handled purely by CSS based on the data-theme attribute
+    // This function is kept for consistency but doesn't need to do anything
+    console.log('Theme updated to:', theme);
 }
 
 // Navigation functionality
 function initializeNavigation() {
+    // Check if we're on the about page
+    if (window.IS_ABOUT_PAGE) {
+        console.log('Navigation initialization skipped for about page');
+        return;
+    }
+    
+    console.log('Initializing navigation');
     // Get navigation elements
     const navLinks = document.querySelectorAll('.nav-link');
     const navbar = document.getElementById('main-navbar');
     
+    if (navLinks.length === 0) {
+        console.log('No navigation links found');
+    } else {
+        console.log('Found', navLinks.length, 'navigation links');
+    }
+    
+    if (!navbar) {
+        console.log('Navbar not found');
+    } else {
+        console.log('Navbar found');
+    }
+    
     // Function to update active link based on scroll position
     function updateActiveLink() {
-        // Remove active class from all links first
-        navLinks.forEach(link => link.classList.remove('active'));
+        // Check if we're on the about page
+        if (window.IS_ABOUT_PAGE) {
+            console.log('updateActiveLink skipped for about page');
+            return;
+        }
         
-        // Get current scroll position
-        const scrollPos = window.scrollY + 150; // Small offset for better detection
-        
-        // Define sections in the order they appear in the page
-        const sections = [
-            { id: 'home', element: document.getElementById('home') },
-            { id: 'intro', element: document.getElementById('intro') },
-            { id: 'projects', element: document.getElementById('projects') },
-            { id: 'experience', element: document.getElementById('experience') },
-            { id: 'contact', element: document.getElementById('contact') }
-        ].filter(section => section.element !== null); // Filter out any sections that don't exist
-        
-        // Find the section that's currently in view
-        let activeSection = 'home'; // Default to home
-        
-        // Special case: if we're at the very top of the page, make sure home is active
-        if (window.scrollY < 50) {
-            activeSection = 'home';
-        } else {
+        try {
+            console.log('Updating active link');
+            // Remove active class from all links first
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                console.log('Removed active class from', link.textContent);
+            });
+            
+            // Get current scroll position
+            const scrollPos = window.scrollY + 100; // Small offset for better detection
+            
+            // Define sections in the order they appear in the page
+            const sections = [
+                { id: 'projects', element: document.getElementById('projects') },
+                { id: 'intro', element: document.getElementById('intro') },
+                { id: 'experience', element: document.getElementById('experience') },
+                { id: 'contact', element: document.getElementById('contact') }
+            ].filter(section => {
+                const exists = section.element !== null;
+                console.log(`Section ${section.id} exists: ${exists}`);
+                return exists;
+            }); // // Filter out any sections that don't exist
+            
+            console.log('Sections to check:', sections.map(s => s.id));
+            
+            // Log section positions for debugging
+            sections.forEach(section => {
+                if (section.element) {
+                    const sectionTop = section.element.offsetTop;
+                    const sectionBottom = sectionTop + section.element.offsetHeight;
+                    console.log(`Section ${section.id}: top=${sectionTop}, bottom=${sectionBottom}, height=${section.element.offsetHeight}`);
+                }
+            });
+            
+            // Find the section that's currently in view
+            let activeSection = null;
+            
             // Check if we're at the bottom of the page (for contact section)
             const scrollBottom = window.scrollY + window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             
+            console.log(`Scroll position: ${window.scrollY}, Window height: ${window.innerHeight}, Scroll bottom: ${scrollBottom}, Document height: ${documentHeight}`);
+            
             // If we're near the bottom of the page, activate contact section
             if (scrollBottom >= documentHeight - 100) {
                 activeSection = 'contact';
+                console.log('Near bottom, activating contact section');
             } else {
-                // Check sections from bottom to top to find the first one that's in view
-                for (let i = sections.length - 1; i >= 0; i--) {
+                // Check sections from top to bottom to find the first one that's in view
+                for (let i = 0; i < sections.length; i++) {
                     const section = sections[i];
-                    const sectionTop = section.element.offsetTop;
-                    
-                    if (scrollPos >= sectionTop) {
-                        activeSection = section.id;
-                        break;
+                    if (section.element) {
+                        const sectionTop = section.element.offsetTop;
+                        const sectionBottom = sectionTop + section.element.offsetHeight;
+                        
+                        console.log(`Checking section ${section.id}: top=${sectionTop}, bottom=${sectionBottom}, scrollPos=${scrollPos}`);
+                        
+                        // Check if the section is in view
+                        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                            activeSection = section.id;
+                            console.log('Found active section:', activeSection);
+                            break;
+                        }
                     }
                 }
             }
-        }
-        
-        // Add active class to the corresponding link
-        const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        } else {
-            // Fallback: if no data-section link found, try to match by href
-            const fallbackLink = document.querySelector(`.nav-link[href="#${activeSection}"]`);
-            if (fallbackLink) {
-                fallbackLink.classList.add('active');
+            
+            // Only set an active link if we found a section in view
+            if (activeSection) {
+                // Add active class to the corresponding link
+                const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    console.log('Added active class to', activeLink.textContent);
+                } else {
+                    // Fallback: if no data-section link found, try to match by href
+                    const fallbackLink = document.querySelector(`.nav-link[href="#${activeSection}"]`);
+                    if (fallbackLink) {
+                        fallbackLink.classList.add('active');
+                        console.log('Added active class to fallback link', fallbackLink.textContent);
+                    } else {
+                        console.log('No link found for section', activeSection);
+                    }
+                }
+            } else {
+                console.log('No active section found');
+                // If no section is active, default to projects when at top of page
+                if (window.scrollY < 200) {
+                    const projectsLink = document.querySelector('.nav-link[data-section="projects"]');
+                    if (projectsLink) {
+                        projectsLink.classList.add('active');
+                        console.log('Added active class to projects link (default at top)');
+                    }
+                }
             }
+        } catch (error) {
+            console.error('Error in updateActiveLink:', error);
         }
     }
     
@@ -264,19 +295,24 @@ function initializeNavigation() {
         link.addEventListener('click', function(e) {
             const sectionId = this.getAttribute('data-section');
             
-            // Handle external links (About)
+            // Handle external links (About) - let them navigate normally
             if (sectionId === 'about') {
                 return; // Let it navigate normally
+            }
+            
+            // Handle links that don't have a corresponding section on this page
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) {
+                return; // Let it navigate normally (e.g., to another page)
             }
             
             e.preventDefault();
             
             // Find target section
-            const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 // Calculate offset (account for navbar height)
                 let offsetTop = targetSection.offsetTop;
-                if (sectionId !== 'home' && navbar) {
+                if (navbar) {
                     offsetTop -= navbar.offsetHeight + 20;
                 }
                 
@@ -300,22 +336,8 @@ function initializeNavigation() {
         setTimeout(updateActiveLink, 100);
     });
     
-    // Listen for theme changes to update navigation styling
-    window.addEventListener('themeChange', function() {
-        if (navbar) {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                navbar.style.background = 'rgba(0, 0, 0, 0.1)';
-                navbar.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
-                navbar.style.border = '1px solid rgba(0, 0, 0, 0.1)';
-            }
-        }
-    });
+    // Theme change listener removed as per user request
 }
-
-
 
 // Contact form functionality
 function initializeContactForm() {
@@ -340,16 +362,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeGraphBackground() {
     const body = document.body;
     
-    document.addEventListener('mousemove', function(e) {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        // Create a subtle parallax effect on the dotted background
-        const xOffset = (x - 0.5) * 5;
-        const yOffset = (y - 0.5) * 5;
-        
-        body.style.backgroundPosition = `${xOffset}px ${yOffset}px`;
-    });
+    // Removed parallax effect on background to prevent dots from disappearing when scrolling
+    // Also removed because we're now using a solid color background
 }
 
 // Typing animation for About section - CURSOR BLINKS AT END & PROFILE PICTURE TRIGGER
@@ -453,6 +467,290 @@ function typeTextMovingCursor(elements, texts, cursorElement, duration) {
     typeHeading();
 }
 
+// Function to trigger intro animation directly
+function triggerIntroAnimation() {
+    console.log('triggerIntroAnimation called');
+    // Set hasScrolled to true to bypass scroll check
+    hasScrolled = true;
+    
+    // Also directly trigger the animation since we want it to show immediately
+    if (!introAnimationStarted) {
+        const typewriterContainer = document.getElementById('intro-typewriter');
+        console.log('typewriterContainer:', typewriterContainer);
+        const introSection = document.getElementById('intro');
+        console.log('introSection:', introSection);
+        if (typewriterContainer) {
+            // Create heading elements if they don't exist
+            let heading1 = typewriterContainer.querySelector('h1');
+            let heading2 = typewriterContainer.querySelector('h2');
+            
+            console.log('heading1 before creation:', heading1);
+            console.log('heading2 before creation:', heading2);
+            
+            if (!heading1) {
+                heading1 = document.createElement('h1');
+                typewriterContainer.appendChild(heading1);
+            }
+            
+            if (!heading2) {
+                heading2 = document.createElement('h2');
+                typewriterContainer.appendChild(heading2);
+            }
+            
+            console.log('heading1 after creation:', heading1);
+            console.log('heading2 after creation:', heading2);
+            
+            // Define the content that should be typed
+            const originalHeading1 = "Hello! I'm Rishi.";
+            const originalHeading2 = 'I design to make the complex simple and the simple exciting.';
+            
+            // Create cursor element
+            const cursorElement = document.createElement('span');
+            cursorElement.className = 'blinking-cursor';
+            // Remove the visible character to avoid conflict with custom cursor
+            cursorElement.style.marginLeft = '2px';
+            cursorElement.style.verticalAlign = 'baseline';
+            
+            console.log('Starting typing animation');
+            // Start typing animation - heading first, then subtitle
+            typeTextWithCursor([heading1, heading2], [originalHeading1, originalHeading2], cursorElement, 1500);
+            
+            introAnimationStarted = true;
+        }
+    }
+}
+
+// Typing function for intro section with moving cursor
+function typeTextWithCursor(elements, texts, cursorElement, duration) {
+    const [heading1, heading2] = elements;
+    const [heading1Text, heading2Text] = texts;
+    
+    // Keep elements hidden until animation starts
+    heading1.style.opacity = '0';
+    heading2.style.opacity = '0';
+    
+    // Ensure elements have fixed height to prevent layout shifts and reduce spacing
+    heading1.style.position = 'relative';
+    heading2.style.position = 'relative';
+    heading1.style.margin = '0';
+    heading2.style.margin = '-0.5em 0 0 0'; // Increased negative top margin to pull closer to h1
+    heading1.style.padding = '0';
+    heading2.style.padding = '0';
+    heading1.style.lineHeight = '1.0'; // Further reduced line height
+    heading2.style.lineHeight = '1.2'; // Further reduced line height
+    
+    // Additional styling to reduce spacing even further
+    heading1.style.height = '1.5em'; // Match CSS height
+    heading2.style.height = '1.8em'; // Match CSS height
+    heading1.style.boxSizing = 'border-box';
+    heading2.style.boxSizing = 'border-box';
+    
+    // Calculate timing for each element
+    const totalLength = heading1Text.length + heading2Text.length;
+    const heading1Duration = (heading1Text.length / totalLength) * duration;
+    const heading2Duration = (heading2Text.length / totalLength) * duration;
+    
+    // Calculate delay per character for the desired total duration
+    const heading1Delay = heading1Text.length > 0 ? heading1Duration / heading1Text.length : 25;
+    const heading2Delay = heading2Text.length > 0 ? heading2Duration / heading2Text.length : 25;
+    
+    let heading1Index = 0;
+    let heading2Index = 0;
+    
+    // Type heading1
+    function typeHeading1() {
+        // Make heading1 visible when we start typing
+        if (heading1Index === 0) {
+            heading1.style.opacity = '1';
+        }
+        
+        if (heading1Index < heading1Text.length) {
+            // Build text character by character
+            const currentText = heading1Text.substring(0, heading1Index + 1);
+            heading1.textContent = currentText;
+            
+            // Ensure cursor is always visible and properly positioned
+            if (cursorElement.parentNode !== heading1) {
+                if (cursorElement.parentNode) {
+                    cursorElement.parentNode.removeChild(cursorElement);
+                }
+                heading1.appendChild(cursorElement);
+            }
+            
+            heading1Index++;
+            setTimeout(typeHeading1, heading1Delay); // Dynamic timing based on desired duration
+        } else {
+            // Complete the heading1 text
+            heading1.textContent = heading1Text;
+            
+            // Move cursor to heading2
+            if (cursorElement.parentNode) {
+                cursorElement.parentNode.removeChild(cursorElement);
+            }
+            heading2.appendChild(cursorElement);
+            
+            // Move to heading2 after a short delay
+            setTimeout(typeHeading2, 100); // Further reduced delay
+        }
+    }
+    
+    // Type heading2 - Handle HTML tags properly
+    function typeHeading2() {
+        // Make heading2 visible when we start typing
+        if (heading2Index === 0) {
+            heading2.style.opacity = '1';
+        }
+        
+        // Special handling for the text with HTML tags
+        // We need to type "I design to make the " first
+        // Then add the "complex" span (normal weight)
+        // Then add " "
+        // Then add the "simple" span (light)
+        // Then add " and the "
+        // Then add the "simple" span (light)
+        // Then add " "
+        // Then add the "exciting" span (light)
+        // Then add "."
+        
+        const parts = [
+                    { text: "I design to make the ", type: "plain" },
+                    { text: "complex", type: "normal" },
+                    { text: " ", type: "plain" },
+                    { text: "simple", type: "light" },
+                    { text: " and the ", type: "plain" },
+                    { text: "simple", type: "light" },
+                    { text: " ", type: "plain" },
+                    { text: "exciting", type: "light" },
+                    { text: ".", type: "plain" }
+                ];
+        
+        let currentPartIndex = 0;
+        let currentPartCharIndex = 0;
+        let accumulatedHTML = "";
+        
+        // Calculate total characters for timing
+        const totalChars = parts.reduce((sum, part) => sum + part.text.length, 0);
+        const charDelay = heading2Duration / totalChars;
+        
+        function typeNextPart() {
+            if (currentPartIndex >= parts.length) {
+                // Animation complete - ensure the full text is displayed
+                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="light">simple</span> and the <span class="light">simple</span> <span class="light">exciting</span>.';
+                
+                // Position cursor at the end and ensure it continues blinking
+                if (cursorElement.parentNode) {
+                    cursorElement.parentNode.removeChild(cursorElement);
+                }
+                heading2.appendChild(cursorElement);
+                
+                // Ensure cursor is visible and blinking at the end
+                cursorElement.style.display = 'inline-block';
+                cursorElement.style.visibility = 'visible';
+                
+                // Make sure the blinking animation continues
+                if (!cursorElement.classList.contains('blinking-cursor')) {
+                    cursorElement.classList.add('blinking-cursor');
+                }
+                
+                // Ensure the animation is not paused
+                cursorElement.style.animationPlayState = 'running';
+                
+                // Fade in the entire intro section
+                const introSection = document.getElementById('intro');
+                if (introSection) {
+                    introSection.style.opacity = '1';
+                }
+                
+                // Ensure all spans are visible after animation
+                const normalWeights = heading2.querySelectorAll('.normal-weight');
+                const lights = heading2.querySelectorAll('.light');
+                
+                normalWeights.forEach(normal => {
+                    normal.style.opacity = '1';
+                });
+                
+                lights.forEach(light => {
+                    light.style.opacity = '1';
+                });
+                
+                return;
+            }
+            
+            const currentPart = parts[currentPartIndex];
+            
+            if (currentPartCharIndex < currentPart.text.length) {
+                // Build the HTML content character by character
+                if (currentPart.type === "plain") {
+                    accumulatedHTML += currentPart.text[currentPartCharIndex];
+                } else if (currentPart.type === "normal") {
+                    // For the first character of a normal section, add the opening span tag
+                    if (currentPartCharIndex === 0) {
+                        accumulatedHTML += '<span class="normal-weight">';
+                    }
+                    // Add the current character
+                    accumulatedHTML += currentPart.text[currentPartCharIndex];
+                    // For the last character of a normal section, add the closing span tag
+                    if (currentPartCharIndex === currentPart.text.length - 1) {
+                        accumulatedHTML += '</span>';
+                    }
+                } else if (currentPart.type === "light") {
+                    // For the first character of a light section, add the opening span tag
+                    if (currentPartCharIndex === 0) {
+                        accumulatedHTML += '<span class="light">';
+                    }
+                    // Add the current character
+                    accumulatedHTML += currentPart.text[currentPartCharIndex];
+                    // For the last character of a light section, add the closing span tag
+                    if (currentPartCharIndex === currentPart.text.length - 1) {
+                        accumulatedHTML += '</span>';
+                    }
+                }
+                
+                // Update the heading content
+                heading2.innerHTML = accumulatedHTML;
+                
+                // Position cursor correctly based on the current part type
+                if (cursorElement.parentNode) {
+                    cursorElement.parentNode.removeChild(cursorElement);
+                }
+                
+                // For styled text, we need to append the cursor to the last span
+                if (currentPart.type === "plain") {
+                    heading2.appendChild(cursorElement);
+                } else {
+                    // Find the last span element and append cursor to it
+                    const spans = heading2.querySelectorAll('span');
+                    if (spans.length > 0) {
+                        const lastSpan = spans[spans.length - 1];
+                        // Only append cursor if we're at the end of that span
+                        if (currentPartCharIndex === currentPart.text.length - 1) {
+                            lastSpan.appendChild(cursorElement);
+                        } else {
+                            // Otherwise append to the heading
+                            heading2.appendChild(cursorElement);
+                        }
+                    } else {
+                        heading2.appendChild(cursorElement);
+                    }
+                }
+                
+                currentPartCharIndex++;
+                setTimeout(typeNextPart, charDelay); // Dynamic timing based on desired duration
+            } else {
+                // Move to next part
+                currentPartIndex++;
+                currentPartCharIndex = 0;
+                setTimeout(typeNextPart, charDelay);
+            }
+        }
+        
+        typeNextPart();
+    }
+    
+    // Start the animation with heading1
+    typeHeading1();
+}
+
 // Check if profile picture is in viewport
 function isProfilePictureInViewport() {
     const profilePicture = document.querySelector('.profile-image');
@@ -487,44 +785,20 @@ function isIntroSectionInViewport() {
 function checkIntroSectionVisibility() {
     // Check if user has scrolled before triggering animation
     if (hasScrolled && isIntroSectionInViewport() && !introAnimationStarted) {
-        // console.log('Intro section is in viewport, user has scrolled, and animation not started');
-        const typewriterContainer = document.getElementById('intro-typewriter');
-        if (typewriterContainer) {
-            // console.log('Typewriter container found');
-            const heading1 = typewriterContainer.querySelector('h1');
-            const heading2 = typewriterContainer.querySelector('h2');
-            
-            if (heading1 && heading2) {
-                // console.log('Heading elements found');
-                // Store original content - use innerHTML to preserve HTML tags
-                const originalHeading1 = heading1.innerHTML;
-                const originalHeading2 = heading2.innerHTML; // Changed from textContent to innerHTML
-                
-                // console.log('Original heading1:', originalHeading1);
-                // console.log('Original heading2:', originalHeading2);
-                
-                // Clear content
-                heading1.textContent = '';
-                heading2.textContent = '';
-                
-                // Show elements
-                heading1.style.opacity = '1';
-                heading2.style.opacity = '1';
-                
-                // Create cursor element
-                const cursorElement = document.createElement('span');
-                cursorElement.className = 'blinking-cursor';
-                cursorElement.style.marginLeft = '2px';
-                cursorElement.style.verticalAlign = 'baseline'; // Align with text baseline
-                
-                // Start typing animation - heading first, then subtitle
-                typeTextWithCursor([heading1, heading2], [originalHeading1, originalHeading2], cursorElement, 3000);
-                
-                introAnimationStarted = true;
-            }
-        }
+        // Call the trigger function instead of duplicating logic
+        triggerIntroAnimation();
     }
 }
+
+// Add scroll listener for intro section visibility
+window.addEventListener('scroll', function() {
+    // Set hasScrolled to true when user scrolls
+    if (!hasScrolled) {
+        hasScrolled = true;
+    }
+    // Check if intro section is visible
+    checkIntroSectionVisibility();
+});
 
 // Scroll event listener to trigger animation when profile picture is visible
 function checkProfilePictureVisibility() {
@@ -563,12 +837,12 @@ function checkProfilePictureVisibility() {
                 cursorElement.style.verticalAlign = 'baseline';
                 heading.appendChild(cursorElement);
                 
-                // Start typing animation for 3 seconds
+                // Start typing animation for 1.5 seconds
                 typeTextMovingCursor(
                     [heading, paragraph, button], 
                     [originalHeading, originalParagraph, originalButton], 
                     cursorElement, 
-                    3000
+                    1500
                 );
                 
                 aboutAnimationStarted = true;
@@ -577,154 +851,20 @@ function checkProfilePictureVisibility() {
     }
 }
 
-// Typing function for intro section with moving cursor
-function typeTextWithCursor(elements, texts, cursorElement, duration) {
-    // console.log('Starting typing animation');
-    // console.log('Elements:', elements);
-    // console.log('Texts:', texts);
-    
-    const [heading1, heading2] = elements;
-    const [heading1Text, heading2Text] = texts;
-    
-    // Calculate timing for each element
-    const totalLength = heading1Text.length + heading2Text.length;
-    const heading1Duration = (heading1Text.length / totalLength) * duration;
-    const heading2Duration = (heading2Text.length / totalLength) * duration;
-    
-    let heading1Index = 0;
-    let heading2Index = 0;
-    
-    // Type heading1
-    function typeHeading1() {
-        // console.log('Typing heading1, index:', heading1Index);
-        if (heading1Index < heading1Text.length) {
-            // Handle HTML tags properly
-            if (heading1Text.charAt(heading1Index) === '<') {
-                // Find the end of the tag
-                const tagEnd = heading1Text.indexOf('>', heading1Index) + 1;
-                const currentText = heading1Text.substring(0, heading1Index);
-                const tagText = heading1Text.substring(heading1Index, tagEnd);
-                
-                // Set the HTML content correctly
-                heading1.innerHTML = currentText + tagText;
-                heading1.appendChild(cursorElement);
-                
-                heading1Index = tagEnd;
-            } else {
-                const textBeforeCursor = heading1Text.substring(0, heading1Index);
-                const currentChar = heading1Text.charAt(heading1Index);
-                
-                // Reconstruct the HTML with cursor in the right place
-                heading1.innerHTML = textBeforeCursor + currentChar;
-                heading1.appendChild(cursorElement);
-                
-                heading1Index++;
-            }
-            setTimeout(typeHeading1, heading1Duration / heading1Text.length);
-        } else {
-            // Complete the heading1 text
-            heading1.innerHTML = heading1Text;
-            // Move to heading2
-            setTimeout(typeHeading2, 300);
-        }
-    }
-    
-    // Type heading2
-    function typeHeading2() {
-        // console.log('Typing heading2, index:', heading2Index);
-        if (heading2Index < heading2Text.length) {
-            // Handle HTML tags properly for heading2 as well
-            if (heading2Text.charAt(heading2Index) === '<') {
-                // Find the end of the tag
-                const tagEnd = heading2Text.indexOf('>', heading2Index) + 1;
-                const currentText = heading2Text.substring(0, heading2Index);
-                const tagText = heading2Text.substring(heading2Index, tagEnd);
-                
-                // Set the HTML content correctly
-                heading2.innerHTML = currentText + tagText;
-                heading2.appendChild(cursorElement);
-                
-                heading2Index = tagEnd;
-            } else {
-                const textBeforeCursor = heading2Text.substring(0, heading2Index);
-                const currentChar = heading2Text.charAt(heading2Index);
-                
-                // Reconstruct the HTML with cursor in the right place
-                heading2.innerHTML = textBeforeCursor + currentChar;
-                heading2.appendChild(cursorElement);
-                
-                heading2Index++;
-            }
-            setTimeout(typeHeading2, heading2Duration / heading2Text.length);
-        } else {
-            // Animation complete - ensure the full text is displayed
-            heading1.innerHTML = heading1Text;
-            heading2.innerHTML = heading2Text;
-            
-            // Position cursor at the end and ensure it continues blinking
-            heading2.appendChild(cursorElement);
-            
-            // Ensure cursor is visible and blinking at the end
-            cursorElement.style.display = 'inline-block';
-            cursorElement.style.visibility = 'visible';
-            
-            // Make sure the blinking animation continues
-            if (!cursorElement.classList.contains('blinking-cursor')) {
-                cursorElement.classList.add('blinking-cursor');
-            }
-            
-            // Ensure the animation is not paused
-            cursorElement.style.animationPlayState = 'running';
-        }
-    }
-    
-    // Start the animation with heading1
-    typeHeading1();
-}
-
-// Initialize scroll listener
+// Initialize animations with a 1-second delay
 document.addEventListener('DOMContentLoaded', function() {
-    // Track initial scroll position
-    let initialScrollY = window.scrollY;
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', function() {
-        // Set hasScrolled to true when user scrolls
-        if (!hasScrolled && window.scrollY !== initialScrollY) {
-            hasScrolled = true;
-        }
-        
-        // Only run these functions on pages other than about.html
-        if (!window.location.pathname.includes('about.html')) {
-            checkProfilePictureVisibility();
-            checkIntroSectionVisibility();
-        }
-    });
-    
-    // Check on initial load in case already in view
+    console.log('DOM content loaded, setting up intro animation');
+    // Start intro section animation after 1 second delay
     setTimeout(function() {
+        console.log('1 second delay completed, triggering intro animation');
         // Only run these functions on pages other than about.html
         if (!window.location.pathname.includes('about.html')) {
-            checkProfilePictureVisibility();
-            checkIntroSectionVisibility();
+            // Set hasScrolled to true to ensure animation triggers
+            hasScrolled = true;
+            // Trigger the animation directly without scroll listener conflicts
+            if (!introAnimationStarted) {
+                triggerIntroAnimation();
+            }
         }
-    }, 1000);
-});
-
-// Add functionality for the animated arrow to scroll to projects section
-document.addEventListener('DOMContentLoaded', function() {
-    const arrow = document.getElementById('arrow-down');
-    arrow.addEventListener('click', function(e) {
-        e.preventDefault();
-        const projectsSection = document.getElementById('projects');
-        if (projectsSection) {
-            const navbarHeight = document.querySelector('.floating-navbar').offsetHeight;
-            const offset = projectsSection.offsetTop - navbarHeight - 20;
-            
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
-        }
-    });
+    }, 1000); // 1 second delay before starting the animation
 });

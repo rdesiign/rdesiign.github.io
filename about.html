@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Rishi Ramesh | Industrial Designer Portfolio</title>
-    <meta name="description" content="Learn more about Rishi Ramesh, an industrial designer specializing in product design, user experience, and innovative solutions.">
-    <!-- Performance optimizations -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="styles.css?v=1.0">
+    <title>About Rishi Ramesh | Industrial Designer</title>
+    <meta name="description" content="Learn more about Rishi Ramesh, an industrial designer passionate about creating innovative products that improve people's lives.">
+    <link rel="stylesheet" href="styles.css?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Preload critical resources -->
     <link rel="preload" href="Assets/Profile raw 4.jpg" as="image">
 </head>
 <body>
@@ -21,16 +18,18 @@
     <!-- Floating Navigation Bar -->
     <nav class="floating-navbar" id="main-navbar">
         <div class="nav-container">
-            <a href="index.html#home" class="nav-link" data-section="home">Home</a>
             <a href="index.html#projects" class="nav-link" data-section="projects">Projects</a>
-            <a href="index.html#experience" class="nav-link" data-section="experience">Concept Playground</a>
             <a href="about.html" class="nav-link active" data-section="about">About</a>
             <a href="index.html#contact" class="nav-link" data-section="contact">Contact</a>
+            <a href="index.html#experience" class="nav-link" data-section="experience">More</a>
+            <!-- Theme Toggle Button -->
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <span id="theme-icon">🌙</span>
+                <span class="theme-icon"></span>
             </button>
         </div>
     </nav>
+
+
 
     <!-- About Section -->
     <section id="about" class="section">
@@ -53,38 +52,119 @@
 
     <!-- Override the main script to prevent navigation interference -->
     <script>
-        // Completely override the initializeNavigation function to prevent it from running on this page
+        // Set a flag to indicate we're on the about page
+        window.IS_ABOUT_PAGE = true;
+        
+        // Completely disable scroll-based navigation highlighting on about page
+        // by overriding the initializeNavigation function
         function initializeNavigation() {
-            // Do nothing - we want to keep the About link active
-            console.log('Navigation initialization overridden for about page');
-        }
-        
-        // Also override the updateActiveLink function
-        function updateActiveLink() {
-            // Do nothing - we want to keep the About link active
-            console.log('Active link update overridden for about page');
-        }
-        
-        // Override the click handlers for navigation links to ensure they work properly
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add a small delay to ensure DOM is fully loaded
-            setTimeout(function() {
-                const navLinks = document.querySelectorAll('.nav-link');
+            console.log('Navigation initialization disabled for about page');
+            
+            // Get navigation elements
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Remove active class from all links first
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Ensure About link has active class
+            const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+            if (aboutLink) {
+                aboutLink.classList.add('active');
+            }
+            
+            // Add a scroll event listener that prevents the default behavior
+            const scrollHandler = function(e) {
+                // Ensure About link stays active and others don't get activated
                 navLinks.forEach(link => {
-                    // Remove any existing event listeners by cloning
-                    const newLink = link.cloneNode(true);
-                    link.parentNode.replaceChild(newLink, link);
+                    if (link.getAttribute('data-section') !== 'about') {
+                        link.classList.remove('active');
+                    } else {
+                        // Ensure About link is always active
+                        if (!link.classList.contains('active')) {
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            };
+            
+            // Attach scroll handler with capture to ensure it runs before other handlers
+            window.addEventListener('scroll', scrollHandler, { capture: true, passive: true });
+            
+            // Set up click handlers for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const sectionId = this.getAttribute('data-section');
                     
-                    // For the About link, make sure it stays active
-                    if (newLink.getAttribute('data-section') === 'about') {
-                        newLink.classList.add('active');
+                    // Let About link work normally (no preventDefault)
+                    if (sectionId === 'about') {
+                        return; // Let it navigate normally
                     }
                     
-                    // We don't add any click event listeners here to ensure default navigation behavior
-                    // The links should work with their href attributes
+                    // For other links, let them navigate normally
+                    // (They should go to the index.html page with the appropriate hash)
                 });
+            });
+            
+            console.log('Navigation initialized for about page - scroll highlighting disabled');
+        }
+        
+        // Override updateActiveLink function to do nothing or just keep About active
+        function updateActiveLink() {
+            // Do nothing - keep About link always active
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-section') !== 'about') {
+                    link.classList.remove('active');
+                }
+            });
+            
+            const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+            if (aboutLink && !aboutLink.classList.contains('active')) {
+                aboutLink.classList.add('active');
+            }
+        }
+        
+        // Simple solution to keep About link active without interfering with navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure DOM is fully loaded
+            setTimeout(function() {
+                // Remove active class from all nav links except About
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    // Remove active class from all links except About
+                    if (link.getAttribute('data-section') !== 'about') {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // Ensure About link has active class
+                const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+                if (aboutLink) {
+                    aboutLink.classList.add('active');
+                }
+                
+                // Since we're on the About page, we don't need to do anything else
+                // The links should work normally with their href attributes
             }, 100);
         });
+        
+        // Override the global updateActiveLink function with a no-op
+        window.updateActiveLink = function() {
+            // Do nothing on about page
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-section') !== 'about') {
+                    link.classList.remove('active');
+                }
+            });
+            
+            const aboutLink = document.querySelector('.nav-link[data-section="about"]');
+            if (aboutLink && !aboutLink.classList.contains('active')) {
+                aboutLink.classList.add('active');
+            }
+        };
     </script>
     
     <script src="script.js"></script>
@@ -98,28 +178,6 @@
             // Initialize all components to ensure consistent behavior
             if (typeof initializeComponents === 'function') {
                 initializeComponents();
-            }
-            
-            // Initialize theme - check if function exists
-            if (typeof initializeTheme === 'function') {
-                initializeTheme();
-            } else {
-                // Fallback: set dark mode as default (as per user preference)
-                const savedTheme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                const themeIcon = document.getElementById('theme-icon');
-                if (themeIcon) {
-                    themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️️';
-                }
-            }
-            
-            // Ensure dark mode is set as default if no saved theme
-            if (!localStorage.getItem('theme')) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                const themeIcon = document.getElementById('theme-icon');
-                if (themeIcon) {
-                    themeIcon.textContent = '🌙';
-                }
             }
             
             // Highlight the About link in navigation and prevent it from being overridden
@@ -136,272 +194,24 @@
                     // Add a special class to identify this as a standalone about page
                     document.body.classList.add('about-page');
                 }
-            }, 100);
-            
-            // Custom Cursor JavaScript
-            const cursor = document.querySelector('.custom-cursor');
-            // Array to store trail elements
-            const trails = [];
-            const trailCount = 30; // Reduced from 50 to make line effect more pronounced
-            
-            // Create trail elements
-            for (let i = 0; i < trailCount; i++) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                document.body.appendChild(trail);
-                trails.push({
-                    element: trail,
-                    x: 0,
-                    y: 0,
-                    opacity: 0,
-                    size: 4,
-                    rotation: 0
-                });
-            }
-            
-            // Function to get average brightness of background at cursor position
-            function getBackgroundBrightness(x, y) {
-                // Create a temporary element to get the background color
-                const tempElement = document.elementFromPoint(x, y);
-                if (!tempElement) return 128; // Default to middle brightness
-                
-                // Get the background color of the element
-                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
-                
-                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
-                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-                    let parent = tempElement.parentElement;
-                    while (parent) {
-                        const parentBg = window.getComputedStyle(parent).backgroundColor;
-                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
-                            return calculateBrightness(parentBg);
-                        }
-                        parent = parent.parentElement;
-                    }
-                    // If we reach here, use body background
-                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-                    return calculateBrightness(bodyBg);
-                }
-                
-                return calculateBrightness(bgColor);
-            }
-            
-            // Function to calculate brightness from RGB values
-            function calculateBrightness(rgb) {
-                // Parse RGB values
-                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-                if (!match) return 128; // Default to middle brightness
-                
-                const r = parseInt(match[1]);
-                const g = parseInt(match[2]);
-                const b = parseInt(match[3]);
-                
-                // Calculate brightness using luminance formula
-                return (r * 299 + g * 587 + b * 114) / 1000;
-            }
-            
-            // Function to update cursor color based on background
-            function updateCursorColor(x, y) {
-                const brightness = getBackgroundBrightness(x, y);
-                // Remove any existing background classes
-                cursor.classList.remove('light-bg', 'dark-bg');
-                
-                // Add appropriate class based on brightness
-                if (brightness > 128) {
-                    cursor.classList.add('light-bg');
-                } else {
-                    cursor.classList.add('dark-bg');
-                }
-            }
-            
-            // Mouse move event
-            let mouseX = 0;
-            let mouseY = 0;
-            let prevMouseX = 0;
-            let prevMouseY = 0;
-            let trailPositions = [];
-            let lastMoveTime = Date.now();
-            let moveTimer = null;
-            let lastTrailTime = 0;
-            let isMoving = false;
-            
-            document.addEventListener('mousemove', function(e) {
-                prevMouseX = mouseX;
-                prevMouseY = mouseY;
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                const now = Date.now();
-                lastMoveTime = now;
-                isMoving = true;
-                
-                // Calculate cursor speed (distance/time)
-                const distance = Math.sqrt(Math.pow(mouseX - prevMouseX, 2) + Math.pow(mouseY - prevMouseY, 2));
-                const timeDiff = now - (lastMoveTime || now);
-                const speed = timeDiff > 0 ? distance / timeDiff : 0;
-                
-                // Move main cursor immediately
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-                
-                // Update cursor color based on background
-                updateCursorColor(mouseX, mouseY);
-                
-                // Store position for trail on every move for more consistent trail
-                trailPositions.push({
-                    x: mouseX, 
-                    y: mouseY,
-                    speed: speed,
-                    timestamp: now
-                });
-                if (trailPositions.length > trailCount) {
-                    trailPositions.shift();
-                }
-                
-                // Update trail positions more frequently for smoother effect
-                if (now - lastTrailTime > 8) { // ~120fps for trail updates (more frequent)
-                    // Update trail positions with delay
-                    trails.forEach((trail, index) => {
-                        if (trailPositions[index]) {
-                            const pos = trailPositions[index];
-                            const nextPos = trailPositions[index + 1] || pos;
-                            
-                            trail.element.style.left = pos.x + 'px';
-                            trail.element.style.top = pos.y + 'px';
-                            
-                            // Point trail in direction of movement
-                            if (nextPos && nextPos !== pos) {
-                                const angle = Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * 180 / Math.PI;
-                                trail.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-                            }
-                            
-                            // Adjust trail appearance based on speed - more responsive to slow movement
-                            let speedFactor = 0;
-                            if (pos.speed > 0) {
-                                // More sensitive to slow movement
-                                speedFactor = Math.min(pos.speed / 3, 1); // Even lower divisor for better slow movement response
-                            }
-                            
-                            // Base opacity with minimum visibility for any movement
-                            const minOpacity = 0.4; // Increased minimum opacity
-                            const maxOpacity = 1.0;
-                            const opacity = minOpacity + (speedFactor * (maxOpacity - minOpacity));
-                            
-                            // Animate opacity with reversed fade (fading from end of path)
-                            const reversedIndex = trailCount - 1 - index;
-                            const fadeFactor = (1 - (reversedIndex / trailCount));
-                            trail.element.style.opacity = fadeFactor * opacity;
-                            
-                            // Adjust trail length based on speed
-                            const minLength = 10;
-                            const maxLength = 30;
-                            const length = minLength + (speedFactor * (maxLength - minLength));
-                            trail.element.style.width = length + 'px';
-                        }
-                    });
-                    
-                    lastTrailTime = now;
-                }
-                
-                // Clear any existing timer
-                if (moveTimer) {
-                    clearTimeout(moveTimer);
-                }
-                
-                // Set timer to hide trail when cursor stops
-                moveTimer = setTimeout(() => {
-                    isMoving = false;
-                    // Completely hide all trail elements
-                    trails.forEach(trail => {
-                        trail.element.style.opacity = '0';
-                        // Reset positions to prevent ghosting
-                        trail.element.style.left = '-100px';
-                        trail.element.style.top = '-100px';
-                    });
-                    // Clear trail positions
-                    trailPositions = [];
-                }, 100); // Hide trail 100ms after cursor stops
-            });
-            
-            // Show custom cursor
-            cursor.style.display = 'block';
-            
-            // Handle all clickable elements with a single, clean approach
-            // This ensures no conflicts between different event handlers
-            document.addEventListener('mouseover', function(e) {
-                // Check if we have a cursor element
-                if (!cursor) return;
-                
-                // Check if the hovered element is a navigation link
-                if (e.target.classList && e.target.classList.contains('nav-link')) {
-                    cursor.classList.add('target');
-                    cursor.classList.add('no-dot');
-                }
-                // Check if the hovered element is any other clickable element
-                else if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || 
-                         (e.target.classList && e.target.classList.contains('theme-toggle'))) {
-                    cursor.classList.add('target');
-                    // Don't add 'no-dot' class for non-navigation elements
-                }
-            });
-            
-            document.addEventListener('mouseout', function(e) {
-                // Check if we have a cursor element
-                if (!cursor) return;
-                
-                // Remove all cursor states when mouse leaves any element
-                cursor.classList.remove('target');
-                cursor.classList.remove('no-dot');
-                cursor.classList.remove('light-bg', 'dark-bg');
-            });
-            
-            // Make sure navigation links work properly by not preventing their default behavior
-            // The mouseover/mouseout events above only change cursor appearance and don't interfere with navigation
-            
-            // Hide cursor when leaving window
-            document.addEventListener('mouseleave', function() {
-                isMoving = false;
-                if (cursor) {
-                    cursor.style.display = 'none';
-                }
-                trails.forEach(trail => {
-                    trail.element.style.display = 'none';
-                    trail.element.style.opacity = '0';
-                });
-                // Clear trail positions
-                trailPositions = [];
-            });
-            
-            // Show cursor when entering window
-            document.addEventListener('mouseenter', function() {
-                if (cursor) {
-                    cursor.style.display = 'block';
-                }
-                trails.forEach(trail => {
-                    trail.element.style.display = 'block';
-                });
-            });
-            
-            // Override navigation behavior to keep About link active
-            setTimeout(function() {
-                const aboutLink = document.querySelector('.nav-link[data-section="about"]');
-                if (aboutLink) {
-                    // Remove active class from all nav links
-                    const navLinks = document.querySelectorAll('.nav-link');
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    
-                    // Add active class to About link
-                    aboutLink.classList.add('active');
-                }
                 
                 // Additional safeguard: Set up a MutationObserver to watch for changes
                 const observer = new MutationObserver(function(mutations) {
                     mutations.forEach(function(mutation) {
                         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                             const target = mutation.target;
-                            if (target.classList.contains('nav-link') && target.getAttribute('data-section') === 'about') {
+                            if (target.classList.contains('nav-link')) {
                                 // Ensure the About link stays active
-                                if (!target.classList.contains('active')) {
-                                    target.classList.add('active');
+                                if (target.getAttribute('data-section') === 'about') {
+                                    if (!target.classList.contains('active')) {
+                                        target.classList.add('active');
+                                    }
+                                } 
+                                // Ensure other links don't get active class
+                                else {
+                                    if (target.classList.contains('active')) {
+                                        target.classList.remove('active');
+                                    }
                                 }
                             }
                         }
@@ -413,6 +223,29 @@
                 navLinks.forEach(function(link) {
                     observer.observe(link, { attributes: true });
                 });
+                
+                // Add a scroll event listener that will override any active classes
+                // that might be added by the main script
+                const handleScroll = function() {
+                    // Ensure About link is always active
+                    if (aboutLink && !aboutLink.classList.contains('active')) {
+                        aboutLink.classList.add('active');
+                    }
+                    
+                    // Ensure other links are never active
+                    navLinks.forEach(function(link) {
+                        if (link.getAttribute('data-section') !== 'about' && 
+                            link.classList.contains('active')) {
+                            link.classList.remove('active');
+                        }
+                    });
+                };
+                
+                // Attach the scroll listener with capture to ensure it runs first
+                window.addEventListener('scroll', handleScroll, { capture: true, passive: true });
+                
+                // Also run once immediately to ensure correct state
+                handleScroll();
             }, 500);
             
             // Initialize fade-in animation for about section

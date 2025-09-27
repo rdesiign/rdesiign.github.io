@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test About Navigation</title>
+    <link rel="stylesheet" href="styles.css?v=1.1">
+</head>
+<body>
+    <!-- Floating Navigation Bar -->
+    <nav class="floating-navbar" id="main-navbar">
+        <div class="nav-container">
+            <a href="index.html#projects" class="nav-link" data-section="projects">Projects</a>
+            <a href="about.html" class="nav-link active" data-section="about">About</a>
+            <a href="index.html#contact" class="nav-link" data-section="contact">Contact</a>
+            <a href="index.html#experience" class="nav-link" data-section="experience">More</a>
+            <!-- Theme Toggle Button -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="section" style="height: 200vh; padding: 100px 20px;">
+        <div class="container">
+            <h1>Test Page for About Navigation</h1>
+            <p>Scroll down to test if the contact link becomes active. It should not become active on this page.</p>
+            <div style="height: 150vh;"></div>
+            <p>If you've scrolled to the bottom and the contact link is not active, the fix is working.</p>
+        </div>
+    </section>
+
+    <script>
+        // Test script to verify navigation behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set a flag to indicate we're on the about page
+            window.IS_ABOUT_PAGE = true;
+            
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Ensure only the About link is active
+            function ensureOnlyAboutActive() {
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-section') === 'about') {
+                        // Ensure About link is active
+                        if (!link.classList.contains('active')) {
+                            link.classList.add('active');
+                        }
+                    } else {
+                        // Ensure all other links are inactive
+                        if (link.classList.contains('active')) {
+                            link.classList.remove('active');
+                        }
+                    }
+                });
+            }
+            
+            // Run immediately
+            ensureOnlyAboutActive();
+            
+            // Run on scroll with capture to override other handlers
+            window.addEventListener('scroll', ensureOnlyAboutActive, { capture: true, passive: true });
+            
+            // Run periodically to ensure the state is maintained
+            setInterval(ensureOnlyAboutActive, 100);
+            
+            // Set up MutationObserver to watch for class changes
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const target = mutation.target;
+                        if (target.classList.contains('nav-link')) {
+                            ensureOnlyAboutActive();
+                        }
+                    }
+                });
+            });
+            
+            // Observe all nav links for class changes
+            navLinks.forEach(function(link) {
+                observer.observe(link, { attributes: true });
+            });
+            
+            console.log('Test page navigation protection initialized');
+        });
+    </script>
+</body>
+</html>

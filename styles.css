@@ -70,24 +70,25 @@
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
+    --dot-color: rgba(255, 255, 255, 0.2); /* White dots for dark mode */
     transition: all 0.3s ease;
 }
 
 [data-theme="light"] {
     /* Light theme variables */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #f1f3f4;
+    --bg-primary: #eeeeee;
+    --bg-secondary: #eeeeee;
+    --bg-tertiary: #eeeeee;
     --text-primary: #1a1a1a;
     --text-secondary: #666666;
     --text-tertiary: #999999;
-
     --border-color: rgba(0, 0, 0, 0.1);
     --accent-primary: #0e7490; /* Darker Teal */
     --accent-secondary: #e55a2b; /* Darker Orange */
     --card-bg: rgba(255, 255, 255, 0.9);
     --card-border: rgba(0, 0, 0, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --dot-color: rgba(0, 0, 0, 0.2); /* Black dots for light mode */
     transition: all 0.3s ease;
 }
 
@@ -98,19 +99,26 @@
     box-sizing: border-box;
 }
 
+html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    /* Dotted notebook background */
-    background-image: radial-gradient(rgba(255, 107, 53, 0.3) 1px, transparent 1px);
-    background-size: 25px 25px;
-    background-position: 0 0;
     position: relative;
     /* Hide default cursor */
     cursor: none;
+    margin: 0; /* Ensure no default body margin */
+    padding: 0; /* Ensure no default body padding */
+    /* Add dotted grid background */
+    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+    background-size: 40px 40px; /* Further reduced density from 30px to 40px */
+    background-position: 0 0;
 }
 
 /* Custom Cursor - Single Element Approach */
@@ -127,6 +135,8 @@ body {
     transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
     background: transparent;
     box-shadow: 0 0 8px rgba(255, 107, 53, 0.5); /* Reduced glow for normal state */
+    /* Ensure cursor doesn't interfere with navbar */
+    pointer-events: none;
 }
 
 .custom-cursor-dot {
@@ -180,234 +190,206 @@ body {
     transition: opacity 0.2s ease;
     box-shadow: 0 0 2px rgba(255, 107, 53, 0.5);
     /* Simplified - no gradient for solid line effect */
+    /* Ensure cursor trail doesn't interfere with navbar */
+    pointer-events: none;
 }
 
 .container {
-    max-width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px; /* Match project grid padding */
+    padding: 0 20px; /* Consistent padding */
 }
 
-/* Floating Navigation Bar */
-.floating-navbar {
-    position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.2); /* Darker background */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50px;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .floating-navbar {
-    background: rgba(0, 0, 0, 0.3); /* Even darker for dark theme */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
+/* Navigation Links */
 .nav-link {
-    position: relative;
-    padding: 10px 20px;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 50px;
+    font-size: 12px; /* Reduced font size */
+    font-weight: 400;
+    padding: 2px 8px; /* Reduced padding for thinner highlight pill */
+    border-radius: 8px; /* Reduced border radius for thinner pills */
     transition: all 0.3s ease;
-    white-space: nowrap;
-    /* Custom cursor interaction */
-    cursor: none;
-    /* Auto-contrast text */
-    mix-blend-mode: difference;
+    position: relative;
+    visibility: visible !important;
+}
+
+/* Add divider lines between navigation links */
+.nav-link:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -8px; /* Position halfway between links */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 12px;
+    background-color: var(--text-tertiary);
+}
+
+/* Ensure no divider appears after the last nav link (before theme toggle) */
+.nav-container > .nav-link:last-child::after {
+    display: none;
+}
+
+/* Ensure proper contrast for nav links in both themes */
+[data-theme="dark"] .nav-link {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .nav-link {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2); /* Thinner white background */
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3); /* Thin white border */
 }
 
 [data-theme="light"] .nav-link:hover {
-    color: #000000;
+    background: rgba(255, 255, 255, 0.3); /* Thinner white background */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); /* Thin border */
+    color: var(--text-primary); /* Ensure text remains black in light mode */
+}
+
+[data-theme="dark"] .nav-link.active {
+    background: rgba(255, 255, 255, 0.2); /* Thinner white background */
+    color: white;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3); /* Thin white border */
 }
 
 [data-theme="light"] .nav-link.active {
-    color: var(--accent-primary) !important;
+    background: rgba(255, 255, 255, 0.3); /* Thinner white background */
+    color: var(--text-primary); /* Ensure text remains black in light mode */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); /* Thin border */
 }
 
-.nav-link:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.1);
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px; /* Match the nav-link border-radius for consistent pill shape */
+    pointer-events: none;
+    visibility: visible !important;
 }
 
-.nav-link.active {
-    color: var(--accent-primary) !important;
-    background: rgba(6, 182, 212, 0.2) !important;
-    font-weight: 400 !important;
-    border-radius: 50px !important;
-    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.3) !important;
-    padding: 10px 20px !important;
-}
-
+/* Theme Toggle Switch */
 .theme-toggle {
+    position: relative;
+    display: inline-block;
+    width: 28px; /* Restored width */
+    height: 28px; /* Restored height */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 14px; /* Restored border radius */
+    background: transparent;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.theme-toggle:focus {
+    outline: none;
+}
+
+.theme-toggle .theme-icon {
+    font-size: 14px; /* Increased font size */
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+/* Dark theme - show moon icon */
+[data-theme="dark"] .theme-toggle .theme-icon::after {
+    content: "🌙";
+}
+
+/* Light theme - show sun icon */
+[data-theme="light"] .theme-toggle .theme-icon::after {
+    content: "☀️";
+}
+
+/* Floating Navigation Bar - Aligned with project thumbnails */
+.floating-navbar {
+    position: fixed;
+    top: 20px; /* Position from top */
+    right: 20px; /* Position from right */
+    left: auto;
+    transform: none;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px; /* More curved fillets */
+    padding: 6px 16px; /* Restored padding to original size */
+    transition: all 0.3s ease;
+    display: flex; /* Make navbar a flex container */
+    align-items: center; /* Align items vertically */
+    gap: 16px; /* Restored gap to original size */
+    max-width: 1400px;
+    width: auto; /* Changed from calc width to auto */
+    justify-content: flex-end; /* Align items to the right */
+    margin: 0;
+    box-sizing: border-box;
+    /* Ensure navbar is visible */
+    visibility: visible !important;
+    /* Ensure it's above the banner */
+    z-index: 1500;
+}
+
+/* Logo Circle */
+.logo-circle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%; /* Make it a circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+    transition: all 0.3s ease;
+}
+
+.logo-text {
     color: var(--text-primary);
     font-size: 16px;
-    cursor: none;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    /* Auto-contrast for theme toggle */
-    mix-blend-mode: difference;
+    font-weight: 700;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+/* Ensure proper contrast for navbar in both themes */
+[data-theme="dark"] .floating-navbar {
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.slide-info {
-    position: absolute;
-    z-index: 2;
-    padding: 30px;
-    max-width: 80%;
+[data-theme="light"] .floating-navbar {
+    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.slide-info.bottom-left {
-    bottom: 30px;
-    left: 30px;
-    text-align: left;
+/* Logo circle theme styles */
+[data-theme="dark"] .logo-circle {
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.slide-title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    font-weight: 400;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+[data-theme="light"] .logo-circle {
+    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.slide-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* Fade animation */
-.fade {
-    animation-name: fade;
-    animation-duration: 1s; /* Reduced from 1.5s for quicker transitions */
-}
-
-@keyframes fade {
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-/* Navigation arrows */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 12px; /* Reduced from 16px */
-    margin-top: -22px;
-    color: white;
-    font-weight: normal;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.3);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Down Arrow */
-.arrow-down {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    border: 2px solid white;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 2;
-    animation: bounce 2s infinite;
-}
-
-.arrow-down::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-20px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-}
-
-/* Dots indicator */
-.dots-container {
-    position: absolute;
-    bottom: 30px; /* Position within the slideshow area */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-}
-
-.dot {
-    cursor: pointer;
-    height: 8px; /* Reduced from 12px */
-    width: 8px; /* Reduced from 12px */
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-    opacity: 0.3; /* Low opacity for inactive dots */
-}
-
-.dot.active, .dot:hover {
-    background-color: #fff;
-    opacity: 1; /* Full opacity for active dot */
+/* Nav container to hold all navigation elements in a row */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Increased gap for more spacious navbar */
+    /* Ensure nav container is visible */
+    visibility: visible !important;
 }
 
 /* Buttons */
@@ -451,23 +433,44 @@ body {
 
 /* Sections */
 .section {
-    padding: 120px 0; /* Increased padding for all sections */
-}
-
-/* Slightly Smaller About Section */
-#about.section {
-    padding: 180px 0; /* Reduced padding to make section slightly smaller and reduce space before projects */
+    padding: 80px 0; /* Reduced padding for all sections */
+    /* Removed background-color to allow dotted background to show through */
 }
 
 /* Intro Section */
 #intro.section {
-    padding: 180px 0 100px 0; /* Increased top padding to create more space after banner */
-    text-align: left; /* Left align the text */
+    padding: 760px 0 0 0; /* Keep current padding */
+    text-align: left;
+    /* Removed background-color to allow dotted background to show through */
+    opacity: 1;
+    min-height: auto;
+    height: auto;
+    position: relative;
+    z-index: 110; /* Ensure it's above the banner */
 }
 
+/* Other Sections (after intro) */
+#projects.section,
+#experience.section,
+#contact.section {
+    padding: 100px 0; /* Increased padding to 100px */
+    /* Removed background-color to allow dotted background to show through */
+}
+
+/* Slightly Smaller About Section */
+#about.section {
+    padding: 120px 0; /* Reduced padding to make section slightly smaller and reduce space before projects */
+    /* Removed background-color to allow dotted background to show through */
+}
+
+/* Section Headers */
 .section-header {
     text-align: center;
     margin-bottom: 60px;
+    max-width: 1400px; /* Match the project grid max-width */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px; /* Match project grid padding */
 }
 
 .section-title {
@@ -484,126 +487,201 @@ body {
     margin: 0 auto;
 }
 
-/* Hero Section */
-.hero-section {
-    width: 100%;
-    height: 85vh; /* Increased from 70vh to 85vh for taller banner */
-}
-
-/* Slideshow Styles */
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+/* Container for intro content */
+.intro-content {
+    max-width: 1400px;
     margin: 0 auto;
-}
-
-.slide {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.slide.active {
-    display: block;
-}
-
-.slide-content {
+    padding: 0 20px; /* Add padding to match project grid */
+    min-height: 150px;
+    margin-top: 0; /* Remove the previous margin as we're handling spacing with section padding */
     position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slide-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Add image optimization */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    z-index: 110;
 }
 
 #intro-typewriter {
-    max-width: 1400px; /* Match the project grid max-width */
-    margin: 0 auto; /* Center the container */
     position: relative;
-    display: block;
-    padding: 0 20px; /* Match project grid padding */
-    box-sizing: content-box; /* Ensure padding doesn't affect width calculation */
+    box-sizing: content-box;
+    /* Removed background-color to allow dotted background to show through */
+    /* Reserve space for the content to prevent shifting */
+    min-height: 100px; /* Reduced to minimize space before banner */
+    max-width: 1280px; /* Match the showreel banner content width */
+    margin: 0 auto 0 0; /* Align to the left edge */
+    padding: 0; /* Remove padding to align with left edge of thumbnails */
+    margin-top: 50px; /* Increased from 30px to 50px to bring text lower */
 }
 
 #intro-typewriter h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Larger font for the main heading */
-    font-weight: 400; /* Changed from 700 to 400 to unbold */
-    margin: 0 0 20px 0;
+    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Reduced font size for the main heading */
+    font-weight: 700; /* Bold for "Hello! I'm Rishi" */
+    margin: 0 0 0 0; /* Removed all margin to minimize space between heading and subtext as much as possible */
+    padding: 0; /* Remove padding */
     color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.0; /* Further reduced line height for tighter spacing */
+    opacity: 0; /* Hidden until animation */
+    visibility: visible;
+    text-align: left; /* Left align the text */
+    /* Fix height to prevent layout shifts */
+    height: 1.5em; /* Further reduced height */
+    /* Ensure proper box sizing */
+    box-sizing: border-box;
 }
 
 #intro-typewriter h2 {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem); /* Smaller font for the subtitle */
-    font-weight: 400;
-    margin: 0;
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Reduced font size for the subtitle */
+    font-weight: 400; /* Regular/light for most of the text */
+    margin: -0.5em 0 0 0; /* Increased negative top margin to pull closer to h1 */
+    padding: 0; /* Remove padding */
     color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-#intro-typewriter .highlight {
-    color: #ff6b35 !important; /* Orange color like the cursor - forced priority */
-    font-weight: 400;
-}
-
-/* Blinking cursor for typing animation */
-.blinking-cursor {
-    display: inline-block;
-    width: 1px;
-    height: 1em;
-    background-color: #ff6b35;
-    margin-left: 2px;
-    animation: blink 1s infinite;
-    vertical-align: baseline;
+    line-height: 1.2; /* Further reduced line height for tighter spacing */
+    opacity: 0; /* Hidden until animation */
     visibility: visible;
-    opacity: 0.5 !important;
+    text-align: left; /* Left align the text */
+    /* Fix height to prevent layout shifts */
+    height: 1.8em; /* Further reduced height */
+    /* Ensure proper box sizing */
+    box-sizing: border-box;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+/* Make sure the highlight span is also hidden initially */
+#intro-typewriter .highlight {
+    color: var(--text-secondary) !important; /* Use default text color instead of orange */
+    font-weight: 700; /* Bold for "exciting" */
+    opacity: 0; /* Hidden until animation */
+}
+
+/* Style for bold text */
+#intro-typewriter .bold {
+    font-weight: 700; /* Bold */
+    opacity: 1; /* Make visible by default */
+}
+
+/* Style for light text */
+#intro-typewriter .light {
+    font-weight: 300; /* Light */
+    opacity: 1; /* Make visible by default */
+}
+
+/* Style for normal weight text */
+#intro-typewriter .normal-weight {
+    font-weight: 400; /* Normal weight */
+    opacity: 1; /* Make visible by default */
+}
+
+/* Ensure the highlight is visible when parent is visible */
+#intro-typewriter h2:has(.highlight) {
+    opacity: 1 !important;
+}
+
+/* Showreel Banner Styles */
+#showreel-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: 40px; /* Uniform padding on all sides */
+    box-sizing: border-box;
+    min-height: 700px; /* Reduced height to create breathing space */
+    width: 100vw; /* Full viewport width */
+    max-width: none;
+    margin: 0; /* No margin to ensure it touches the edges */
+    position: absolute; /* Keep only absolute positioning */
+    top: 0;
+    left: 0;
+    /* Ensure it's above other content */
+    z-index: 200; /* Increase z-index to ensure it's above other elements */
+    overflow: hidden; /* Ensure video doesn't overflow */
+    /* Use the image as background */
+    background-image: url('./Projects/MMM/MMM8.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.showreel-placeholder {
+    text-align: center;
+    color: var(--text-secondary);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    /* Remove flex display to allow absolute positioning to work properly */
+    display: block;
+}
+
+.showreel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Banner image for when video is not available - hide it since we're using background */
+.showreel-image {
+    display: none;
+}
+
+/* Fallback image for when video is not available */
+.showreel-image-fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    display: none; /* Hidden by default, shown only if video fails */
+}
+
+.showreel-overlay {
+    display: none;
+}
+
+.showreel-placeholder h3 {
+    display: none;
+}
+
+.showreel-placeholder p {
+    display: none;
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-    gap: 30px; /* Restore original gap */
-    max-width: 1400px; /* Reduced max width for breathing room */
-    margin: 0 auto;
-    padding: 0 20px; /* Add breathing room on sides */
+    gap: 40px; /* Consistent gap for both rows and columns */
+    max-width: 1400px; /* Increased to match container width */
+    margin: 0 auto; /* Center the grid */
+    padding: 0 20px; /* Add padding to match intro content */
+    width: 100%;
 }
 
 /* Creative Playground grid - 3 items per row */
 .creative-playground-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 40px; /* Consistent gap for both rows and columns */
+    max-width: 1400px; /* Match project grid content width */
+    margin: 0 auto; /* Center the grid */
+    padding: 0 20px; /* Add padding to match intro content */
+    width: 100%;
 }
 
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 0; /* Remove fillets from project cards */
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px var(--shadow-color);
     position: relative;
+    width: 100%;
+    /* Remove max-width and margin that were causing alignment issues */
 }
 
 .project-card:hover {
@@ -615,7 +693,7 @@ body {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 75%; /* 4:3 aspect ratio maintained */
+    padding-bottom: 75%; /* 4:3 aspect ratio */
     overflow: hidden;
 }
 
@@ -693,152 +771,38 @@ body {
     grid-template-columns: 1fr 2fr;
     gap: 60px; /* Increased gap */
     align-items: flex-start;
-    max-width: 1200px; /* Increased max-width */
-    margin: 0 auto;
+    max-width: 1280px; /* Match the project grid max-width */
+    margin: 0 auto 0 0; /* Align to the left edge to match intro text */
+    padding: 0 20px; /* Add padding to match intro content */
     position: relative;
 }
 
+/* Profile image styling */
 .about-image {
-    width: 100%; /* Increased from 90% */
-    max-width: 350px; /* Increased from 300px */
-    border-radius: 0; /* Remove fillets from about image */
-    overflow: hidden;
-    background: var(--card-bg);
-    aspect-ratio: 4/5;
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: 1px solid var(--border-color);
-    margin: 0;
+    align-items: flex-start;
 }
 
 .profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0; /* Remove fillets from profile image */
-    /* Add image optimization */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: all 0.3s ease;
 }
 
-/* Fade-in animation for About section */
-#about-content h3, 
-#about-content p, 
-#about-content .btn {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out; /* Reduced from 0.8s to 0.4s */
-}
-
-#about-content p {
-    transition-delay: 0.1s; /* Reduced from 0.2s to 0.1s */
-}
-
-#about-content .btn {
-    transition-delay: 0.2s; /* Reduced from 0.4s to 0.2s */
-}
-
-/* About section content styling */
-#about .about-text h3 {
-    font-size: 26px;
-    font-weight: 400;
-    margin-bottom: 18px;
-    color: var(--text-primary);
-}
-
-/* Make "Rishi" the same color as the cursor */
-#about .about-text h3 span.highlight {
-    color: #ff6b35;
-}
-
-#about .about-text p {
-    color: var(--text-secondary);
-    margin-bottom: 18px;
-    line-height: 1.7;
-    font-size: 17px;
-}
-
-#about .btn {
-    margin-top: 18px;
-    padding: 12px 24px;
-    font-size: 15px;
-    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    letter-spacing: normal;
-    text-transform: none;
-    font-variant: normal;
-    font-feature-settings: normal;
-}
-
-/* Ensure the CV button text is clearly visible */
-#about .btn.btn-primary {
-    color: white;
-    text-shadow: none;
+.profile-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 /* Experience Timeline */
 .experience-timeline {
     position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding-left: 30px;
-}
-
-.experience-timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 30px;
-    width: 2px;
-    background: var(--accent-secondary);
-    opacity: 0.3;
-}
-
-.experience-item {
-    position: relative;
-    margin-bottom: 40px;
-    padding-left: 50px;
-}
-
-.experience-item:nth-child(odd) {
-    text-align: left;
-}
-
-.experience-item:nth-child(even) {
-    text-align: left;
-}
-
-.experience-item:nth-child(odd) .experience-content {
-    text-align: left;
-}
-
-.experience-item:nth-child(even) .experience-content {
-    text-align: left;
-}
-
-.experience-content {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.experience-content:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.experience-dot {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--accent-secondary);
-    left: 22px;
-    top: 30px;
-    border: 3px solid var(--bg-primary);
+    max-width: 1280px; /* Match the project grid max-width */
+    margin: 0 auto 0 0; /* Align to the left edge to match intro text */
+    padding: 0 20px 0 50px; /* Add padding to match intro content and account for timeline */
 }
 
 /* Contact Section */
@@ -846,8 +810,9 @@ body {
     display: grid;
     grid-template-columns: 1fr; /* Single column layout */
     gap: 60px;
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 1280px; /* Match the project grid max-width */
+    margin: 0 auto 0 0; /* Align to the left edge to match intro text */
+    padding: 0 20px; /* Add padding to match intro content */
     position: relative;
 }
 
@@ -893,204 +858,109 @@ footer {
     padding: 40px 0;
     border-top: 1px solid var(--border-color);
     color: var(--text-tertiary);
-    background: var(--bg-secondary);
+}
+
+/* Blinking Cursor for Typing Animation */
+.blinking-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: var(--accent-secondary); /* Orange color */
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    vertical-align: baseline;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Ensure cursor visibility */
+.blinking-cursor {
+    visibility: visible !important;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 85px; /* Reduced gap to make section slightly smaller */
-        text-align: center;
-        max-width: 750px; /* Reduced width to make section slightly smaller */
-    }
-    
-    .about-image {
-        width: 100%; /* Increased from 90% on tablet */
-    }
-    
-    .experience-timeline::before {
-        left: 30px;
-    }
-    
-    .experience-item {
-        flex-direction: column !important;
-        align-items: flex-start;
-        padding-left: 60px;
-    }
-    
-    .experience-content {
+    #showreel-banner {
         width: 100%;
-        margin: 0 !important;
+        min-height: 600px; /* Reduced height for tablet */
+        padding: 80px; /* Reduced padding for tablet */
     }
     
-    .experience-dot {
-        left: 30px;
+    #intro-typewriter h1 {
+        font-size: clamp(1.3rem, 3.5vw, 2rem); /* Adjusted for tablet */
     }
     
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .hero-section {
-        height: 70vh;
-    }
-    
-    /* Keep 2 items per row on medium screens */
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px; /* Restore original gap */
-        max-width: 1200px; /* Reduced max width for breathing room */
-        padding: 0 30px; /* Add breathing room on sides */
-    }
-    
-    /* Creative Playground grid on medium screens */
-    .creative-playground-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        padding: 0 30px;
+    #intro-typewriter h2 {
+        font-size: clamp(0.9rem, 1.8vw, 1rem); /* Adjusted for tablet */
     }
 }
 
 @media (max-width: 768px) {
-    .floating-navbar {
-        top: 20px;
-        padding: 8px 15px;
+    #intro.section {
+        padding: 660px 0 0 0; /* Adjusted padding for mobile */
     }
     
-    .nav-container {
-        gap: 10px;
+    #intro-typewriter {
+        padding: 0; /* Remove padding to maintain alignment */
     }
     
-    .nav-link {
-        padding: 8px 16px;
-        font-size: 13px;
+    #intro-typewriter h1 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem); /* Adjusted for mobile */
     }
     
-    .hero-section {
-        height: 60vh; /* Increased from 50vh to 60vh */
+    #intro-typewriter h2 {
+        font-size: clamp(0.8rem, 1.6vw, 0.9rem); /* Adjusted for mobile */
     }
     
-    .slide-title {
-        font-size: 1.8rem;
-    }
-    
-    .slide-subtitle {
-        font-size: 1rem;
-    }
-    
-    .section {
-        padding: 80px 0;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        max-width: 100%;
-        padding: 0 15px; /* Add breathing room on sides */
-    }
-    
-    /* Creative Playground grid on mobile */
-    .creative-playground-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        max-width: 100%;
-        padding: 0 15px;
-    }
-    
-    .experience-item {
-        padding-left: 50px;
-    }
-    
-    .experience-dot {
-        left: 20px;
-    }
-    
-    .contact-link {
-        padding: 16px 24px; /* Adjust padding for smaller screens */
-        font-size: 16px;
-        max-width: 280px; /* Slightly smaller max width */
+    #showreel-banner {
+        min-height: 500px; /* Reduced height for mobile */
+        padding: 50px; /* Reduced padding for mobile */
     }
 }
 
 @media (max-width: 480px) {
-    .floating-navbar {
-        top: 15px;
-        left: 10px;
-        right: 10px;
-        transform: none;
-        width: auto;
-        border-radius: 30px;
-        padding: 8px;
+    #intro.section {
+        padding: 600px 0 0 0; /* Adjusted padding for small mobile */
     }
     
-    .about-image {
-        width: 100%; /* Increased from 90% on mobile */
+    #intro-typewriter {
+        padding: 0; /* Remove padding to maintain alignment */
     }
     
-    .nav-container {
-        gap: 5px;
-        flex-wrap: wrap;
-        justify-content: center;
+    #intro-typewriter h1 {
+        font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusted for small mobile */
     }
     
-    .nav-link {
-        padding: 6px 12px;
-        font-size: 12px;
-        border-radius: 20px;
+    #intro-typewriter h2 {
+        font-size: clamp(0.7rem, 1.4vw, 0.8rem); /* Adjusted for small mobile */
     }
     
-    .theme-toggle {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
+    #showreel-banner {
+        min-height: 450px; /* Reduced height for small mobile */
+        padding: 40px; /* Reduced padding for small mobile */
     }
     
-    
-    .hero-section {
-        height: 50vh;
+    .showreel-placeholder {
+        max-width: 100%; /* Full width on mobile */
     }
     
-    .slide-title {
-        font-size: 1.5rem;
+    .showreel-placeholder h3 {
+        font-size: 1.3rem;
     }
     
-    .slide-subtitle {
+    .showreel-placeholder p {
         font-size: 0.9rem;
     }
-    
-    .section {
-        padding: 60px 0;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .about-content {
-        gap: 60px; /* Reduced gap to make section smaller */
-    }
-    
-    .experience-item {
-        padding-left: 40px;
-        margin-bottom: 40px;
-    }
-    
-    .experience-timeline::before {
-        left: 20px;
-    }
-    
-    .experience-dot {
-        left: 15px;
-        width: 12px;
-        height: 12px;
-    }
-    
-    .contact-link {
-        padding: 14px 20px; /* Further adjust padding for mobile */
-        font-size: 15px;
-        max-width: 100%; /* Full width on mobile */
-        border-radius: 40px; /* Maintain pill shape */
-    }
-    
+}
+
+/* Video fallback handling */
+.showreel-placeholder.video-error .showreel-video {
+    display: none;
+}
+
+.showreel-placeholder.video-error .showreel-image-fallback {
+    display: block;
 }
