@@ -208,9 +208,10 @@ body {
     font-weight: 400;
     padding: 2px 8px; /* Reduced padding for thinner highlight pill */
     border-radius: 8px; /* Reduced border radius for thinner pills */
-    transition: all 0.3s ease;
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
     position: relative;
     visibility: visible !important;
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 /* Add divider lines between navigation links */
@@ -281,13 +282,15 @@ body {
     width: 28px; /* Restored width */
     height: 28px; /* Restored height */
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 14px; /* Restored border radius */
-    background: transparent;
-    border: none;
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
+    border-radius: 50%; /* Make it a circle */
+    background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
+    border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    margin: 0; /* Remove any default margins */
 }
 
 .theme-toggle:focus {
@@ -314,20 +317,21 @@ body {
 .floating-navbar {
     position: fixed;
     top: 20px; /* Position from top */
-    right: 20px; /* Position from right */
+    right: 20px; /* Position at top right */
     left: auto;
     transform: none;
     z-index: 1000;
-    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 30px; /* More curved fillets */
-    padding: 6px 16px; /* Restored padding to original size */
-    transition: all 0.3s ease;
+    background: transparent; /* No background when collapsed */
+    border: none; /* No border when collapsed */
+    border-radius: 20px; /* Circle shape when collapsed */
+    padding: 0; /* No padding when collapsed */
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
     display: flex; /* Make navbar a flex container */
     align-items: center; /* Align items vertically */
-    gap: 16px; /* Restored gap to original size */
+    flex-direction: row; /* Explicitly set flex direction to row */
+    gap: 12px; /* Reduced gap for thinner navbar */
     max-width: 1400px;
-    width: auto; /* Changed from calc width to auto */
+    width: 40px; /* Same width as the plus circle icon */
     justify-content: flex-end; /* Align items to the right */
     margin: 0;
     box-sizing: border-box;
@@ -335,6 +339,293 @@ body {
     visibility: visible !important;
     /* Ensure it's above the banner */
     z-index: 1500;
+    flex-wrap: nowrap; /* Prevent items from wrapping to next line */
+    height: 40px; /* Set height to match width for perfect circle */
+    /* Ensure no transform affects the navbar */
+    transform: none;
+}
+
+/* Navigation Toggle Button (Plus/Minus) */
+.nav-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    /* Reset default button styles */
+    padding: 0;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+    /* Ensure proper rendering */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Ensure no inherited styles affect centering */
+    transform: none;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.nav-toggle-icon {
+    transition: all 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0; /* Reverted to original position */
+    left: 0;
+    /* Additional centering adjustments */
+    box-sizing: border-box;
+    vertical-align: middle;
+    /* Ensure proper font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga" 1;
+    /* Force proper alignment */
+    display: inline-flex;
+    /* Ensure the text is centered */
+    text-align: center;
+    /* Remove any default styling that might affect centering */
+    border: none;
+    background: none;
+    /* Ensure no transform affects centering */
+    transform: none;
+    /* Use theme color */
+    color: var(--text-primary);
+}
+
+/* Remove circle styling when navbar is expanded */
+.floating-navbar.expanded .nav-toggle {
+    background: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+/* Adjust minus icon positioning when navbar is expanded */
+.floating-navbar.expanded .nav-toggle-icon {
+    transform: translateY(0); /* Reverted to original position */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    /* Ensure color is maintained in expanded state */
+    color: var(--text-primary);
+}
+
+/* Ensure no transform affects the icon when navbar is collapsed */
+.nav-toggle-icon {
+    transition: all 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0; /* Reverted to original position */
+    left: 0;
+    /* Additional centering adjustments */
+    box-sizing: border-box;
+    vertical-align: middle;
+    /* Ensure proper font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga" 1;
+    /* Force proper alignment */
+    display: inline-flex;
+    /* Ensure the text is centered */
+    text-align: center;
+    /* Remove any default styling that might affect centering */
+    border: none;
+    background: none;
+    /* Ensure no transform affects centering */
+    transform: none;
+}
+
+.nav-toggle:focus {
+    outline: none;
+    /* Ensure no focus styles affect centering */
+    box-shadow: none;
+}
+
+/* Theme styles for nav toggle button */
+[data-theme="dark"] .nav-toggle {
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
+}
+
+[data-theme="light"] .nav-toggle {
+    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
+}
+
+/* Theme styles for nav toggle icon */
+[data-theme="dark"] .nav-toggle-icon {
+    color: #ffffff; /* White icon in dark mode */
+}
+
+[data-theme="light"] .nav-toggle-icon {
+    color: #000000; /* Black icon in light mode */
+}
+
+/* Expanded Navigation Bar */
+.floating-navbar.expanded {
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px; /* Thinner pill shape */
+    padding: 4px 12px; /* Reduced padding for thinner navbar */
+    width: auto; /* Reset width when expanded */
+    min-width: 250px; /* Adjusted width for all navigation elements */
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
+}
+
+/* Navigation Container */
+.nav-container {
+    display: flex; /* Always display the container */
+    align-items: center;
+    flex-direction: row; /* Keep horizontal layout */
+    gap: 12px; /* Reduced spacing between nav items */
+    /* Ensure nav container is visible */
+    visibility: visible !important;
+    flex-wrap: nowrap; /* Prevent items from wrapping to next line */
+    transition: all 0.6s ease; /* Slower transition for smoother animation */
+    width: 100%; /* Ensure container takes full width of navbar */
+    /* Ensure no transform affects the container */
+    transform: none;
+}
+
+/* Navigation Links and Theme Toggle - Hidden by default when inside nav-container */
+.nav-container .nav-link,
+.nav-container .theme-toggle {
+    display: none;
+}
+
+/* Navigation Links and Theme Toggle - Visible when navbar is expanded */
+.floating-navbar.expanded .nav-container .nav-link,
+.floating-navbar.expanded .nav-container .theme-toggle {
+    display: flex;
+}
+
+/* Nav Toggle Button - Always visible */
+.nav-container .nav-toggle {
+    display: flex;
+}
+
+/* Navigation Container when expanded */
+.floating-navbar.expanded .nav-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row; /* Keep horizontal layout */
+    gap: 16px; /* Consistent spacing between nav items */
+    /* Ensure nav container is visible */
+    visibility: visible !important;
+    flex-wrap: nowrap; /* Prevent items from wrapping to next line */
+    transition: all 0.6s ease; /* Consistent transition timing */
+}
+
+/* Vertical Contact Icons */
+.contact-icons-vertical {
+    position: fixed;
+    top: 76px; /* Position below the navbar with equal spacing (20px navbar top + 40px navbar height + 16px gap) */
+    right: 20px;
+    left: auto;
+    transform: none; /* Remove the translateY transformation */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+}
+
+/* Adjust contact icons position to avoid overlap with navbar */
+@media (min-width: 768px) {
+    .contact-icons-vertical {
+        top: 76px; /* Position below the navbar with equal spacing (20px navbar top + 40px navbar height + 16px gap) */
+    }
+}
+
+/* Circular Contact Icon Links */
+.contact-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.contact-icon-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+/* Contact Icon Styling */
+.contact-icon {
+    font-size: 16px;
+}
+
+/* Theme styles for contact icons */
+[data-theme="dark"] .contact-icon-link {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary); /* White icons in dark mode */
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+[data-theme="light"] .contact-icon-link {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--text-primary); /* Black icons in light mode */
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+[data-theme="dark"] .contact-icon-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+[data-theme="light"] .contact-icon-link:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 /* Logo Circle */
@@ -351,7 +642,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1500;
-    transition: all 0.3s ease;
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 .logo-text {
@@ -362,34 +653,42 @@ body {
 }
 
 /* Ensure proper contrast for navbar in both themes */
-[data-theme="dark"] .floating-navbar {
+[data-theme="dark"] .floating-navbar.expanded {
     background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
     border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
-[data-theme="light"] .floating-navbar {
+[data-theme="light"] .floating-navbar.expanded {
     background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
     border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+/* Theme toggle button theme styles */
+[data-theme="dark"] .theme-toggle {
+    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+[data-theme="light"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 /* Logo circle theme styles */
 [data-theme="dark"] .logo-circle {
     background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
     border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 [data-theme="light"] .logo-circle {
     background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
     border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-/* Nav container to hold all navigation elements in a row */
-.nav-container {
-    display: flex;
-    align-items: center;
-    gap: 16px; /* Increased gap for more spacious navbar */
-    /* Ensure nav container is visible */
-    visibility: visible !important;
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 /* Buttons */
@@ -805,53 +1104,6 @@ body {
     padding: 0 20px 0 50px; /* Add padding to match intro content and account for timeline */
 }
 
-/* Contact Section */
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column layout */
-    gap: 60px;
-    max-width: 1280px; /* Match the project grid max-width */
-    margin: 0 auto 0 0; /* Align to the left edge to match intro text */
-    padding: 0 20px; /* Add padding to match intro content */
-    position: relative;
-}
-
-.contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically if needed */
-}
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center content horizontally */
-    gap: 15px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    padding: 20px 30px; /* More padding for pill shape */
-    border: 1px solid var(--border-color);
-    border-radius: 50px; /* Pill-shaped borders */
-    background: var(--card-bg);
-    width: 100%; /* Full width */
-    max-width: 300px; /* Limit width */
-    text-align: center; /* Center text */
-}
-
-.contact-link:hover {
-    color: var(--text-primary);
-    border-color: var(--accent-primary);
-    transform: translateY(-3px);
-}
-
-.contact-icon {
-    font-size: 24px;
-}
-
 /* Footer */
 footer {
     text-align: center;
@@ -871,6 +1123,30 @@ footer {
     vertical-align: baseline;
 }
 
+/* Bold styling for specific words */
+.bold-word {
+  font-weight: 700 !important;
+  transition: all 0.3s ease; /* Smooth transition for the effect */
+}
+
+/* Bold and white styling for specific words */
+.bold-white {
+  font-weight: 700 !important;
+  color: white !important;
+  transition: all 0.3s ease; /* Smooth transition for the effect */
+}
+
+/* Light and normal styling for specific words */
+.light-normal {
+  font-weight: 400 !important;
+  transition: all 0.3s ease; /* Smooth transition for the effect */
+}
+
+/* Override bold-white color in light mode */
+[data-theme="light"] .bold-white {
+  color: #ff6b35 !important; /* Orange color */
+}
+
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -888,11 +1164,10 @@ footer {
         min-height: 600px; /* Reduced height for tablet */
         padding: 80px; /* Reduced padding for tablet */
     }
-    
     #intro-typewriter h1 {
         font-size: clamp(1.3rem, 3.5vw, 2rem); /* Adjusted for tablet */
     }
-    
+
     #intro-typewriter h2 {
         font-size: clamp(0.9rem, 1.8vw, 1rem); /* Adjusted for tablet */
     }
@@ -902,22 +1177,52 @@ footer {
     #intro.section {
         padding: 660px 0 0 0; /* Adjusted padding for mobile */
     }
-    
+
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
     }
-    
+
     #intro-typewriter h1 {
         font-size: clamp(1.2rem, 3vw, 1.8rem); /* Adjusted for mobile */
     }
-    
+
     #intro-typewriter h2 {
         font-size: clamp(0.8rem, 1.6vw, 0.9rem); /* Adjusted for mobile */
     }
-    
+
     #showreel-banner {
         min-height: 500px; /* Reduced height for mobile */
         padding: 50px; /* Reduced padding for mobile */
+    }
+    
+    /* Ensure navbar elements stay in a single line on mobile */
+    .floating-navbar {
+        padding: 4px 12px; /* Reduced padding for mobile */
+        gap: 12px; /* Reduced gap for mobile */
+    }
+    
+    .nav-container {
+        gap: 12px; /* Reduced gap for mobile */
+    }
+    
+    .nav-link {
+        font-size: 11px; /* Slightly reduced font size for mobile */
+        padding: 2px 6px; /* Reduced padding for mobile */
+    }
+    
+    .theme-toggle {
+        width: 24px; /* Reduced width for mobile */
+        height: 24px; /* Reduced height for mobile */
+    }
+    
+    .nav-toggle {
+        width: 24px; /* Reduced width for mobile */
+        height: 24px; /* Reduced height for mobile */
+    }
+    
+    .nav-toggle-icon {
+        font-size: 16px; /* Adjusted font size for mobile */
+        /* Reverted positioning changes */
     }
 }
 
@@ -925,34 +1230,65 @@ footer {
     #intro.section {
         padding: 600px 0 0 0; /* Adjusted padding for small mobile */
     }
-    
+
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
     }
-    
+
     #intro-typewriter h1 {
         font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusted for small mobile */
     }
-    
+
     #intro-typewriter h2 {
         font-size: clamp(0.7rem, 1.4vw, 0.8rem); /* Adjusted for small mobile */
     }
-    
+
     #showreel-banner {
         min-height: 450px; /* Reduced height for small mobile */
         padding: 40px; /* Reduced padding for small mobile */
     }
-    
+
     .showreel-placeholder {
         max-width: 100%; /* Full width on mobile */
     }
-    
+
     .showreel-placeholder h3 {
         font-size: 1.3rem;
     }
-    
+
     .showreel-placeholder p {
         font-size: 0.9rem;
+    }
+    
+    /* Ensure navbar elements stay in a single line on small mobile */
+    .floating-navbar {
+        padding: 3px 10px; /* Further reduced padding for small mobile */
+        gap: 10px; /* Further reduced gap for small mobile */
+        right: 10px; /* Adjust position for small screens */
+    }
+    
+    .nav-container {
+        gap: 10px; /* Further reduced gap for small mobile */
+    }
+    
+    .nav-link {
+        font-size: 10px; /* Further reduced font size for small mobile */
+        padding: 1px 5px; /* Further reduced padding for small mobile */
+    }
+    
+    .theme-toggle {
+        width: 22px; /* Further reduced width for small mobile */
+        height: 22px; /* Further reduced height for small mobile */
+    }
+    
+    .nav-toggle {
+        width: 22px; /* Further reduced width for small mobile */
+        height: 22px; /* Further reduced height for small mobile */
+    }
+    
+    .nav-toggle-icon {
+        font-size: 14px; /* Adjusted font size for small mobile */
+        /* Reverted positioning changes */
     }
 }
 

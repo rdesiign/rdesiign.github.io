@@ -28,6 +28,40 @@ function preloadImages() {
     });
 }
 
+// Navigation toggle functionality
+function initializeNavigationToggle() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navContainer = document.getElementById('nav-container');
+    const navbar = document.getElementById('main-navbar');
+    const navToggleIcon = document.querySelector('.nav-toggle-icon');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    if (navToggle && navContainer && navbar) {
+        // Initially hide navigation links and theme toggle
+        navLinks.forEach(link => link.style.display = 'none');
+        if (themeToggle) themeToggle.style.display = 'none';
+        
+        navToggle.addEventListener('click', function() {
+            // Toggle expanded class on navbar
+            navbar.classList.toggle('expanded');
+            
+            // Toggle navigation links and theme toggle visibility
+            if (navbar.classList.contains('expanded')) {
+                // Show all navigation elements
+                navLinks.forEach(link => link.style.display = 'flex');
+                if (themeToggle) themeToggle.style.display = 'flex';
+                navToggleIcon.textContent = '−'; // Minus sign
+            } else {
+                // Hide navigation links and theme toggle, keep nav-toggle visible
+                navLinks.forEach(link => link.style.display = 'none');
+                if (themeToggle) themeToggle.style.display = 'none';
+                navToggleIcon.textContent = '+'; // Plus sign
+            }
+        });
+    }
+}
+
 // Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Main app initialization');
@@ -47,6 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Preload critical images
     preloadImages();
+    
+    // Initialize navigation toggle
+    initializeNavigationToggle();
     
     initializeComponents();
     initializeNavigation();
@@ -189,10 +226,10 @@ function initializeNavigation() {
             
             // Define sections in the order they appear in the page
             const sections = [
-                { id: 'projects', element: document.getElementById('projects') },
                 { id: 'intro', element: document.getElementById('intro') },
-                { id: 'experience', element: document.getElementById('experience') },
-                { id: 'contact', element: document.getElementById('contact') }
+                { id: 'projects', element: document.getElementById('projects') },
+                { id: 'experience', element: document.getElementById('experience') }
+                // Removed contact section from navigation
             ].filter(section => {
                 const exists = section.element !== null;
                 console.log(`Section ${section.id} exists: ${exists}`);
@@ -213,16 +250,10 @@ function initializeNavigation() {
             // Find the section that's currently in view
             let activeSection = null;
             
-            // Check if we're at the bottom of the page (for contact section)
-            const scrollBottom = window.scrollY + window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            
-            console.log(`Scroll position: ${window.scrollY}, Window height: ${window.innerHeight}, Scroll bottom: ${scrollBottom}, Document height: ${documentHeight}`);
-            
-            // If we're near the bottom of the page, activate contact section
-            if (scrollBottom >= documentHeight - 100) {
-                activeSection = 'contact';
-                console.log('Near bottom, activating contact section');
+            // Check if we're at the top of the page (for home/intro section)
+            if (window.scrollY < 100) {
+                activeSection = 'intro';
+                console.log('Near top, activating intro section');
             } else {
                 // Check sections from top to bottom to find the first one that's in view
                 for (let i = 0; i < sections.length; i++) {
@@ -605,24 +636,24 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         // We need to type "I design to make the " first
         // Then add the "complex" span (normal weight)
         // Then add " "
-        // Then add the "simple" span (light)
-        // Then add " and the "
-        // Then add the "simple" span (light)
+        // Then add the "simple" span (bold, white)
         // Then add " "
-        // Then add the "exciting" span (light)
+        // Then add the "simple" span (light, normal color)
+        // Then add " "
+        // Then add the "exciting" span (bold, white)
         // Then add "."
         
         const parts = [
-                    { text: "I design to make the ", type: "plain" },
-                    { text: "complex", type: "normal" },
-                    { text: " ", type: "plain" },
-                    { text: "simple", type: "light" },
-                    { text: " and the ", type: "plain" },
-                    { text: "simple", type: "light" },
-                    { text: " ", type: "plain" },
-                    { text: "exciting", type: "light" },
-                    { text: ".", type: "plain" }
-                ];
+                { text: "I design to make the ", type: "plain" },
+                { text: "complex", type: "normal" },
+                { text: " ", type: "plain" },
+                { text: "simple", type: "bold-white" },
+                { text: " and the ", type: "plain" },
+                { text: "simple", type: "light-normal" },
+                { text: " ", type: "plain" },
+                { text: "exciting", type: "bold-white" },
+                { text: ".", type: "plain" }
+            ];
         
         let currentPartIndex = 0;
         let currentPartCharIndex = 0;
@@ -635,7 +666,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         function typeNextPart() {
             if (currentPartIndex >= parts.length) {
                 // Animation complete - ensure the full text is displayed
-                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="light">simple</span> and the <span class="light">simple</span> <span class="light">exciting</span>.';
+                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="light-normal">simple</span> <span class="bold-white">exciting</span>.';
                 
                 // Position cursor at the end and ensure it continues blinking
                 if (cursorElement.parentNode) {
@@ -663,13 +694,18 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 
                 // Ensure all spans are visible after animation
                 const normalWeights = heading2.querySelectorAll('.normal-weight');
-                const lights = heading2.querySelectorAll('.light');
+                const boldWhites = heading2.querySelectorAll('.bold-white');
+                const lightNormals = heading2.querySelectorAll('.light-normal');
                 
                 normalWeights.forEach(normal => {
                     normal.style.opacity = '1';
                 });
                 
-                lights.forEach(light => {
+                boldWhites.forEach(bold => {
+                    bold.style.opacity = '1';
+                });
+                
+                lightNormals.forEach(light => {
                     light.style.opacity = '1';
                 });
                 
@@ -693,14 +729,25 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                     if (currentPartCharIndex === currentPart.text.length - 1) {
                         accumulatedHTML += '</span>';
                     }
-                } else if (currentPart.type === "light") {
-                    // For the first character of a light section, add the opening span tag
+                } else if (currentPart.type === "bold-white") {
+                    // For the first character of a bold-white section, add the opening span tag
                     if (currentPartCharIndex === 0) {
-                        accumulatedHTML += '<span class="light">';
+                        accumulatedHTML += '<span class="bold-white">';
                     }
                     // Add the current character
                     accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a light section, add the closing span tag
+                    // For the last character of a bold-white section, add the closing span tag
+                    if (currentPartCharIndex === currentPart.text.length - 1) {
+                        accumulatedHTML += '</span>';
+                    }
+                } else if (currentPart.type === "light-normal") {
+                    // For the first character of a light-normal section, add the opening span tag
+                    if (currentPartCharIndex === 0) {
+                        accumulatedHTML += '<span class="light-normal">';
+                    }
+                    // Add the current character
+                    accumulatedHTML += currentPart.text[currentPartCharIndex];
+                    // For the last character of a light-normal section, add the closing span tag
                     if (currentPartCharIndex === currentPart.text.length - 1) {
                         accumulatedHTML += '</span>';
                     }
