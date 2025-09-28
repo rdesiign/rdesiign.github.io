@@ -556,25 +556,46 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
     const [heading1, heading2] = elements;
     const [heading1Text, heading2Text] = texts;
     
-    // Keep elements hidden until animation starts
+    // Pre-set all positioning styles to prevent any layout shifts
+    const commonStyles = {
+        position: 'absolute',
+        left: '0',
+        right: '0',
+        margin: '0',
+        padding: '0',
+        boxSizing: 'border-box',
+        transform: 'translateZ(0)', // Force hardware acceleration
+        lineHeight: '1.2',
+        transition: 'none', // Prevent any transitions that might cause shifting
+        transformStyle: 'preserve-3d', // Prevent 3D rendering issues
+        backfaceVisibility: 'hidden' // Prevent backface visibility issues
+    };
+    
+    // Apply common styles
+    Object.assign(heading1.style, commonStyles);
+    Object.assign(heading2.style, commonStyles);
+    
+    // Set specific positions
+    heading1.style.top = '0';
+    heading1.style.height = '50px';
+    heading2.style.top = '60px';
+    heading2.style.height = '50px';
+    
+    // Set initial states
     heading1.style.opacity = '0';
     heading2.style.opacity = '0';
+    heading1.style.color = 'var(--text-primary)';
+    heading2.style.color = 'var(--text-secondary)';
+    heading1.style.textAlign = 'left';
+    heading2.style.textAlign = 'left';
     
-    // Ensure elements have fixed height to prevent layout shifts and reduce spacing
-    heading1.style.position = 'relative';
-    heading2.style.position = 'relative';
-    heading1.style.margin = '0';
-    heading2.style.margin = '-0.5em 0 0 0'; // Increased negative top margin to pull closer to h1
-    heading1.style.padding = '0';
-    heading2.style.padding = '0';
-    heading1.style.lineHeight = '1.0'; // Further reduced line height
-    heading2.style.lineHeight = '1.2'; // Further reduced line height
+    // Set font sizes
+    heading1.style.fontSize = 'clamp(1.5rem, 4vw, 2.5rem)';
+    heading2.style.fontSize = 'clamp(1rem, 2vw, 1.2rem)';
     
-    // Additional styling to reduce spacing even further
-    heading1.style.height = '1.5em'; // Match CSS height
-    heading2.style.height = '1.8em'; // Match CSS height
-    heading1.style.boxSizing = 'border-box';
-    heading2.style.boxSizing = 'border-box';
+    // Set font weights
+    heading1.style.fontWeight = '700';
+    heading2.style.fontWeight = '400';
     
     // Calculate timing for each element
     const totalLength = heading1Text.length + heading2Text.length;
@@ -621,7 +642,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             heading2.appendChild(cursorElement);
             
             // Move to heading2 after a short delay
-            setTimeout(typeHeading2, 100); // Further reduced delay
+            setTimeout(typeHeading2, 300); // Delay before starting second line
         }
     }
     
@@ -633,16 +654,6 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         }
         
         // Special handling for the text with HTML tags
-        // We need to type "I design to make the " first
-        // Then add the "complex" span (normal weight)
-        // Then add " "
-        // Then add the "simple" span (bold, white)
-        // Then add " "
-        // Then add the "simple" span (light, normal color)
-        // Then add " "
-        // Then add the "exciting" span (bold, white)
-        // Then add "."
-        
         const parts = [
                 { text: "I design to make the ", type: "plain" },
                 { text: "complex", type: "normal" },
@@ -686,28 +697,8 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 // Ensure the animation is not paused
                 cursorElement.style.animationPlayState = 'running';
                 
-                // Fade in the entire intro section
-                const introSection = document.getElementById('intro');
-                if (introSection) {
-                    introSection.style.opacity = '1';
-                }
-                
-                // Ensure all spans are visible after animation
-                const normalWeights = heading2.querySelectorAll('.normal-weight');
-                const boldWhites = heading2.querySelectorAll('.bold-white');
-                const lightNormals = heading2.querySelectorAll('.light-normal');
-                
-                normalWeights.forEach(normal => {
-                    normal.style.opacity = '1';
-                });
-                
-                boldWhites.forEach(bold => {
-                    bold.style.opacity = '1';
-                });
-                
-                lightNormals.forEach(light => {
-                    light.style.opacity = '1';
-                });
+                // IMPORTANT: Do not apply any post-animation effects that could cause shifting
+                // The text should remain static in its fixed position
                 
                 return;
             }

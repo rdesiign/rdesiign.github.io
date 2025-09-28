@@ -278,39 +278,83 @@ body {
 /* Theme Toggle Switch */
 .theme-toggle {
     position: relative;
-    display: inline-block;
-    width: 28px; /* Restored width */
-    height: 28px; /* Restored height */
-    cursor: pointer;
-    transition: all 0.6s ease; /* Slower transition for smoother animation */
-    border-radius: 50%; /* Make it a circle */
-    background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0; /* Prevent button from shrinking */
-    margin: 0; /* Remove any default margins */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    border-radius: 50%; /* Make it circular like other nav icons */
+    background: transparent;
+    border: none;
+    flex-shrink: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    /* Reset default button styles */
+    padding: 0;
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+    /* Ensure proper rendering */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Ensure no inherited styles affect centering */
+    transform: none;
+    text-transform: none;
+    letter-spacing: normal;
+    overflow: visible; /* Allow pseudo-element to extend beyond bounds */
 }
 
 .theme-toggle:focus {
     outline: none;
+    box-shadow: none;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px; /* Smaller than the 40px button */
+    height: 32px; /* Smaller than the 40px button */
+    border-radius: 50%;
+    background: transparent;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: -1; /* Behind the icon */
+}
+
+.theme-toggle:hover::before {
+    background: var(--text-primary);
+    opacity: 0.2;
+    transform: translate(-50%, -50%);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 .theme-toggle .theme-icon {
-    font-size: 14px; /* Increased font size */
-    line-height: 1;
+    width: 16px;
+    height: 16px;
     transition: all 0.3s ease;
+    color: var(--text-primary); /* Match contact icons color behavior */
 }
 
-/* Dark theme - show moon icon */
-[data-theme="dark"] .theme-toggle .theme-icon::after {
-    content: "🌙";
+/* Hide sun icon in dark theme (show moon) */
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: none;
 }
 
-/* Light theme - show sun icon */
-[data-theme="light"] .theme-toggle .theme-icon::after {
-    content: "☀️";
+/* Hide moon icon in light theme (show sun) */
+[data-theme="light"] .theme-toggle .moon-icon {
+    display: none;
 }
 
 /* Floating Navigation Bar - Aligned with project thumbnails */
@@ -412,8 +456,6 @@ body {
     background: none;
     /* Ensure no transform affects centering */
     transform: none;
-    /* Use theme color */
-    color: var(--text-primary);
 }
 
 /* Remove circle styling when navbar is expanded */
@@ -568,6 +610,7 @@ body {
     flex-direction: column;
     gap: 16px;
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 /* Adjust contact icons position to avoid overlap with navbar */
@@ -637,12 +680,14 @@ body {
     height: 40px;
     background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50%; /* Make it a circle */
+    border-radius: 0; /* Make it a square */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1500;
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    /* Removed filters for enhanced visual effect */
+    box-sizing: border-box;
 }
 
 .logo-text {
@@ -650,6 +695,8 @@ body {
     font-size: 16px;
     font-weight: 700;
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    /* Add text shadow for better visibility */
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Ensure proper contrast for navbar in both themes */
@@ -667,15 +714,25 @@ body {
 
 /* Theme toggle button theme styles */
 [data-theme="dark"] .theme-toggle {
-    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border: none;
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 [data-theme="light"] .theme-toggle {
-    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: transparent;
+    border: none;
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
+}
+
+[data-theme="dark"] .theme-toggle:hover::before {
+    background: #ffffff; /* White in dark theme */
+    opacity: 0.2;
+}
+
+[data-theme="light"] .theme-toggle:hover::before {
+    background: #000000; /* Black in light theme */
+    opacity: 0.2;
 }
 
 /* Logo circle theme styles */
@@ -683,12 +740,14 @@ body {
     background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    /* Removed glow effect for dark theme */
 }
 
 [data-theme="light"] .logo-circle {
     background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
     border: 1px solid rgba(0, 0, 0, 0.15);
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    /* Removed subtle glow effect for light theme */
 }
 
 /* Buttons */
@@ -800,45 +859,63 @@ body {
 #intro-typewriter {
     position: relative;
     box-sizing: content-box;
-    /* Removed background-color to allow dotted background to show through */
-    /* Reserve space for the content to prevent shifting */
-    min-height: 100px; /* Reduced to minimize space before banner */
+    /* Reserve fixed space for the content to prevent any shifting */
+    height: 150px; /* Fixed height to prevent any layout shifts */
     max-width: 1280px; /* Match the showreel banner content width */
     margin: 0 auto 0 0; /* Align to the left edge */
     padding: 0; /* Remove padding to align with left edge of thumbnails */
-    margin-top: 50px; /* Increased from 30px to 50px to bring text lower */
+    margin-top: 50px; /* Position lower */
+    overflow: hidden; /* Prevent any overflow issues */
+    /* Add transform to create a new stacking context and prevent interference */
+    transform: translateZ(0);
 }
 
 #intro-typewriter h1 {
     font-size: clamp(1.5rem, 4vw, 2.5rem); /* Reduced font size for the main heading */
     font-weight: 700; /* Bold for "Hello! I'm Rishi" */
-    margin: 0 0 0 0; /* Removed all margin to minimize space between heading and subtext as much as possible */
+    margin: 0; /* No margin */
     padding: 0; /* Remove padding */
     color: var(--text-primary);
-    line-height: 1.0; /* Further reduced line height for tighter spacing */
+    line-height: 1.2; /* Consistent line height */
     opacity: 0; /* Hidden until animation */
     visibility: visible;
     text-align: left; /* Left align the text */
-    /* Fix height to prevent layout shifts */
-    height: 1.5em; /* Further reduced height */
-    /* Ensure proper box sizing */
+    /* Fixed positioning to prevent any shifting */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* Fixed height */
     box-sizing: border-box;
+    /* Ensure no reflow */
+    transform: translateZ(0); /* Force hardware acceleration */
+    will-change: opacity; /* Optimize for opacity changes */
+    /* Prevent any transitions that might cause shifting */
+    transition: none;
 }
 
 #intro-typewriter h2 {
     font-size: clamp(1rem, 2vw, 1.2rem); /* Reduced font size for the subtitle */
     font-weight: 400; /* Regular/light for most of the text */
-    margin: -0.5em 0 0 0; /* Increased negative top margin to pull closer to h1 */
+    margin: 0; /* No margin */
     padding: 0; /* Remove padding */
     color: var(--text-secondary);
-    line-height: 1.2; /* Further reduced line height for tighter spacing */
+    line-height: 1.2; /* Consistent line height */
     opacity: 0; /* Hidden until animation */
     visibility: visible;
     text-align: left; /* Left align the text */
-    /* Fix height to prevent layout shifts */
-    height: 1.8em; /* Further reduced height */
-    /* Ensure proper box sizing */
+    /* Fixed positioning to prevent any shifting */
+    position: absolute;
+    top: 60px; /* Fixed position below the first line */
+    left: 0;
+    right: 0;
+    height: 50px; /* Fixed height */
     box-sizing: border-box;
+    /* Ensure no reflow */
+    transform: translateZ(0); /* Force hardware acceleration */
+    will-change: opacity; /* Optimize for opacity changes */
+    /* Prevent any transitions that might cause shifting */
+    transition: none;
 }
 
 /* Make sure the highlight span is also hidden initially */
