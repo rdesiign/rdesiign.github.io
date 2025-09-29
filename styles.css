@@ -279,13 +279,13 @@ body {
 .theme-toggle {
     position: relative;
     display: inline-block;
-    width: 28px; /* Restored width */
-    height: 28px; /* Restored height */
+    width: 20px; /* Reduced width for smaller icon */
+    height: 20px; /* Reduced height for smaller icon */
     cursor: pointer;
     transition: all 0.6s ease; /* Slower transition for smoother animation */
-    border-radius: 50%; /* Make it a circle */
-    background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0; /* Remove circle shape */
+    background: transparent; /* Remove background */
+    border: none; /* Remove border */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -293,24 +293,62 @@ body {
     margin: 0; /* Remove any default margins */
 }
 
+/* Hover effect for theme toggle */
+.theme-toggle:hover::before {
+    content: '';
+    position: absolute;
+    width: 32px; /* Slightly larger than the icon */
+    height: 32px; /* Slightly larger than the icon */
+    border-radius: 50%; /* Make it circular */
+    background: rgba(255, 255, 255, 0.1); /* Subtle white background */
+    z-index: -1; /* Behind the icon */
+    transition: all 0.6s ease; /* Smooth transition */
+}
+
+/* Dark theme hover effect */
+[data-theme="dark"] .theme-toggle:hover::before {
+    background: rgba(255, 255, 255, 0.1); /* Subtle white background */
+}
+
+/* Light theme hover effect */
+[data-theme="light"] .theme-toggle:hover::before {
+    background: rgba(0, 0, 0, 0.1); /* Subtle black background */
+}
+
 .theme-toggle:focus {
     outline: none;
 }
 
 .theme-toggle .theme-icon {
-    font-size: 14px; /* Increased font size */
+    font-size: 16px; /* Adjusted font size */
     line-height: 1;
     transition: all 0.3s ease;
+    width: 16px;
+    height: 16px;
 }
 
-/* Dark theme - show moon icon */
+/* Dark theme - show moon icon as SVG */
 [data-theme="dark"] .theme-toggle .theme-icon::after {
-    content: "🌙";
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-/* Light theme - show sun icon */
+/* Light theme - show sun icon as SVG */
 [data-theme="light"] .theme-toggle .theme-icon::after {
-    content: "☀️";
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'%3E%3C/circle%3E%3Cline x1='12' y1='1' x2='12' y2='3'%3E%3C/line%3E%3Cline x1='12' y1='21' x2='12' y2='23'%3E%3C/line%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'%3E%3C/line%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'%3E%3C/line%3E%3Cline x1='1' y1='12' x2='3' y2='12'%3E%3C/line%3E%3Cline x1='21' y1='12' x2='23' y2='12'%3E%3C/line%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'%3E%3C/line%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* Floating Navigation Bar - Aligned with project thumbnails */
@@ -667,14 +705,14 @@ body {
 
 /* Theme toggle button theme styles */
 [data-theme="dark"] .theme-toggle {
-    background: rgba(10, 10, 10, 0.8); /* 20% transparency for dark background */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent; /* Remove background */
+    border: none; /* Remove border */
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 [data-theme="light"] .theme-toggle {
-    background: rgba(255, 255, 255, 0.8); /* 20% transparency for light background */
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: transparent; /* Remove background */
+    border: none; /* Remove border */
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
