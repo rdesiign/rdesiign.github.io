@@ -82,6 +82,13 @@ function initializeMobileNavigation() {
         mobileNavPopup.classList.add('active');
         // Prevent body scroll when popup is open
         document.body.style.overflow = 'hidden';
+        // Change mobile toggle icon to minus
+        if (mobileNavToggle) {
+            const icon = mobileNavToggle.querySelector('.mobile-nav-toggle-icon');
+            if (icon) {
+                icon.textContent = '−'; // Minus sign
+            }
+        }
         // Focus the close button for accessibility
         if (mobileNavClose) {
             mobileNavClose.focus();
@@ -93,6 +100,13 @@ function initializeMobileNavigation() {
         mobileNavPopup.classList.remove('active');
         // Restore body scroll
         document.body.style.overflow = '';
+        // Change mobile toggle icon back to plus
+        if (mobileNavToggle) {
+            const icon = mobileNavToggle.querySelector('.mobile-nav-toggle-icon');
+            if (icon) {
+                icon.textContent = '+'; // Plus sign
+            }
+        }
         // Return focus to the nav toggle button
         if (mobileNavToggle && mobileNavToggle.style.display !== 'none') {
             mobileNavToggle.focus();
@@ -115,7 +129,12 @@ function initializeMobileNavigation() {
         mobileNavToggle.addEventListener('click', function(e) {
             // Prevent default behavior
             e.preventDefault();
-            openMobileNav();
+            // Toggle mobile nav popup
+            if (mobileNavPopup.classList.contains('active')) {
+                closeMobileNav();
+            } else {
+                openMobileNav();
+            }
         });
     }
     
