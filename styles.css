@@ -510,6 +510,7 @@ body {
     background: none;
     /* Ensure no transform affects centering */
     transform: none;
+
 }
 
 .nav-toggle:focus {
@@ -688,6 +689,74 @@ body {
     font-size: 16px;
     font-weight: 700;
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Mobile Navigation Toggle Button */
+.mobile-nav-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1600; /* Higher z-index to ensure it's above other elements */
+    transition: all 0.6s ease;
+    padding: 0;
+    outline: none;
+}
+
+.mobile-nav-toggle-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-primary);
+    transition: all 0.6s ease;
+}
+
+[data-theme="dark"] .mobile-nav-toggle {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .mobile-nav-toggle {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.mobile-nav-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Show mobile nav toggle on mobile devices */
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    
+    /* Adjust positioning for mobile */
+    .mobile-nav-toggle {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-nav-toggle {
+        width: 30px;
+        height: 30px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .mobile-nav-toggle-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* Ensure proper contrast for navbar in both themes */
@@ -1386,6 +1455,8 @@ footer {
     visibility: hidden;
     transition: all 0.3s ease;
     transform: scale(0.9);
+    /* Improve accessibility */
+    outline: none;
 }
 
 .mobile-nav-popup.active {
@@ -1404,6 +1475,8 @@ footer {
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* Improve accessibility */
+    outline: none;
 }
 
 .mobile-nav-header {
@@ -1434,10 +1507,14 @@ footer {
     justify-content: center;
     border-radius: 50%;
     transition: all 0.3s ease;
+    /* Improve accessibility */
+    outline: none;
 }
 
-.mobile-nav-close:hover {
+.mobile-nav-close:hover,
+.mobile-nav-close:focus {
     background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid var(--accent-primary);
 }
 
 .mobile-nav-links {
@@ -1456,10 +1533,14 @@ footer {
     border-radius: 12px;
     transition: all 0.3s ease;
     text-align: center;
+    /* Improve accessibility */
+    outline: none;
 }
 
-.mobile-nav-link:hover {
+.mobile-nav-link:hover,
+.mobile-nav-link:focus {
     background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid var(--accent-primary);
 }
 
 .mobile-contact-icons {
@@ -1480,11 +1561,15 @@ footer {
     color: var(--text-primary);
     text-decoration: none;
     transition: all 0.3s ease;
+    /* Improve accessibility */
+    outline: none;
 }
 
-.mobile-contact-icon-link:hover {
+.mobile-contact-icon-link:hover,
+.mobile-contact-icon-link:focus {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
+    outline: 2px solid var(--accent-primary);
 }
 
 .mobile-theme-toggle-container {
@@ -1505,10 +1590,14 @@ footer {
     justify-content: center;
     border-radius: 50%;
     transition: all 0.3s ease;
+    /* Improve accessibility */
+    outline: none;
 }
 
-.mobile-theme-toggle:hover {
+.mobile-theme-toggle:hover,
+.mobile-theme-toggle:focus {
     background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid var(--accent-primary);
 }
 
 .theme-label {
@@ -1516,7 +1605,7 @@ footer {
     font-size: 14px;
 }
 
-/* Hide mobile popup is hidden on desktop by default */
+/* Hide mobile navigation popup by default on desktop */
 @media (min-width: 769px) {
     .mobile-nav-popup {
         display: none !important;
@@ -1602,4 +1691,10 @@ footer {
     .theme-label {
         font-size: 12px;
     }
+}
+
+/* Focus management for accessibility */
+*:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
 }

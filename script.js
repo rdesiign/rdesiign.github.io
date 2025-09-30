@@ -70,6 +70,7 @@ function initializeNavigationToggle() {
 // Mobile Navigation Popup Functionality
 function initializeMobileNavigation() {
     const navToggle = document.getElementById('nav-toggle');
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
     const mobileNavPopup = document.getElementById('mobile-nav-popup');
     const mobileNavClose = document.getElementById('mobile-nav-close');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
@@ -81,6 +82,10 @@ function initializeMobileNavigation() {
         mobileNavPopup.classList.add('active');
         // Prevent body scroll when popup is open
         document.body.style.overflow = 'hidden';
+        // Focus the close button for accessibility
+        if (mobileNavClose) {
+            mobileNavClose.focus();
+        }
     }
     
     // Function to close mobile nav popup
@@ -88,11 +93,26 @@ function initializeMobileNavigation() {
         mobileNavPopup.classList.remove('active');
         // Restore body scroll
         document.body.style.overflow = '';
+        // Return focus to the nav toggle button
+        if (mobileNavToggle && mobileNavToggle.style.display !== 'none') {
+            mobileNavToggle.focus();
+        } else if (navToggle && navToggle.style.display !== 'none') {
+            navToggle.focus();
+        }
     }
     
     // Event listeners for opening/closing the popup
     if (navToggle) {
         navToggle.addEventListener('click', function(e) {
+            // Prevent default behavior
+            e.preventDefault();
+            openMobileNav();
+        });
+    }
+    
+    // Mobile nav toggle button event listener
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', function(e) {
             // Prevent default behavior
             e.preventDefault();
             openMobileNav();
@@ -110,9 +130,51 @@ function initializeMobileNavigation() {
         }
     });
     
-    // Close popup when clicking on any mobile nav link
+    // Close popup with Escape key
+    mobileNavPopup.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeMobileNav();
+        }
+    });
+    
+    // Close popup and handle navigation when clicking on any mobile nav link
     mobileNavLinks.forEach(link => {
-        link.addEventListener('click', closeMobileNav);
+        link.addEventListener('click', function(e) {
+            // Close the popup first
+            closeMobileNav();
+            
+            // Handle internal page navigation
+            const sectionId = this.getAttribute('data-section');
+            
+            // Handle external links (About) - let them navigate normally
+            if (sectionId === 'about') {
+                return; // Let it navigate normally
+            }
+            
+            // Handle links that don't have a corresponding section on this page
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) {
+                return; // Let it navigate normally (e.g., to another page)
+            }
+            
+            e.preventDefault();
+            
+            // Find target section
+            if (targetSection) {
+                // Calculate offset (account for navbar height)
+                const navbar = document.getElementById('main-navbar');
+                let offsetTop = targetSection.offsetTop;
+                if (navbar) {
+                    offsetTop -= navbar.offsetHeight + 20;
+                }
+                
+                // Smooth scroll to section
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
     
     // Sync theme toggle between mobile and desktop
@@ -171,6 +233,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     } catch (error) {
         console.error('Error in main initialization:', error);
+    }
+});
+
+// Handle window resize to initialize appropriate navigation
+window.addEventListener('resize', function() {
+    // Re-initialize navigation toggle on resize
+    initializeNavigationToggle();
+    
+    // Close mobile navigation popup if window is resized to desktop view
+    if (window.innerWidth > 768) {
+        const mobileNavPopup = document.getElementById('mobile-nav-popup');
+        if (mobileNavPopup && mobileNavPopup.classList.contains('active')) {
+            mobileNavPopup.classList.remove('active');
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+    }
+    
+    // Show/hide mobile nav toggle based on screen size
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    if (mobileNavToggle) {
+        if (window.innerWidth <= 768) {
+            mobileNavToggle.style.display = 'flex';
+        } else {
+            mobileNavToggle.style.display = 'none';
+        }
     }
 });
 
