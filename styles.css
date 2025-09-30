@@ -666,7 +666,7 @@ body {
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
-/* Logo Circle */
+/* Logo Square */
 .logo-circle {
     position: fixed;
     top: 20px;
@@ -675,7 +675,7 @@ body {
     height: 40px;
     background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50%; /* Make it a circle */
+    border-radius: 0; /* Make it a square */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1229,38 +1229,53 @@ footer {
     }
 
     #showreel-banner {
-        min-height: 500px; /* Reduced height for mobile */
-        padding: 50px; /* Reduced padding for mobile */
+        min-height: 400px; /* Reduced height for mobile */
+        padding: 30px; /* Reduced padding for mobile */
+        width: calc(100vw - 4px); /* Full width with 2px offset on each side */
+        margin: 2px auto; /* 2px offset on all sides */
     }
     
     /* Ensure navbar elements stay in a single line on mobile */
     .floating-navbar {
-        padding: 4px 12px; /* Reduced padding for mobile */
-        gap: 12px; /* Reduced gap for mobile */
+        padding: 6px 14px; /* Increased padding for better touch targets */
+        gap: 14px; /* Increased gap for better spacing */
+        height: 45px; /* Increased height for better touch targets */
     }
     
     .nav-container {
-        gap: 12px; /* Reduced gap for mobile */
+        gap: 14px; /* Increased gap for better spacing */
     }
     
     .nav-link {
-        font-size: 11px; /* Slightly reduced font size for mobile */
-        padding: 2px 6px; /* Reduced padding for mobile */
+        font-size: 13px; /* Increased font size for better readability */
+        padding: 4px 10px; /* Increased padding for better touch targets */
     }
     
     .theme-toggle {
-        width: 24px; /* Reduced width for mobile */
-        height: 24px; /* Reduced height for mobile */
+        width: 28px; /* Increased width for better touch targets */
+        height: 28px; /* Increased height for better touch targets */
     }
     
     .nav-toggle {
-        width: 24px; /* Reduced width for mobile */
-        height: 24px; /* Reduced height for mobile */
+        width: 28px; /* Increased width for better touch targets */
+        height: 28px; /* Increased height for better touch targets */
     }
     
     .nav-toggle-icon {
-        font-size: 16px; /* Adjusted font size for mobile */
+        font-size: 18px; /* Adjusted font size for better visibility */
         /* Reverted positioning changes */
+    }
+    
+    /* Mobile grid layout - one column */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 30px; /* Reduced gap for mobile */
+    }
+    
+    /* Creative Playground grid - one column on mobile */
+    .creative-playground-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 30px; /* Reduced gap for mobile */
     }
 }
 
@@ -1282,8 +1297,10 @@ footer {
     }
 
     #showreel-banner {
-        min-height: 450px; /* Reduced height for small mobile */
-        padding: 40px; /* Reduced padding for small mobile */
+        min-height: 300px; /* Further reduced height for small mobile */
+        padding: 20px; /* Reduced padding for small mobile */
+        width: calc(100vw - 4px); /* Full width with 2px offset on each side */
+        margin: 2px auto; /* 2px offset on all sides */
     }
 
     .showreel-placeholder {
@@ -1300,33 +1317,46 @@ footer {
     
     /* Ensure navbar elements stay in a single line on small mobile */
     .floating-navbar {
-        padding: 3px 10px; /* Further reduced padding for small mobile */
-        gap: 10px; /* Further reduced gap for small mobile */
-        right: 10px; /* Adjust position for small screens */
+        padding: 8px 15px; /* Increased padding for better touch targets */
+        gap: 15px; /* Increased gap for better spacing */
+        right: 15px; /* Adjust position for small screens */
+        height: 50px; /* Increased height for better touch targets */
     }
     
     .nav-container {
-        gap: 10px; /* Further reduced gap for small mobile */
+        gap: 15px; /* Increased gap for better spacing */
     }
     
     .nav-link {
-        font-size: 10px; /* Further reduced font size for small mobile */
-        padding: 1px 5px; /* Further reduced padding for small mobile */
+        font-size: 14px; /* Increased font size for better readability */
+        padding: 6px 12px; /* Increased padding for better touch targets */
     }
     
     .theme-toggle {
-        width: 22px; /* Further reduced width for small mobile */
-        height: 22px; /* Further reduced height for small mobile */
+        width: 30px; /* Increased width for better touch targets */
+        height: 30px; /* Increased height for better touch targets */
     }
     
     .nav-toggle {
-        width: 22px; /* Further reduced width for small mobile */
-        height: 22px; /* Further reduced height for small mobile */
+        width: 30px; /* Increased width for better touch targets */
+        height: 30px; /* Increased height for better touch targets */
     }
     
     .nav-toggle-icon {
-        font-size: 14px; /* Adjusted font size for small mobile */
+        font-size: 20px; /* Adjusted font size for better visibility */
         /* Reverted positioning changes */
+    }
+    
+    /* Mobile grid layout - one column */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 30px; /* Reduced gap for mobile */
+    }
+    
+    /* Creative Playground grid - one column on mobile */
+    .creative-playground-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 30px; /* Reduced gap for mobile */
     }
 }
 
