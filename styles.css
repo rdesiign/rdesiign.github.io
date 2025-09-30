@@ -1344,12 +1344,12 @@ footer {
 
 @media (max-width: 768px) {
     #intro.section {
-        padding: 75vh 0 0 0; /* Increased padding to account for larger banner */
+        padding: 70vh 0 0 0; /* Adjusted padding to account for banner */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 20px; /* Add some breathing space between banner and text */
+        margin-top: 45px; /* Add breathing space between banner and text */
     }
 
     #intro-typewriter h1 {
@@ -1363,10 +1363,13 @@ footer {
     }
 
     #showreel-banner {
-        min-height: 75vh; /* Further increased to cover more of the screen */
-        padding: 15px; /* Reduced padding for mobile */
+        min-height: 65vh; /* Reduced to prevent cutoff while maintaining size */
+        padding: 35px; /* Increased padding to prevent content cutoff */
         width: calc(100vw - 4px); /* Full width with 2px offset on each side */
         margin: 2px auto; /* 2px offset on all sides */
+        background-size: cover; /* Ensure image covers the entire banner */
+        background-position: center center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent image repetition */
     }
     
     /* Ensure navbar elements stay in a single line on mobile */
@@ -1415,12 +1418,12 @@ footer {
 
 @media (max-width: 480px) {
     #intro.section {
-        padding: 75vh 0 0 0; /* Increased padding for small mobile */
+        padding: 70vh 0 0 0; /* Adjusted padding for small mobile */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 15px; /* Add some breathing space between banner and text */
+        margin-top: 40px; /* Add breathing space between banner and text */
     }
 
     #intro-typewriter h1 {
@@ -1434,10 +1437,13 @@ footer {
     }
 
     #showreel-banner {
-        min-height: 75vh; /* Further increased to cover more of the screen */
-        padding: 10px; /* Reduced padding for small mobile */
+        min-height: 65vh; /* Reduced to prevent cutoff while maintaining size */
+        padding: 30px; /* Increased padding to prevent content cutoff */
         width: calc(100vw - 4px); /* Full width with 2px offset on each side */
         margin: 2px auto; /* 2px offset on all sides */
+        background-size: cover; /* Ensure image covers the entire banner */
+        background-position: center center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent image repetition */
     }
 
     .showreel-placeholder {
