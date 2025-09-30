@@ -30,6 +30,11 @@ function preloadImages() {
 
 // Navigation toggle functionality
 function initializeNavigationToggle() {
+    // Only initialize desktop navigation on screens wider than 768px
+    if (window.innerWidth <= 768) {
+        return;
+    }
+    
     const navToggle = document.getElementById('nav-toggle');
     const navContainer = document.getElementById('nav-container');
     const navbar = document.getElementById('main-navbar');
@@ -62,6 +67,76 @@ function initializeNavigationToggle() {
     }
 }
 
+// Mobile Navigation Popup Functionality
+function initializeMobileNavigation() {
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileNavPopup = document.getElementById('mobile-nav-popup');
+    const mobileNavClose = document.getElementById('mobile-nav-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const mainThemeToggle = document.getElementById('theme-toggle');
+    
+    // Function to open mobile nav popup
+    function openMobileNav() {
+        mobileNavPopup.classList.add('active');
+        // Prevent body scroll when popup is open
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Function to close mobile nav popup
+    function closeMobileNav() {
+        mobileNavPopup.classList.remove('active');
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }
+    
+    // Event listeners for opening/closing the popup
+    if (navToggle) {
+        navToggle.addEventListener('click', function(e) {
+            // Prevent default behavior
+            e.preventDefault();
+            openMobileNav();
+        });
+    }
+    
+    if (mobileNavClose) {
+        mobileNavClose.addEventListener('click', closeMobileNav);
+    }
+    
+    // Close popup when clicking outside the content
+    mobileNavPopup.addEventListener('click', function(e) {
+        if (e.target === mobileNavPopup) {
+            closeMobileNav();
+        }
+    });
+    
+    // Close popup when clicking on any mobile nav link
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNav);
+    });
+    
+    // Sync theme toggle between mobile and desktop
+    if (mobileThemeToggle && mainThemeToggle) {
+        // Update mobile theme toggle when main theme changes
+        mainThemeToggle.addEventListener('click', function() {
+            // Small delay to ensure the theme change has been processed
+            setTimeout(() => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                updateThemeIcon(currentTheme);
+            }, 10);
+        });
+        
+        // Update main theme toggle when mobile theme changes
+        mobileThemeToggle.addEventListener('click', function() {
+            // Trigger click on main theme toggle
+            mainThemeToggle.click();
+            // Update mobile theme icon
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            updateThemeIcon(currentTheme);
+        });
+    }
+}
+
 // Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Main app initialization');
@@ -84,6 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize navigation toggle
     initializeNavigationToggle();
+    
+    // Initialize mobile navigation
+    initializeMobileNavigation();
     
     initializeComponents();
     initializeNavigation();
@@ -147,6 +225,7 @@ function initializeComponents() {
 // Theme toggle functionality
 function initializeTheme() {
     const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
     
     // Set the initial theme
@@ -155,21 +234,29 @@ function initializeTheme() {
     // Update icon based on current theme
     updateThemeIcon(currentTheme);
     
-    // Add event listener to toggle theme
+    // Function to toggle theme
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Update the theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        // Update the icon
+        updateThemeIcon(newTheme);
+        
+        // Save the theme to localStorage
+        localStorage.setItem('theme', newTheme);
+    }
+    
+    // Add event listener to desktop theme toggle
     if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            // Update the theme
-            document.documentElement.setAttribute('data-theme', newTheme);
-            
-            // Update the icon
-            updateThemeIcon(newTheme);
-            
-            // Save the theme to localStorage
-            localStorage.setItem('theme', newTheme);
-        });
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Add event listener to mobile theme toggle
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', toggleTheme);
     }
 }
 
