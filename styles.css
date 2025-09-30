@@ -695,7 +695,7 @@ body {
 .mobile-nav-toggle {
     position: fixed;
     top: 20px;
-    left: 70px; /* Position to the right of the logo */
+    right: 20px; /* Position on the right side of the screen */
     width: 40px;
     height: 40px;
     background: rgba(10, 10, 10, 0.8);
@@ -803,7 +803,7 @@ body {
     /* Adjust positioning for mobile */
     .mobile-nav-toggle {
         top: 20px;
-        left: 70px; /* Position to the right of the logo */
+        right: 20px; /* Position on the right side of the screen */
     }
 }
 
@@ -812,7 +812,7 @@ body {
         width: 30px;
         height: 30px;
         top: 15px;
-        left: 65px; /* Adjust for smaller screens */
+        right: 15px; /* Adjust for smaller screens */
         font-size: 20px;
     }
     
@@ -1344,27 +1344,27 @@ footer {
 
 @media (max-width: 768px) {
     #intro.section {
-        padding: 50vh 0 0 0; /* Adjusted padding to account for larger banner */
+        padding: 75vh 0 0 0; /* Increased padding to account for larger banner */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 20px; /* Further reduce space on mobile */
+        margin-top: 20px; /* Add some breathing space between banner and text */
     }
 
     #intro-typewriter h1 {
-        font-size: clamp(1.5rem, 5vw, 2.2rem); /* Enlarged font size for mobile */
+        font-size: clamp(1.5rem, 5vw, 2.2rem); /* Keep current font size */
         height: 1.3em; /* Adjust height */
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(1rem, 3vw, 1.3rem); /* Enlarged font size for mobile */
+        font-size: clamp(1rem, 3vw, 1.3rem); /* Keep current font size */
         height: 1.5em; /* Adjust height */
     }
 
     #showreel-banner {
-        min-height: 50vh; /* Cover almost half the screen */
-        padding: 30px; /* Reduced padding for mobile */
+        min-height: 75vh; /* Further increased to cover more of the screen */
+        padding: 15px; /* Reduced padding for mobile */
         width: calc(100vw - 4px); /* Full width with 2px offset on each side */
         margin: 2px auto; /* 2px offset on all sides */
     }
@@ -1415,27 +1415,27 @@ footer {
 
 @media (max-width: 480px) {
     #intro.section {
-        padding: 50vh 0 0 0; /* Adjusted padding for small mobile */
+        padding: 75vh 0 0 0; /* Increased padding for small mobile */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 15px; /* Further reduce space on small mobile */
+        margin-top: 15px; /* Add some breathing space between banner and text */
     }
 
     #intro-typewriter h1 {
-        font-size: clamp(1.3rem, 6vw, 2rem); /* Further enlarged font size for small mobile */
+        font-size: clamp(1.3rem, 6vw, 2rem); /* Keep current font size */
         height: 1.2em; /* Adjust height */
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(0.9rem, 4vw, 1.1rem); /* Further enlarged font size for small mobile */
+        font-size: clamp(0.9rem, 4vw, 1.1rem); /* Keep current font size */
         height: 1.4em; /* Adjust height */
     }
 
     #showreel-banner {
-        min-height: 50vh; /* Cover almost half the screen */
-        padding: 20px; /* Reduced padding for small mobile */
+        min-height: 75vh; /* Further increased to cover more of the screen */
+        padding: 10px; /* Reduced padding for small mobile */
         width: calc(100vw - 4px); /* Full width with 2px offset on each side */
         margin: 2px auto; /* 2px offset on all sides */
     }
