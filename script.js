@@ -47,7 +47,10 @@ function initializeNavigationToggle() {
         navLinks.forEach(link => link.style.display = 'none');
         if (themeToggle) themeToggle.style.display = 'none';
         
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function(e) {
+            // Prevent default behavior
+            e.preventDefault();
+            
             // Toggle expanded class on navbar
             navbar.classList.toggle('expanded');
             
@@ -116,7 +119,8 @@ function initializeMobileNavigation() {
     }
     
     // Event listeners for opening/closing the popup
-    if (navToggle) {
+    // Only add this listener on mobile devices
+    if (navToggle && window.innerWidth <= 768) {
         navToggle.addEventListener('click', function(e) {
             // Prevent default behavior
             e.preventDefault();
@@ -259,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('resize', function() {
     // Re-initialize navigation toggle on resize
     initializeNavigationToggle();
+    initializeMobileNavigation();
     
     // Close mobile navigation popup if window is resized to desktop view
     if (window.innerWidth > 768) {
