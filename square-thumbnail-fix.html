@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Thumbnail Fix Test</title>
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    <style>
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .abstract-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .abstract-grid-row {
+            display: contents;
+        }
+        
+        .abstract-grid-row.first .project-col-left {
+            grid-row: 1;
+            grid-column: 1;
+        }
+        
+        .abstract-grid-row.first .project-col-right {
+            grid-row: 1;
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .abstract-grid-row.second .project-col-left {
+            grid-row: 2;
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .abstract-grid-row.second .project-col-right {
+            grid-row: 2;
+            grid-column: 2;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            height: 100%;
+            display: block;
+            box-sizing: border-box;
+        }
+        
+        .project-image-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            display: block;
+            box-sizing: border-box;
+            line-height: 0;
+        }
+        
+        .project-image-container.square {
+            padding-bottom: 100%; /* 1:1 aspect ratio */
+        }
+        
+        .project-image-container.landscape {
+            padding-bottom: 50%; /* 2:1 aspect ratio */
+        }
+        
+        .project-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            object-position: center;
+            display: block;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-content h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .project-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .abstract-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .abstract-grid-row {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Square Thumbnail Fix Test</h1>
+        
+        <div class="abstract-grid">
+            <!-- First Row -->
+            <div class="abstract-grid-row first">
+                <!-- Left Column: 1:1 Aspect Ratio Thumbnail -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <img src="Projects/Headphone/Headphone concept 1.png" alt="Headphone Concept" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Headphone Concept</h3>
+                                    <p>Industrial design exploration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM8.png" alt="Headway - Migraine Medication Management System" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Headway</h3>
+                                    <p>Migraine Medication Management System</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM1.png" alt="Sustainable Furniture" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Sustainable Furniture</h3>
+                                    <p>Modular workspace system made from recycled materials</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="abstract-grid-row second">
+                <!-- Left Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM1.png" alt="New Landscape Project 2" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>New Landscape Project 2</h3>
+                                    <p>Project description will go here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Assets/square.png" alt="Square Image" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Square Image</h3>
+                                    <p>Project description will go here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: 1:1 Aspect Ratio Thumbnail -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <img src="Assets/square.png" alt="New Portrait Project" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>New Portrait Project</h3>
+                                    <p>Project description will go here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract Grid Demo - Pinterest Style</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* Abstract Grid Layout for Project Thumbnails - Pinterest Style */
+        .abstract-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        .abstract-grid-row {
+            display: contents;
+        }
+
+        /* First row pattern */
+        .abstract-grid-row.first .project-col-left {
+            grid-row: 1;
+            grid-column: 1;
+        }
+
+        .abstract-grid-row.first .project-col-right {
+            grid-row: 1;
+            grid-column: 2;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Second row pattern */
+        .abstract-grid-row.second .project-col-left {
+            grid-row: 2;
+            grid-column: 1;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .abstract-grid-row.second .project-col-right {
+            grid-row: 2;
+            grid-column: 2;
+        }
+
+        /* Project column styling */
+        .project-col-left,
+        .project-col-right {
+            display: block;
+        }
+
+        /* 1:1 Aspect Ratio Container (Square) */
+        .project-col-left .project-image-container.square,
+        .project-col-right .project-image-container.square {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* 2:1 Aspect Ratio Container (Landscape) */
+        .project-col-left .project-image-container.landscape,
+        .project-col-right .project-image-container.landscape {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 50%; /* 2:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* Project image styling */
+        .project-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover .project-image {
+            filter: blur(2px);
+        }
+
+        /* Project overlay styling */
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            width: 70%;
+            max-width: 350px;
+        }
+
+        .project-content h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tag {
+            background: rgba(6, 182, 212, 0.3);
+            color: #06b6d4;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design for Abstract Grid */
+        @media (max-width: 768px) {
+            .abstract-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .abstract-grid-row {
+                display: block;
+            }
+            
+            .abstract-grid-row.first .project-col-left,
+            .abstract-grid-row.first .project-col-right,
+            .abstract-grid-row.second .project-col-left,
+            .abstract-grid-row.second .project-col-right {
+                display: block;
+                margin-bottom: 20px;
+            }
+            
+            .project-col-right {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            /* Reset aspect ratios for mobile */
+            .project-image-container.square,
+            .project-image-container.landscape {
+                padding-bottom: 75%; /* Standard 4:3 aspect ratio for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .abstract-grid {
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .abstract-grid-row.first .project-col-left,
+            .abstract-grid-row.first .project-col-right,
+            .abstract-grid-row.second .project-col-left,
+            .abstract-grid-row.second .project-col-right {
+                margin-bottom: 20px;
+            }
+            
+            .project-content {
+                width: 80%;
+                max-width: none;
+            }
+            
+            .project-content h3 {
+                font-size: 20px;
+            }
+            
+            .project-content p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Abstract Grid Pattern - Pinterest Style</h1>
+        <p style="text-align: center; margin-bottom: 30px;">All gaps between images are equidistant at 20px</p>
+        
+        <div class="abstract-grid">
+            <!-- First Row -->
+            <div class="abstract-grid-row first">
+                <!-- Left Column: 1:1 Aspect Ratio Thumbnail -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <img src="Projects/Headphone/Headphone concept 1.png" alt="Headphone Concept" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Headphone Concept</h3>
+                                    <p>Industrial design exploration</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Product Design</span>
+                                        <span class="project-tag">Industrial Design</span>
+                                        <span class="project-tag">Audio</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM8.png" alt="Headway - Migraine Medication Management System" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Headway</h3>
+                                    <p>Migraine Medication Management System</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Product Design</span>
+                                        <span class="project-tag">UI/UX</span>
+                                        <span class="project-tag">Healthcare</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM1.png" alt="Sustainable Furniture" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Sustainable Furniture</h3>
+                                    <p>Modular workspace system made from recycled materials</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Furniture</span>
+                                        <span class="project-tag">Sustainability</span>
+                                        <span class="project-tag">Modular Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="abstract-grid-row second">
+                <!-- Left Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Projects/MMM/MMM1.png" alt="New Landscape Project 2" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>New Landscape Project 2</h3>
+                                    <p>Project description will go here</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Furniture</span>
+                                        <span class="project-tag">Sustainability</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <img src="Assets/square.png" alt="Square Image" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Square Image</h3>
+                                    <p>Project description will go here</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Product Design</span>
+                                        <span class="project-tag">Industrial Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: 1:1 Aspect Ratio Thumbnail -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <img src="Projects/Headphone/Headphone concept 1.png" alt="New Portrait Project" class="project-image">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>New Portrait Project</h3>
+                                    <p>Project description will go here</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Product Design</span>
+                                        <span class="project-tag">Industrial Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

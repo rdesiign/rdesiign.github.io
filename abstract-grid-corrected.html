@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract Grid Pattern - Corrected Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #aaa;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Abstract Grid Layout for Project Thumbnails - Pinterest Style */
+        .abstract-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .abstract-grid-row {
+            display: contents;
+        }
+
+        /* First row pattern */
+        .abstract-grid-row.first .project-col-left {
+            grid-row: 1;
+            grid-column: 1;
+        }
+
+        .abstract-grid-row.first .project-col-right {
+            grid-row: 1;
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Second row pattern */
+        .abstract-grid-row.second .project-col-left {
+            grid-row: 2;
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .abstract-grid-row.second .project-col-right {
+            grid-row: 2;
+            grid-column: 2;
+        }
+
+        /* Project column styling */
+        .project-col-left,
+        .project-col-right {
+            display: block;
+        }
+
+        /* 1:1 Aspect Ratio Container (Square) */
+        .project-col-left .project-image-container.square,
+        .project-col-right .project-image-container.square {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+        }
+
+        /* 2:1 Aspect Ratio Container (Landscape) */
+        .project-col-left .project-image-container.landscape,
+        .project-col-right .project-image-container.landscape {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 50%; /* 2:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+        }
+
+        /* Project image styling */
+        .project-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover .project-image {
+            filter: blur(2px);
+        }
+
+        /* Responsive Design for Abstract Grid */
+        @media (max-width: 768px) {
+            .abstract-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .abstract-grid-row {
+                display: block;
+            }
+            
+            .abstract-grid-row.first .project-col-left,
+            .abstract-grid-row.first .project-col-right,
+            .abstract-grid-row.second .project-col-left,
+            .abstract-grid-row.second .project-col-right {
+                display: block;
+                margin-bottom: 20px;
+            }
+            
+            .project-col-right {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            /* Reset aspect ratios for mobile */
+            .project-image-container.square,
+            .project-image-container.landscape {
+                padding-bottom: 75%; /* Standard 4:3 aspect ratio for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .abstract-grid {
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .abstract-grid-row.first .project-col-left,
+            .abstract-grid-row.first .project-col-right,
+            .abstract-grid-row.second .project-col-left,
+            .abstract-grid-row.second .project-col-right {
+                margin-bottom: 20px;
+            }
+            
+            .project-col-right {
+                gap: 20px;
+            }
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .instructions h2 {
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Abstract Grid Pattern - Corrected Version</h1>
+        <p class="description">All gaps between images are now equidistant at exactly 20px</p>
+        
+        <div class="abstract-grid">
+            <!-- First Row -->
+            <div class="abstract-grid-row first">
+                <!-- Left Column: 1:1 Aspect Ratio Thumbnail (Headphone Project) -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #6a11cb, #2575fc); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Headphone Project
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Landscape Project 1
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Landscape Project 2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="abstract-grid-row second">
+                <!-- Left Column: Two 2:1 Landscape Thumbnails Stacked -->
+                <div class="project-col-left">
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #43e97b, #38f9d7); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Landscape Project 3
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image-container landscape">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #fa709a, #fee140); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Landscape Project 4
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: 1:1 Aspect Ratio Thumbnail -->
+                <div class="project-col-right">
+                    <div class="project-card">
+                        <div class="project-image-container square">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #30cfd0, #330867); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                Portrait Project
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>Implementation Details</h2>
+            <ul>
+                <li>All gaps between images are exactly 20px</li>
+                <li>First row: Left column has 1:1 aspect ratio (square), right column has two 2:1 landscape images stacked vertically</li>
+                <li>Second row: Left column has two 2:1 landscape images stacked vertically, right column has 1:1 aspect ratio (square)</li>
+                <li>Used flexbox for vertical stacking within columns to ensure consistent 20px gaps</li>
+                <li>Used CSS Grid for the main layout with 20px gap between columns</li>
+                <li>Fully responsive with consistent spacing on all screen sizes</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

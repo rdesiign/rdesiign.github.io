@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isolated Square Thumbnail Test</title>
+    <style>
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .square-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* 1:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            display: block;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .square-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .test-item {
+            margin-bottom: 20px;
+        }
+        
+        .test-label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Isolated Square Thumbnail Test</h1>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <div class="test-label">Headphone Concept</div>
+                <div class="square-container">
+                    <img src="Projects/Headphone/Headphone concept 1.png" alt="Headphone Concept" class="square-image">
+                </div>
+            </div>
+            
+            <div class="test-item">
+                <div class="test-label">New Portrait Project</div>
+                <div class="square-container">
+                    <img src="Assets/square.png" alt="New Portrait Project" class="square-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

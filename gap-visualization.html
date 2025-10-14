@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Visualization - Abstract Grid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #aaa;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Visualization Container */
+        .visualization {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        /* Abstract Grid Layout */
+        .abstract-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Grid items */
+        .grid-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Square items */
+        .square {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Landscape items */
+        .landscape {
+            aspect-ratio: 2 / 1;
+        }
+
+        /* Stacked items container */
+        .stacked {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Gap indicators */
+        .gap-indicator {
+            position: absolute;
+            background-color: rgba(255, 107, 53, 0.7);
+            z-index: 10;
+        }
+
+        /* Horizontal gap indicator */
+        .horizontal-gap {
+            height: 4px;
+            width: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Vertical gap indicator */
+        .vertical-gap {
+            width: 4px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Labels */
+        .label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 20;
+        }
+
+        .top-label {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .left-label {
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .center-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .instructions h2 {
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* Color coding */
+        .headphone { background: linear-gradient(45deg, #6a11cb, #2575fc); }
+        .landscape1 { background: linear-gradient(45deg, #f093fb, #f5576c); }
+        .landscape2 { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+        .landscape3 { background: linear-gradient(45deg, #43e97b, #38f9d7); }
+        .landscape4 { background: linear-gradient(45deg, #fa709a, #fee140); }
+        .portrait { background: linear-gradient(45deg, #30cfd0, #330867); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gap Visualization - Abstract Grid</h1>
+        <p class="description">Demonstrating equidistant 20px gaps between all project thumbnails</p>
+        
+        <div class="visualization">
+            <div class="abstract-grid">
+                <!-- First Row -->
+                <div class="grid-item square headphone">
+                    <div class="center-label">Headphone<br>Project</div>
+                </div>
+                
+                <div class="stacked">
+                    <div class="grid-item landscape landscape1">
+                        <div class="center-label">Landscape<br>Project 1</div>
+                    </div>
+                    <div class="grid-item landscape landscape2">
+                        <div class="center-label">Landscape<br>Project 2</div>
+                        <!-- Gap indicator between this and headphone project -->
+                        <div class="gap-indicator horizontal-gap"></div>
+                        <div class="label top-label">20px</div>
+                    </div>
+                </div>
+                
+                <!-- Second Row -->
+                <div class="stacked">
+                    <div class="grid-item landscape landscape3">
+                        <div class="center-label">Landscape<br>Project 3</div>
+                    </div>
+                    <div class="grid-item landscape landscape4">
+                        <div class="center-label">Landscape<br>Project 4</div>
+                    </div>
+                </div>
+                
+                <div class="grid-item square portrait">
+                    <div class="center-label">Portrait<br>Project</div>
+                </div>
+            </div>
+            
+            <!-- Gap indicators for grid columns -->
+            <div class="gap-indicator vertical-gap" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            <div class="label top-label" style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%);">20px</div>
+        </div>
+        
+        <div class="instructions">
+            <h2>Implementation Details</h2>
+            <ul>
+                <li><strong>All gaps are exactly 20px:</strong> Both horizontal and vertical gaps between all elements</li>
+                <li><strong>First row:</strong> Left column has 1:1 aspect ratio (square), right column has two 2:1 landscape images stacked vertically</li>
+                <li><strong>Second row:</strong> Left column has two 2:1 landscape images stacked vertically, right column has 1:1 aspect ratio (square)</li>
+                <li><strong>Implementation approach:</strong> 
+                    <ul>
+                        <li>CSS Grid for main layout with 20px gap between columns</li>
+                        <li>Flexbox with 20px gap for vertical stacking within columns</li>
+                        <li>Aspect ratios maintained with aspect-ratio property</li>
+                    </ul>
+                </li>
+                <li><strong>Responsive:</strong> Maintains consistent 20px gaps on all screen sizes</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1275,6 +1275,8 @@ footer {
     margin: 0 auto 0 0; /* Align to the left edge */
     padding: 0; /* Remove padding to align with left edge of thumbnails */
     margin-top: 30px; /* Reduced from 50px to 30px to reduce space */
+    transform: scale(1.5); /* Scale up the typing animation by 1.5 */
+    transform-origin: left top; /* Scale from top-left corner */
 }
 
 #intro-typewriter h1 {
@@ -1470,6 +1472,7 @@ footer {
     border-radius: 8px;
     /* Uniform square aspect ratio for all projects */
     padding-bottom: 100%;
+    line-height: 0;
 }
 
 .project-image {
@@ -1511,7 +1514,7 @@ footer {
     max-width: 350px;
 }
 
-.project-content h3 {
+.projects-masonry .project-content h3 {
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 8px;
@@ -1522,23 +1525,21 @@ footer {
 .project-content p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
+}
+
+}
+
     margin-bottom: 15px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Project tags have been removed as per user request */
 .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: none;
 }
 
 .project-tag {
-    background: rgba(6, 182, 212, 0.3);
-    color: var(--accent-primary);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+    display: none;
 }
 
 .projects-masonry {
@@ -1620,7 +1621,7 @@ footer {
 .projects-masonry .project-content h3 {
     font-size: 24px;
     font-weight: 400;
-    margin-bottom: 8px;
+    margin-bottom: 15px; /* Increased from 8px to 15px for more breathing space */
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -1632,19 +1633,13 @@ footer {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Project tags have been removed as per user request */
 .projects-masonry .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: none;
 }
 
 .projects-masonry .project-tag {
-    background: rgba(6, 182, 212, 0.3);
-    color: var(--accent-primary);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+    display: none;
 }
 
 /* Responsive Design for Masonry Layout */
@@ -1686,6 +1681,339 @@ footer {
     }
     
     .projects-masonry .project-content p {
+        font-size: 14px;
+    }
+}
+
+/* Abstract Grid Layout for Project Thumbnails - Pinterest Style */
+.abstract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.abstract-grid-row {
+    display: contents;
+}
+
+.abstract-grid-row.first .project-col-left {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.abstract-grid-row.first .project-col-right {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.abstract-grid-row.second .project-col-left {
+    grid-row: 2;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.abstract-grid-row.second .project-col-right .project-card {
+    position: relative;
+    top: -45px; /* Shift higher to create exactly 20px gap with Sustainable Furniture project */
+}
+
+.abstract-grid-row.second .project-col-right {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+/* Ensure proper alignment of project columns */
+.project-col-left,
+.project-col-right {
+    display: block;
+}
+
+/* Ensure proper height for project columns */
+.project-col-left .project-card,
+.project-col-right .project-card {
+    height: 100%;
+    display: block;
+}
+
+/* Align bottom edges of square and landscape images */
+.project-col-left .project-image-container.square,
+.project-col-right .project-image-container.square {
+    height: 100%;
+    padding-bottom: 0;
+    line-height: 0;
+}
+
+.project-col-left .project-card .project-image-container.square,
+.project-col-right .project-card .project-image-container.square {
+    height: 100%;
+    padding-bottom: 0;
+    line-height: 0;
+}
+
+/* Ensure proper alignment of project columns */
+.project-col-left,
+.project-col-right {
+    display: block;
+}
+
+/* Project column styling */
+.project-col-left,
+.project-col-right {
+    display: block;
+}
+
+/* Ensure proper height for project columns */
+.project-col-left .project-card,
+.project-col-right .project-card {
+    height: 100%;
+    display: block;
+}
+
+/* 1:1 Aspect Ratio Container (Square) */
+.project-col-left .project-image-container.square,
+.project-col-right .project-image-container.square {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 110%; /* Slightly larger than 1:1 to better align with 20px gap */
+    overflow: hidden;
+    border-radius: 8px;
+    display: block;
+    box-sizing: border-box;
+    line-height: 0;
+    z-index: 1;
+}
+
+/* Square images should be centered and fill container */
+.project-col-left .project-image-container.square .project-image,
+.project-col-right .project-image-container.square .project-image {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+/* Ensure square containers align properly with landscape containers */
+.project-col-left .project-card .project-image-container.square,
+.project-col-right .project-card .project-image-container.square {
+    height: 0;
+    padding-bottom: 110%; /* Slightly larger than 1:1 to better align with 20px gap */
+}
+
+/* 2:1 Aspect Ratio Container (Landscape) */
+.project-col-left .project-image-container.landscape,
+.project-col-right .project-image-container.landscape {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%; /* 2:1 aspect ratio */
+    overflow: hidden;
+    border-radius: 8px;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Landscape images should be centered and fill container */
+.project-col-left .project-image-container.landscape .project-image,
+.project-col-right .project-image-container.landscape .project-image {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Project image styling */
+.project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    display: block;
+    object-position: center;
+    z-index: 1;
+}
+
+/* Specific styling for square project images */
+.project-image-container.square .project-image {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Specific styling for project cards with square images */
+.project-col-left .project-card,
+.project-col-right .project-card {
+    height: auto;
+    display: block;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.project-card:hover .project-image {
+    filter: blur(2px);
+}
+
+/* Project overlay styling */
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-content {
+    color: white;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    width: 70%;
+    max-width: 350px;
+    position: relative;
+    z-index: 3;
+}
+
+.project-content h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 16px; /* Increased breathing space between heading and subtext */
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.project-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tag {
+    background: rgba(6, 182, 212, 0.3);
+    color: var(--accent-primary);
+    padding: 8px 16px; /* Increased padding to make tags less thin */
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    /* Ensure consistent sizing during hover transitions */
+    transition: none;
+}
+
+/* Responsive Design for Abstract Grid */
+@media (max-width: 768px) {
+    .abstract-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .abstract-grid-row {
+        display: block;
+    }
+    
+    .abstract-grid-row.first .project-col-left,
+    .abstract-grid-row.first .project-col-right,
+    .abstract-grid-row.second .project-col-left,
+    .abstract-grid-row.second .project-col-right {
+        display: block;
+        margin-bottom: 20px;
+    }
+    
+    .project-col-right {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    /* Reset aspect ratios for mobile */
+    .project-image-container.square,
+    .project-image-container.landscape {
+        padding-bottom: 75%; /* Standard 4:3 aspect ratio for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .abstract-grid {
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .abstract-grid-row.first .project-col-left,
+    .abstract-grid-row.first .project-col-right,
+    .abstract-grid-row.second .project-col-left,
+    .abstract-grid-row.second .project-col-right {
+        margin-bottom: 20px;
+    }
+    
+    .project-col-right {
+        gap: 20px;
+    }
+    
+    .project-content {
+        width: 80%;
+        max-width: none;
+    }
+    
+    .project-content h3 {
+        font-size: 20px;
+    }
+    
+    .project-content p {
         font-size: 14px;
     }
 }
@@ -1833,6 +2161,8 @@ footer {
         padding: 0; /* Remove padding to maintain alignment */
         margin-top: 45px; /* Add breathing space between banner and text */
     }
+}
+
 
     #intro-typewriter h1 {
         font-size: clamp(1.6rem, 5vw, 2.2rem); /* Slightly reduced font size */
