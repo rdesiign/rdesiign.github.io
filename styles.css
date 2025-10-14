@@ -70,7 +70,7 @@
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
-    --dot-color: rgba(255, 255, 255, 0.2); /* White dots for dark mode */
+    --dot-color: rgba(255, 255, 255, 0.1); /* Reduced opacity for white grid lines in dark mode */
     transition: all 0.3s ease;
 }
 
@@ -88,7 +88,7 @@
     --card-bg: rgba(255, 255, 255, 0.9);
     --card-border: rgba(0, 0, 0, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --dot-color: rgba(0, 0, 0, 0.2); /* Black dots for light mode */
+    --dot-color: rgba(0, 0, 0, 0.1); /* Reduced opacity for black grid lines in light mode */
     transition: all 0.3s ease;
 }
 
@@ -115,9 +115,11 @@ body {
     cursor: none;
     margin: 0; /* Ensure no default body margin */
     padding: 0; /* Ensure no default body padding */
-    /* Add dotted grid background */
-    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
-    background-size: 40px 40px; /* Further reduced density from 30px to 40px */
+    /* Add square grid background */
+    background-image: 
+        linear-gradient(var(--dot-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--dot-color) 1px, transparent 1px);
+    background-size: 40px 40px; /* Square grid with 40px spacing */
     background-position: 0 0;
 }
 
@@ -979,7 +981,7 @@ body {
 }
 
 #intro-typewriter h1 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Reduced font size for the main heading */
+    font-size: clamp(1.8rem, 4.5vw, 3rem); /* Slightly reduced font size for the main heading */
     font-weight: 700; /* Bold for "Hello! I'm Rishi" */
     margin: 0 0 0 0; /* Removed all margin to minimize space between heading and subtext as much as possible */
     padding: 0; /* Remove padding */
@@ -995,7 +997,7 @@ body {
 }
 
 #intro-typewriter h2 {
-    font-size: clamp(1rem, 2vw, 1.2rem); /* Reduced font size for the subtitle */
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem); /* Slightly reduced font size for the subtitle */
     font-weight: 400; /* Regular/light for most of the text */
     margin: -0.5em 0 0 0; /* Increased negative top margin to pull closer to h1 */
     padding: 0; /* Remove padding */
@@ -1292,6 +1294,36 @@ footer {
     vertical-align: baseline;
 }
 
+/* Blinking animation for status dot only */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Style for location and status content */
+.location-status-content {
+    margin-top: 30px; /* Increased from 20px to 30px for more breathing space */
+}
+
+.status-content {
+    margin-top: 30px; /* Increased from 20px to 30px for more breathing space */
+}
+
+.status-dot {
+    animation: blink 1s infinite;
+}
+
+.blinking-dot {
+    animation: blink 1s infinite;
+    color: var(--accent-secondary); /* Orange color */
+    margin-right: 8px;
+}
+
+.bold-white .blinking-dot {
+    color: var(--accent-secondary); /* Orange color */
+    animation: blink 1s infinite;
+}
+
 /* Bold styling for specific words */
 .bold-word {
   font-weight: 700 !important;
@@ -1316,11 +1348,6 @@ footer {
   color: #ff6b35 !important; /* Orange color */
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
 /* Ensure cursor visibility */
 .blinking-cursor {
     visibility: visible !important;
@@ -1334,11 +1361,11 @@ footer {
         padding: 80px; /* Reduced padding for tablet */
     }
     #intro-typewriter h1 {
-        font-size: clamp(1.3rem, 3.5vw, 2rem); /* Adjusted for tablet */
+        font-size: clamp(1.6rem, 3.5vw, 2.5rem); /* Adjusted for tablet */
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(0.9rem, 1.8vw, 1rem); /* Adjusted for tablet */
+        font-size: clamp(1rem, 1.8vw, 1.2rem); /* Adjusted for tablet */
     }
 }
 
@@ -1353,12 +1380,12 @@ footer {
     }
 
     #intro-typewriter h1 {
-        font-size: clamp(1.5rem, 5vw, 2.2rem); /* Keep current font size */
+        font-size: clamp(1.6rem, 5vw, 2.2rem); /* Slightly reduced font size */
         height: 1.3em; /* Adjust height */
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(1rem, 3vw, 1.3rem); /* Keep current font size */
+        font-size: clamp(1rem, 3vw, 1.2rem); /* Slightly reduced font size */
         height: 1.5em; /* Adjust height */
     }
 

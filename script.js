@@ -732,7 +732,7 @@ function triggerIntroAnimation() {
             
             // Define the content that should be typed
             const originalHeading1 = "Hello! I'm Rishi.";
-            const originalHeading2 = 'I design to make the complex simple and the simple exciting.';
+            const originalHeading2 = 'I design to make the complex simple and the simple exciting. Based in  ●Delft, The Netherlands';
             
             // Create cursor element
             const cursorElement = document.createElement('span');
@@ -833,25 +833,35 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         
         // Special handling for the text with HTML tags
         // We need to type "I design to make the " first
-        // Then add the "complex" span (normal weight)
+        // Then add the "complex" span (normal weight as requested)
         // Then add " "
-        // Then add the "simple" span (bold, white)
-        // Then add " "
-        // Then add the "simple" span (light, normal color)
-        // Then add " "
-        // Then add the "exciting" span (bold, white)
+        // Then add the "simple" span (bold as requested)
+        // Then add " and the "
+        // Then add the "simple" span (normal weight as requested)
+        // Then add ","
+        // Then add the "exciting" span (bold)
         // Then add "."
+        // Then add line break
+        // Then add "Based in "
+        // Then add the blinking orange dot
+        // Then add " "
+        // Then add the "Delft, The Netherlands" span (bold)
         
         const parts = [
                 { text: "I design to make the ", type: "plain" },
-                { text: "complex", type: "normal" },
+                { text: "complex", type: "normal" }, // Changed to normal as requested
                 { text: " ", type: "plain" },
-                { text: "simple", type: "bold-white" },
+                { text: "simple", type: "bold" }, // Changed to bold as requested
                 { text: " and the ", type: "plain" },
-                { text: "simple", type: "light-normal" },
+                { text: "simple", type: "normal" }, // Changed to normal as requested (unbolded)
+                { text: ",", type: "plain" },
                 { text: " ", type: "plain" },
-                { text: "exciting", type: "bold-white" },
-                { text: ".", type: "plain" }
+                { text: "exciting", type: "bold" }, // Keep bold
+                { text: ".", type: "plain" },
+                { text: " ", type: "linebreak" },
+                { text: "Based in ", type: "plain" },
+                { text: " ●", type: "blinking-dot" }, // Orange blinking dot - moved space before dot
+                { text: "Delft, The Netherlands", type: "bold" } // Keep bold
             ];
         
         let currentPartIndex = 0;
@@ -865,7 +875,8 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         function typeNextPart() {
             if (currentPartIndex >= parts.length) {
                 // Animation complete - ensure the full text is displayed
-                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="light-normal">simple</span> <span class="bold-white">exciting</span>.';
+                // Updated to reflect the new bolding requirements and fixed spacing
+                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span>, <span class="bold-white">exciting</span>.<br>Based in <span class="blinking-dot"> ●</span><span class="bold-white">Delft, The Netherlands</span>';
                 
                 // Position cursor at the end and ensure it continues blinking
                 if (cursorElement.parentNode) {
@@ -894,7 +905,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 // Ensure all spans are visible after animation
                 const normalWeights = heading2.querySelectorAll('.normal-weight');
                 const boldWhites = heading2.querySelectorAll('.bold-white');
-                const lightNormals = heading2.querySelectorAll('.light-normal');
+                const blinkingDots = heading2.querySelectorAll('.blinking-dot');
                 
                 normalWeights.forEach(normal => {
                     normal.style.opacity = '1';
@@ -904,9 +915,12 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                     bold.style.opacity = '1';
                 });
                 
-                lightNormals.forEach(light => {
-                    light.style.opacity = '1';
+                blinkingDots.forEach(dot => {
+                    dot.style.opacity = '1';
                 });
+                
+                // Add the blinking dot content after the typing animation
+                addLocationAndStatusContent();
                 
                 return;
             }
@@ -928,28 +942,31 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                     if (currentPartCharIndex === currentPart.text.length - 1) {
                         accumulatedHTML += '</span>';
                     }
-                } else if (currentPart.type === "bold-white") {
-                    // For the first character of a bold-white section, add the opening span tag
+                } else if (currentPart.type === "bold") {
+                    // For the first character of a bold section, add the opening span tag
                     if (currentPartCharIndex === 0) {
                         accumulatedHTML += '<span class="bold-white">';
                     }
                     // Add the current character
                     accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a bold-white section, add the closing span tag
+                    // For the last character of a bold section, add the closing span tag
                     if (currentPartCharIndex === currentPart.text.length - 1) {
                         accumulatedHTML += '</span>';
                     }
-                } else if (currentPart.type === "light-normal") {
-                    // For the first character of a light-normal section, add the opening span tag
+                } else if (currentPart.type === "blinking-dot") {
+                    // For the first character of a blinking dot section, add the opening span tag
                     if (currentPartCharIndex === 0) {
-                        accumulatedHTML += '<span class="light-normal">';
+                        accumulatedHTML += '<span class="blinking-dot">';
                     }
                     // Add the current character
                     accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a light-normal section, add the closing span tag
+                    // For the last character of a blinking dot section, add the closing span tag
                     if (currentPartCharIndex === currentPart.text.length - 1) {
                         accumulatedHTML += '</span>';
                     }
+                } else if (currentPart.type === "linebreak") {
+                    // Add line break
+                    accumulatedHTML += '<br>';
                 }
                 
                 // Update the heading content
@@ -961,7 +978,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 }
                 
                 // For styled text, we need to append the cursor to the last span
-                if (currentPart.type === "plain") {
+                if (currentPart.type === "plain" || currentPart.type === "linebreak") {
                     heading2.appendChild(cursorElement);
                 } else {
                     // Find the last span element and append cursor to it
@@ -995,6 +1012,27 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
     
     // Start the animation with heading1
     typeHeading1();
+}
+
+// Function to add the location and status content after the typing animation
+function addLocationAndStatusContent() {
+    const typewriterContainer = document.getElementById('intro-typewriter');
+    
+    // Create a new div for the blinking dot only
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'status-content';
+    statusDiv.style.marginTop = '30px'; // Keep the breathing space
+    statusDiv.style.opacity = '0';
+    statusDiv.style.transition = 'opacity 0.5s ease-in-out';
+    statusDiv.style.color = 'var(--text-secondary)';
+    
+    // Add the new content to the typewriter container
+    typewriterContainer.appendChild(statusDiv);
+    
+    // Fade in the content after a short delay
+    setTimeout(() => {
+        statusDiv.style.opacity = '1';
+    }, 500);
 }
 
 // Check if profile picture is in viewport
