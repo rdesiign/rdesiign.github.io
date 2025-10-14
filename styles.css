@@ -668,28 +668,326 @@ body {
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
-/* Logo Square */
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling on html element */
+}
+
+body {
+    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden; /* Already present, but reinforcing */
+    position: relative;
+    /* Hide default cursor */
+    cursor: none;
+    margin: 0; /* Ensure no default body margin */
+    padding: 0; /* Ensure no default body padding */
+    /* Add dotted grid background */
+    background-image: 
+        radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 40px 40px; /* Dotted grid with 40px spacing */
+    background-position: 0 0;
+    width: 100vw; /* Ensure body doesn't extend beyond viewport */
+    max-width: 100vw; /* Prevent overflow */
+}
+
+/* Ensure all containers respect viewport width */
+.container {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Showreel Banner Styles - Fixed to prevent horizontal overflow */
+#showreel-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: 40px; /* Uniform padding on all sides */
+    box-sizing: border-box;
+    min-height: 700px; /* Reduced height to create breathing space */
+    width: 100vw; /* Full viewport width */
+    max-width: 100vw; /* Prevent overflow */
+    margin: 0; /* No margin to ensure it touches the edges */
+    position: absolute; /* Keep only absolute positioning */
+    top: 0;
+    left: 0;
+    /* Ensure it's above other content */
+    z-index: 200; /* Increase z-index to ensure it's above other elements */
+    overflow: hidden; /* Ensure video doesn't overflow */
+    /* Use the image as background */
+    background-image: url('./Projects/MMM/MMM8.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Projects Grid - Ensure it doesn't cause horizontal overflow */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ensure project cards don't overflow */
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+/* Floating Navigation Bar - Ensure it doesn't cause overflow */
+.floating-navbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    transform: none;
+    z-index: 1000;
+    background: transparent;
+    border: none;
+    border-radius: 20px;
+    padding: 0;
+    transition: all 0.6s ease;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+    max-width: calc(100vw - 40px); /* Prevent overflow */
+    width: 40px;
+    justify-content: flex-end;
+    margin: 0;
+    box-sizing: border-box;
+    visibility: visible !important;
+    z-index: 1500;
+    flex-wrap: nowrap;
+    height: 40px;
+    transform: none;
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* Logo Square - Ensure it doesn't cause overflow */
 .logo-circle {
     position: fixed;
     top: 20px;
     left: 20px;
     width: 40px;
     height: 40px;
-    background: rgba(10, 10, 10, 0.8); /* Same transparency as navbar */
+    background: rgba(10, 10, 10, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 0; /* Make it a square */
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1500;
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    transition: all 0.6s ease;
+    max-width: calc(100vw - 40px); /* Prevent overflow */
+    overflow: hidden; /* Prevent content overflow */
 }
 
-.logo-text {
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 700;
-    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+/* Contact Icons - Ensure they don't cause overflow */
+.contact-icons-vertical {
+    position: fixed;
+    top: 76px;
+    right: 20px;
+    left: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+    max-width: calc(100vw - 40px); /* Prevent overflow */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* Mobile Navigation Popup - Ensure it doesn't cause overflow */
+.mobile-nav-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: none;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    max-width: 100vw; /* Prevent overflow */
+}
+
+/* Ensure all sections respect viewport width */
+.section {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding: 80px 0;
+}
+
+/* Intro Section */
+#intro.section {
+    padding: 760px 0 0 0;
+    text-align: left;
+    opacity: 1;
+    min-height: auto;
+    height: auto;
+    position: relative;
+    z-index: 110;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Projects Section */
+#projects.section {
+    padding: 100px 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* About Section */
+#about.section {
+    padding: 120px 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Experience Section */
+#experience.section {
+    padding: 100px 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Contact Section */
+#contact.section {
+    padding: 100px 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-tertiary);
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Responsive Design - Ensure no horizontal overflow on smaller screens */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100vw;
+        max-width: 100vw;
+    }
+    
+    .container {
+        max-width: 100vw;
+        overflow-x: hidden;
+        padding: 0 15px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 15px;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .floating-navbar {
+        max-width: calc(100vw - 30px);
+    }
+    
+    .logo-circle {
+        max-width: calc(100vw - 30px);
+    }
+    
+    .contact-icons-vertical {
+        max-width: calc(100vw - 30px);
+    }
+    
+    .section {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    #showreel-banner {
+        max-width: 100vw;
+        width: 100vw;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden;
+        width: 100vw;
+        max-width: 100vw;
+    }
+    
+    .container {
+        max-width: 100vw;
+        overflow-x: hidden;
+        padding: 0 10px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .floating-navbar {
+        max-width: calc(100vw - 20px);
+    }
+    
+    .logo-circle {
+        max-width: calc(100vw - 20px);
+    }
+    
+    .contact-icons-vertical {
+        max-width: calc(100vw - 20px);
+    }
+    
+    #showreel-banner {
+        max-width: 100vw;
+        width: 100vw;
+        padding: 15px;
+    }
 }
 
 /* Mobile Navigation Toggle Button */
@@ -1123,48 +1421,29 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px; /* Reduced gap between items */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 15px;
     width: 100%;
 }
 
-/* Special layout for the first project row */
+/* Simplified project row layout for uniform grid */
 .project-row {
     grid-column: 1 / 3;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     gap: 20px;
 }
 
-.project-col-left {
-    grid-column: 1;
-    grid-row: 1 / 3;
-}
-
-.project-col-right {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px;
-}
-
-/* Mirrored layout classes */
-.project-col-left.mirrored {
-    grid-column: 2;
-    grid-row: 1 / 3;
-}
-
-.project-col-right.mirrored {
-    grid-column: 1;
-    grid-row: 1 / 3;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px;
+.project-col-left,
+.project-col-right,
+.project-row.second-row .project-col-left,
+.project-row.second-row .project-col-right {
+    grid-column: auto;
+    grid-row: auto;
+    display: block;
 }
 
 .project-card {
@@ -1175,7 +1454,7 @@ body {
     box-shadow: 0 4px 12px var(--shadow-color);
     position: relative;
     width: 100%;
-    border-radius: 8px; /* Added border-radius for rounded corners */
+    border-radius: 8px;
 }
 
 .project-card:hover {
@@ -1188,26 +1467,9 @@ body {
     width: 100%;
     height: 0;
     overflow: hidden;
-    border-radius: 8px; /* Added border-radius for rounded corners */
-}
-
-/* Portrait orientation (left column) - square aspect ratio */
-.project-col-left .project-image-container {
-    padding-bottom: 100%; /* Square aspect ratio (1:1) */
-}
-
-/* Landscape orientation (right column) - each image has width equal to height of left image */
-.project-col-right .project-image-container {
-    padding-bottom: calc(50% - 10px); /* Adjust for gap */
-}
-
-/* Mirrored layout aspect ratios */
-.project-col-left.mirrored .project-image-container {
-    padding-bottom: calc(50% - 10px); /* Landscape orientation */
-}
-
-.project-col-right.mirrored .project-image-container {
-    padding-bottom: 100%; /* Portrait orientation */
+    border-radius: 8px;
+    /* Uniform square aspect ratio for all projects */
+    padding-bottom: 100%;
 }
 
 .project-image {
@@ -1218,21 +1480,20 @@ body {
     height: 100%;
     object-fit: cover;
     transition: all 0.3s ease;
-    /* Add image optimization */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
 }
 
 .project-card:hover .project-image {
-    filter: blur(2px); /* Slight blur on hover */
+    filter: blur(2px);
 }
 
 .project-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%; /* Cover full width */
-    background: transparent; /* No background */
+    width: 100%;
+    background: transparent;
     padding: 20px;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -1246,23 +1507,23 @@ body {
     color: white;
     transform: translateY(0);
     transition: transform 0.3s ease;
-    width: 70%; /* Layout covers ~70% width */
-    max-width: 350px; /* Max width without overwhelming the image */
+    width: 70%;
+    max-width: 350px;
 }
 
 .project-content h3 {
-    font-size: 24px; /* Slightly larger font */
-    font-weight: 400; /* Changed from 600 to 400 to unbold */
+    font-size: 24px;
+    font-weight: 400;
     margin-bottom: 8px;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Restore text shadow for better readability */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .project-content p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin-bottom: 15px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Restore text shadow for better readability */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .project-tags {
@@ -1272,12 +1533,161 @@ body {
 }
 
 .project-tag {
-    background: rgba(6, 182, 212, 0.3); /* Translucent teal background */
-    color: var(--accent-primary); /* Teal color text */
+    background: rgba(6, 182, 212, 0.3);
+    color: var(--accent-primary);
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
+}
+
+.projects-masonry {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.projects-masonry .project-card {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 300px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.projects-masonry .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.projects-masonry .project-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* 4:3 aspect ratio */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.projects-masonry .project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.projects-masonry .project-card:hover .project-image {
+    filter: blur(2px);
+}
+
+.projects-masonry .project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.projects-masonry .project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.projects-masonry .project-content {
+    color: white;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    width: 70%;
+    max-width: 350px;
+}
+
+.projects-masonry .project-content h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.projects-masonry .project-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.projects-masonry .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.projects-masonry .project-tag {
+    background: rgba(6, 182, 212, 0.3);
+    color: var(--accent-primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Responsive Design for Masonry Layout */
+@media (max-width: 768px) {
+    .projects-masonry {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .projects-masonry .project-card {
+        flex: 1 1 100%;
+        min-width: unset;
+        margin-bottom: 0;
+    }
+    
+    .projects-masonry .project-image-container {
+        padding-bottom: 75%; /* Maintain 4:3 aspect ratio on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-masonry {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .projects-masonry .project-card {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
+    
+    .projects-masonry .project-content {
+        width: 80%;
+        max-width: none;
+    }
+    
+    .projects-masonry .project-content h3 {
+        font-size: 20px;
+    }
+    
+    .projects-masonry .project-content p {
+        font-size: 14px;
+    }
 }
 
 /* About Section */
