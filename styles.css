@@ -115,11 +115,10 @@ body {
     cursor: none;
     margin: 0; /* Ensure no default body margin */
     padding: 0; /* Ensure no default body padding */
-    /* Add square grid background */
+    /* Add dotted grid background */
     background-image: 
-        linear-gradient(var(--dot-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--dot-color) 1px, transparent 1px);
-    background-size: 40px 40px; /* Square grid with 40px spacing */
+        radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 40px 40px; /* Dotted grid with 40px spacing */
     background-position: 0 0;
 }
 
@@ -1124,23 +1123,34 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-    gap: 40px; /* Consistent gap for both rows and columns */
-    max-width: 1400px; /* Increased to match container width */
-    margin: 0 auto; /* Center the grid */
-    padding: 0 20px; /* Add padding to match intro content */
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px; /* Reduced gap between items */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
     width: 100%;
 }
 
-/* Creative Playground grid - 3 items per row */
-.creative-playground-grid {
+/* Special layout for the first project row */
+.project-row {
+    grid-column: 1 / 3;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px; /* Consistent gap for both rows and columns */
-    max-width: 1400px; /* Match project grid content width */
-    margin: 0 auto; /* Center the grid */
-    padding: 0 20px; /* Add padding to match intro content */
-    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+}
+
+.project-col-left {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+.project-col-right {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
 }
 
 .project-card {
@@ -1151,7 +1161,7 @@ body {
     box-shadow: 0 4px 12px var(--shadow-color);
     position: relative;
     width: 100%;
-    /* Remove max-width and margin that were causing alignment issues */
+    border-radius: 8px; /* Added border-radius for rounded corners */
 }
 
 .project-card:hover {
@@ -1163,8 +1173,18 @@ body {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 75%; /* 4:3 aspect ratio */
     overflow: hidden;
+    border-radius: 8px; /* Added border-radius for rounded corners */
+}
+
+/* Portrait orientation (left column) - square aspect ratio */
+.project-col-left .project-image-container {
+    padding-bottom: 100%; /* Square aspect ratio (1:1) */
+}
+
+/* Landscape orientation (right column) - each image has width equal to height of left image */
+.project-col-right .project-image-container {
+    padding-bottom: calc(50% - 10px); /* Adjust for gap */
 }
 
 .project-image {
@@ -1203,6 +1223,8 @@ body {
     color: white;
     transform: translateY(0);
     transition: transform 0.3s ease;
+    width: 70%; /* Layout covers ~70% width */
+    max-width: 350px; /* Max width without overwhelming the image */
 }
 
 .project-content h3 {
@@ -1233,6 +1255,17 @@ body {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
+}
+
+/* Creative Playground grid - 3 items per row */
+.creative-playground-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 20px; /* Reduced gap between items */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
 }
 
 /* About Section */
@@ -1433,13 +1466,37 @@ footer {
     /* Mobile grid layout - one column */
     .projects-grid {
         grid-template-columns: 1fr; /* Single column layout */
-        gap: 30px; /* Reduced gap for mobile */
+        grid-template-rows: auto;
+        gap: 15px; /* Reduced gap for mobile */
+    }
+    
+    .projects-grid .project-row {
+        display: contents;
+    }
+    
+    .projects-grid .project-col-left,
+    .projects-grid .project-col-right {
+        grid-row: auto;
+        grid-column: auto;
+        display: block;
+    }
+    
+    .projects-grid .project-col-right {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Reset aspect ratios for mobile */
+    .project-col-left .project-image-container,
+    .project-col-right .project-image-container {
+        padding-bottom: 75%; /* Standard 4:3 aspect ratio for mobile */
     }
     
     /* Creative Playground grid - one column on mobile */
     .creative-playground-grid {
         grid-template-columns: 1fr; /* Single column layout */
-        gap: 30px; /* Reduced gap for mobile */
+        gap: 15px; /* Reduced gap for mobile */
     }
 }
 
@@ -1520,13 +1577,20 @@ footer {
     /* Mobile grid layout - one column */
     .projects-grid {
         grid-template-columns: 1fr; /* Single column layout */
-        gap: 30px; /* Reduced gap for mobile */
+        grid-template-rows: auto;
+        gap: 15px; /* Reduced gap for mobile */
+    }
+    
+    .projects-grid .project-col-right {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     /* Creative Playground grid - one column on mobile */
     .creative-playground-grid {
         grid-template-columns: 1fr; /* Single column layout */
-        gap: 30px; /* Reduced gap for mobile */
+        gap: 15px; /* Reduced gap for mobile */
     }
 }
 

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
+
 import http.server
 import socketserver
 import os
 
-PORT = 8088  # Changed to port 8088
-Handler = http.server.SimpleHTTPRequestHandler
+# Change to a different port
+PORT = 8089
 
-# Change to the directory where the script is located
+# Set the directory to serve files from
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+Handler = http.server.SimpleHTTPRequestHandler
+
+print(f"Serving at http://localhost:{PORT}")
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at http://localhost:{PORT}")
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer stopped.")
+    httpd.serve_forever()
