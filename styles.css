@@ -70,7 +70,7 @@
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
-    --dot-color: rgba(255, 255, 255, 0.1); /* Reduced opacity for white grid lines in dark mode */
+    --dot-color: rgba(255, 255, 255, 0.15); /* Increased opacity for more visible white grid lines in dark mode */
     transition: all 0.3s ease;
 }
 
@@ -88,7 +88,7 @@
     --card-bg: rgba(255, 255, 255, 0.9);
     --card-border: rgba(0, 0, 0, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --dot-color: rgba(0, 0, 0, 0.1); /* Reduced opacity for black grid lines in light mode */
+    --dot-color: rgba(0, 0, 0, 0.15); /* Increased opacity for more visible black grid lines in light mode */
     transition: all 0.3s ease;
 }
 
