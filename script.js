@@ -28,200 +28,6 @@ function preloadImages() {
     });
 }
 
-// Navigation toggle functionality
-function initializeNavigationToggle() {
-    // Only initialize desktop navigation on screens wider than 768px
-    if (window.innerWidth <= 768) {
-        return;
-    }
-    
-    const navToggle = document.getElementById('nav-toggle');
-    const navContainer = document.getElementById('nav-container');
-    const navbar = document.getElementById('main-navbar');
-    const navToggleIcon = document.querySelector('.nav-toggle-icon');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    if (navToggle && navContainer && navbar) {
-        // Initially hide navigation links and theme toggle
-        navLinks.forEach(link => link.style.display = 'none');
-        if (themeToggle) themeToggle.style.display = 'none';
-        
-        navToggle.addEventListener('click', function(e) {
-            // Prevent default behavior
-            e.preventDefault();
-            
-            // Toggle expanded class on navbar
-            navbar.classList.toggle('expanded');
-            
-            // Toggle navigation links and theme toggle visibility
-            if (navbar.classList.contains('expanded')) {
-                // Show all navigation elements
-                navLinks.forEach(link => link.style.display = 'flex');
-                if (themeToggle) themeToggle.style.display = 'flex';
-                navToggleIcon.textContent = '−'; // Minus sign
-            } else {
-                // Hide navigation links and theme toggle, keep nav-toggle visible
-                navLinks.forEach(link => link.style.display = 'none');
-                if (themeToggle) themeToggle.style.display = 'none';
-                navToggleIcon.textContent = '+'; // Plus sign
-            }
-        });
-    }
-}
-
-// Mobile Navigation Popup Functionality
-function initializeMobileNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-    const mobileNavPopup = document.getElementById('mobile-nav-popup');
-    const mobileNavClose = document.getElementById('mobile-nav-close');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    const mainThemeToggle = document.getElementById('theme-toggle');
-    
-    // Function to open mobile nav popup
-    function openMobileNav() {
-        mobileNavPopup.classList.add('active');
-        // Prevent body scroll when popup is open
-        document.body.style.overflow = 'hidden';
-        // Change mobile toggle icon to minus
-        if (mobileNavToggle) {
-            const icon = mobileNavToggle.querySelector('.mobile-nav-toggle-icon');
-            if (icon) {
-                icon.textContent = '−'; // Minus sign
-            }
-        }
-        // Focus the close button for accessibility
-        if (mobileNavClose) {
-            mobileNavClose.focus();
-        }
-    }
-    
-    // Function to close mobile nav popup
-    function closeMobileNav() {
-        mobileNavPopup.classList.remove('active');
-        // Restore body scroll
-        document.body.style.overflow = '';
-        // Change mobile toggle icon back to plus
-        if (mobileNavToggle) {
-            const icon = mobileNavToggle.querySelector('.mobile-nav-toggle-icon');
-            if (icon) {
-                icon.textContent = '+'; // Plus sign
-            }
-        }
-        // Return focus to the nav toggle button
-        if (mobileNavToggle && mobileNavToggle.style.display !== 'none') {
-            mobileNavToggle.focus();
-        } else if (navToggle && navToggle.style.display !== 'none') {
-            navToggle.focus();
-        }
-    }
-    
-    // Event listeners for opening/closing the popup
-    // Only add this listener on mobile devices
-    if (navToggle && window.innerWidth <= 768) {
-        navToggle.addEventListener('click', function(e) {
-            // Prevent default behavior
-            e.preventDefault();
-            openMobileNav();
-        });
-    }
-    
-    // Mobile nav toggle button event listener
-    if (mobileNavToggle) {
-        mobileNavToggle.addEventListener('click', function(e) {
-            // Prevent default behavior
-            e.preventDefault();
-            // Toggle mobile nav popup
-            if (mobileNavPopup.classList.contains('active')) {
-                closeMobileNav();
-            } else {
-                openMobileNav();
-            }
-        });
-    }
-    
-    if (mobileNavClose) {
-        mobileNavClose.addEventListener('click', closeMobileNav);
-    }
-    
-    // Close popup when clicking outside the content
-    mobileNavPopup.addEventListener('click', function(e) {
-        if (e.target === mobileNavPopup) {
-            closeMobileNav();
-        }
-    });
-    
-    // Close popup with Escape key
-    mobileNavPopup.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeMobileNav();
-        }
-    });
-    
-    // Close popup and handle navigation when clicking on any mobile nav link
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Close the popup first
-            closeMobileNav();
-            
-            // Handle internal page navigation
-            const sectionId = this.getAttribute('data-section');
-            
-            // Handle external links (About) - let them navigate normally
-            if (sectionId === 'about') {
-                return; // Let it navigate normally
-            }
-            
-            // Handle links that don't have a corresponding section on this page
-            const targetSection = document.getElementById(sectionId);
-            if (!targetSection) {
-                return; // Let it navigate normally (e.g., to another page)
-            }
-            
-            e.preventDefault();
-            
-            // Find target section
-            if (targetSection) {
-                // Calculate offset (account for navbar height)
-                const navbar = document.getElementById('main-navbar');
-                let offsetTop = targetSection.offsetTop;
-                if (navbar) {
-                    offsetTop -= navbar.offsetHeight + 20;
-                }
-                
-                // Smooth scroll to section
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Sync theme toggle between mobile and desktop
-    if (mobileThemeToggle && mainThemeToggle) {
-        // Update mobile theme toggle when main theme changes
-        mainThemeToggle.addEventListener('click', function() {
-            // Small delay to ensure the theme change has been processed
-            setTimeout(() => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                updateThemeIcon(currentTheme);
-            }, 10);
-        });
-        
-        // Update main theme toggle when mobile theme changes
-        mobileThemeToggle.addEventListener('click', function() {
-            // Trigger click on main theme toggle
-            mainThemeToggle.click();
-            // Update mobile theme icon
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            updateThemeIcon(currentTheme);
-        });
-    }
-}
-
 // Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Main app initialization');
@@ -242,47 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preload critical images
     preloadImages();
     
-    // Initialize navigation toggle
-    initializeNavigationToggle();
-    
-    // Initialize mobile navigation
-    initializeMobileNavigation();
-    
     initializeComponents();
-    initializeNavigation();
     initializeContactForm();
     initializeGraphBackground();
     initializeShowreelBanner(); // Add this line
+    initializeNavigation(); // Add navigation initialization
     
     } catch (error) {
         console.error('Error in main initialization:', error);
-    }
-});
-
-// Handle window resize to initialize appropriate navigation
-window.addEventListener('resize', function() {
-    // Re-initialize navigation toggle on resize
-    initializeNavigationToggle();
-    initializeMobileNavigation();
-    
-    // Close mobile navigation popup if window is resized to desktop view
-    if (window.innerWidth > 768) {
-        const mobileNavPopup = document.getElementById('mobile-nav-popup');
-        if (mobileNavPopup && mobileNavPopup.classList.contains('active')) {
-            mobileNavPopup.classList.remove('active');
-            // Restore body scroll
-            document.body.style.overflow = '';
-        }
-    }
-    
-    // Show/hide mobile nav toggle based on screen size
-    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-    if (mobileNavToggle) {
-        if (window.innerWidth <= 768) {
-            mobileNavToggle.style.display = 'flex';
-        } else {
-            mobileNavToggle.style.display = 'none';
-        }
     }
 });
 
@@ -334,6 +107,145 @@ function initializeComponents() {
     initializeTheme();
 }
 
+// Navigation functionality
+function initializeNavigation() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const expandedNav = document.getElementById('expanded-nav');
+    
+    // Initially hide the nav-close button
+    if (navClose) {
+        navClose.style.display = 'none';
+    }
+    
+    if (navToggle) {
+        navToggle.addEventListener('click', function() {
+            // Toggle navigation visibility
+            if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
+                // Expand navigation
+                expandedNav.style.display = 'flex';
+                // Hide the nav toggle button
+                navToggle.style.display = 'none';
+                // Show the nav close button
+                if (navClose) {
+                    navClose.style.display = 'flex';
+                }
+            }
+        });
+    }
+    
+    if (navClose) {
+        navClose.addEventListener('click', function() {
+            // Collapse navigation
+            expandedNav.style.display = 'none';
+            // Show the nav toggle button
+            if (navToggle) {
+                navToggle.style.display = 'flex';
+            }
+            // Hide the nav close button
+            navClose.style.display = 'none';
+        });
+    }
+    
+    // Close navigation when clicking outside
+    document.addEventListener('click', function(event) {
+        if (expandedNav && expandedNav.style.display === 'flex') {
+            const isClickInsideNav = navToggle.contains(event.target) || 
+                                   (navClose && navClose.contains(event.target)) || 
+                                   expandedNav.contains(event.target);
+            if (!isClickInsideNav) {
+                expandedNav.style.display = 'none';
+                // Show the nav toggle button
+                if (navToggle) {
+                    navToggle.style.display = 'flex';
+                }
+                // Hide the nav close button
+                if (navClose) {
+                    navClose.style.display = 'none';
+                }
+            }
+        }
+    });
+    
+    // Add scroll event listener for navigation highlighting (only on index.html)
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+        window.addEventListener('scroll', highlightNavigation);
+        
+        // Initial highlight check
+        highlightNavigation();
+    }
+    
+    // Add smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only prevent default for anchor links on the same page
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Remove active class from all links
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+// Function to highlight navigation based on scroll position (only for index.html)
+function highlightNavigation() {
+    // Only run on index.html
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        return;
+    }
+    
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const scrollPos = window.scrollY + 200; // Offset for better highlighting
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        // Special handling for intro section
+        if (sectionId === 'intro') {
+            // For intro section, highlight when at the top of the page
+            if (scrollPos <= sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#intro' || link.textContent === 'Home') {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        } 
+        // For other sections
+        else if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
 // Theme toggle functionality
 function initializeTheme() {
     const themeToggle = document.getElementById('theme-toggle');
@@ -374,199 +286,16 @@ function initializeTheme() {
 
 // Function to update theme icon based on current theme
 function updateThemeIcon(theme) {
-    // The icon is now handled purely by CSS based on the data-theme attribute
-    // This function is kept for consistency but doesn't need to do anything
-    console.log('Theme updated to:', theme);
-}
-
-// Navigation functionality
-function initializeNavigation() {
-    // Check if we're on the about page
-    if (window.IS_ABOUT_PAGE) {
-        console.log('Navigation initialization skipped for about page');
-        return;
-    }
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
     
-    console.log('Initializing navigation');
-    // Get navigation elements
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.getElementById('main-navbar');
-    
-    if (navLinks.length === 0) {
-        console.log('No navigation links found');
+    if (theme === 'light') {
+        if (sunIcon) sunIcon.style.display = 'none';
+        if (moonIcon) moonIcon.style.display = 'block';
     } else {
-        console.log('Found', navLinks.length, 'navigation links');
+        if (sunIcon) sunIcon.style.display = 'block';
+        if (moonIcon) moonIcon.style.display = 'none';
     }
-    
-    if (!navbar) {
-        console.log('Navbar not found');
-    } else {
-        console.log('Navbar found');
-    }
-    
-    // Function to update active link based on scroll position
-    function updateActiveLink() {
-        // Check if we're on the about page
-        if (window.IS_ABOUT_PAGE) {
-            console.log('updateActiveLink skipped for about page');
-            return;
-        }
-        
-        try {
-            console.log('Updating active link');
-            // Remove active class from all links first
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                console.log('Removed active class from', link.textContent);
-            });
-            
-            // Get current scroll position
-            const scrollPos = window.scrollY + 100; // Small offset for better detection
-            
-            // Define sections in the order they appear in the page
-            const sections = [
-                { id: 'intro', element: document.getElementById('intro') },
-                { id: 'projects', element: document.getElementById('projects') },
-                { id: 'experience', element: document.getElementById('experience') }
-                // Removed contact section from navigation
-            ].filter(section => {
-                const exists = section.element !== null;
-                console.log(`Section ${section.id} exists: ${exists}`);
-                return exists;
-            }); // // Filter out any sections that don't exist
-            
-            console.log('Sections to check:', sections.map(s => s.id));
-            
-            // Log section positions for debugging
-            sections.forEach(section => {
-                if (section.element) {
-                    const sectionTop = section.element.offsetTop;
-                    const sectionBottom = sectionTop + section.element.offsetHeight;
-                    console.log(`Section ${section.id}: top=${sectionTop}, bottom=${sectionBottom}, height=${section.element.offsetHeight}`);
-                }
-            });
-            
-            // Find the section that's currently in view
-            let activeSection = null;
-            
-            // Check if we're at the top of the page (for home/intro section)
-            if (window.scrollY < 100) {
-                activeSection = 'intro';
-                console.log('Near top, activating intro section');
-            } else {
-                // Check sections from top to bottom to find the first one that's in view
-                for (let i = 0; i < sections.length; i++) {
-                    const section = sections[i];
-                    if (section.element) {
-                        const sectionTop = section.element.offsetTop;
-                        const sectionBottom = sectionTop + section.element.offsetHeight;
-                        
-                        console.log(`Checking section ${section.id}: top=${sectionTop}, bottom=${sectionBottom}, scrollPos=${scrollPos}`);
-                        
-                        // Check if the section is in view
-                        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                            activeSection = section.id;
-                            console.log('Found active section:', activeSection);
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            // Only set an active link if we found a section in view
-            if (activeSection) {
-                // Add active class to the corresponding link
-                const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                    console.log('Added active class to', activeLink.textContent);
-                } else {
-                    // Fallback: if no data-section link found, try to match by href
-                    const fallbackLink = document.querySelector(`.nav-link[href="#${activeSection}"]`);
-                    if (fallbackLink) {
-                        fallbackLink.classList.add('active');
-                        console.log('Added active class to fallback link', fallbackLink.textContent);
-                    } else {
-                        console.log('No link found for section', activeSection);
-                    }
-                }
-            } else {
-                console.log('No active section found');
-                // If no section is active, default to projects when at top of page
-                if (window.scrollY < 200) {
-                    const projectsLink = document.querySelector('.nav-link[data-section="projects"]');
-                    if (projectsLink) {
-                        projectsLink.classList.add('active');
-                        console.log('Added active class to projects link (default at top)');
-                    }
-                }
-            }
-        } catch (error) {
-            console.error('Error in updateActiveLink:', error);
-        }
-    }
-    
-    // Set up scroll listener with throttling
-    let ticking = false;
-    function updateActiveLinkThrottled() {
-        if (!ticking) {
-            requestAnimationFrame(function() {
-                updateActiveLink();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-    
-    window.addEventListener('scroll', updateActiveLinkThrottled);
-    
-    // Set up click handlers for smooth scrolling
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const sectionId = this.getAttribute('data-section');
-            
-            // Handle external links (About) - let them navigate normally
-            if (sectionId === 'about') {
-                return; // Let it navigate normally
-            }
-            
-            // Handle links that don't have a corresponding section on this page
-            const targetSection = document.getElementById(sectionId);
-            if (!targetSection) {
-                return; // Let it navigate normally (e.g., to another page)
-            }
-            
-            e.preventDefault();
-            
-            // Find target section
-            if (targetSection) {
-                // Calculate offset (account for navbar height)
-                let offsetTop = targetSection.offsetTop;
-                if (navbar) {
-                    offsetTop -= navbar.offsetHeight + 20;
-                }
-                
-                // Smooth scroll to section
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-                
-                // Update active link after scroll
-                setTimeout(updateActiveLink, 100);
-            }
-        });
-    });
-    
-    // Initialize on load
-    setTimeout(updateActiveLink, 100);
-    
-    // Update on window resize
-    window.addEventListener('resize', function() {
-        setTimeout(updateActiveLink, 100);
-    });
-    
-    // Theme change listener removed as per user request
 }
 
 // Contact form functionality
@@ -836,7 +565,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         // Then add the "complex" span (normal weight as requested)
         // Then add " "
         // Then add the "simple" span (bold as requested)
-        // Then add " and the "
+        // Then add " "
         // Then add the "simple" span (normal weight as requested)
         // Then add ","
         // Then add the "exciting" span (bold)
@@ -852,7 +581,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 { text: "complex", type: "normal" }, // Changed to normal as requested
                 { text: " ", type: "plain" },
                 { text: "simple", type: "bold" }, // Changed to bold as requested
-                { text: " and the ", type: "plain" },
+                { text: " ", type: "plain" },
                 { text: "simple", type: "normal" }, // Changed to normal as requested (unbolded)
                 { text: ",", type: "plain" },
                 { text: " ", type: "plain" },
@@ -870,9 +599,10 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         
         // Calculate total characters for timing
         const totalChars = parts.reduce((sum, part) => sum + part.text.length, 0);
-        const charDelay = heading2Duration / totalChars;
+        const charDelay = Math.max(25, totalChars > 0 ? heading2Duration / totalChars : 25); // Minimum 25ms delay
         
         function typeNextPart() {
+            // Check if we've completed all parts
             if (currentPartIndex >= parts.length) {
                 // Animation complete - ensure the full text is displayed
                 // Updated to reflect the new bolding requirements and fixed spacing
@@ -927,112 +657,160 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             
             const currentPart = parts[currentPartIndex];
             
-            if (currentPartCharIndex < currentPart.text.length) {
-                // Build the HTML content character by character
-                if (currentPart.type === "plain") {
-                    accumulatedHTML += currentPart.text[currentPartCharIndex];
-                } else if (currentPart.type === "normal") {
-                    // For the first character of a normal section, add the opening span tag
-                    if (currentPartCharIndex === 0) {
-                        accumulatedHTML += '<span class="normal-weight">';
-                    }
-                    // Add the current character
-                    accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a normal section, add the closing span tag
-                    if (currentPartCharIndex === currentPart.text.length - 1) {
-                        accumulatedHTML += '</span>';
-                    }
-                } else if (currentPart.type === "bold") {
-                    // For the first character of a bold section, add the opening span tag
-                    if (currentPartCharIndex === 0) {
-                        accumulatedHTML += '<span class="bold-white">';
-                    }
-                    // Add the current character
-                    accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a bold section, add the closing span tag
-                    if (currentPartCharIndex === currentPart.text.length - 1) {
-                        accumulatedHTML += '</span>';
-                    }
-                } else if (currentPart.type === "blinking-dot") {
-                    // For the first character of a blinking dot section, add the opening span tag
-                    if (currentPartCharIndex === 0) {
-                        accumulatedHTML += '<span class="blinking-dot">';
-                    }
-                    // Add the current character
-                    accumulatedHTML += currentPart.text[currentPartCharIndex];
-                    // For the last character of a blinking dot section, add the closing span tag
-                    if (currentPartCharIndex === currentPart.text.length - 1) {
-                        accumulatedHTML += '</span>';
-                    }
-                } else if (currentPart.type === "linebreak") {
-                    // Add line break
-                    accumulatedHTML += '<br>';
-                }
-                
-                // Update the heading content
-                heading2.innerHTML = accumulatedHTML;
-                
-                // Position cursor correctly based on the current part type
-                if (cursorElement.parentNode) {
-                    cursorElement.parentNode.removeChild(cursorElement);
-                }
-                
-                // For styled text, we need to append the cursor to the last span
-                if (currentPart.type === "plain" || currentPart.type === "linebreak") {
-                    heading2.appendChild(cursorElement);
-                } else {
-                    // Find the last span element and append cursor to it
-                    const spans = heading2.querySelectorAll('span');
-                    if (spans.length > 0) {
-                        const lastSpan = spans[spans.length - 1];
-                        // Only append cursor if we're at the end of that span
-                        if (currentPartCharIndex === currentPart.text.length - 1) {
-                            lastSpan.appendChild(cursorElement);
-                        } else {
-                            // Otherwise append to the heading
-                            heading2.appendChild(cursorElement);
-                        }
-                    } else {
-                        heading2.appendChild(cursorElement);
-                    }
-                }
-                
-                currentPartCharIndex++;
-                setTimeout(typeNextPart, charDelay); // Dynamic timing based on desired duration
-            } else {
-                // Move to next part
+            // Check if we've completed the current part
+            if (currentPartCharIndex >= currentPart.text.length) {
+                // Move to the next part
                 currentPartIndex++;
                 currentPartCharIndex = 0;
-                setTimeout(typeNextPart, charDelay);
+                
+                // If we haven't completed all parts, continue with the next part
+                if (currentPartIndex < parts.length) {
+                    setTimeout(typeNextPart, charDelay);
+                } else {
+                    // We've completed all parts, finalize the animation
+                    // Animation complete - ensure the full text is displayed
+                    heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span>, <span class="bold-white">exciting</span>.<br>Based in <span class="blinking-dot"> ●</span><span class="bold-white">Delft, The Netherlands</span>';
+                    
+                    // Position cursor at the end and ensure it continues blinking
+                    if (cursorElement.parentNode) {
+                        cursorElement.parentNode.removeChild(cursorElement);
+                    }
+                    heading2.appendChild(cursorElement);
+                    
+                    // Ensure cursor is visible and blinking at the end
+                    cursorElement.style.display = 'inline-block';
+                    cursorElement.style.visibility = 'visible';
+                    
+                    // Make sure the blinking animation continues
+                    if (!cursorElement.classList.contains('blinking-cursor')) {
+                        cursorElement.classList.add('blinking-cursor');
+                    }
+                    
+                    // Ensure the animation is not paused
+                    cursorElement.style.animationPlayState = 'running';
+                    
+                    // Fade in the entire intro section
+                    const introSection = document.getElementById('intro');
+                    if (introSection) {
+                        introSection.style.opacity = '1';
+                    }
+                    
+                    // Ensure all spans are visible after animation
+                    const normalWeights = heading2.querySelectorAll('.normal-weight');
+                    const boldWhites = heading2.querySelectorAll('.bold-white');
+                    const blinkingDots = heading2.querySelectorAll('.blinking-dot');
+                    
+                    normalWeights.forEach(normal => {
+                        normal.style.opacity = '1';
+                    });
+                    
+                    boldWhites.forEach(bold => {
+                        bold.style.opacity = '1';
+                    });
+                    
+                    blinkingDots.forEach(dot => {
+                        dot.style.opacity = '1';
+                    });
+                    
+                    // Add the blinking dot content after the typing animation
+                    addLocationAndStatusContent();
+                }
+                return;
             }
+            
+            // Build the HTML content character by character
+            if (currentPart.type === "plain") {
+                accumulatedHTML += currentPart.text[currentPartCharIndex];
+            } else if (currentPart.type === "normal") {
+                // For the first character of a normal section, add the opening span tag
+                if (currentPartCharIndex === 0) {
+                    accumulatedHTML += '<span class="normal-weight">';
+                }
+                // Add the current character
+                accumulatedHTML += currentPart.text[currentPartCharIndex];
+                // For the last character of a normal section, add the closing span tag
+                if (currentPartCharIndex === currentPart.text.length - 1) {
+                    accumulatedHTML += '</span>';
+                }
+            } else if (currentPart.type === "bold") {
+                // For the first character of a bold section, add the opening span tag
+                if (currentPartCharIndex === 0) {
+                    accumulatedHTML += '<span class="bold-white">';
+                }
+                // Add the current character
+                accumulatedHTML += currentPart.text[currentPartCharIndex];
+                // For the last character of a bold section, add the closing span tag
+                if (currentPartCharIndex === currentPart.text.length - 1) {
+                    accumulatedHTML += '</span>';
+                }
+            } else if (currentPart.type === "blinking-dot") {
+                // For the first character of a blinking dot section, add the opening span tag
+                if (currentPartCharIndex === 0) {
+                    accumulatedHTML += '<span class="blinking-dot">';
+                }
+                // Add the current character
+                accumulatedHTML += currentPart.text[currentPartCharIndex];
+                // For the last character of a blinking dot section, add the closing span tag
+                if (currentPartCharIndex === currentPart.text.length - 1) {
+                    accumulatedHTML += '</span>';
+                }
+            } else if (currentPart.type === "linebreak") {
+                // Add line break
+                accumulatedHTML += '<br>';
+            }
+            
+            // Update the heading content
+            heading2.innerHTML = accumulatedHTML;
+            
+            // Position cursor correctly based on the current part type
+            if (cursorElement.parentNode) {
+                cursorElement.parentNode.removeChild(cursorElement);
+            }
+            
+            // For styled text, we need to append the cursor to the last span
+            if (currentPart.type === "plain" || currentPart.type === "linebreak") {
+                heading2.appendChild(cursorElement);
+            } else {
+                // Find the last span element and append cursor to it
+                const spans = heading2.querySelectorAll('span');
+                if (spans.length > 0) {
+                    const lastSpan = spans[spans.length - 1];
+                    // Only append cursor if we're at the end of that span
+                    if (currentPartCharIndex === currentPart.text.length - 1 && 
+                        (currentPart.type === "normal" || currentPart.type === "bold" || currentPart.type === "blinking-dot")) {
+                        lastSpan.appendChild(cursorElement);
+                    } else {
+                        // Otherwise append to the heading
+                        heading2.appendChild(cursorElement);
+                    }
+                } else {
+                    heading2.appendChild(cursorElement);
+                }
+            }
+            
+            currentPartCharIndex++;
+            setTimeout(typeNextPart, charDelay); // Dynamic timing based on desired duration
         }
         
         typeNextPart();
     }
     
-    // Start the animation with heading1
+    // Start the animation
     typeHeading1();
 }
 
-// Function to add the location and status content after the typing animation
+// Add location and status content (blinking dot, etc.)
 function addLocationAndStatusContent() {
-    const typewriterContainer = document.getElementById('intro-typewriter');
-    
-    // Create a new div for the blinking dot only
-    const statusDiv = document.createElement('div');
-    statusDiv.className = 'status-content';
-    statusDiv.style.marginTop = '30px'; // Keep the breathing space
-    statusDiv.style.opacity = '0';
-    statusDiv.style.transition = 'opacity 0.5s ease-in-out';
-    statusDiv.style.color = 'var(--text-secondary)';
-    
-    // Add the new content to the typewriter container
-    typewriterContainer.appendChild(statusDiv);
-    
-    // Fade in the content after a short delay
-    setTimeout(() => {
-        statusDiv.style.opacity = '1';
-    }, 500);
+    // This function is called after the typing animation is complete
+    // It adds the blinking dot and other dynamic content
+    const heading2 = document.querySelector('#intro-typewriter h2');
+    if (heading2) {
+        // Ensure the blinking dot is visible
+        const blinkingDot = heading2.querySelector('.blinking-dot');
+        if (blinkingDot) {
+            blinkingDot.style.opacity = '1';
+        }
+    }
 }
 
 // Check if profile picture is in viewport
