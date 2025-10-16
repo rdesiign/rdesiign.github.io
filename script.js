@@ -590,9 +590,9 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 { text: "exciting", type: "bold" }, // Keep bold
                 { text: ".", type: "plain" },
                 { text: " ", type: "linebreak" },
-                { text: "Based in ", type: "plain" },
+                { text: "Currently based in ", type: "plain" }, // Updated text
                 { text: "●", type: "blinking-dot" },
-                { text: " ", type: "plain" }, // Space after the dot
+                { text: "&nbsp;", type: "plain" }, // Non-breaking space after the dot
                 { text: "Delft, The Netherlands", type: "bold" },
                 { text: "", type: "location-end" } // Closing tag for location-text span
             ];
@@ -609,7 +609,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             // Check if we've completed all parts
             if (currentPartIndex >= parts.length) {
                 // Animation complete - ensure the full text is displayed
-                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
+                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Currently based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
                 
                 // Remove the cursor element entirely after animation is complete
                 if (cursorElement.parentNode) {
@@ -664,7 +664,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 } else {
                     // We've completed all parts, finalize the animation
                     // Animation complete - ensure the full text is displayed
-                    heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
+                    heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Currently based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
                     
                     // Remove the cursor element entirely after animation is complete
                     if (cursorElement.parentNode) {
