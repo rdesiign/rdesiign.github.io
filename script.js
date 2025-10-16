@@ -566,14 +566,16 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
         // Then add " "
         // Then add the "simple" span (bold as requested)
         // Then add " "
+        // Then add the "and the " span (normal weight)
         // Then add the "simple" span (normal weight as requested)
-        // Then add ","
+        // Then add " "
         // Then add the "exciting" span (bold)
         // Then add "."
         // Then add line break
+        // Then add the location text with smaller font size
         // Then add "Based in "
         // Then add the blinking orange dot
-        // Then add " "
+        // Then add " " (space after the dot)
         // Then add the "Delft, The Netherlands" span (bold)
         
         const parts = [
@@ -582,15 +584,17 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 { text: " ", type: "plain" },
                 { text: "simple", type: "bold" }, // Changed to bold as requested
                 { text: " ", type: "plain" },
-                { text: "simple", type: "normal" }, // Changed to normal as requested (unbolded)
-                { text: ",", type: "plain" },
+                { text: "and the ", type: "plain" },
+                { text: "simple", type: "normal" }, // Changed to normal as requested
                 { text: " ", type: "plain" },
                 { text: "exciting", type: "bold" }, // Keep bold
                 { text: ".", type: "plain" },
                 { text: " ", type: "linebreak" },
                 { text: "Based in ", type: "plain" },
-                { text: " ●", type: "blinking-dot" }, // Orange blinking dot - moved space before dot
-                { text: "Delft, The Netherlands", type: "bold" } // Keep bold
+                { text: "●", type: "blinking-dot" },
+                { text: " ", type: "plain" }, // Space after the dot
+                { text: "Delft, The Netherlands", type: "bold" },
+                { text: "", type: "location-end" } // Closing tag for location-text span
             ];
         
         let currentPartIndex = 0;
@@ -605,26 +609,12 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             // Check if we've completed all parts
             if (currentPartIndex >= parts.length) {
                 // Animation complete - ensure the full text is displayed
-                // Updated to reflect the new bolding requirements and fixed spacing
-                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span>, <span class="bold-white">exciting</span>.<br>Based in <span class="blinking-dot"> ●</span><span class="bold-white">Delft, The Netherlands</span>';
+                heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
                 
-                // Position cursor at the end and ensure it continues blinking
+                // Remove the cursor element entirely after animation is complete
                 if (cursorElement.parentNode) {
                     cursorElement.parentNode.removeChild(cursorElement);
                 }
-                heading2.appendChild(cursorElement);
-                
-                // Ensure cursor is visible and blinking at the end
-                cursorElement.style.display = 'inline-block';
-                cursorElement.style.visibility = 'visible';
-                
-                // Make sure the blinking animation continues
-                if (!cursorElement.classList.contains('blinking-cursor')) {
-                    cursorElement.classList.add('blinking-cursor');
-                }
-                
-                // Ensure the animation is not paused
-                cursorElement.style.animationPlayState = 'running';
                 
                 // Fade in the entire intro section
                 const introSection = document.getElementById('intro');
@@ -636,6 +626,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 const normalWeights = heading2.querySelectorAll('.normal-weight');
                 const boldWhites = heading2.querySelectorAll('.bold-white');
                 const blinkingDots = heading2.querySelectorAll('.blinking-dot');
+                const locationTexts = heading2.querySelectorAll('.location-text');
                 
                 normalWeights.forEach(normal => {
                     normal.style.opacity = '1';
@@ -647,6 +638,10 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 
                 blinkingDots.forEach(dot => {
                     dot.style.opacity = '1';
+                });
+                
+                locationTexts.forEach(location => {
+                    location.style.opacity = '1';
                 });
                 
                 // Add the blinking dot content after the typing animation
@@ -669,25 +664,12 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                 } else {
                     // We've completed all parts, finalize the animation
                     // Animation complete - ensure the full text is displayed
-                    heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span>, <span class="bold-white">exciting</span>.<br>Based in <span class="blinking-dot"> ●</span><span class="bold-white">Delft, The Netherlands</span>';
+                    heading2.innerHTML = 'I design to make the <span class="normal-weight">complex</span> <span class="bold-white">simple</span> and the <span class="normal-weight">simple</span> <span class="bold-white">exciting</span>.<br><span class="location-text">Based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span>';
                     
-                    // Position cursor at the end and ensure it continues blinking
+                    // Remove the cursor element entirely after animation is complete
                     if (cursorElement.parentNode) {
                         cursorElement.parentNode.removeChild(cursorElement);
                     }
-                    heading2.appendChild(cursorElement);
-                    
-                    // Ensure cursor is visible and blinking at the end
-                    cursorElement.style.display = 'inline-block';
-                    cursorElement.style.visibility = 'visible';
-                    
-                    // Make sure the blinking animation continues
-                    if (!cursorElement.classList.contains('blinking-cursor')) {
-                        cursorElement.classList.add('blinking-cursor');
-                    }
-                    
-                    // Ensure the animation is not paused
-                    cursorElement.style.animationPlayState = 'running';
                     
                     // Fade in the entire intro section
                     const introSection = document.getElementById('intro');
@@ -699,6 +681,7 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                     const normalWeights = heading2.querySelectorAll('.normal-weight');
                     const boldWhites = heading2.querySelectorAll('.bold-white');
                     const blinkingDots = heading2.querySelectorAll('.blinking-dot');
+                    const locationTexts = heading2.querySelectorAll('.location-text');
                     
                     normalWeights.forEach(normal => {
                         normal.style.opacity = '1';
@@ -712,6 +695,10 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                         dot.style.opacity = '1';
                     });
                     
+                    locationTexts.forEach(location => {
+                        location.style.opacity = '1';
+                    });
+                    
                     // Add the blinking dot content after the typing animation
                     addLocationAndStatusContent();
                 }
@@ -720,7 +707,12 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             
             // Build the HTML content character by character
             if (currentPart.type === "plain") {
-                accumulatedHTML += currentPart.text[currentPartCharIndex];
+                // Handle space characters explicitly to prevent HTML space collapsing
+                if (currentPart.text[currentPartCharIndex] === " ") {
+                    accumulatedHTML += "&nbsp;";
+                } else {
+                    accumulatedHTML += currentPart.text[currentPartCharIndex];
+                }
             } else if (currentPart.type === "normal") {
                 // For the first character of a normal section, add the opening span tag
                 if (currentPartCharIndex === 0) {
@@ -755,8 +747,11 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
                     accumulatedHTML += '</span>';
                 }
             } else if (currentPart.type === "linebreak") {
-                // Add line break
-                accumulatedHTML += '<br>';
+                // Add line break and start the location text span
+                accumulatedHTML += '<br><span class="location-text">';
+            } else if (currentPart.type === "location-end") {
+                // Close the location text span
+                accumulatedHTML += '</span>';
             }
             
             // Update the heading content
@@ -768,8 +763,20 @@ function typeTextWithCursor(elements, texts, cursorElement, duration) {
             }
             
             // For styled text, we need to append the cursor to the last span
-            if (currentPart.type === "plain" || currentPart.type === "linebreak") {
-                heading2.appendChild(cursorElement);
+            if (currentPart.type === "plain" || currentPart.type === "linebreak" || currentPart.type === "location-end") {
+                // For linebreak and location-end, cursor should be appended to the location-text span if it exists
+                if ((currentPart.type === "linebreak" || currentPart.type === "location-end") && currentPartCharIndex === currentPart.text.length - 1) {
+                    const locationSpans = heading2.querySelectorAll('.location-text');
+                    if (locationSpans.length > 0) {
+                        locationSpans[locationSpans.length - 1].appendChild(cursorElement);
+                    } else {
+                        heading2.appendChild(cursorElement);
+                    }
+                } else if (currentPart.type === "plain") {
+                    heading2.appendChild(cursorElement);
+                } else {
+                    heading2.appendChild(cursorElement);
+                }
             } else {
                 // Find the last span element and append cursor to it
                 const spans = heading2.querySelectorAll('span');
@@ -810,6 +817,12 @@ function addLocationAndStatusContent() {
         if (blinkingDot) {
             blinkingDot.style.opacity = '1';
         }
+        
+        // Ensure the location text is visible
+        const locationText = heading2.querySelector('.location-text');
+        if (locationText) {
+            locationText.style.opacity = '1';
+        }
     }
 }
 
@@ -830,7 +843,7 @@ function isProfilePictureInViewport() {
 function isIntroSectionInViewport() {
     const introSection = document.getElementById('intro');
     if (introSection) {
-        const rect = introSection.getBoundingClientRect();
+        const rect = introSection.getBoundingClientRectBoundingClientRect();
         const inViewport = (
             rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
             rect.bottom >= 0

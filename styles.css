@@ -1265,6 +1265,22 @@ footer {
     transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
+/* Location text styling - smaller font size for the third line */
+.location-text {
+    font-size: 0.9rem; /* Even smaller than before */
+    display: inline-block;
+    line-height: 1.2; /* Maintain proper line height */
+}
+/* Location text styling - smaller font size for the third line */
+.location-text {
+    font-size: 0.9rem; /* Even smaller than before */
+    display: inline-block;
+    line-height: 1.2; /* Maintain proper line height */
+}
+
+    -webkit-transform: translateZ(0);
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -1272,11 +1288,15 @@ footer {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 400;
+}
+
 
     font-size: 16px;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+}
+
     text-align: center;
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Use Product Sans */
     letter-spacing: normal; /* Ensure normal letter spacing */
@@ -1883,6 +1903,8 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 #intro-typewriter .bold {
     font-weight: 700; /* Bold */
     opacity: 1; /* Make visible by default */
+}
+
 }
 
 /* Style for light text */
@@ -2657,9 +2679,21 @@ footer {
     margin-right: 8px;
 }
 
+.blinking-dot {
+    animation: blink 1s infinite;
+    color: var(--accent-secondary); /* Orange color */
+    margin-right: 0; /* Remove margin to ensure equal spacing */
+}
+
 .bold-white .blinking-dot {
     color: var(--accent-secondary); /* Orange color */
     animation: blink 1s infinite;
+}
+
+.blinking-dot {
+    animation: blink 1s infinite;
+    color: var(--accent-secondary); /* Orange color */
+    margin-right: 0;
 }
 
 /* Bold styling for specific words */
