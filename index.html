@@ -24,7 +24,7 @@
     <div class="nav-container" id="nav-container">
         <!-- Plus Toggle Button -->
         <div class="icon-circle nav-toggle" id="nav-toggle">
-            <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
@@ -225,6 +225,12 @@
         <div class="container">
             <p>&copy; 2024 Rishi Ramesh. All rights reserved. Designed with passion for great products.</p>
         </div>
+        <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+        </button>
     </footer>
 
     <script src="script.js?v=1.0"></script>
@@ -234,25 +240,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const cursor = document.querySelector('.custom-cursor');
             const links = document.querySelectorAll('a, button, .project-card');
-            
-            // Array to store trail elements
-            const trails = [];
-            const trailCount = 30; // Reduced from 50 to make line effect more pronounced
-            
-            // Create trail elements
-            for (let i = 0; i < trailCount; i++) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                document.body.appendChild(trail);
-                trails.push({
-                    element: trail,
-                    x: 0,
-                    y: 0,
-                    opacity: 0,
-                    size: 4,
-                    rotation: 0
-                });
-            }
             
             // Function to get average brightness of background at cursor position
             function getBackgroundBrightness(x, y) {
@@ -310,29 +297,9 @@
             }
             
             // Mouse move event
-            let mouseX = 0;
-            let mouseY = 0;
-            let prevMouseX = 0;
-            let prevMouseY = 0;
-            let trailPositions = [];
-            let lastMoveTime = Date.now();
-            let moveTimer = null;
-            let lastTrailTime = 0;
-            let isMoving = false;
-            
             document.addEventListener('mousemove', function(e) {
-                prevMouseX = mouseX;
-                prevMouseY = mouseY;
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                const now = Date.now();
-                lastMoveTime = now;
-                isMoving = true;
-                
-                // Calculate cursor speed (distance/time)
-                const distance = Math.sqrt(Math.pow(mouseX - prevMouseX, 2) + Math.pow(mouseY - prevMouseY, 2));
-                const timeDiff = now - (lastMoveTime || now);
-                const speed = timeDiff > 0 ? distance / timeDiff : 0;
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
                 
                 // Move main cursor immediately
                 cursor.style.left = mouseX + 'px';
@@ -340,81 +307,6 @@
                 
                 // Update cursor color based on background
                 updateCursorColor(mouseX, mouseY);
-                
-                // Store position for trail on every move for more consistent trail
-                trailPositions.push({
-                    x: mouseX, 
-                    y: mouseY,
-                    speed: speed,
-                    timestamp: now
-                });
-                if (trailPositions.length > trailCount) {
-                    trailPositions.shift();
-                }
-                
-                // Update trail positions more frequently for smoother effect
-                if (now - lastTrailTime > 8) { // ~120fps for trail updates (more frequent)
-                    // Update trail positions with delay
-                    trails.forEach((trail, index) => {
-                        if (trailPositions[index]) {
-                            const pos = trailPositions[index];
-                            const nextPos = trailPositions[index + 1] || pos;
-                            
-                            trail.element.style.left = pos.x + 'px';
-                            trail.element.style.top = pos.y + 'px';
-                            
-                            // Point trail in direction of movement
-                            if (nextPos && nextPos !== pos) {
-                                const angle = Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * 180 / Math.PI;
-                                trail.element.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-                            }
-                            
-                            // Adjust trail appearance based on speed - more responsive to slow movement
-                            let speedFactor = 0;
-                            if (pos.speed > 0) {
-                                // More sensitive to slow movement
-                                speedFactor = Math.min(pos.speed / 3, 1); // Even lower divisor for better slow movement response
-                            }
-                            
-                            // Base opacity with minimum visibility for any movement
-                            const minOpacity = 0.4; // Increased minimum opacity
-                            const maxOpacity = 1.0;
-                            const opacity = minOpacity + (speedFactor * (maxOpacity - minOpacity));
-                            
-                            // Animate opacity with reversed fade (fading from end of path)
-                            const reversedIndex = trailCount - 1 - index;
-                            const fadeFactor = (1 - (reversedIndex / trailCount));
-                            trail.element.style.opacity = fadeFactor * opacity;
-                            
-                            // Adjust trail length based on speed
-                            const minLength = 10;
-                            const maxLength = 30;
-                            const length = minLength + (speedFactor * (maxLength - minLength));
-                            trail.element.style.width = length + 'px';
-                        }
-                    });
-                    
-                    lastTrailTime = now;
-                }
-                
-                // Clear any existing timer
-                if (moveTimer) {
-                    clearTimeout(moveTimer);
-                }
-                
-                // Set timer to hide trail when cursor stops
-                moveTimer = setTimeout(() => {
-                    isMoving = false;
-                    // Completely hide all trail elements
-                    trails.forEach(trail => {
-                        trail.element.style.opacity = '0';
-                        // Reset positions to prevent ghosting
-                        trail.element.style.left = '-100px';
-                        trail.element.style.top = '-100px';
-                    });
-                    // Clear trail positions
-                    trailPositions = [];
-                }, 100); // Hide trail 100ms after cursor stops
             });
             
             // Show custom cursor
@@ -445,21 +337,35 @@
             
             // Hide cursor when leaving window
             document.addEventListener('mouseleave', function() {
-                isMoving = false;
                 cursor.style.display = 'none';
-                trails.forEach(trail => {
-                    trail.element.style.display = 'none';
-                    trail.element.style.opacity = '0';
-                });
-                // Clear trail positions
-                trailPositions = [];
             });
             
             // Show cursor when entering window
             document.addEventListener('mouseenter', function() {
                 cursor.style.display = 'block';
-                trails.forEach(trail => {
-                    trail.element.style.display = 'block';
+            });
+        });
+    </script>
+    
+    <!-- Back to Top Button JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Scroll to top when button is clicked
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
             });
         });

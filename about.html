@@ -69,6 +69,7 @@
             </svg>
         </button>
     </div>
+
     <!-- Logo Square -->
     <div class="logo-circle">
         <span class="logo-text">R.</span>
@@ -165,6 +166,118 @@
         // Remove the scroll event listener completely since we want the text to appear automatically
         // The scroll event listener that was triggering the fade-in animation based on scrolling has been removed
         // Text will now appear automatically when the page loads
+    </script>
+    
+    <!-- Custom Cursor JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .project-card');
+            
+            // Function to get average brightness of background at cursor position
+            function getBackgroundBrightness(x, y) {
+                // Create a temporary element to get the background color
+                const tempElement = document.elementFromPoint(x, y);
+                if (!tempElement) return 128; // Default to middle brightness
+                
+                // Get the background color of the element
+                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
+                
+                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
+                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+                    let parent = tempElement.parentElement;
+                    while (parent) {
+                        const parentBg = window.getComputedStyle(parent).backgroundColor;
+                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+                            return calculateBrightness(parentBg);
+                        }
+                        parent = parent.parentElement;
+                    }
+                    // If we reach here, use body background
+                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+                    return calculateBrightness(bodyBg);
+                }
+                
+                return calculateBrightness(bgColor);
+            }
+            
+            // Function to calculate brightness from RGB values
+            function calculateBrightness(rgb) {
+                // Parse RGB values
+                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (!match) return 128; // Default to middle brightness
+                
+                const r = parseInt(match[1]);
+                const g = parseInt(match[2]);
+                const b = parseInt(match[3]);
+                
+                // Calculate brightness using luminance formula
+                return (r * 299 + g * 587 + b * 114) / 1000;
+            }
+            
+            // Function to update cursor color based on background
+            function updateCursorColor(x, y) {
+                const brightness = getBackgroundBrightness(x, y);
+                // Remove any existing background classes
+                cursor.classList.remove('light-bg', 'dark-bg');
+                
+                // Add appropriate class based on brightness
+                if (brightness > 128) {
+                    cursor.classList.add('light-bg');
+                } else {
+                    cursor.classList.add('dark-bg');
+                }
+            }
+            
+            // Mouse move event
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                // Move main cursor immediately
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                
+                // Update cursor color based on background
+                updateCursorColor(mouseX, mouseY);
+            });
+            
+            // Show custom cursor
+            cursor.style.display = 'block';
+            
+            // Hover effects for clickable elements
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    // Transform cursor to target
+                    cursor.classList.add('target');
+                    
+                    // Check if this is a navigation link
+                    if (this.classList.contains('nav-link')) {
+                        // Add class to hide the dot for navigation links
+                        cursor.classList.add('no-dot');
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    // Transform cursor back to normal
+                    cursor.classList.remove('target');
+                    // Remove background color classes
+                    cursor.classList.remove('light-bg', 'dark-bg');
+                    // Remove no-dot class
+                    cursor.classList.remove('no-dot');
+                });
+            });
+            
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', function() {
+                cursor.style.display = 'none';
+            });
+            
+            // Show cursor when entering window
+            document.addEventListener('mouseenter', function() {
+                cursor.style.display = 'block';
+            });
+        });
     </script>
 </body>
 </html>

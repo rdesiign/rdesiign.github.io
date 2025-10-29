@@ -181,23 +181,6 @@ body {
     border: 1px solid #ffffff;
 }
 
-.cursor-trail {
-    position: fixed;
-    width: 20px; /* Much wider for line effect */
-    height: 4px; /* Shorter height */
-    background-color: var(--accent-secondary);
-    border-radius: 2px; /* Slightly rounded edges */
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    box-shadow: 0 0 2px rgba(255, 107, 53, 0.5);
-    /* Simplified - no gradient for solid line effect */
-    /* Ensure cursor trail doesn't interfere with navbar */
-    pointer-events: none;
-}
-
 .container {
     max-width: 100%;
     margin: 0 auto;
@@ -359,6 +342,7 @@ footer {
     padding: 40px 0;
     text-align: center;
     border-top: 1px solid var(--border-color);
+    position: relative;
 }
 
 /* About Content */
@@ -1396,7 +1380,7 @@ footer {
 
 /* Navigation Toggle Button */
 .nav-toggle {
-    background: #000000;
+    background: #ff6b35; /* Orange background */
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
@@ -2078,7 +2062,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .project-card:hover .project-image {
-    filter: blur(2px);
 }
 
 .project-overlay {
@@ -2176,7 +2159,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .projects-masonry .project-card:hover .project-image {
-    filter: blur(2px);
 }
 
 .projects-masonry .project-overlay {
@@ -2483,7 +2465,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .project-card:hover .project-image {
-    filter: blur(2px);
 }
 
 /* Project overlay styling */
@@ -2656,6 +2637,54 @@ footer {
     color: #cccccc; /* Light gray text */
     margin: 0 auto;
     max-width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px; /* Ensure minimum height for proper vertical centering */
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateY(10px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%);
+}
+
+.back-to-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) translateY(-3px);
+}
+
+.back-to-top:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    transition: all 0.3s ease;
 }
 
 /* Blinking Cursor for Typing Animation */
@@ -3168,6 +3197,20 @@ footer {
         width: 45px;
         height: 45px;
     }
+    
+    /* Adjust back to top button for mobile */
+    .back-to-top {
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        top: 50%;
+        transform: translateY(-50%) translateY(10px);
+    }
+    
+    .back-to-top svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3200,6 +3243,20 @@ footer {
     
     .theme-label {
         font-size: 12px;
+    }
+    
+    /* Adjust back to top button for small screens */
+    .back-to-top {
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        top: 50%;
+        transform: translateY(-50%) translateY(10px);
+    }
+    
+    .back-to-top svg {
+        width: 16px;
+        height: 16px;
     }
 }
 
