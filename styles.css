@@ -121,7 +121,7 @@ body {
     /* Add dotted grid background */
     background-image: 
         radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 40px 40px; /* Dotted grid with 40px spacing */
+    background-size: 20px 20px; /* Dotted grid with 20px spacing (increased density) */
     background-position: 0 0;
 }
 
@@ -199,16 +199,16 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px; /* Consistent padding */
+    padding: 0 35px; /* Increased padding to add space between thumbnails and side elements */
 }
 
 /* Logo Square - Ensure it doesn't cause overflow */
 .logo-circle {
     position: fixed;
     top: 20px;
-    left: 20px; /* Changed from right: 20px to left: 20px */
+    left: 25px; /* Moved inward by 5px to add space */
     width: 40px;
     height: 40px;
     background: rgba(10, 10, 10, 0.8);
@@ -366,7 +366,7 @@ footer {
     display: flex;
     gap: 100px; /* Increased gap between image and text */
     align-items: flex-start;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -440,9 +440,9 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
     width: 100%;
     overflow-x: hidden;
     margin-top: 0; /* Ensure no top margin */
@@ -500,7 +500,7 @@ footer {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 15px;
+        padding: 0 25px;
     }
     
     .about-content {
@@ -526,7 +526,7 @@ footer {
     .abstract-grid {
         grid-template-columns: 1fr;
         gap: 15px;
-        padding: 0 10px;
+        padding: 0 25px;
     }
     
     .abstract-grid-row {
@@ -564,7 +564,7 @@ footer {
     
     .abstract-grid {
         gap: 10px;
-        padding: 0 5px;
+        padding: 0 20px;
     }
     
     .abstract-grid-row {
@@ -779,7 +779,7 @@ footer {
 .contact-icons-container {
     position: fixed;
     top: 76px; /* Position below the navbar with equal spacing (20px navbar top + 40px navbar height + 16px gap) */
-    right: 20px;
+    right: 25px; /* Moved inward by 5px to add space */
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -952,7 +952,7 @@ footer {
 .back-button-container {
     position: fixed;
     top: 70px; /* Positioned below the logo (logo is 40px tall + 20px top spacing + 10px gap) */
-    left: 20px;
+    left: 25px; /* Moved inward by 5px to add space */
     z-index: 1400;
 }
 
@@ -995,7 +995,7 @@ footer {
 @media (max-width: 480px) {
     .back-button-container {
         top: 55px; /* Adjusted for smaller logo size on mobile (30px tall + 15px top spacing + 10px gap) */
-        left: 15px;
+        left: 20px; /* Moved inward by 5px to add space */
     }
     
     .back-button {
@@ -1214,7 +1214,7 @@ footer {
     
     .nav-container {
         top: 15px;
-        right: 15px;
+        right: 20px; /* Moved inward by 5px to add space */
     }
     
     .expanded-nav {
@@ -1385,7 +1385,7 @@ footer {
 .nav-container {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: 25px; /* Moved inward by 5px to add space */
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -1676,7 +1676,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 @media (max-width: 480px) {
     .nav-container {
         top: 15px;
-        right: 15px;
+        right: 20px; /* Moved inward by 5px to add space */
     }
     
     .expanded-nav {
@@ -1686,7 +1686,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     
     .contact-icons-container {
         top: 61px;
-        right: 15px;
+        right: 20px; /* Moved inward by 5px to add space */
     }
     
     .nav-toggle,
@@ -1815,10 +1815,10 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 .section-header {
     text-align: center;
     margin-bottom: 60px;
-    max-width: 1400px; /* Match the project grid max-width */
+    max-width: 100%; /* Match the project grid max-width */
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px; /* Match project grid padding */
+    padding: 0 35px; /* Match project grid padding */
 }
 
 .section-title {
@@ -1837,9 +1837,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 
 /* Container for intro content */
 .intro-content {
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px; /* Add padding to match project grid */
+    padding: 0 35px; /* Add padding to match project grid */
     min-height: 150px;
     margin-top: 0; /* Remove the previous margin as we're handling spacing with section padding */
     position: relative;
@@ -2008,9 +2008,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 35px;
     width: 100%;
 }
 
@@ -2123,9 +2123,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 35px;
     width: 100%;
 }
 
@@ -2266,10 +2266,10 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 .abstract-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 1400px;
+    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 35px;
     width: 100%;
 }
 
@@ -2287,7 +2287,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
 }
 
 .abstract-grid-row.second .project-col-left {
@@ -2295,18 +2295,24 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     grid-column: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+}
 }
 
-.abstract-grid-row.second .project-col-right .project-card {
-    position: relative;
-    top: -45px; /* Shift higher to create exactly 20px gap with Sustainable Furniture project */
-}
+
 
 .abstract-grid-row.second .project-col-right {
     grid-row: 2;
     grid-column: 2;
 }
+
+/* Adjust the positioning of the New Portrait Project to reduce the gap */
+.abstract-grid-row.second .project-col-right .project-card {
+    position: relative;
+    top: -62px; /* Move up by 62px to reduce the gap */
+}
+
+/* The abstract-grid already has a 10px gap which should ensure consistent spacing */
 
 /* Ensure proper alignment of project columns */
 .project-col-left,
@@ -2536,7 +2542,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 @media (max-width: 768px) {
     .abstract-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
     }
     
     .abstract-grid-row {
@@ -2554,7 +2560,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     .project-col-right {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px; /* Reduced from 20px to 10px for consistent spacing */
     }
     
     /* Reset aspect ratios for mobile */
@@ -2566,19 +2572,19 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 
 @media (max-width: 480px) {
     .abstract-grid {
-        gap: 20px;
-        padding: 0 10px;
+        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+        padding: 0 20px;
     }
     
     .abstract-grid-row.first .project-col-left,
     .abstract-grid-row.first .project-col-right,
     .abstract-grid-row.second .project-col-left,
     .abstract-grid-row.second .project-col-right {
-        margin-bottom: 20px;
+        margin-bottom: 10px; /* Reduced from 20px to 10px for tighter spacing */
     }
     
     .project-col-right {
-        gap: 20px;
+        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
     }
     
     .project-content {
@@ -2601,9 +2607,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     grid-template-columns: 1fr 2fr;
     gap: 60px; /* Increased gap */
     align-items: flex-start;
-    max-width: 1280px; /* Match the project grid max-width */
+    max-width: 100%; /* Match the project grid max-width */
     margin: 0 auto 0 0; /* Align to the left edge to match intro text */
-    padding: 0 20px; /* Add padding to match intro content */
+    padding: 0 35px; /* Add padding to match intro content */
     position: relative;
 }
 
@@ -2630,9 +2636,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 /* Experience Timeline */
 .experience-timeline {
     position: relative;
-    max-width: 1280px; /* Match the project grid max-width */
+    max-width: 100%; /* Match the project grid max-width */
     margin: 0 auto 0 0; /* Align to the left edge to match intro text */
-    padding: 0 20px 0 50px; /* Add padding to match intro content and account for timeline */
+    padding: 0 35px 0 50px; /* Add padding to match intro content and account for timeline */
 }
 
 /* Footer */
@@ -2872,7 +2878,7 @@ footer {
 @media (max-width: 480px) {
     .nav-container {
         top: 15px;
-        right: 15px;
+        right: 20px; /* Moved inward by 5px to add space */
     }
     
     .expanded-nav {
@@ -2882,7 +2888,7 @@ footer {
     
     .contact-icons-container {
         top: 61px;
-        right: 15px;
+        right: 20px; /* Moved inward by 5px to add space */
         align-items: center;
     }
     
