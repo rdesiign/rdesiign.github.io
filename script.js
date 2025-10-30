@@ -302,20 +302,7 @@ function updateThemeIcon(theme) {
 function initializeContactForm() {
 }
 
-// Project card hover effects
-document.addEventListener('DOMContentLoaded', function() {
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
+// Project card hover effects removed as per user request
 
 // Graph paper background with cursor interaction
 function initializeGraphBackground() {

@@ -576,7 +576,6 @@ footer {
         padding-top: 70px; /* Adjusted padding for small mobile */
     }
 }
-}
 
 /* Theme styles for nav toggle button */
 [data-theme="dark"] .nav-toggle {
@@ -1059,8 +1058,6 @@ footer {
     font-weight: 400;
     transition: color 0.3s ease;
     white-space: nowrap;
-}
-
     flex-shrink: 0;
     position: relative;
     padding: 10px 20px; /* Increased padding for more prominent pill shape */
@@ -1233,6 +1230,9 @@ footer {
         margin: 0 0 0 6px; /* Adjusted margin for mobile */
     }
 }
+
+/* Logo circle theme styles */
+
 
 
 
@@ -2034,7 +2034,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
@@ -2133,7 +2132,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .projects-masonry .project-card:hover {
-    transform: translateY(-10px);
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
@@ -2159,6 +2157,8 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .projects-masonry .project-card:hover .project-image {
+    opacity: 1;
+    filter: brightness(0.8);
 }
 
 .projects-masonry .project-overlay {
@@ -2460,7 +2460,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
@@ -2482,6 +2481,11 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 
 .project-card:hover .project-overlay {
     opacity: 1;
+}
+
+.project-card:hover .project-image {
+    opacity: 1;
+    filter: brightness(0.8);
 }
 
 .project-content {
@@ -2632,16 +2636,45 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 /* Footer */
 footer {
     text-align: center;
-    padding: 40px 0;
+    padding: 60px 0;
     background-color: #000000; /* Black background for the card */
     color: #cccccc; /* Light gray text */
     margin: 0 auto;
     max-width: 100%;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 120px; /* Ensure minimum height for proper vertical centering */
+    min-height: 200px; /* Increased height for proper vertical centering */
+    border-radius: 8px; /* Add fillets to match project card styling */
+}
+
+/* Align footer with project section */
+footer .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px; /* Match project grid padding */
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-content .designed-with-passion {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.footer-content .copyright {
+    font-size: 1rem;
+    margin: 0;
 }
 
 /* Back to Top Button */
