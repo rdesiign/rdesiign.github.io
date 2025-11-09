@@ -1858,7 +1858,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     padding: 0; /* Remove padding */
     color: var(--text-primary);
     line-height: 1.0; /* Further reduced line height for tighter spacing */
-    opacity: 0; /* Hidden until animation */
+    opacity: 1; /* Make visible by default since we removed the animation */
     visibility: visible;
     text-align: left; /* Left align the text */
     /* Fix height to prevent layout shifts */
@@ -1874,7 +1874,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     padding: 0; /* Remove padding */
     color: var(--text-secondary);
     line-height: 1.2; /* Further reduced line height for tighter spacing */
-    opacity: 0; /* Hidden until animation */
+    opacity: 1; /* Make visible by default since we removed the animation */
     visibility: visible;
     text-align: left; /* Left align the text */
     /* Fix height to prevent layout shifts */
@@ -1883,36 +1883,66 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     box-sizing: border-box;
 }
 
-/* Make sure the highlight span is also hidden initially */
+/* Make sure the highlight span is also visible by default */
 #intro-typewriter .highlight {
     color: var(--text-secondary) !important; /* Use default text color instead of orange */
     font-weight: 700; /* Bold for "exciting" */
-    opacity: 0; /* Hidden until animation */
+    opacity: 1; /* Make visible by default since we removed the animation */
 }
 
 /* Style for bold text */
 #intro-typewriter .bold {
     font-weight: 700; /* Bold */
-    opacity: 1; /* Make visible by default */
-}
-
+    opacity: 1; /* Make visible by default since we removed the animation */
 }
 
 /* Style for light text */
 #intro-typewriter .light {
     font-weight: 300; /* Light */
-    opacity: 1; /* Make visible by default */
+    opacity: 1; /* Make visible by default since we removed the animation */
 }
 
 /* Style for normal weight text */
 #intro-typewriter .normal-weight {
     font-weight: 400; /* Normal weight */
-    opacity: 1; /* Make visible by default */
+    opacity: 1; /* Make visible by default since we removed the animation */
 }
 
 /* Ensure the highlight is visible when parent is visible */
 #intro-typewriter h2:has(.highlight) {
     opacity: 1 !important;
+}
+
+/* Location text styling - smaller font size for the third line */
+.location-text {
+    font-size: 0.9rem; /* Even smaller than before */
+    display: inline-block;
+    line-height: 1.2; /* Maintain proper line height */
+    opacity: 1; /* Make visible by default since we removed the animation */
+}
+
+/* Blinking dot styling */
+.blinking-dot {
+    animation: blink 1s infinite;
+    color: var(--accent-secondary); /* Orange color */
+    margin-right: 0; /* Remove margin to ensure equal spacing */
+    opacity: 1; /* Make visible by default since we removed the animation */
+}
+
+.bold-white .blinking-dot {
+    color: var(--accent-secondary); /* Orange color */
+    animation: blink 1s infinite;
+}
+
+/* Blinking animation for status dot only */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Ensure cursor visibility - removed since we're not using a typing cursor */
+.blinking-cursor {
+    display: none; /* Hide the blinking cursor since we removed the typing animation */
 }
 
 /* Showreel Banner Styles */
