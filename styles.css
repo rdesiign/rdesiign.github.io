@@ -196,7 +196,7 @@ body {
     height: 40px;
     background: rgba(10, 10, 10, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 0; /* Changed from 50% to 0 to make it square */
+    border-radius: 50%; /* Changed to match the circular navigation icons */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1829,7 +1829,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     max-width: 1280px; /* Match the showreel banner content width */
     margin: 0 auto 0 0; /* Align to the left edge to match project thumbnails */
     padding: 0 20px; /* Add padding to match project grid */
-    margin-top: 50px; /* Increased from 30px back to 50px to restore original spacing */
+    margin-top: 15px; /* Shifted more upwards for better alignment */
     transform: scale(1); /* Removed scaling to restore original size */
     transform-origin: left top; /* Scale from top-left corner */
 }
