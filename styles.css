@@ -939,17 +939,19 @@ footer {
     display: block;
 }
 
-/* Back Button Styles */
-.back-button-container {
+
+
+/* Back to Home Button Styles - Positioned on top left */
+.back-to-home-container {
     position: fixed;
-    top: 70px; /* Positioned below the logo (logo is 40px tall + 20px top spacing + 10px gap) */
-    left: 25px; /* Moved inward by 5px to add space */
+    top: 20px;
+    left: 15px; /* Align with navigation icons on left */
     z-index: 1400;
 }
 
-.back-button {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.back-to-home {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -958,45 +960,57 @@ footer {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.back-button:hover {
-    background: rgba(255, 255, 255, 0.2);
+.back-to-home:hover {
     transform: scale(1.1);
 }
 
-.back-button svg {
-    width: 20px;
-    height: 20px;
-    color: var(--text-primary);
+.back-to-home svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    color: #ffffff;
 }
 
 /* Light mode adjustments */
-[data-theme="light"] .back-button {
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+[data-theme="light"] .back-to-home {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="light"] .back-button:hover {
-    background: rgba(0, 0, 0, 0.2);
+[data-theme="light"] .back-to-home:hover {
+    transform: scale(1.1);
+}
+
+[data-theme="light"] .back-to-home svg {
+    color: #ffffff;
+    stroke: #ffffff;
 }
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
-    .back-button-container {
-        top: 55px; /* Adjusted for smaller logo size on mobile (30px tall + 15px top spacing + 10px gap) */
-        left: 20px; /* Moved inward by 5px to add space */
+    /* Mobile adjustments for back to home button */
+    .back-to-home-container {
+        top: 15px;
+        left: 20px;
     }
     
-    .back-button {
+    .back-to-home {
         width: 30px;
         height: 30px;
     }
     
-    .back-button svg {
-        width: 16px;
-        height: 16px;
+    .back-to-home svg {
+        width: 14px;
+        height: 14px;
     }
 }
 

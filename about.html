@@ -35,6 +35,16 @@
         <div class="custom-cursor-dot"></div>
     </div>
 
+    <!-- Back to Home Button (top left) -->
+    <div class="back-to-home-container">
+        <a href="index.html" class="back-to-home" aria-label="Back to home">
+            <svg class="back-to-home-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </a>
+    </div>
+
     <!-- Navigation Container -->
     <div class="nav-container" id="nav-container">
         <!-- Plus Toggle Button -->
@@ -81,14 +91,7 @@
         </div>
     </div>
 
-    <!-- Back Button -->
-    <div class="back-button-container">
-        <button class="back-button" id="back-button" aria-label="Go back">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-    </div>
+
 
 
     <!-- About Section -->
@@ -128,12 +131,11 @@
                 initializeNavigation();
             }
             
-            // Initialize back button functionality
-            const backButton = document.getElementById('back-button');
-            if (backButton) {
-                backButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.history.back();
+            // Initialize back to home button functionality
+            const backToHomeButton = document.querySelector('.back-to-home');
+            if (backToHomeButton) {
+                backToHomeButton.addEventListener('click', function(e) {
+                    // Allow the default link behavior to navigate to index.html
                 });
             }
             
