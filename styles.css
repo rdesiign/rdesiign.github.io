@@ -224,6 +224,7 @@ body {
 /* Intro Section */
 #intro {
     padding-top: 100px; /* Increased top padding to account for removed navbar */
+    overflow: visible; /* Ensure content is not clipped */
 }
 
 /* About Section */
@@ -531,7 +532,7 @@ footer {
     }
     
     #intro {
-        padding-top: 80px; /* Adjusted padding for mobile */
+        padding-top: 100px; /* Restore original padding for mobile */
     }
     
     #about {
@@ -1061,16 +1062,16 @@ footer {
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px; /* Reduced font size */
     font-weight: 400;
     transition: color 0.3s ease;
     white-space: nowrap;
     flex-shrink: 0;
     position: relative;
-    padding: 10px 20px; /* Increased padding for more prominent pill shape */
-    border-radius: 30px; /* Increased border radius for more rounded pill */
+    padding: 4px 10px; /* Thinner padding for slimmer pill shape */
+    border-radius: 20px; /* More rounded corners */
     z-index: 1; /* Ensure the text stays above the pseudo-element */
-    margin: 0 5px; /* Add some margin for better spacing */
+    margin: 0 3px; /* Reduced margin for better spacing */
 }
 
 .nav-link:hover {
@@ -1085,12 +1086,12 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.2); /* Increased opacity for more visibility */
-    border-radius: 30px; /* Match the increased border radius */
+    background: rgba(255, 255, 255, 0.15); /* Reduced opacity for subtler effect */
+    border-radius: 20px; /* More rounded corners to match nav-link */
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1; /* Place behind the text */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add subtle glow effect */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05); /* Reduced glow effect */
 }
 
 .nav-link:hover::before {
@@ -1109,11 +1110,11 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.2); /* Increased opacity for more visibility */
-    border-radius: 30px; /* Match the increased border radius */
+    background: rgba(255, 255, 255, 0.15); /* Reduced opacity for subtler effect */
+    border-radius: 20px; /* More rounded corners to match nav-link */
     opacity: 1;
     z-index: -1;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add subtle glow effect */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05); /* Reduced glow effect */
 }
 
 /* Light mode adjustments for the pill effect */
@@ -1186,18 +1187,18 @@ footer {
 /* Mobile adjustments for the pill effect */
 @media (max-width: 480px) {
     .nav-link {
-        padding: 8px 16px; /* Adjusted padding for mobile */
-        border-radius: 25px; /* Adjusted border radius for mobile */
-        font-size: 14px;
-        margin: 0 3px; /* Adjusted margin for mobile */
+        padding: 5px 10px; /* Reduced padding for mobile */
+        border-radius: 12px; /* Reduced border radius for mobile */
+        font-size: 12px; /* Reduced font size for mobile */
+        margin: 0 2px; /* Reduced margin for mobile */
     }
     
     .nav-link::before {
-        border-radius: 25px; /* Match the adjusted border radius */
+        border-radius: 12px; /* Match the reduced border radius */
     }
     
     .nav-link.active::before {
-        border-radius: 25px; /* Match the adjusted border radius */
+        border-radius: 12px; /* Match the reduced border radius */
     }
     
     .nav-container {
@@ -1236,12 +1237,8 @@ footer {
         height: 30px;
         margin: 0 0 0 6px; /* Adjusted margin for mobile */
     }
-}
 
 /* Logo circle theme styles */
-
-
-
 
 /* Logo circle theme styles */
 [data-theme="dark"] .logo-circle {
@@ -1258,18 +1255,16 @@ footer {
 
 /* Location text styling - smaller font size for the third line */
 .location-text {
-    font-size: 0.9rem; /* Even smaller than before */
+    font-size: 1.1rem; /* Increased size for better visibility */
     display: inline-block;
-    line-height: 1.2; /* Maintain proper line height */
+    line-height: 1.1; /* Reduced line height for tighter spacing */
 }
 /* Location text styling - smaller font size for the third line */
 .location-text {
-    font-size: 0.9rem; /* Even smaller than before */
+    font-size: 1.1rem; /* Increased size for better visibility */
     display: inline-block;
-    line-height: 1.2; /* Maintain proper line height */
-}
-
-    -webkit-transform: translateZ(0);
+    line-height: 1.1; /* Reduced line height for tighter spacing */
+    margin-top: 25px; /* Increase space between the two lines */
 }
 
 /* Buttons */
@@ -1279,15 +1274,10 @@ footer {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 400;
-}
-
-
     font-size: 16px;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-}
-
     text-align: center;
     font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Use Product Sans */
     letter-spacing: normal; /* Ensure normal letter spacing */
@@ -1324,13 +1314,8 @@ footer {
 
 /* Intro Section */
 #intro.section {
-    padding: 760px 0 0 0; /* Keep current padding */
+    padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
     text-align: left;
-</
-```
-
-```
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
 }
 
 /* Mobile Contact Icon Links */
@@ -1434,22 +1419,20 @@ footer {
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px; /* Reduced font size */
     font-weight: 400;
     transition: color 0.3s ease;
     white-space: nowrap;
     flex-shrink: 0;
     position: relative;
-    padding: 10px 15px; /* Reduced horizontal padding from 20px to 15px */
-    border-radius: 30px; /* Increased border radius for more rounded pill */
+    padding: 4px 10px; /* Thinner padding for slimmer pill shape */
+    border-radius: 20px; /* More rounded corners */
     z-index: 1; /* Ensure the text stays above the pseudo-element */
-    margin: 0 2px; /* Reduced margin from 5px to 2px */
+    margin: 0 3px; /* Reduced margin for better spacing */
 }
 
 .nav-link:hover {
     color: #ff6b35;
-}
-
 }
 
 /* Transparent pill-shaped hover effect */
@@ -1460,12 +1443,12 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.2); /* Increased opacity for more visibility */
-    border-radius: 30px; /* Match the increased border radius */
+    background: rgba(255, 255, 255, 0.15); /* Reduced opacity for subtler effect */
+    border-radius: 20px; /* More rounded corners to match nav-link */
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1; /* Place behind the text */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add subtle glow effect */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05); /* Reduced glow effect */
 }
 
 .nav-link:hover::before {
@@ -1484,11 +1467,11 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.2); /* Increased opacity for more visibility */
-    border-radius: 30px; /* Match the increased border radius */
+    background: rgba(255, 255, 255, 0.15); /* Reduced opacity for subtler effect */
+    border-radius: 20px; /* More rounded corners to match nav-link */
     opacity: 1;
     z-index: -1;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add subtle glow effect */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05); /* Reduced glow effect */
 }
 
 /* Light mode adjustments for the pill effect */
@@ -1505,18 +1488,18 @@ footer {
 /* Mobile adjustments for the pill effect */
 @media (max-width: 480px) {
     .nav-link {
-        padding: 8px 16px; /* Adjusted padding for mobile */
-        border-radius: 25px; /* Adjusted border radius for mobile */
-        font-size: 14px;
-        margin: 0 3px; /* Adjusted margin for mobile */
+        padding: 3px 8px; /* Thinner padding for mobile */
+        border-radius: 15px; /* More rounded corners for mobile */
+        font-size: 12px; /* Reduced font size for mobile */
+        margin: 0 2px; /* Reduced margin for mobile */
     }
     
     .nav-link::before {
-        border-radius: 25px; /* Match the adjusted border radius */
+        border-radius: 15px; /* More rounded corners for mobile */
     }
     
     .nav-link.active::before {
-        border-radius: 25px; /* Match the adjusted border radius */
+        border-radius: 15px; /* More rounded corners for mobile */
     }
 }
 
@@ -1707,18 +1690,11 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     .nav-close {
         margin: 0;
     }
-}
     
-    .nav-toggle-icon, .contact-icon {
-        width: 14px;
-        height: 14px;
-    }
-    
-    /* Mobile styles for nav close button */
-    .nav-close {
-        width: 30px;
-        height: 30px;
-        margin: 0 0 0 6px; /* Adjusted margin for mobile */
+    /* Mobile adjustment for logo */
+    .logo-circle {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -1785,7 +1761,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 
 /* Intro Section */
 #intro.section {
-    padding: 760px 0 0 0; /* Keep current padding */
+    padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
     text-align: left;
     /* Removed background-color to allow dotted background to show through */
     opacity: 1;
@@ -1837,7 +1813,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 .intro-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 35px; /* Add padding to match project grid */
+    padding: 0 20px; /* Add padding to match project grid */
     min-height: 150px;
     margin-top: 0; /* Remove the previous margin as we're handling spacing with section padding */
     position: relative;
@@ -1849,44 +1825,44 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     box-sizing: content-box;
     /* Removed background-color to allow dotted background to show through */
     /* Reserve space for the content to prevent shifting */
-    min-height: 100px; /* Reduced to minimize space before banner */
+    /* min-height: 100px; Removed to prevent content clipping */
     max-width: 1280px; /* Match the showreel banner content width */
-    margin: 0 auto 0 0; /* Align to the left edge */
-    padding: 0; /* Remove padding to align with left edge of thumbnails */
-    margin-top: 30px; /* Reduced from 50px to 30px to reduce space */
-    transform: scale(1.5); /* Scale up the typing animation by 1.5 */
+    margin: 0 auto 0 0; /* Align to the left edge to match project thumbnails */
+    padding: 0 20px; /* Add padding to match project grid */
+    margin-top: 50px; /* Increased from 30px back to 50px to restore original spacing */
+    transform: scale(1); /* Removed scaling to restore original size */
     transform-origin: left top; /* Scale from top-left corner */
 }
 
 #intro-typewriter h1 {
-    font-size: clamp(1.8rem, 4.5vw, 3rem); /* Slightly reduced font size for the main heading */
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Restore original font size for the main heading */
     font-weight: 700; /* Bold for "Hello! I'm Rishi" */
-    margin: 0 0 0 0; /* Removed all margin to minimize space between heading and subtext as much as possible */
+    margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
     padding: 0; /* Remove padding */
     color: var(--text-primary);
-    line-height: 1.0; /* Further reduced line height for tighter spacing */
+    line-height: 1.2; /* Restore line height for better readability */
     opacity: 1; /* Make visible by default since we removed the animation */
     visibility: visible;
     text-align: left; /* Left align the text */
-    /* Fix height to prevent layout shifts */
-    height: 1.5em; /* Further reduced height */
+    /* Remove fixed height to prevent overflow */
+    /* height: 1.3em; Removed fixed height */
     /* Ensure proper box sizing */
     box-sizing: border-box;
 }
 
 #intro-typewriter h2 {
-    font-size: clamp(1.1rem, 2.2vw, 1.5rem); /* Slightly reduced font size for the subtitle */
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem); /* Restore original font size for the subtitle */
     font-weight: 400; /* Regular/light for most of the text */
-    margin: -0.5em 0 0 0; /* Increased negative top margin to pull closer to h1 */
+    margin: 0; /* Remove negative margin for better spacing */
     padding: 0; /* Remove padding */
     color: var(--text-secondary);
-    line-height: 1.2; /* Further reduced line height for tighter spacing */
+    line-height: 1.4; /* Restore line height for better readability */
     opacity: 1; /* Make visible by default since we removed the animation */
     visibility: visible;
     text-align: left; /* Left align the text */
-    /* Fix height to prevent layout shifts */
-    height: 1.8em; /* Further reduced height */
-    /* Ensure proper box sizing */
+    /* Remove fixed height to prevent overflow */
+    /* height: 1.5em; Removed fixed height */
+    /* Ensure proper box-sizing */
     box-sizing: border-box;
 }
 
@@ -1922,10 +1898,11 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 
 /* Location text styling - smaller font size for the third line */
 .location-text {
-    font-size: 0.9rem; /* Even smaller than before */
+    font-size: 1.1rem; /* Increased size for better visibility */
     display: inline-block;
-    line-height: 1.2; /* Maintain proper line height */
+    line-height: 1.1; /* Reduced line height for tighter spacing */
     opacity: 1; /* Make visible by default since we removed the animation */
+    margin-top: 25px; /* Increase space between the two lines */
 }
 
 /* Blinking dot styling */
@@ -2323,8 +2300,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     flex-direction: column;
     gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
 }
-}
-
 
 
 .abstract-grid-row.second .project-col-right {
@@ -2335,7 +2310,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
 /* Adjust the positioning of the New Portrait Project to reduce the gap */
 .abstract-grid-row.second .project-col-right .project-card {
     position: relative;
-    top: -62px; /* Move up by 62px to reduce the gap */
+    top: -66px; /* Move up by 66px to reduce the gap */
 }
 
 /* The abstract-grid already has a 10px gap which should ensure consistent spacing */
@@ -2857,15 +2832,13 @@ footer .container {
 
 @media (max-width: 768px) {
     #intro.section {
-        padding: 70vh 0 0 0; /* Adjusted padding to account for banner */
+        padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 45px; /* Add breathing space between banner and text */
+        margin-top: 0; /* Remove margin that was for banner spacing */
     }
-}
-
 
     #intro-typewriter h1 {
         font-size: clamp(1.6rem, 5vw, 2.2rem); /* Slightly reduced font size */
@@ -2940,22 +2913,26 @@ footer .container {
 
 @media (max-width: 480px) {
     #intro.section {
-        padding: 70vh 0 0 0; /* Adjusted padding for small mobile */
+        padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
     }
 
     #intro-typewriter {
         padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 40px; /* Add breathing space between banner and text */
+        margin-top: 0; /* Remove margin that was for banner spacing */
     }
 
     #intro-typewriter h1 {
         font-size: clamp(1.3rem, 6vw, 2rem); /* Keep current font size */
-        height: 1.2em; /* Adjust height */
+        /* height: 1.0em; Removed fixed height to prevent overflow */
+        line-height: 1.2; /* Restore line height for better readability */
+        margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
     }
 
     #intro-typewriter h2 {
         font-size: clamp(0.9rem, 4vw, 1.1rem); /* Keep current font size */
-        height: 1.4em; /* Adjust height */
+        /* height: 1.2em; Removed fixed height to prevent overflow */
+        line-height: 1.4; /* Restore line height for better readability */
+        margin: 0; /* Remove negative margin for better spacing */
     }
 
     #showreel-banner {
@@ -3048,6 +3025,7 @@ footer .container {
     align-items: center;
 }
 
+.mobile-nav-popup.active {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
