@@ -158,12 +158,12 @@ body {
 }
 
 .custom-cursor.target {
-    width: 36px;
-    height: 36px;
-    background: transparent;
-    transform: translate(-50%, -50%) scale(1.1);
-    border: 2px solid var(--accent-secondary);
-    box-shadow: 0 0 15px rgba(255, 107, 53, 0.8); /* Reduced but still prominent glow */
+    width: 28px;
+    height: 28px;
+    background: var(--accent-secondary);
+    transform: translate(-50%, -50%);
+    border: none;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
 }
 
 /* Hide dot when cursor is over navigation links */
@@ -173,12 +173,12 @@ body {
 
 /* Target cursor for light backgrounds (dark color) */
 .custom-cursor.target.light-bg {
-    border: 1px solid #1a1a1a;
+    border: none;
 }
 
 /* Target cursor for dark backgrounds (light color) */
 .custom-cursor.target.dark-bg {
-    border: 1px solid #ffffff;
+    border: none;
 }
 
 .container {
@@ -2485,6 +2485,12 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     display: block;
 }
 
+/* Specific styling for Headway project image to shift it upward */
+.project-card:has(img[src*="MMM Thumbnail"]) .project-image,
+.project-card:has(img[alt*="Headway"]) .project-image {
+    object-position: center 45% !important; /* Shift image upward */
+}
+
 .project-card:hover {
     box-shadow: 0 10px 25px var(--shadow-color);
 }
@@ -3322,8 +3328,22 @@ footer .container {
     }
 }
 
+
+
 /* Focus management for accessibility */
 *:focus {
     outline: 2px solid var(--accent-primary);
     outline-offset: 2px;
+}
+
+/* Project link styling */
+.project-link {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.project-link:hover {
+    text-decoration: none;
+    color: inherit;
 }

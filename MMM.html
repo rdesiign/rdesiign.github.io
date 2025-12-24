@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MMM - Migraine Management System</title>
+    <meta name="description" content="Migraine Management System - A comprehensive solution for tracking and managing migraines">
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
+    <style>
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow-x: hidden;">
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+
+    <!-- Navigation Container -->
+    <div class="nav-container" id="nav-container">
+        <!-- Plus Toggle Button -->
+        <div class="icon-circle nav-toggle" id="nav-toggle">
+            <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+        
+        <!-- Expanded Navigation Bar (initially hidden) -->
+        <div class="expanded-nav" id="expanded-nav" style="display: none;">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#project" class="nav-link">Project</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="#" class="nav-link">More</a>
+            
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">
+                    <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
+            </button>
+            
+            <!-- Minus Icon (for closing the expanded nav) -->
+            <div class="icon-circle nav-close" id="nav-close">
+                <svg class="nav-toggle-icon minus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Icons (outside the navigation bar) -->
+    <div class="contact-icons-container">
+        <div class="contact-icon-circle">
+            <a href="mailto:hello@rishiramesh.com" class="contact-icon-link" aria-label="Email">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="contact-icon-circle">
+            <a href="https://www.linkedin.com/in/rishi-design/" class="contact-icon-link" target="_blank" aria-label="LinkedIn">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="contact-icon-circle">
+            <a href="tel:+1234567890" class="contact-icon-link" aria-label="Phone">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Header Image Section - Full width with proper image fit -->
+    <section id="header" class="section" style="padding: 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
+        <img src="Projects/MMM/MMM Header.png" alt="MMM - Migraine Management System Header" class="header-image" style="width: 100vw !important; height: auto !important; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: contain !important;">
+    </section>
+
+    <!-- Project Content Section -->
+    <section id="project" class="section">
+        <div class="container" style="padding: 0 35px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <!-- Left Column: Title, Subtitle, and Description -->
+                <div class="project-content" style="width: 50%; max-width: none !important; padding-left: 40px;">
+                    <h1 style="font-size: 3rem; margin-bottom: 5px;">Headway</h1>
+                    <h2 style="font-size: 1.5rem; font-weight: 400; margin-bottom: 20px;">Migraine Management System</h2>
+                    <p style="font-size: 1.1rem; width: 100%; max-width: 90% !important; line-height: 1.6;">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod<br>tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                
+                <!-- Right Column: Project Details -->
+                <div style="width: 40%;">
+                    <div style="margin-bottom: 15px;"><strong>Self Initiated Project</strong></div>
+                    <div style="margin-bottom: 15px;"><strong>Duration:</strong> 3 months 2020</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <span style="background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">Research</span>
+                        <span style="background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">Industrial Design</span>
+                        <span style="background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">Visualisation</span>
+                        <span style="background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">UIUX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Statement Section -->
+    <section id="problem" class="section">
+        <div class="container" style="padding: 0 35px;">
+            <img src="Projects/MMM/MMM Problem statement.png" alt="MMM Problem Statement" style="width: 100%; max-width: calc(100% - 80px); display: block; margin-left: 40px; border-radius: 8px; margin-bottom: 40px;">
+            <div style="margin-left: 40px; margin-top: 20px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Need for a holistic solution</h3>
+                <p style="font-size: 1.1rem; width: 100%; max-width: 60% !important; line-height: 1.6;">Interviews were conducted with stakeholders (patients, patient families and healthcare professionals) to understand how exactly migraine impacts their day-to-day lives and what the barriers to a successful treatment process are.</p>
+            </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Research Question Section -->
+    <section id="research" class="section">
+        <div class="container" style="padding: 0 35px;">
+            <img src="Projects/MMM/MMM Research Question.png" alt="MMM Research Question" style="width: 100%; max-width: calc(100% - 80px); display: block; margin-left: 40px; border-radius: 8px; margin-top: 10px;">
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="designed-with-passion">Designed with passion for great products.</p>
+                <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+            </div>
+        </div>
+        <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="script.js?v=1.0"></script>
+    
+    <!-- Custom Cursor JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .project-card');
+            
+            // Function to get average brightness of background at cursor position
+            function getBackgroundBrightness(x, y) {
+                // Create a temporary element to get the background color
+                const tempElement = document.elementFromPoint(x, y);
+                if (!tempElement) return 128; // Default to middle brightness
+                
+                // Get the background color of the element
+                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
+                
+                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
+                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+                    let parent = tempElement.parentElement;
+                    while (parent) {
+                        const parentBg = window.getComputedStyle(parent).backgroundColor;
+                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+                            return calculateBrightness(parentBg);
+                        }
+                        parent = parent.parentElement;
+                    }
+                    // If we reach here, use body background
+                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+                    return calculateBrightness(bodyBg);
+                }
+                
+                return calculateBrightness(bgColor);
+            }
+            
+            // Function to calculate brightness from RGB values
+            function calculateBrightness(rgb) {
+                // Parse RGB values
+                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (!match) return 128; // Default to middle brightness
+                
+                const r = parseInt(match[1]);
+                const g = parseInt(match[2]);
+                const b = parseInt(match[3]);
+                
+                // Calculate brightness using luminance formula
+                return (r * 299 + g * 587 + b * 114) / 1000;
+            }
+            
+            // Function to update cursor color based on background
+            function updateCursorColor(x, y) {
+                const brightness = getBackgroundBrightness(x, y);
+                // Remove any existing background classes
+                cursor.classList.remove('light-bg', 'dark-bg');
+                
+                // Add appropriate class based on brightness
+                if (brightness > 128) {
+                    cursor.classList.add('light-bg');
+                } else {
+                    cursor.classList.add('dark-bg');
+                }
+            }
+            
+            // Mouse move event
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                // Move main cursor immediately
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                
+                // Update cursor color based on background
+                updateCursorColor(mouseX, mouseY);
+            });
+            
+            // Show custom cursor
+            cursor.style.display = 'block';
+            
+            // Hover effects for clickable elements
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    // Transform cursor to target
+                    cursor.classList.add('target');
+                    
+                    // Check if this is a navigation link
+                    if (this.classList.contains('nav-link')) {
+                        // Add class to hide the dot for navigation links
+                        cursor.classList.add('no-dot');
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    // Transform cursor back to normal
+                    cursor.classList.remove('target');
+                    // Remove background color classes
+                    cursor.classList.remove('light-bg', 'dark-bg');
+                    // Remove no-dot class
+                    cursor.classList.remove('no-dot');
+                });
+            });
+            
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', function() {
+                cursor.style.display = 'none';
+            });
+            
+            // Show cursor when entering window
+            document.addEventListener('mouseenter', function() {
+                cursor.style.display = 'block';
+            });
+        });
+    </script>
+    
+    <!-- Back to Top Button JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Scroll to top when button is clicked
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
