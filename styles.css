@@ -2127,14 +2127,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     line-height: 1.5;
 }
 
-/* Project tags have been removed as per user request */
-.project-tags {
-    display: none;
-}
 
-.project-tag {
-    display: none;
-}
 
 .projects-masonry {
     display: flex;
@@ -2227,14 +2220,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* Project tags have been removed as per user request */
-.projects-masonry .project-tags {
-    display: none;
-}
 
-.projects-masonry .project-tag {
-    display: none;
-}
 
 /* Responsive Design for Masonry Layout */
 @media (max-width: 768px) {
@@ -3346,4 +3332,27 @@ footer .container {
 .project-link:hover {
     text-decoration: none;
     color: inherit;
+}
+
+/* Project tag styles - text only, visible on hover */
+.project-tag {
+    position: absolute;
+    top: 25px; /* Increased top spacing for more breathing room */
+    right: 20px; /* Increased right spacing for more breathing room */
+    color: white;
+    font-size: 14px; /* Reduced font size */
+    font-weight: 400; /* Lighter font weight */
+    z-index: 3; /* Ensure it appears above other elements */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    background: none; /* Remove background */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove border radius */
+    text-align: center;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+/* Show tag text on project card hover */
+.project-card:hover .project-tag {
+    opacity: 1; /* Show on hover */
 }
