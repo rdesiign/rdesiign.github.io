@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Semi - Beginner's Cooktop</title>
+    <meta name="description" content="Semi - A beginner's cooktop designed for simplicity and ease of use">
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
+    <style>
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow-x: hidden;">
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+
+    <!-- Back to Home Button (top left) -->
+    <div class="back-to-home-container">
+        <a href="index.html" class="back-to-home" aria-label="Back to home">
+            <svg class="back-to-home-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Navigation Container -->
+    <div class="nav-container" id="nav-container">
+        <!-- Plus Toggle Button -->
+        <div class="icon-circle nav-toggle" id="nav-toggle">
+            <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+        
+        <!-- Expanded Navigation Bar (initially hidden) -->
+        <div class="expanded-nav" id="expanded-nav" style="display: none;">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#project" class="nav-link">Project</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="#" class="nav-link">More</a>
+            
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">
+                    <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
+            </button>
+            
+            <!-- Minus Icon (for closing the expanded nav) -->
+            <div class="icon-circle nav-close" id="nav-close">
+                <svg class="nav-toggle-icon minus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Icons (outside the navigation bar) -->
+    <div class="contact-icons-container">
+        <div class="contact-icon-circle">
+            <a href="mailto:hello@rishiramesh.com" class="contact-icon-link" aria-label="Email">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="contact-icon-circle">
+            <a href="https://www.linkedin.com/in/rishi-design/" class="contact-icon-link" target="_blank" aria-label="LinkedIn">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="contact-icon-circle">
+            <a href="tel:+1234567890" class="contact-icon-link" aria-label="Phone">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Header Image Section - Full width with proper image fit -->
+    <section id="header" class="section" style="padding: 0 0 0 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
+        <img src="Projects/Semi/Semi Hero.png" alt="Semi - Beginner's Cooktop Header" class="header-image" style="width: 100vw !important; height: 70vh !important; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover !important; object-position: center 70% !important;">
+    </section>
+
+    <!-- Project Content Section -->
+    <section id="project" class="section">
+        <div class="container" style="padding: 0 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <!-- Left Column: Title, Subtitle, and Description -->
+                <div class="project-content" style="width: 50%; max-width: none !important; padding-left: 65px;">
+                    <h1 style="font-size: 3rem; margin-bottom: 5px; color: var(--text-primary);">Semi</h1>
+                    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; color: var(--text-secondary);">Beginner's Cooktop</h2>
+                    <p style="font-size: 1.1rem; width: 100%; max-width: 90% !important; line-height: 1.6; color: var(--text-primary);">Semi is designed to make cooking accessible and intuitive for beginners. With simplified controls, guided cooking modes, a built-in weighing scale and smart safety features, it transforms the kitchen experience for those new to cooking while maintaining professional-grade performance.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px;">
+                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Industrial Design</span>
+                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Visualisation</span>
+                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">CMF</span>
+                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Design for Manufacture</span>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Project Details -->
+                <div style="width: 40%; margin-top: 115px; margin-left: auto;">
+                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Client:</strong> Klynk</div>
+                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Year:</strong> 2023</div>
+                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Duration:</strong> 6 months</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Research Question Section -->
+    <section id="research-question" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+                <img src="Projects/Semi/semi research question.png" alt="Semi Research Question" style="width: 100%; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </section>
+    
+    <!-- A Beginner's Story Section -->
+    <section id="beginners-story" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">A Beginner's Story</h3>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); width: 100%; max-width: 90% !important; margin-bottom: 30px;">User interviews revealed that novice cooks often second-guess themselves, not just from lack of skill but from the pressure to "get it right." Recipes assume knowledge beginners don't have, turning cooking into stress rather than exploration. The opportunity is to guide them in ways that build confidence, not just give instructions.</p>
+                
+                <!-- Side by side images -->
+                <div style="display: flex; gap: 20px; margin-top: 30px;">
+                    <div style="flex: 1; overflow: hidden;">
+                        <img src="Projects/Semi/beginner story.png" alt="Beginner's Story" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                    </div>
+                    <div style="flex: 1; overflow: hidden;">
+                        <img src="Projects/Semi/Concept Direction.png" alt="Concept Direction" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Concept Section -->
+    <section id="concept" class="section" style="padding-top: 100px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div style="margin-left: 65px; max-width: calc(100% - 130px); margin-bottom: 40px;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); font-weight: bold;">The Concept</h3>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-left: 65px; max-width: calc(100% - 130px); gap: 30px;">
+                <!-- Recipe Library -->
+                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="recipe-library-icon" src="Projects/Semi/recipe library white.png" alt="Recipe Library Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Recipe Library</h4>
+                    <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Curated collection of beginner-friendly recipes with adaptive difficulty levels that grow with user confidence and skill development.</p>
+                </div>
+                
+                <!-- Guided Cooking -->
+                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="guided-cooking-icon" src="Projects/Semi/guide cooking white.png" alt="Guided Cooking Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Guided Cooking</h4>
+                    <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Step-by-step cooking assistance with visual cues and timing prompts that reduce anxiety and build culinary confidence.</p>
+                </div>
+                
+                <!-- Built-in Weighing Scale -->
+                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="weighing-scale-icon" src="Projects/Semi/weighing scale white.png" alt="Built-in Weighing Scale Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Built-in Weighing Scale</h4>
+                    <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Precision weighing system integrated into the cooktop surface for accurate ingredient measurement without separate tools.</p>
+                </div>
+                
+                <!-- Temperature Control -->
+                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="temperature-control-icon" src="Projects/Semi/temp control white.png" alt="Temperature Control Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Temperature Control</h4>
+                    <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Intuitive temperature management with visual indicators and preset cooking modes that prevent overheating and burning.</p>
+                </div>
+            </div>
+        </div>
+    </section>            </div>
+        </div>
+    </section>
+    
+    <!-- Design Process Section -->
+    <section id="design-process" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Design Process</h3>
+                
+                <!-- Process Steps -->
+                <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 30px;">
+                    <!-- Research -->
+                    <div style="display: flex; gap: 30px; align-items: center;">
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Research & Discovery</h4>
+                            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Extensive user interviews with cooking beginners revealed common pain points around complex interfaces, fear of making mistakes, and lack of confidence in kitchen skills.</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="Projects/new context.png" alt="Research Phase" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        </div>
+                    </div>
+                    
+                    <!-- Ideation -->
+                    <div style="display: flex; gap: 30px; align-items: center;">
+                        <div style="flex: 1;">
+                            <img src="Projects/new context.png" alt="Ideation Phase" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Ideation & Concept Development</h4>
+                            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Brainstorming sessions focused on simplifying complex cooking processes while maintaining functionality. Explored various interaction models and progressive disclosure approaches.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Prototyping -->
+                    <div style="display: flex; gap: 30px; align-items: center;">
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Prototyping & Testing</h4>
+                            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Created interactive prototypes to test different guidance systems and control layouts. Iterated based on usability testing feedback from beginner cooks.</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="Projects/new context.png" alt="Prototyping Phase" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final Product Section -->
+    <section id="final-product" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Final Product</h3>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">The final Semi cooktop combines elegant industrial design with intuitive user experience, featuring a clean interface that adapts to user skill levels.</p>
+                
+                <!-- Product Images -->
+                <div style="display: flex; gap: 25px; margin-top: 40px;">
+                    <div style="flex: 1;">
+                        <img src="Projects/new context.png" alt="Semi Cooktop Front View" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        <p style="font-size: 0.9rem; text-align: center; margin-top: 15px; color: var(--text-secondary);">Front View</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="Projects/new context.png" alt="Semi Cooktop Interface" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        <p style="font-size: 0.9rem; text-align: center; margin-top: 15px; color: var(--text-secondary);">Control Interface</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="Projects/new context.png" alt="Semi Cooktop in Kitchen" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                        <p style="font-size: 0.9rem; text-align: center; margin-top: 15px; color: var(--text-secondary);">Kitchen Integration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="padding: 0 60px;">
+            <div class="footer-content">
+                <p class="designed-with-passion">Designed with passion for great products.</p>
+                <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+            </div>
+        </div>
+        <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="script.js?v=1.0"></script>
+    
+    <!-- Custom Cursor JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .project-card');
+            
+            // Function to get average brightness of background at cursor position
+            function getBackgroundBrightness(x, y) {
+                // Create a temporary element to get the background color
+                const tempElement = document.elementFromPoint(x, y);
+                if (!tempElement) return 128; // Default to middle brightness
+                
+                // Get the background color of the element
+                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
+                
+                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
+                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+                    let parent = tempElement.parentElement;
+                    while (parent) {
+                        const parentBg = window.getComputedStyle(parent).backgroundColor;
+                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
+                            return calculateBrightness(parentBg);
+                        }
+                        parent = parent.parentElement;
+                    }
+                    // If we reach here, use body background
+                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+                    return calculateBrightness(bodyBg);
+                }
+                
+                return calculateBrightness(bgColor);
+            }
+            
+            // Function to calculate brightness from RGB values
+            function calculateBrightness(rgb) {
+                // Parse RGB values
+                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (!match) return 128; // Default to middle brightness
+                
+                const r = parseInt(match[1]);
+                const g = parseInt(match[2]);
+                const b = parseInt(match[3]);
+                
+                // Calculate brightness using luminance formula
+                return (r * 299 + g * 587 + b * 114) / 1000;
+            }
+            
+            // Function to update cursor color based on background
+            function updateCursorColor(x, y) {
+                const brightness = getBackgroundBrightness(x, y);
+                // Remove any existing background classes
+                cursor.classList.remove('light-bg', 'dark-bg');
+                
+                // Add appropriate class based on brightness
+                if (brightness > 128) {
+                    cursor.classList.add('light-bg');
+                } else {
+                    cursor.classList.add('dark-bg');
+                }
+            }
+            
+            // Mouse move event
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                // Move main cursor immediately
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                
+                // Update cursor color based on background
+                updateCursorColor(mouseX, mouseY);
+            });
+            
+            // Show custom cursor
+            cursor.style.display = 'block';
+            
+            // Hover effects for clickable elements
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    // Transform cursor to target
+                    cursor.classList.add('target');
+                    
+                    // Check if this is a navigation link
+                    if (this.classList.contains('nav-link')) {
+                        // Add class to hide the dot for navigation links
+                        cursor.classList.add('no-dot');
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    // Transform cursor back to normal
+                    cursor.classList.remove('target');
+                    // Remove background color classes
+                    cursor.classList.remove('light-bg', 'dark-bg');
+                    // Remove no-dot class
+                    cursor.classList.remove('no-dot');
+                });
+            });
+            
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', function() {
+                cursor.style.display = 'none';
+            });
+            
+            // Show cursor when entering window
+            document.addEventListener('mouseenter', function() {
+                cursor.style.display = 'block';
+            });
+        });
+    </script>
+    
+    <!-- Back to Top Button JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Scroll to top when button is clicked
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+    <!-- Theme-Aware Icon Switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to update concept icons based on theme
+            function updateConceptIcons() {
+                // Check theme from html data-theme attribute
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+                const isLightMode = currentTheme === 'light';
+                
+                console.log('Current theme:', currentTheme, 'Is light mode:', isLightMode);
+                
+                // Get the concept icon elements
+                const recipeLibraryIcon = document.getElementById('recipe-library-icon');
+                const guidedCookingIcon = document.getElementById('guided-cooking-icon');
+                const temperatureControlIcon = document.getElementById('temperature-control-icon');
+                const weighingScaleIcon = document.getElementById('weighing-scale-icon');
+                
+                console.log('Icons found:', {recipeLibraryIcon: !!recipeLibraryIcon, guidedCookingIcon: !!guidedCookingIcon, temperatureControlIcon: !!temperatureControlIcon, weighingScaleIcon: !!weighingScaleIcon});
+                
+                // Update recipe library icon with theme-aware logic
+                if (recipeLibraryIcon) {
+                    const recipeSrc = isLightMode ? 'Projects/Semi/recipe library black.png' : 'Projects/Semi/recipe library white.png';
+                    console.log('Updating recipe library icon to:', recipeSrc);
+                    recipeLibraryIcon.src = recipeSrc;
+                }
+                
+                // Handle guided cooking icon separately with its own theme logic
+                if (guidedCookingIcon) {
+                    const guidedCookingSrc = isLightMode ? 'Projects/Semi/guided cooking black.png' : 'Projects/Semi/guide cooking white.png';
+                    console.log('Updating guided cooking icon to:', guidedCookingSrc);
+                    guidedCookingIcon.src = guidedCookingSrc;
+                }
+                
+                // Handle temperature control icon separately with its own theme logic
+                if (temperatureControlIcon) {
+                    const tempControlSrc = isLightMode ? 'Projects/Semi/temp control black.png' : 'Projects/Semi/temp control white.png';
+                    console.log('Updating temperature control icon to:', tempControlSrc);
+                    temperatureControlIcon.src = tempControlSrc;
+                }
+                
+                // Handle weighing scale icon separately with its own theme logic
+                if (weighingScaleIcon) {
+                    const scaleSrc = isLightMode ? 'Projects/Semi/weighing scale black.png' : 'Projects/Semi/weighing scale white.png';
+                    console.log('Updating weighing scale icon to:', scaleSrc);
+                    weighingScaleIcon.src = scaleSrc;
+                }
+            }
+            
+            // Initial update
+            updateConceptIcons();
+            
+            // Listen for theme changes
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                        console.log('Theme changed, updating icons');
+                        updateConceptIcons();
+                    }
+                });
+            });
+            
+            // Observe theme changes on the html element
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme']
+            });
+            
+            // Also listen for custom theme change events if any
+            document.addEventListener('themeChange', updateConceptIcons);
+        });
+    </script>
+</body>
+</html>
