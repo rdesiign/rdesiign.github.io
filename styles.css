@@ -585,17 +585,39 @@ footer {
     }
 }
 
-/* Theme styles for nav toggle button */
-[data-theme="dark"] .nav-toggle {
-    background: #000000; /* Solid black background */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+/* Ensure navigation menu remains black with white text/icons in light mode for index.html */
+[data-theme="light"] .nav-toggle,
+.index-page .nav-toggle {
+    background: #000000 !important; /* Force solid black background */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
 }
 
-[data-theme="light"] .nav-toggle {
-    background: #000000; /* Solid black background */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+[data-theme="light"] .nav-toggle-icon,
+.index-page .nav-toggle-icon {
+    color: #ffffff !important; /* Force white icon */
+    stroke: #ffffff !important; /* Force white stroke */
+}
+
+[data-theme="light"] .expanded-nav,
+.index-page .expanded-nav {
+    background: #000000 !important; /* Force black background */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="light"] .nav-link,
+.index-page .nav-link {
+    color: #ffffff !important; /* Force white text */
+}
+
+[data-theme="light"] .nav-link:hover,
+.index-page .nav-link:hover {
+    color: #ff6b35 !important; /* Keep orange hover effect */
+}
+
+[data-theme="light"] .nav-close .minus-icon,
+.index-page .nav-close .minus-icon {
+    stroke: #ffffff !important; /* Force white minus icon */
 }
 
 /* Theme styles for nav toggle icon */
@@ -1142,10 +1164,10 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle glow effect */
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button - Enhanced Visibility */
 .theme-toggle {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: none; /* Removed circular border */
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -1156,6 +1178,8 @@ footer {
     padding: 0;
     margin: 0;
     flex-shrink: 0;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* Theme Icon Container */
@@ -1573,21 +1597,61 @@ footer {
     display: block;
 }
 
-/* Sun and Moon icon styles - FIXED */
-html[data-theme="light"] .theme-toggle .sun-icon {
+/* Sun and Moon icon styles - ENHANCED for both modes */
+html[data-theme="light"] .theme-toggle .sun-icon,
+[data-theme="light"] .theme-toggle .sun-icon,
+.theme-toggle .sun-icon {
     stroke: #000000;
+    display: block !important;
+    visibility: visible !important;
 }
 
-html[data-theme="light"] .theme-toggle .moon-icon {
+html[data-theme="light"] .theme-toggle .moon-icon,
+[data-theme="light"] .theme-toggle .moon-icon,
+.theme-toggle .moon-icon {
     stroke: #000000;
+    display: block !important;
+    visibility: visible !important;
 }
 
-html[data-theme="dark"] .theme-toggle .sun-icon {
+html[data-theme="dark"] .theme-toggle .sun-icon,
+[data-theme="dark"] .theme-toggle .sun-icon,
+.theme-toggle .sun-icon {
     stroke: #ffffff;
+    display: block !important;
+    visibility: visible !important;
 }
 
-html[data-theme="dark"] .theme-toggle .moon-icon {
+html[data-theme="dark"] .theme-toggle .moon-icon,
+[data-theme="dark"] .theme-toggle .moon-icon,
+.theme-toggle .moon-icon {
     stroke: #ffffff;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Ensure theme icons are always visible - ULTIMATE OVERRIDE */
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    fill: none !important;
+}
+
+/* Override any JavaScript display: none with higher specificity */
+[data-theme="light"] .theme-toggle .sun-icon[style*="display: none"],
+[data-theme="dark"] .theme-toggle .moon-icon[style*="display: none"] {
+    display: none !important;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon[style*="display: block"],
+[data-theme="dark"] .theme-toggle .sun-icon[style*="display: block"] {
+    display: block !important;
 }
 
 /* Theme-specific styles for dark mode */
@@ -3355,4 +3419,70 @@ footer .container {
 /* Show tag text on project card hover */
 .project-card:hover .project-tag {
     opacity: 1; /* Show on hover */
+}
+
+/* Force navigation bar to be black with white text/icons in both modes */
+.nav-toggle,
+.expanded-nav {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.nav-link,
+.theme-toggle {
+    color: #ffffff !important;
+}
+
+.nav-link:hover {
+    color: #ff6b35 !important;
+}
+
+/* Navigation bar theme styles - override both modes */
+[data-theme="light"] .nav-toggle,
+[data-theme="dark"] .nav-toggle,
+.index-page .nav-toggle {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="light"] .nav-toggle-icon,
+[data-theme="dark"] .nav-toggle-icon,
+.index-page .nav-toggle-icon {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+[data-theme="light"] .expanded-nav,
+[data-theme="dark"] .expanded-nav,
+.index-page .expanded-nav {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="light"] .nav-link,
+[data-theme="dark"] .nav-link,
+.index-page .nav-link {
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="dark"] .nav-link:hover,
+.index-page .nav-link:hover {
+    color: #ff6b35 !important;
+}
+
+/* Theme toggle button */
+[data-theme="light"] .theme-toggle,
+[data-theme="dark"] .theme-toggle {
+    background: transparent !important;
+    border: none !important; /* Removed circular border */
+}
+
+/* Ensure theme icons are white */
+[data-theme="light"] .theme-toggle .sun-icon,
+[data-theme="dark"] .theme-toggle .sun-icon,
+[data-theme="light"] .theme-toggle .moon-icon,
+[data-theme="dark"] .theme-toggle .moon-icon {
+    stroke: #ffffff !important;
 }
