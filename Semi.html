@@ -356,7 +356,7 @@
                         </div>
                         <div style="flex: 1;">
                             <div class="progressive-image">
-                                <img src="Projects/Semi/What%20to%20add.png" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;" onerror="console.error('Failed to load What to add.png:', this.src); this.style.border='3px solid red'; this.alt='IMAGE LOAD FAILED';">
+                                <img src="Projects/Semi/What%20to%20add.png" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;" onerror="console.error('❌ FAILED to load What to add.png from:', this.src); this.style.border='4px solid red'; this.style.minHeight='200px'; this.alt='IMAGE MISSING: What to add.png';" onload="console.log('✅ SUCCESS: What to add.png loaded from:', this.src); this.style.border='2px solid green';">
                             </div>
                         </div>
                     </div>
@@ -434,24 +434,50 @@
         </button>
     </footer>
 
-    <!-- Image Loading Debug -->
+    <!-- Comprehensive Image Debug -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Test image loading
-        const testImages = [
-            'Projects/Semi/Semi%20Introduction.png',
-            'Projects/Semi/What%20to%20add.png'
+        // Test multiple approaches for the missing image
+        const imageUrl = 'Projects/Semi/What%20to%20add.png';
+        
+        console.log('🔍 Testing What to add.png loading...');
+        
+        // Method 1: Direct image element
+        const img1 = document.createElement('img');
+        img1.src = imageUrl;
+        img1.onload = function() {
+            console.log('✅ Method 1 SUCCESS:', this.src);
+        };
+        img1.onerror = function() {
+            console.error('❌ Method 1 FAILED:', this.src);
+        };
+        
+        // Method 2: XMLHttpRequest to check if file exists
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', imageUrl, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log('✅ File EXISTS on server:', imageUrl);
+                } else {
+                    console.error('❌ File NOT FOUND on server:', imageUrl, 'Status:', xhr.status);
+                }
+            }
+        };
+        xhr.send();
+        
+        // Method 3: Try alternative path variations
+        const alternatives = [
+            'Projects/Semi/what%20to%20add.png',  // lowercase
+            'Projects/Semi/What to add.png',      // without encoding
+            'Projects/Semi/what to add.png'       // lowercase without encoding
         ];
         
-        testImages.forEach(imgSrc => {
-            const img = new Image();
-            img.onload = function() {
-                console.log('✅ Image loaded successfully:', imgSrc);
-            };
-            img.onerror = function() {
-                console.error('❌ Image failed to load:', imgSrc);
-            };
-            img.src = imgSrc;
+        alternatives.forEach((altUrl, index) => {
+            const testImg = new Image();
+            testImg.onload = () => console.log(`✅ Alternative ${index + 1} works:`, altUrl);
+            testImg.onerror = () => console.error(`❌ Alternative ${index + 1} failed:`, altUrl);
+            testImg.src = altUrl;
         });
     });
     </script>

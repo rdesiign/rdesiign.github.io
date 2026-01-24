@@ -1,15 +1,26 @@
-// Service Worker Cleanup
+// Temporarily disable service worker for debugging
 (function() {
     'use strict';
     
-    // Unregister any existing service workers to prevent loading loops
+    // Unregister any existing service workers to prevent interference
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(function(registrations) {
             for(let registration of registrations) {
+                console.log(' unregistering service worker:', registration);
                 registration.unregister();
             }
         }).catch(function(error) {
             console.log('Service worker cleanup error:', error);
+        });
+    }
+    
+    // Clear all caches for debugging
+    if ('caches' in window) {
+        caches.keys().then(function(cacheNames) {
+            cacheNames.forEach(function(cacheName) {
+                console.log('Clearing cache:', cacheName);
+                caches.delete(cacheName);
+            });
         });
     }
 })();
