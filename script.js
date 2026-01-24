@@ -1,74 +1,6 @@
-// Loading Screen Functionality
-let loadingProgress = 0;
-const totalResources = 15; // Approximate number of resources to load
 
-function updateLoadingProgress(increment = 1) {
-    loadingProgress += increment;
-    const percentage = Math.min(Math.round((loadingProgress / totalResources) * 100), 100);
-    
-    const progressFill = document.getElementById('progress-fill');
-    const progressText = document.getElementById('progress-text');
-    
-    if (progressFill) {
-        progressFill.style.width = percentage + '%';
-    }
-    
-    if (progressText) {
-        progressText.textContent = percentage + '%';
-    }
-    
-    // Hide loading screen when complete
-    if (percentage >= 100) {
-        setTimeout(hideLoadingScreen, 300);
-    }
-}
 
-function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        loadingScreen.classList.add('hidden');
-        // Remove from DOM after transition
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }
-}
 
-// Track image loading
-function trackImageLoading() {
-    const images = document.querySelectorAll('img');
-    let loadedImages = 0;
-    const totalImages = images.length;
-    
-    if (totalImages === 0) {
-        updateLoadingProgress(5); // Bonus progress if no images
-        return;
-    }
-    
-    images.forEach(img => {
-        if (img.complete) {
-            loadedImages++;
-            updateLoadingProgress(1);
-        } else {
-            img.addEventListener('load', () => {
-                loadedImages++;
-                updateLoadingProgress(1);
-            });
-            
-            img.addEventListener('error', () => {
-                loadedImages++;
-                updateLoadingProgress(1); // Still count errored images
-            });
-        }
-    });
-    
-    // Timeout fallback
-    setTimeout(() => {
-        if (loadedImages < totalImages) {
-            updateLoadingProgress(totalImages - loadedImages);
-        }
-    }, 5000);
-}
 
 // Temporarily disable service worker for debugging
 (function() {
@@ -167,10 +99,7 @@ function enhancedLazyLoad() {
 // Main app initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Main app initialization');
-    
-    // Start loading screen tracking
-    updateLoadingProgress(2); // Initial progress
-    
+        
     // Production environment setup
     try {
     
@@ -186,39 +115,28 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Preload critical images
     preloadImages();
-    updateLoadingProgress(3);
-    
+            
     // Initialize performance optimizations
     optimizeImagesForPerformance();
-    updateLoadingProgress(2);
-    
+            
     // Initialize enhanced lazy loading
     enhancedLazyLoad();
-    updateLoadingProgress(2);
     
-    // Track image loading progress
-    trackImageLoading();
+    
     
     // Initialize components
     initializeComponents();
-    updateLoadingProgress(2);
-    
+            
     initializeContactForm();
-    updateLoadingProgress(1);
-    
+            
     initializeGraphBackground();
-    updateLoadingProgress(1);
-    
+            
     initializeShowreelBanner();
-    updateLoadingProgress(1);
-    
+            
     initializeNavigation();
-    updateLoadingProgress(1);
     
     } catch (error) {
         console.error('Error in main initialization:', error);
-        // Still hide loading screen even if there's an error
-        setTimeout(hideLoadingScreen, 1000);
     }
 });
 
