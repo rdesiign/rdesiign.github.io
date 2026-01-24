@@ -14,18 +14,44 @@
     }
 })();
 
-// Preload critical images
+// Preload critical images with error handling
 function preloadImages() {
     const imagesToPreload = [
-        'Projects/MMM/MMM8.png',
-        'Projects/MMM/MMM1.png',
-        'Assets/Profile raw 4.jpg'
+        'Projects/MMM/MMM8.png?v=1.0',
+        'Projects/MMM/MMM1.png?v=1.0',
+        'Assets/Profile raw 4.jpg?v=1.0'
     ];
     
     imagesToPreload.forEach(src => {
         const img = new Image();
+        img.onload = function() {
+            console.log('Image loaded successfully:', src);
+        };
+        img.onerror = function() {
+            console.error('Failed to load image:', src);
+        };
         img.src = src;
     });
+}
+
+// Lazy load images with Intersection Observer
+function lazyLoadImages() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
 }
 
 // Main app initialization
@@ -47,6 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Preload critical images
     preloadImages();
+    
+    // Initialize lazy loading
+    lazyLoadImages();
     
     initializeComponents();
     initializeContactForm();

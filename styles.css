@@ -3486,3 +3486,104 @@ footer .container {
 [data-theme="dark"] .theme-toggle .moon-icon {
     stroke: #ffffff !important;
 }
+
+/* ===== IMAGE LOADING OPTIMIZATIONS FOR GITHUB PAGES ===== */
+
+/* Base image styles for performance */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Lazy loading placeholder styles */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+img:not(.lazy) {
+    opacity: 1;
+}
+
+/* Progressive image loading container */
+.progressive-image {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.progressive-image img {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Loading skeleton/placeholder */
+.image-placeholder {
+    background: linear-gradient(90deg, 
+        var(--bg-tertiary) 25%, 
+        var(--bg-secondary) 50%, 
+        var(--bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: loading-pulse 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading-pulse {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Optimize for GitHub Pages mobile */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .header-image {
+        height: 50vh !important;
+    }
+    
+    /* Reduce image quality on mobile for faster loading */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Critical image optimization */
+.header-image,
+.project-image {
+    /* Enable progressive JPEG rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Error handling for broken images */
+img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* High DPI display optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
