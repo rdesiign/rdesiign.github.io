@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
+    <!-- Preload critical hero image -->
+    <link rel="preload" href="Projects/Semi/Semi Hero.png" as="image">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
@@ -118,7 +120,7 @@
 
     <!-- Header Image Section - Full width with proper image fit -->
     <section id="header" class="section" style="padding: 0 0 0 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
-        <img src="Projects/Semi/Semi Hero.png" alt="Semi - Beginner's Cooktop Header" class="header-image" style="width: 100vw !important; height: 70vh !important; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover !important; object-position: center 70% !important;" loading="eager">
+        <img src="Projects/Semi/Semi Hero.png" alt="Semi - Beginner's Cooktop Header" class="header-image" style="width: 100vw !important; height: 70vh !important; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover !important; object-position: center 70% !important;" loading="eager" fetchpriority="high">
     </section>
 
     <!-- Project Content Section -->
