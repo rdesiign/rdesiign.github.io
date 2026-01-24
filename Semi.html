@@ -234,7 +234,7 @@
                 <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Introducing Semi</h3>
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">Semi is a supportive cooking system that helps remove uncertainty, making everyday cooking feel confident and effortless.</p>
                 <div class="progressive-image">
-                    <img data-fullsrc="Projects/Semi/semi introduction.png?v=1.1" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
+                    <img src="Projects/Semi/semi%20introduction.png?v=1.3" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
                 </div>
             </div>
         </div>
@@ -356,7 +356,7 @@
                         </div>
                         <div style="flex: 1;">
                             <div class="progressive-image">
-                                <img data-fullsrc="Projects/Semi/what to add.png?v=1.1" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                                <img src="Projects/Semi/what%20to%20add.png?v=1.3" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;">
                             </div>
                         </div>
                     </div>
@@ -434,6 +434,49 @@
         </button>
     </footer>
 
+    <!-- Simple Image Loading Debug -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if images are loading
+        const images = document.querySelectorAll('img[src*="semi introduction.png"], img[src*="what to add.png"]');
+        
+        images.forEach((img, index) => {
+            console.log('Checking image:', img.src);
+            
+            img.onload = function() {
+                console.log('✅ Image loaded successfully:', img.src);
+                img.style.border = '2px solid green';
+            };
+            
+            img.onerror = function() {
+                console.error('❌ Image failed to load:', img.src);
+                img.style.border = '2px solid red';
+                img.alt = 'Image failed to load: ' + img.src;
+                
+                // Try alternative approach
+                setTimeout(() => {
+                    const newImg = document.createElement('img');
+                    newImg.src = img.src.replace('?v=1.2', '?v=1.3');
+                    newImg.alt = img.alt;
+                    newImg.style.width = '100%';
+                    newImg.style.borderRadius = '8px';
+                    newImg.style.display = 'block';
+                    
+                    newImg.onload = () => {
+                        console.log('✅ Retry successful:', newImg.src);
+                        img.parentNode.replaceChild(newImg, img);
+                    };
+                    
+                    newImg.onerror = () => {
+                        console.error('❌ Retry also failed:', newImg.src);
+                        img.parentNode.innerHTML = '<div style="background: #ff000033; padding: 20px; border-radius: 8px; text-align: center; color: #ff6b6b;">Failed to load: ' + img.src.split('/').pop() + '</div>';
+                    };
+                }, 1000);
+            };
+        });
+    });
+    </script>
+    
     <script src="script.js?v=1.1"></script>
     <script src="image-loader.js?v=1.0"></script>
     
