@@ -3510,15 +3510,95 @@ img:not(.lazy) {
     opacity: 1;
 }
 
-/* Progressive image loading container */
+/* Advanced image loading states */
 .progressive-image {
     position: relative;
     overflow: hidden;
-    background-color: var(--bg-secondary);
+    background: linear-gradient(90deg, var(--bg-tertiary), var(--bg-secondary));
+    min-height: 200px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progressive-image::before {
+    content: "Loading...";
+    position: absolute;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    z-index: 1;
 }
 
 .progressive-image img {
-    transition: opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-out;
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.progressive-image img:not([src^="data:"]) {
+    /* When showing actual image */
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fully-loaded {
+    transition: all 0.5s ease-out !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    filter: none !important;
+}
+
+/* Slow connection optimizations */
+.slow-connection .progressive-image img {
+    filter: blur(1px) brightness(1.05);
+    transform: scale(0.98);
+}
+
+.slow-connection .fully-loaded {
+    transition: all 1s ease-out !important;
+    filter: none !important;
+    transform: scale(1) !important;
+}
+
+/* Connection detection indicator */
+.connection-status {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 10000;
+    display: none;
+}
+
+.slow-connection .connection-status {
+    display: block;
+}
+
+/* Force hardware acceleration for smoother loading */
+img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: opacity;
+}
+
+/* Reduce image quality on slow connections */
+.slow-connection img {
+    image-rendering: -webkit-optimize-contrast;
+    filter: blur(0.5px); /* Minimal blur to reduce perceived quality */
+}
+
+/* Emergency bandwidth detection */
+@media (max-width: 768px) and (max-bandwidth: 1Mbps) {
+    img {
+        transform: scale(0.9);
+        filter: brightness(1.1) contrast(0.9);
+    }
 }
 
 /* Loading skeleton/placeholder */

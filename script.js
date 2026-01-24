@@ -34,24 +34,51 @@ function preloadImages() {
     });
 }
 
-// Lazy load images with Intersection Observer
-function lazyLoadImages() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
+// Aggressive image optimization for slow connections
+function optimizeImagesForPerformance() {
+    // Reduce image quality for initial load
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        // Add loading attributes if missing
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+        
+        // Add decoding hint
+        img.setAttribute('decoding', 'async');
+        
+        // For large images, consider using lower quality versions
+        const src = img.getAttribute('src');
+        if (src && (src.includes('Semi') || src.includes('MMM'))) {
+            // Could implement WebP conversion or quality reduction here
+            console.log('Optimizing image:', src);
+        }
+    });
+}
 
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
+// Enhanced lazy loading with timeout fallback
+function enhancedLazyLoad() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                // Add slight delay to prevent layout shift
+                setTimeout(() => {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    img.classList.add('loaded');
+                }, 100);
+            }
         });
-    }
+    }, {
+        rootMargin: '50px 0px', // Start loading 50px before entering viewport
+        threshold: 0.01
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
 }
 
 // Main app initialization
@@ -74,8 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preload critical images
     preloadImages();
     
-    // Initialize lazy loading
-    lazyLoadImages();
+    // Initialize performance optimizations
+    optimizeImagesForPerformance();
+    
+    // Initialize enhanced lazy loading
+    enhancedLazyLoad();
     
     initializeComponents();
     initializeContactForm();

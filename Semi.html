@@ -21,6 +21,8 @@
     </style>
 </head>
 <body style="margin: 0; padding: 0; overflow-x: hidden;">
+    <div class="connection-status">Slow Connection Detected - Optimizing Image Loading</div>
+    
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor">
         <div class="custom-cursor-dot"></div>
@@ -231,7 +233,9 @@
             <div style="margin-left: 65px; max-width: calc(100% - 130px); text-align: center;">
                 <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Introducing Semi</h3>
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">Semi is a supportive cooking system that helps remove uncertainty, making everyday cooking feel confident and effortless.</p>
-                <img src="Projects/Semi/semi introduction.png?v=1.1" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
+                <div class="progressive-image">
+                    <img data-fullsrc="Projects/Semi/semi introduction.png?v=1.1" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
+                </div>
             </div>
         </div>
     </section>
@@ -351,7 +355,9 @@
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">A built-in weighing scale delivers precise, real-time measurements, guiding each addition to ensure consistency, accuracy, and reliable results.</p>
                         </div>
                         <div style="flex: 1;">
-                            <img src="Projects/Semi/what to add.png?v=1.1" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                            <div class="progressive-image">
+                                <img data-fullsrc="Projects/Semi/what to add.png?v=1.1" alt="Precise Ingredient Measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -428,7 +434,8 @@
         </button>
     </footer>
 
-    <script src="script.js?v=1.0"></script>
+    <script src="script.js?v=1.1"></script>
+    <script src="image-loader.js?v=1.0"></script>
     
     <!-- Custom Cursor JavaScript -->
     <script>
