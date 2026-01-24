@@ -191,7 +191,7 @@
                         <div class="project-card">
                             <a href="Semi.html" class="project-link">
                                 <div class="project-image-container landscape">
-                                    <img src="Projects/Semi/Semi Thumbnail.png?v=1.2" alt="Semi" class="project-image" loading="lazy">
+                                    <img src="Projects/Semi/Semi Thumbnail.png" alt="Semi" class="project-image" loading="lazy">
                                     <div class="project-tag">In Market</div>
                                     <div class="project-overlay">
                                         <div class="project-content">
@@ -213,7 +213,7 @@
                         <div class="project-card">
                             <a href="MMM.html" class="project-link">
                                 <div class="project-image-container landscape">
-                                    <img src="Projects/MMM/MMM Thumbnail.png?v=1.2" alt="Headway - Migraine Management System" class="project-image" loading="lazy">
+                                    <img src="Projects/MMM/MMM Thumbnail.png" alt="Headway - Migraine Management System" class="project-image" loading="lazy">
                                     <div class="project-tag">Concept</div>
                                     <div class="project-overlay">
                                         <div class="project-content">
@@ -278,29 +278,8 @@
         </button>
     </footer>
 
-    <!-- Thumbnail Image Loading Feedback -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Monitor thumbnail loading
-        const thumbnails = document.querySelectorAll('.project-image');
-        
-        thumbnails.forEach(img => {
-            img.onload = function() {
-                console.log('✅ Thumbnail loaded:', this.alt);
-                this.style.boxShadow = '0 0 5px rgba(0,255,0,0.2)';
-            };
-            
-            img.onerror = function() {
-                console.error('❌ Thumbnail failed to load:', this.src);
-                this.style.border = '2px solid red';
-                this.alt = 'Failed to load: ' + this.alt;
-            };
-        });
-    });
-    </script>
-    
-    <script src="script.js?v=1.1"></script>
-    <script src="image-loader.js?v=1.0"></script>
+    <script src="script.js"></script>
+    <script src="image-loader.js"></script>
     
     <!-- Custom Cursor JavaScript -->
     <script>

@@ -7,12 +7,12 @@ const urlsToCache = [
   '/Semi.html',
   '/styles.css',
   '/script.js',
-  // Critical assets with versioning
-  'Assets/Profile raw 4.jpg?v=1.0',
-  'Assets/master-logo.png?v=1.0',
-  'Projects/MMM/MMM8.png?v=1.0',
-  'Projects/MMM/MMM1.png?v=1.0',
-  'Projects/Semi/Semi Thumbnail.png?v=1.0'
+  // Critical assets
+  'Assets/Profile raw 4.jpg',
+  'Assets/master-logo.png',
+  'Projects/MMM/MMM8.png',
+  'Projects/MMM/MMM1.png',
+  'Projects/Semi/Semi Thumbnail.png'
 ];
 
 // Install event - cache core assets

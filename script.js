@@ -17,9 +17,9 @@
 // Preload critical images with error handling
 function preloadImages() {
     const imagesToPreload = [
-        'Projects/MMM/MMM8.png?v=1.0',
-        'Projects/MMM/MMM1.png?v=1.0',
-        'Assets/Profile raw 4.jpg?v=1.0'
+        'Projects/MMM/MMM8.png',
+        'Projects/MMM/MMM1.png',
+        'Assets/Profile raw 4.jpg'
     ];
     
     imagesToPreload.forEach(src => {
