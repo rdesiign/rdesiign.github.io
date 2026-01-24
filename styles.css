@@ -3510,55 +3510,15 @@ img:not(.lazy) {
     opacity: 1;
 }
 
-/* Advanced image loading states */
-.progressive-image {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(90deg, var(--bg-tertiary), var(--bg-secondary));
-    min-height: 200px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.progressive-image::before {
-    content: "Loading...";
-    position: absolute;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    z-index: 1;
-}
-
+/* Simplified loading for smaller images */
 .progressive-image img {
-    transition: all 0.3s ease-out;
     opacity: 0;
-    transform: scale(1.05);
+    transition: opacity 0.3s ease;
 }
 
-.progressive-image img:not([src^="data:"]) {
-    /* When showing actual image */
+/* When image loads, fade in smoothly */
+.progressive-image img[alt="Semi Introduction"] {
     opacity: 1;
-    transform: scale(1);
-}
-
-.fully-loaded {
-    transition: all 0.5s ease-out !important;
-    opacity: 1 !important;
-    transform: scale(1) !important;
-    filter: none !important;
-}
-
-/* Slow connection optimizations */
-.slow-connection .progressive-image img {
-    filter: blur(1px) brightness(1.05);
-    transform: scale(0.98);
-}
-
-.slow-connection .fully-loaded {
-    transition: all 1s ease-out !important;
-    filter: none !important;
-    transform: scale(1) !important;
 }
 
 /* Connection detection indicator */
