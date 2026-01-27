@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-cache-v1.0';
+const CACHE_NAME = 'portfolio-cache-v1.1';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,7 +12,8 @@ const urlsToCache = [
   'Assets/master-logo.png',
   'Projects/MMM/MMM8.png',
   'Projects/MMM/MMM1.png',
-  'Projects/Semi/Semi Thumbnail.png'
+  'Projects/Semi/Semi Thumbnail.png',
+  'Projects/Semi/semi introduction.jpg'
 ];
 
 // Install event - cache core assets
