@@ -51,23 +51,43 @@ function preloadImages() {
 
 // Aggressive image optimization for slow connections
 function optimizeImagesForPerformance() {
-    // Reduce image quality for initial load
+    // Optimize all images for better performance
     const images = document.querySelectorAll('img');
     
     images.forEach(img => {
-        // Add loading attributes if missing
-        if (!img.hasAttribute('loading')) {
-            img.setAttribute('loading', 'lazy');
+        // Add decoding hint for better performance
+        if (!img.hasAttribute('decoding')) {
+            img.setAttribute('decoding', 'async');
         }
         
-        // Add decoding hint
-        img.setAttribute('decoding', 'async');
-        
-        // For large images, consider using lower quality versions
+        // Add fetchpriority for critical images (above the fold)
         const src = img.getAttribute('src');
-        if (src && (src.includes('Semi') || src.includes('MMM'))) {
-            // Could implement WebP conversion or quality reduction here
-            console.log('Optimizing image:', src);
+        if (src && (
+            src.includes('Semi Thumbnail') || 
+            src.includes('MMM Thumbnail') || 
+            src.includes('pawtrail') || 
+            src.includes('Headphone/place') ||
+            src.includes('square.png')
+        )) {
+            img.setAttribute('fetchpriority', 'high');
+        }
+        
+        // Add loading=lazy for non-critical images only
+        if (!img.hasAttribute('loading')) {
+            // Only apply lazy loading to images below the fold
+            const rect = img.getBoundingClientRect();
+            if (rect.top > window.innerHeight) {
+                img.setAttribute('loading', 'lazy');
+            }
+        }
+        
+        // Log optimization for monitoring
+        if (src) {
+            console.log('Optimized image:', src, {
+                decoding: img.getAttribute('decoding'),
+                fetchpriority: img.getAttribute('fetchpriority'),
+                loading: img.getAttribute('loading')
+            });
         }
     });
 }
@@ -85,15 +105,39 @@ function enhancedLazyLoad() {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
                     img.classList.add('loaded');
+                    // Add fade-in effect
+                    img.style.opacity = '0';
+                    img.onload = () => {
+                        img.style.transition = 'opacity 0.3s ease-in-out';
+                        img.style.opacity = '1';
+                    };
                 }, 100);
             }
         });
     }, {
-        rootMargin: '50px 0px', // Start loading 50px before entering viewport
+        rootMargin: '100px 0px', // Increased margin for smoother loading
         threshold: 0.01
     });
     
     images.forEach(img => imageObserver.observe(img));
+    
+    // Also observe project images for enhanced loading
+    document.querySelectorAll('.project-image').forEach(img => {
+        // Skip already loaded images
+        if (img.complete && img.naturalHeight !== 0) return;
+        
+        // Add loading indicator
+        img.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
+        img.style.backgroundSize = '200% 100%';
+        img.style.animation = 'loading-shimmer 1.8s infinite';
+        
+        img.onload = () => {
+            img.style.background = '';
+            img.style.animation = '';
+            img.style.transition = 'opacity 0.3s ease-in-out';
+            img.style.opacity = '1';
+        };
+    });
 }
 
 // Main app initialization
