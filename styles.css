@@ -585,6 +585,33 @@ footer {
     #about {
         padding-top: 70px; /* Adjusted padding for small mobile */
     }
+    
+    /* Extreme mobile performance optimizations */
+    .project-image {
+        /* Minimal processing for worst devices */
+        image-rendering: -webkit-optimize-contrast;
+        decoding: sync;
+        /* Force hardware acceleration off to save battery */
+        transform: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Simplified grid for better rendering */
+    .abstract-grid-row {
+        display: block;
+    }
+    
+    .project-col-left,
+    .project-col-right {
+        display: block;
+        width: 100%;
+    }
+    
+    /* Reduce image container overhead */
+    .project-image-container {
+        contain: none !important;
+        transform: none !important;
+    }
 }
 
 
@@ -3563,6 +3590,19 @@ img {
         transform: scale(0.9);
         filter: brightness(1.1) contrast(0.9);
     }
+    
+    /* Extreme mobile optimization */
+    .project-image {
+        image-rendering: pixelated;
+        decoding: sync;
+    }
+    
+    /* Disable all non-essential animations */
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* Loading skeleton/placeholder */
@@ -3585,6 +3625,56 @@ img {
     }
 }
 
+/* Mobile-optimized loading states */
+@media (max-width: 768px) {
+    .image-placeholder {
+        animation: none;
+        background: var(--bg-secondary);
+    }
+    
+    @keyframes loading-pulse {
+        /* Disabled on mobile */
+        0%, 100% { opacity: 1; }
+    }
+}
+
+/* Mobile optimization class */
+.mobile-optimized {
+    /* Disable heavy visual effects */
+    transform: none !important;
+}
+
+.mobile-optimized .project-image {
+    /* Maximum mobile performance */
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: visible !important;
+    perspective: none !important;
+    contain: none !important;
+}
+
+.mobile-optimized .project-image-container {
+    contain: none !important;
+    transform: none !important;
+}
+
+/* Reduce repaints on mobile */
+@media (max-width: 768px) {
+    .mobile-optimized * {
+        /* Disable expensive CSS properties */
+        text-shadow: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Simplified transitions */
+    .mobile-optimized * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 /* Enhanced project image loading optimizations */
 .project-image {
     /* Hardware acceleration for smoother loading */
@@ -3599,6 +3689,21 @@ img {
     min-height: 200px;
 }
 
+/* Desktop-only advanced features */
+@media (min-width: 769px) {
+    .project-image {
+        /* Keep advanced features for desktop */
+        transform: translateZ(0);
+        will-change: opacity;
+        contain: layout style paint;
+    }
+    
+    .project-image-container {
+        contain: layout style paint;
+        transform: translateZ(0);
+    }
+}
+
 /* Loading state for project images */
 .project-image:not([src]) {
     background: linear-gradient(90deg, 
@@ -3608,6 +3713,18 @@ img {
     background-size: 200% 100%;
     animation: loading-shimmer 1.8s infinite;
     border-radius: 8px;
+}
+
+/* Desktop-only loading animations */
+@media (min-width: 769px) {
+    .project-image:not([src]) {
+        background: linear-gradient(90deg, 
+            var(--bg-secondary) 25%, 
+            var(--bg-tertiary) 50%, 
+            var(--bg-secondary) 75%);
+        background-size: 200% 100%;
+        animation: loading-shimmer 1.8s infinite;
+    }
 }
 
 @keyframes loading-shimmer {
@@ -3632,6 +3749,14 @@ img {
     transform: translateZ(0);
 }
 
+/* Mobile simplified container */
+@media (max-width: 768px) {
+    .project-image-container {
+        contain: none;
+        transform: none;
+    }
+}
+
 /* Optimize for GitHub Pages mobile */
 @media (max-width: 768px) {
     .project-grid {
@@ -3645,6 +3770,11 @@ img {
     /* Reduce image quality on mobile for faster loading */
     img {
         image-rendering: -webkit-optimize-contrast;
+        /* Disable heavy CSS effects on mobile */
+        transform: none !important;
+        backface-visibility: visible !important;
+        perspective: none !important;
+        will-change: auto !important;
     }
     
     /* Mobile-specific project image optimizations */
@@ -3653,6 +3783,31 @@ img {
         image-rendering: -webkit-optimize-contrast;
         /* Faster decode on mobile */
         decoding: sync;
+        /* Reduce memory usage */
+        content-visibility: auto;
+        contain-intrinsic-size: 300px 200px;
+    }
+    
+    /* Disable animations on mobile for better performance */
+    .project-image-container {
+        transform: none !important;
+        contain: none !important;
+    }
+    
+    /* Simplified loading states for mobile */
+    .project-image:not([src]) {
+        background: #f0f0f0;
+        animation: none;
+    }
+    
+    @keyframes loading-shimmer {
+        /* Disabled on mobile */
+        0%, 100% { opacity: 1; }
+    }
+    
+    /* Reduce transition durations on mobile */
+    .project-image {
+        transition: opacity 0.1s ease-in-out;
     }
 }
 
@@ -3688,5 +3843,70 @@ img::before {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     img {
         image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Mobile Safari specific optimizations */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 768px) {
+        /* Disable momentum scrolling issues */
+        .project-image {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        /* Optimize touch interactions */
+        .project-card {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        /* Safari performance tweaks */
+        .mobile-optimized {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        .mobile-optimized .project-image {
+            -webkit-transform: none;
+            transform: none;
+        }
+    }
+}
+
+/* Low-end device detection and optimization */
+@media (max-width: 768px) and (max-device-width: 768px) {
+    /* Reduce memory-intensive operations */
+    .project-image {
+        content-visibility: auto;
+        contain-intrinsic-size: 200px 150px;
+    }
+    
+    /* Simplify complex layouts */
+    .abstract-grid {
+        display: block;
+    }
+    
+    .abstract-grid-row {
+        display: block;
+        margin-bottom: 20px;
+    }
+    
+    /* Minimal styling for performance */
+    .project-image-container {
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Extreme performance mode */
+    .mobile-optimized .project-image {
+        /* Bare minimum styling */
+        display: block;
+        width: 100%;
+        height: auto;
+        /* Remove all performance-heavy properties */
+        transform: none !important;
+        will-change: auto !important;
+        contain: none !important;
     }
 }

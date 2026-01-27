@@ -31,7 +31,15 @@
 
 // Preload critical images with error handling
 function preloadImages() {
-    const imagesToPreload = [
+    // Detect mobile device
+    const isMobile = window.innerWidth <= 768;
+    
+    // Different preload lists for mobile vs desktop
+    const imagesToPreload = isMobile ? [
+        'Assets/Profile raw 4.jpg',
+        'Projects/Semi/Semi Thumbnail.png',
+        'Projects/MMM/MMM Thumbnail.jpg'
+    ] : [
         'Projects/MMM/MMM8.png',
         'Projects/MMM/MMM1.png',
         'Assets/Profile raw 4.jpg'
@@ -40,10 +48,10 @@ function preloadImages() {
     imagesToPreload.forEach(src => {
         const img = new Image();
         img.onload = function() {
-            console.log('Image loaded successfully:', src);
+            console.log(`${isMobile ? 'Mobile' : 'Desktop'} image loaded successfully:`, src);
         };
         img.onerror = function() {
-            console.error('Failed to load image:', src);
+            console.error(`Failed to load ${isMobile ? 'mobile' : 'desktop'} image:`, src);
         };
         img.src = src;
     });
@@ -51,13 +59,27 @@ function preloadImages() {
 
 // Aggressive image optimization for slow connections
 function optimizeImagesForPerformance() {
+    // Detect mobile device
+    const isMobile = window.innerWidth <= 768;
+    
     // Optimize all images for better performance
     const images = document.querySelectorAll('img');
     
     images.forEach(img => {
-        // Add decoding hint for better performance
-        if (!img.hasAttribute('decoding')) {
-            img.setAttribute('decoding', 'async');
+        // Mobile-specific optimizations
+        if (isMobile) {
+            // Use sync decoding for better mobile performance
+            img.setAttribute('decoding', 'sync');
+            
+            // Remove heavy attributes on mobile
+            img.style.removeProperty('will-change');
+            img.style.removeProperty('transform');
+            img.style.removeProperty('backface-visibility');
+        } else {
+            // Desktop optimizations
+            if (!img.hasAttribute('decoding')) {
+                img.setAttribute('decoding', 'async');
+            }
         }
         
         // Add fetchpriority for critical images (above the fold)
@@ -84,6 +106,7 @@ function optimizeImagesForPerformance() {
         // Log optimization for monitoring
         if (src) {
             console.log('Optimized image:', src, {
+                mobile: isMobile,
                 decoding: img.getAttribute('decoding'),
                 fetchpriority: img.getAttribute('fetchpriority'),
                 loading: img.getAttribute('loading')
@@ -94,28 +117,39 @@ function optimizeImagesForPerformance() {
 
 // Enhanced lazy loading with timeout fallback
 function enhancedLazyLoad() {
+    // Detect mobile device
+    const isMobile = window.innerWidth <= 768;
+    
     const images = document.querySelectorAll('img[data-src]');
     
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                // Add slight delay to prevent layout shift
+                // Mobile gets faster loading, desktop gets smoother animations
+                const delay = isMobile ? 0 : 100;
+                
                 setTimeout(() => {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
                     img.classList.add('loaded');
-                    // Add fade-in effect
-                    img.style.opacity = '0';
-                    img.onload = () => {
-                        img.style.transition = 'opacity 0.3s ease-in-out';
+                    
+                    // Mobile: instant show, Desktop: smooth fade
+                    if (isMobile) {
                         img.style.opacity = '1';
-                    };
-                }, 100);
+                        img.style.transition = 'none';
+                    } else {
+                        img.style.opacity = '0';
+                        img.onload = () => {
+                            img.style.transition = 'opacity 0.3s ease-in-out';
+                            img.style.opacity = '1';
+                        };
+                    }
+                }, delay);
             }
         });
     }, {
-        rootMargin: '100px 0px', // Increased margin for smoother loading
+        rootMargin: isMobile ? '50px 0px' : '100px 0px', // Smaller margin for mobile
         threshold: 0.01
     });
     
@@ -126,15 +160,22 @@ function enhancedLazyLoad() {
         // Skip already loaded images
         if (img.complete && img.naturalHeight !== 0) return;
         
-        // Add loading indicator
-        img.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
-        img.style.backgroundSize = '200% 100%';
-        img.style.animation = 'loading-shimmer 1.8s infinite';
+        // Mobile: simple loading, Desktop: fancy animations
+        if (isMobile) {
+            img.style.background = '#f0f0f0';
+            img.style.animation = 'none';
+        } else {
+            img.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
+            img.style.backgroundSize = '200% 100%';
+            img.style.animation = 'loading-shimmer 1.8s infinite';
+        }
         
         img.onload = () => {
             img.style.background = '';
             img.style.animation = '';
-            img.style.transition = 'opacity 0.3s ease-in-out';
+            if (!isMobile) {
+                img.style.transition = 'opacity 0.3s ease-in-out';
+            }
             img.style.opacity = '1';
         };
     });
@@ -157,6 +198,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     
+    // Device detection for optimizations
+    const isMobile = window.innerWidth <= 768;
+    console.log(`${isMobile ? 'Mobile' : 'Desktop'} device detected`);
+    
     // Preload critical images
     preloadImages();
             
@@ -166,21 +211,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize enhanced lazy loading
     enhancedLazyLoad();
     
-    
-    
-    // Initialize components
-    initializeComponents();
-            
-    initializeContactForm();
-            
-    initializeGraphBackground();
-            
-    initializeShowreelBanner();
-            
-    initializeNavigation();
+    // Mobile-specific performance boost
+    if (isMobile) {
+        // Reduce CPU-intensive operations
+        document.body.classList.add('mobile-optimized');
+        
+        // Defer non-critical JavaScript
+        setTimeout(() => {
+            initializeComponents();
+            initializeContactForm();
+        }, 1000);
+        
+        // Initialize essential components immediately
+        initializeGraphBackground();
+        initializeShowreelBanner();
+        initializeNavigation();
+    } else {
+        // Desktop: full initialization
+        initializeComponents();
+        initializeContactForm();
+        initializeGraphBackground();
+        initializeShowreelBanner();
+        initializeNavigation();
+    }
     
     } catch (error) {
         console.error('Error in main initialization:', error);
+        // Fallback initialization
+        initializeNavigation();
     }
 });
 
