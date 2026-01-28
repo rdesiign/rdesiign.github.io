@@ -519,18 +519,28 @@ footer {
     
     .abstract-grid {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 8px; /* Maintain consistent 8px spacing */
         padding: 0 25px;
     }
     
     .abstract-grid-row {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 8px; /* Maintain consistent 8px spacing */
     }
     
     .project-col-left,
     .project-col-right {
-        gap: 15px;
+        gap: 0; /* Reset gap to use margin instead */
+    }
+    
+    .project-col-left .project-card,
+    .project-col-right .project-card {
+        margin-bottom: 8px; /* Maintain consistent 8px vertical spacing */
+    }
+    
+    .project-col-left .project-card:last-child,
+    .project-col-right .project-card:last-child {
+        margin-bottom: 0; /* Remove margin from last item */
     }
     
     #intro {
@@ -557,17 +567,27 @@ footer {
     }
     
     .abstract-grid {
-        gap: 10px;
+        gap: 8px; /* Maintain consistent 8px spacing */
         padding: 0 20px;
     }
     
     .abstract-grid-row {
-        gap: 10px;
+        gap: 8px; /* Maintain consistent 8px spacing */
     }
     
     .project-col-left,
     .project-col-right {
-        gap: 10px;
+        gap: 0; /* Reset gap to use margin instead */
+    }
+    
+    .project-col-left .project-card,
+    .project-col-right .project-card {
+        margin-bottom: 8px; /* Maintain consistent 8px vertical spacing */
+    }
+    
+    .project-col-left .project-card:last-child,
+    .project-col-right .project-card:last-child {
+        margin-bottom: 0; /* Remove margin from last item */
     }
     
     .project-content h3 {
@@ -2360,55 +2380,52 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     }
 }
 
-/* Abstract Grid Layout for Project Thumbnails - Pinterest Style */
+/* Abstract Grid Layout for Project Thumbnails - True 2 Column Approach */
 .abstract-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+    gap: 8px; /* Consistent 8px gap for all items */
     max-width: 100%;
     margin: 0 auto;
     padding: 0 35px;
     width: 100%;
 }
 
-.abstract-grid-row {
-    display: contents;
-}
-
-.abstract-grid-row.first .project-col-left {
-    grid-row: 1;
-    grid-column: 1;
-}
-
-.abstract-grid-row.first .project-col-right {
-    grid-row: 1;
-    grid-column: 2;
+/* Left column - contains all left-side thumbnails */
+.project-col-left {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
 }
 
-.abstract-grid-row.second .project-col-left {
-    grid-row: 2;
-    grid-column: 1;
+.project-col-left .project-card {
+    margin-bottom: 8px; /* Consistent 8px vertical spacing within column 1 */
+}
+
+.project-col-left .project-card:last-child {
+    margin-bottom: 0; /* Remove margin from last item */
+}
+
+/* Right column - contains all right-side thumbnails */
+.project-col-right {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
 }
 
-
-.abstract-grid-row.second .project-col-right {
-    grid-row: 2;
-    grid-column: 2;
+.project-col-right .project-card {
+    margin-bottom: 8px; /* Consistent 8px vertical spacing within column 2 */
 }
 
-/* Adjust the positioning of the New Portrait Project to reduce the gap */
-.abstract-grid-row.second .project-col-right .project-card {
+.project-col-right .project-card:last-child {
+    margin-bottom: 0; /* Remove margin from last item */
+}
+
+/* Removed manual positioning to maintain natural grid flow during resizing */
+/* .abstract-grid-row.second .project-col-right .project-card {
     position: relative;
-    top: -66px; /* Move up by 66px to reduce the gap */
-}
+    top: -53px;
+} */
 
-/* The abstract-grid already has a 10px gap which should ensure consistent spacing */
+/* The abstract-grid maintains consistent 8px gaps with natural flow for responsive behavior */
 
 /* Ensure proper alignment of project columns */
 .project-col-left,
@@ -2647,7 +2664,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 @media (max-width: 768px) {
     .abstract-grid {
         grid-template-columns: 1fr;
-        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+        gap: 8px; /* Consistent 8px spacing between stacked items */
     }
     
     .abstract-grid-row {
@@ -2665,7 +2682,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     .project-col-right {
         display: flex;
         flex-direction: column;
-        gap: 10px; /* Reduced from 20px to 10px for consistent spacing */
+        gap: 16px; /* Maintain increased vertical spacing */
     }
     
     /* Reset aspect ratios for mobile */
@@ -2677,7 +2694,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 
 @media (max-width: 480px) {
     .abstract-grid {
-        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+        gap: 8px; /* Consistent 8px spacing between stacked items */
         padding: 0 20px;
     }
     
@@ -2689,7 +2706,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     }
     
     .project-col-right {
-        gap: 10px; /* Reduced from 20px to 10px for tighter spacing */
+        gap: 16px; /* Maintain increased vertical spacing */
     }
     
     .project-content {
