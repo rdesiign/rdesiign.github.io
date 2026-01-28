@@ -518,24 +518,52 @@ footer {
     }
     
     .abstract-grid {
-        grid-template-columns: 1fr;
-        gap: 8px; /* Maintain consistent 8px spacing */
-        padding: 0 25px;
+        grid-template-columns: 1fr; /* Single column layout for mobile */
+        gap: 8px; /* Consistent 8px spacing between all thumbnails */
+        padding: 0; /* Remove padding to allow full width */
     }
     
     .abstract-grid-row {
-        grid-template-columns: 1fr;
-        gap: 8px; /* Maintain consistent 8px spacing */
+        display: contents; /* Remove row containers for clean flow */
     }
     
+    /* Remove column containers to create true single column flow */
     .project-col-left,
     .project-col-right {
-        gap: 0; /* Reset gap to use margin instead */
+        display: contents; /* Eliminate column wrappers */
     }
     
+    /* Apply consistent spacing directly to project cards */
+    .project-card {
+        width: 100vw; /* Full viewport width */
+        max-width: 100vw; /* Ensure no overflow */
+        margin-left: 0; /* Align to left edge */
+        margin-right: 0; /* Align to right edge */
+        border-radius: 0; /* Remove rounded corners for edge-to-edge look */
+        margin-bottom: 8px; /* Consistent 8px spacing */
+        margin-top: 0; /* Ensure no top margin interference */
+    }
+    
+    .project-card:last-child {
+        margin-bottom: 0; /* Remove margin from last item */
+    }
+    
+    /* Make images fill the full card width */
+    .project-image-container {
+        width: 100%;
+        border-radius: 0; /* Remove container rounding */
+    }
+    
+    .project-image {
+        width: 100%;
+        border-radius: 0; /* Remove image rounding */
+    }
+    
+    /* Override any inherited spacing from desktop styles */
     .project-col-left .project-card,
     .project-col-right .project-card {
-        margin-bottom: 8px; /* Maintain consistent 8px vertical spacing */
+        margin-bottom: 8px; /* Enforce consistent 8px spacing */
+        margin-top: 0; /* Reset any top margins */
     }
     
     .project-col-left .project-card:last-child,
@@ -577,17 +605,15 @@ footer {
     
     .project-col-left,
     .project-col-right {
-        gap: 0; /* Reset gap to use margin instead */
+        display: flex;
+        flex-direction: column;
+        gap: 8px; /* Consistent 8px spacing between thumbnails */
     }
     
+    /* Remove individual card margins to prevent double-spacing */
     .project-col-left .project-card,
     .project-col-right .project-card {
-        margin-bottom: 8px; /* Maintain consistent 8px vertical spacing */
-    }
-    
-    .project-col-left .project-card:last-child,
-    .project-col-right .project-card:last-child {
-        margin-bottom: 0; /* Remove margin from last item */
+        margin-bottom: 0; /* Remove individual margins that cause inconsistent spacing */
     }
     
     .project-content h3 {
@@ -2676,13 +2702,13 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     .abstract-grid-row.second .project-col-left,
     .abstract-grid-row.second .project-col-right {
         display: block;
-        margin-bottom: 20px;
+        margin-bottom: 0; /* Remove inconsistent spacing */
     }
     
     .project-col-right {
         display: flex;
         flex-direction: column;
-        gap: 16px; /* Maintain increased vertical spacing */
+        gap: 8px; /* Consistent 8px spacing */
     }
     
     /* Reset aspect ratios for mobile */
@@ -2695,18 +2721,52 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 @media (max-width: 480px) {
     .abstract-grid {
         gap: 8px; /* Consistent 8px spacing between stacked items */
-        padding: 0 20px;
+        padding: 0; /* Remove padding for full width */
     }
     
     .abstract-grid-row.first .project-col-left,
     .abstract-grid-row.first .project-col-right,
     .abstract-grid-row.second .project-col-left,
     .abstract-grid-row.second .project-col-right {
-        margin-bottom: 10px; /* Reduced from 20px to 10px for tighter spacing */
+        margin-bottom: 0; /* Remove inconsistent spacing */
+        margin-top: 0; /* Ensure no top spacing interference */
     }
     
-    .project-col-right {
-        gap: 16px; /* Maintain increased vertical spacing */
+    /* Ensure consistent 8px spacing in smallest mobile view */
+    .project-card {
+        width: 100vw; /* Full viewport width */
+        max-width: 100vw; /* Ensure no overflow */
+        margin-left: 0; /* Align to left edge */
+        margin-right: 0; /* Align to right edge */
+        border-radius: 0; /* Remove rounded corners */
+        margin-bottom: 8px; /* Consistent 8px spacing */
+        margin-top: 0; /* No top margin */
+    }
+    
+    .project-card:last-child {
+        margin-bottom: 0; /* Remove margin from last item */
+    }
+    
+    /* Make images fill the full card width */
+    .project-image-container {
+        width: 100%;
+        border-radius: 0; /* Remove container rounding */
+    }
+    
+    .project-image {
+        width: 100%;
+        border-radius: 0; /* Remove image rounding */
+    }
+    
+    .project-col-left .project-card,
+    .project-col-right .project-card {
+        margin-bottom: 8px; /* Enforce consistent 8px spacing */
+        margin-top: 0; /* Reset any top margins */
+    }
+    
+    .project-col-left .project-card:last-child,
+    .project-col-right .project-card:last-child {
+        margin-bottom: 0; /* Remove margin from last item */
     }
     
     .project-content {
