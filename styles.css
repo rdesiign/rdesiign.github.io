@@ -60,6 +60,209 @@
     font-display: swap;
 }
 
+/* TT Turns Font Face Declarations */
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_DemiBold_Italic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Turns';
+    src: url('./assets/font/TT Turns Font Family/TT_Turns_Trial_Bold_Italic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* TT Firs Neue Font Face Declarations */
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial DemiBold Italic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Firs Neue';
+    src: url('./assets/font/tt_firs_neue/TT Firs Neue Trial Bold Italic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Augsburg Font Face Declarations (Plush Trial) */
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-Regular-BF654c40145b0dd.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-Medium-BF654c401412ccd.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-Bold-BF654c40144cc74.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-ExtraBold-BF654c4014409f5.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-Black-BF654c4013ec70c.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-Italic-BF654c40145fe4f.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Augsburg';
+    src: url('./assets/font/augsburg-font-family/Plush-Trial-BoldItalic-BF654c40144a11a.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* CSS Variables for Theme Colors */
 :root {
     /* Dark theme variables */
@@ -2044,8 +2247,9 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 }
 
 #intro-typewriter h1 {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem); /* Restore original font size for the main heading */
-    font-weight: 700; /* Bold for "Hello! I'm Rishi" */
+    font-weight: 600; /* Semibold for "Hello! I'm Rishi" */
     margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
     padding: 0; /* Remove padding */
     color: var(--text-primary);
@@ -2059,9 +2263,26 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     box-sizing: border-box;
 }
 
+/* Avatar image styling - same size as letter H */
+#intro-typewriter .avatar-image {
+    height: 1em; /* Match the height of the letter H (1em = current font size) */
+    width: auto; /* Maintain aspect ratio */
+    vertical-align: baseline; /* Align with the baseline of the text */
+    display: inline-block; /* Inline with text */
+    margin: 0 0.15em 0 0.02em; /* Even less space on left (between "I'm" and image), more on right */
+    padding: 0; /* No padding */
+    object-fit: contain; /* Contain the image */
+}
+
+/* Ensure the H span maintains proper sizing */
+#intro-typewriter .hello-h {
+    display: inline-block; /* Keep inline with image */
+}
+
 #intro-typewriter h2 {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(1.2rem, 2.5vw, 1.7rem); /* Restore original font size for the subtitle */
-    font-weight: 400; /* Regular/light for most of the text */
+    font-weight: 500; /* Medium for most of the text */
     margin: 0; /* Remove negative margin for better spacing */
     padding: 0; /* Remove padding */
     color: var(--text-secondary);
@@ -2084,7 +2305,8 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 
 /* Style for bold text */
 #intro-typewriter .bold {
-    font-weight: 700; /* Bold */
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-weight: 600; /* Semibold */
     opacity: 1; /* Make visible by default since we removed the animation */
 }
 
@@ -2107,6 +2329,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 
 /* Location text styling - smaller font size for the third line */
 .location-text {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: 1.1rem; /* Increased size for better visibility */
     display: inline-block;
     line-height: 1.1; /* Reduced line height for tighter spacing */
@@ -3045,7 +3268,8 @@ footer .container {
 
 /* Bold and white styling for specific words */
 .bold-white {
-  font-weight: 700 !important;
+  font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-weight: 600 !important;
   color: white !important;
   transition: all 0.3s ease; /* Smooth transition for the effect */
 }
