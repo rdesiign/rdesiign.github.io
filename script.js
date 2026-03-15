@@ -303,15 +303,24 @@ function initializeNavigation() {
     
     if (navToggle) {
         navToggle.addEventListener('click', function() {
+            // Check if we're in mobile/tablet view
+            const isMobileTablet = window.innerWidth <= 1024;
+            
             // Toggle navigation visibility
-            if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
-                // Expand navigation
-                expandedNav.style.display = 'flex';
-                // Hide the nav toggle button
-                navToggle.style.display = 'none';
-                // Show the nav close button
-                if (navClose) {
-                    navClose.style.display = 'flex';
+            if (isMobileTablet) {
+                // Mobile/Tablet: Use show class
+                expandedNav.classList.toggle('show');
+            } else {
+                // Desktop: Use inline style display
+                if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
+                    // Expand navigation
+                    expandedNav.style.display = 'flex';
+                    // Hide the nav toggle button
+                    navToggle.style.display = 'none';
+                    // Show the nav close button
+                    if (navClose) {
+                        navClose.style.display = 'flex';
+                    }
                 }
             }
         });
@@ -319,32 +328,55 @@ function initializeNavigation() {
     
     if (navClose) {
         navClose.addEventListener('click', function() {
-            // Collapse navigation
-            expandedNav.style.display = 'none';
-            // Show the nav toggle button
-            if (navToggle) {
-                navToggle.style.display = 'flex';
-            }
-            // Hide the nav close button
-            navClose.style.display = 'none';
-        });
-    }
-    
-    // Close navigation when clicking outside
-    document.addEventListener('click', function(event) {
-        if (expandedNav && expandedNav.style.display === 'flex') {
-            const isClickInsideNav = navToggle.contains(event.target) || 
-                                   (navClose && navClose.contains(event.target)) || 
-                                   expandedNav.contains(event.target);
-            if (!isClickInsideNav) {
+            // Check if we're in mobile/tablet view
+            const isMobileTablet = window.innerWidth <= 1024;
+            
+            if (isMobileTablet) {
+                // Mobile/Tablet: Remove show class
+                expandedNav.classList.remove('show');
+            } else {
+                // Desktop: Hide navigation
                 expandedNav.style.display = 'none';
                 // Show the nav toggle button
                 if (navToggle) {
                     navToggle.style.display = 'flex';
                 }
                 // Hide the nav close button
-                if (navClose) {
-                    navClose.style.display = 'none';
+                navClose.style.display = 'none';
+            }
+        });
+    }
+    
+    // Close navigation when clicking outside
+    document.addEventListener('click', function(event) {
+        const isMobileTablet = window.innerWidth <= 1024;
+        
+        if (isMobileTablet) {
+            // Mobile/Tablet check
+            if (expandedNav && expandedNav.classList.contains('show')) {
+                const isClickInsideNav = navToggle.contains(event.target) || 
+                                       (navClose && navClose.contains(event.target)) || 
+                                       expandedNav.contains(event.target);
+                if (!isClickInsideNav) {
+                    expandedNav.classList.remove('show');
+                }
+            }
+        } else {
+            // Desktop check
+            if (expandedNav && expandedNav.style.display === 'flex') {
+                const isClickInsideNav = navToggle.contains(event.target) || 
+                                       (navClose && navClose.contains(event.target)) || 
+                                       expandedNav.contains(event.target);
+                if (!isClickInsideNav) {
+                    expandedNav.style.display = 'none';
+                    // Show the nav toggle button
+                    if (navToggle) {
+                        navToggle.style.display = 'flex';
+                    }
+                    // Hide the nav close button
+                    if (navClose) {
+                        navClose.style.display = 'none';
+                    }
                 }
             }
         }

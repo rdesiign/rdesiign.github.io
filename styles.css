@@ -1547,13 +1547,63 @@ footer {
     margin: 0;
     width: 40px;
     height: 40px;
-    display: flex;
+    display: none; /* Hidden by default on desktop */
     align-items: center;
     justify-content: center;
 }
 
 .nav-close:hover {
     transform: scale(1.1);
+}
+
+/* Mobile and Tablet - Popup Navigation */
+@media (max-width: 1024px) {
+    .nav-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .expanded-nav {
+        display: none !important; /* Hidden by default on mobile/tablet */
+        position: fixed;
+        top: 70px;
+        right: 15px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 20px;
+        min-width: 250px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 1299;
+    }
+    
+    .expanded-nav.show {
+        display: flex !important; /* Show when active */
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 8px;
+    }
+    
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        margin-left: auto;
+    }
+    
+    .nav-close {
+        display: flex !important; /* Show close button on mobile/tablet */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 }
 
 /* Mobile adjustments for the pill effect */
@@ -2252,7 +2302,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     font-weight: 600; /* Semibold for "Hello! I'm Rishi" */
     margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
     padding: 0; /* Remove padding */
-    color: var(--text-primary);
+    color: var(--text-secondary); /* Gray text */
     line-height: 1.2; /* Restore line height for better readability */
     opacity: 1; /* Make visible by default since we removed the animation */
     visibility: visible;
@@ -2263,13 +2313,25 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
     box-sizing: border-box;
 }
 
+/* Override to make "Hello! I'm Rishi" white/primary color */
+#intro-typewriter h1,
+#intro-typewriter h1 .rishi-text {
+    color: var(--text-primary) !important;
+}
+
+/* Override bold-white to be gray and normal weight in intro section */
+#intro-typewriter h2 .bold-white {
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+}
+
 /* Avatar image styling - same size as letter H */
 #intro-typewriter .avatar-image {
     height: 1em; /* Match the height of the letter H (1em = current font size) */
     width: auto; /* Maintain aspect ratio */
     vertical-align: baseline; /* Align with the baseline of the text */
     display: inline-block; /* Inline with text */
-    margin: 0 0.15em 0 0.02em; /* Even less space on left (between "I'm" and image), more on right */
+    margin: 0 0.3em 0 0.02em; /* Increased space on right (between image and "Rishi") */
     padding: 0; /* No padding */
     object-fit: contain; /* Contain the image */
 }
@@ -3122,7 +3184,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon,
 
 /* Footer */
 footer {
-    text-align: center;
+    text-align: left; /* Align text to the left */
     padding: 60px 0;
     background-color: #000000; /* Black background for the card */
     color: #cccccc; /* Light gray text */
@@ -3131,44 +3193,119 @@ footer {
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px; /* Increased height for proper vertical centering */
+    align-items: flex-start; /* Align items to the left */
+    justify-content: center; /* Vertically center content */
+    min-height: 300px; /* Increased vertical size */
     border-radius: 8px; /* Add fillets to match project card styling */
 }
 
 /* Align footer with project section */
 footer .container {
-    max-width: 100%;
+    max-width: 1280px; /* Match project grid max-width */
     margin: 0 auto;
-    padding: 0 30px; /* Match project grid padding */
+    padding: 0; /* Remove all padding for full width control */
     width: 100%;
 }
 
 .footer-content {
     display: flex;
+    flex-direction: row; /* Two column layout */
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center; /* Vertically center items */
+    gap: 0; /* No gap between columns */
+    width: 100%;
+    height: 100%; /* Full height for proper vertical alignment */
+}
+
+.footer-left {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 10px;
+    text-align: center; /* Center align text */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center vertically */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-60%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center social links vertically */
+    align-items: flex-end; /* Align right section to the right */
+    gap: 0; /* No gap needed since arrow is absolute positioned */
+    padding-right: 200px; /* Push content even further to the right */
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     gap: 15px;
 }
 
-.footer-content .designed-with-passion {
-    font-size: 1.5rem;
-    font-weight: bold;
+.lets-connect {
+    font-size: 2rem; /* Match curious-by-design size */
+    font-weight: 600;
+    color: #ffffff;
     margin: 0;
 }
 
-.footer-content .copyright {
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.social-link {
+    color: #cccccc;
+    text-decoration: underline; /* Underlined */
+    font-weight: 600; /* Bold */
     font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ffffff;
+}
+
+.curious-by-design {
+    font-size: 2rem; /* Larger size */
+    font-weight: bold;
     margin: 0;
+    color: #ffffff;
+}
+
+.footer-content .copyright {
+    font-size: 0.875rem; /* Smaller size */
+    margin: 0;
+    opacity: 0.6; /* Lighter appearance */
+}
+
+.social-links-footer {
+    display: flex;
+    gap: 40px; /* Space between links */
+    margin-top: 15px;
+}
+
+.social-link-footer {
+    color: #cccccc;
+    text-decoration: underline; /* Underlined */
+    font-weight: 700; /* Bold */
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-link-footer:hover {
+    color: #ffffff;
 }
 
 /* Back to Top Button */
 .back-to-top {
-    position: absolute;
-    right: 20px;
-    top: 50%;
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.1);
@@ -3181,13 +3318,27 @@ footer .container {
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-50%) translateY(10px);
+    transform: translateY(10px);
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateY(-50%);
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .back-to-top:hover {
