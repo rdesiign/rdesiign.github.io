@@ -20,9 +20,135 @@
     <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
     <style>
+        @media (max-width: 768px) {
+            body.semi-page .custom-cursor {
+                display: none !important;
+            }
+
+            body.semi-page .section {
+                padding: 72px 0 !important;
+            }
+
+            body.semi-page #header.section {
+                padding: 0 !important;
+            }
+
+            body.semi-page .header-image {
+                height: 54vh !important;
+                min-height: 360px;
+                object-position: center 62% !important;
+            }
+
+            body.semi-page .section .container,
+            body.semi-page footer .container {
+                padding: 0 20px !important;
+            }
+
+            body.semi-page .semi-content,
+            body.semi-page .semi-concept-grid,
+            body.semi-page .semi-project-main {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding-left: 0 !important;
+            }
+
+            body.semi-page .semi-project-layout,
+            body.semi-page .semi-story-gallery,
+            body.semi-page .semi-process-row {
+                flex-direction: column !important;
+                gap: 24px !important;
+            }
+
+            body.semi-page .semi-project-main,
+            body.semi-page .semi-project-meta,
+            body.semi-page .semi-process-row > div,
+            body.semi-page .semi-story-gallery > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: none !important;
+            }
+
+            body.semi-page .semi-project-meta {
+                margin: 0 !important;
+            }
+
+            body.semi-page .semi-project-main h1 {
+                font-size: clamp(2.4rem, 11vw, 3rem) !important;
+                line-height: 0.95;
+            }
+
+            body.semi-page .semi-project-main h2 {
+                font-size: 1.2rem !important;
+            }
+
+            body.semi-page .semi-project-main p,
+            body.semi-page .semi-content p {
+                max-width: 100% !important;
+            }
+
+            body.semi-page .semi-concept-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 28px 18px !important;
+                justify-content: initial !important;
+            }
+
+            body.semi-page .semi-concept-card {
+                text-align: left !important;
+                align-items: flex-start !important;
+            }
+
+            body.semi-page .semi-concept-card p {
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+
+            body.semi-page .semi-concept-icon {
+                width: 100% !important;
+                max-width: 180px;
+                height: auto !important;
+                aspect-ratio: 1 / 1;
+            }
+
+            body.semi-page .semi-process-gallery {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px !important;
+            }
+
+            body.semi-page .semi-process-gallery > div {
+                min-width: 0;
+            }
+
+            body.semi-page .carousel-arrow {
+                width: 36px !important;
+                height: 36px !important;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body.semi-page .section {
+                padding: 56px 0 !important;
+            }
+
+            body.semi-page .header-image {
+                height: 48vh !important;
+                min-height: 280px;
+            }
+
+            body.semi-page .semi-concept-grid,
+            body.semi-page .semi-process-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            body.semi-page .carousel-dots {
+                bottom: 10px !important;
+            }
+        }
     </style>
 </head>
-<body style="margin: 0; padding: 0; overflow-x: hidden;">
+<body class="semi-page" style="margin: 0; padding: 0; overflow-x: hidden;">
     <div class="connection-status">Slow Connection Detected - Optimizing Image Loading</div>
     
     <!-- Custom Cursor Elements -->
@@ -126,9 +252,9 @@
     <!-- Project Content Section -->
     <section id="project" class="section">
         <div class="container" style="padding: 0 60px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="semi-project-layout" style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <!-- Left Column: Title, Subtitle, and Description -->
-                <div class="project-content" style="width: 50%; max-width: none !important; padding-left: 65px;">
+                <div class="project-content semi-project-main" style="width: 50%; max-width: none !important; padding-left: 65px;">
                     <h1 style="font-size: 3rem; margin-bottom: 5px; color: var(--text-primary);">Semi</h1>
                     <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; color: var(--text-secondary);">Beginner's Cooktop</h2>
                     <p style="font-size: 1rem; width: 100%; max-width: 90% !important; line-height: 1.6; color: var(--text-primary);">Semi is designed to make cooking accessible and intuitive for beginners. With simplified controls, guided cooking modes, a built-in weighing scale and smart safety features, it transforms the kitchen experience for those new to cooking while maintaining professional-grade performance.</p>
@@ -141,7 +267,7 @@
                 </div>
                 
                 <!-- Right Column: Project Details -->
-                <div style="width: 40%; margin-top: 115px; margin-left: auto;">
+                <div class="semi-project-meta" style="width: 40%; margin-top: 115px; margin-left: auto;">
                     <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Client:</strong> Klynk</div>
                     <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Year:</strong> 2023</div>
                     <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Duration:</strong> 6 months</div>
@@ -153,7 +279,7 @@
     <!-- Research Question Section -->
     <section id="research-question" class="section" style="padding-top: 120px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <img src="Projects/Semi/semi research question.jpg" alt="Semi Research Question" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
             </div>
         </div>
@@ -162,12 +288,12 @@
     <!-- A Beginner's Story Section -->
     <section id="beginners-story" class="section" style="padding-top: 120px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">A Beginner's Story</h3>
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); width: 100%; max-width: 90% !important; margin-bottom: 30px;">User interviews revealed that novice cooks often second-guess themselves, not just from lack of skill but from the pressure to "get it right." Recipes assume knowledge beginners don't have, turning cooking into stress rather than exploration. The opportunity is to guide them in ways that build confidence, not just give instructions.</p>
                 
                 <!-- Side by side images -->
-                <div style="display: flex; gap: 8px; margin-top: 30px;">
+                <div class="semi-story-gallery" style="display: flex; gap: 8px; margin-top: 30px;">
                     <div style="flex: 1; overflow: hidden;">
                         <img src="Projects/Semi/beginners story.jpg" alt="Beginner's Story" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy">
                     </div>
@@ -182,34 +308,34 @@
     <!-- The Concept Section -->
     <section id="concept" class="section" style="padding-top: 100px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px); margin-bottom: 40px;">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px); margin-bottom: 40px;">
                 <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); font-weight: bold;">The Concept</h3>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-left: 65px; max-width: calc(100% - 130px); gap: 30px;">
+            <div class="semi-concept-grid" style="display: flex; justify-content: space-between; margin-left: 65px; max-width: calc(100% - 130px); gap: 30px;">
                 <!-- Recipe Library -->
-                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="recipe-library-icon" src="Projects/Semi/recipe library white.png" alt="Recipe Library Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="recipe-library-icon" class="semi-concept-icon" src="Projects/Semi/recipe library white.png" alt="Recipe Library Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Recipe Library</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Personalised recipe database tailored to your skill level and ingredients to reduce decision stress.</p>
                 </div>
                 
                 <!-- Guided Cooking -->
-                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="guided-cooking-icon" src="Projects/Semi/guide cooking white.png" alt="Guided Cooking Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="guided-cooking-icon" class="semi-concept-icon" src="Projects/Semi/guide cooking white.png" alt="Guided Cooking Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Guided Cooking</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Step-by-step guidance that reduces anxiety and builds cooking confidence.</p>
                 </div>
                 
                 <!-- Built-in Weighing Scale -->
-                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="weighing-scale-icon" src="Projects/Semi/weighing scale white.png" alt="Built-in Weighing Scale Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="weighing-scale-icon" class="semi-concept-icon" src="Projects/Semi/weighing scale white.png" alt="Built-in Weighing Scale Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Built-in Weighing Scale</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Integrated scale for accurate ingredient measurement and portion control.</p>
                 </div>
                 
                 <!-- Temperature Control -->
-                <div style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="temperature-control-icon" src="Projects/Semi/temp control white.png" alt="Temperature Control Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <img id="temperature-control-icon" class="semi-concept-icon" src="Projects/Semi/temp control white.png" alt="Temperature Control Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Temperature Control</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Automatic temperature monitoring and adjustment for consistent cooking results.</p>
                 </div>
@@ -222,7 +348,7 @@
     <!-- Ideation Section -->
     <section class="section" style="padding-top: 100px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">The aesthetic direction was driven by the need for a "smart" look, informed by aesthetic patterns and features observed in products traditionally associated with smart technology, such as smartphones, laptops, and smart home interfaces. Sketches and CAD were developed in parallel, guided by the mood board and manufacturing constraints.</p>
                 <img src="Projects/Semi/semi ideation.jpg" alt="Semi Ideation" style="width: 100%; display: block; border-radius: 8px;">
             </div>
@@ -232,7 +358,7 @@
     <!-- Semi Section -->
     <section class="section" style="padding-top: 100px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px); text-align: center;">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px); text-align: center;">
                 <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Introducing Semi</h3>
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">Semi is a supportive cooking system that helps remove uncertainty, making everyday cooking feel confident and effortless.</p>
                 <div class="progressive-image">
@@ -245,11 +371,11 @@
     <!-- Design Process Section -->
     <section id="design-process" class="section" style="padding-top: 120px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <!-- Process Steps -->
-                <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 30px;">
+                <div class="semi-process-stack" style="display: flex; flex-direction: column; gap: 40px; margin-top: 30px;">
                     <!-- Research -->
-                    <div style="display: flex; gap: 30px; align-items: center;">
+                    <div class="semi-process-row" style="display: flex; gap: 30px; align-items: center;">
                         <div style="flex: 1;">
                             <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Effortless Meal Planning</h4>
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">A curated recipe library tailored to skill level and available ingredients, reducing decision-making time and simplifying the start of any meal.</p>
@@ -260,7 +386,7 @@
                     </div>
                     
                     <!-- Ideation -->
-                    <div style="display: flex; gap: 30px; align-items: center;">
+                    <div class="semi-process-row" style="display: flex; gap: 30px; align-items: center;">
                         <div style="flex: 1;">
                             <!-- Carousel container -->
                             <div class="carousel-container" style="position: relative; width: 100%; height: auto; border-radius: 8px; overflow: hidden;">
@@ -351,7 +477,7 @@
                     </div>
                     
                     <!-- Precise Ingredient Measurement Section -->
-                    <div style="display: flex; gap: 30px; align-items: center;">
+                    <div class="semi-process-row" style="display: flex; gap: 30px; align-items: center;">
                         <div style="flex: 1;">
                             <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Precise Ingredient Measurement</h4>
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">[Placeholder text for precise ingredient measurement content]</p>
@@ -368,7 +494,7 @@
     <!-- Closing Shot Section -->
     <section class="section" style="padding-top: 60px; padding-bottom: 40px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <img src="Projects/Semi/closing shot.jpg" alt="Closing Shot" style="width: 100%; display: block; border-radius: 8px;">
             </div>
         </div>
@@ -377,11 +503,11 @@
     <!-- Additional Images Section -->
     <section class="section" style="padding-top: 60px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
-            <div style="margin-left: 65px; max-width: calc(100% - 130px);">
+            <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <h3 style="font-size: 1.5rem; margin-bottom: 25px; color: var(--text-primary); font-weight: bold; text-align: center;">PROCESS</h3>
                 
                 <!-- First Row of Prototype Images -->
-                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <div class="semi-process-gallery" style="display: flex; gap: 15px; margin-bottom: 15px;">
                     <div style="flex: 1;">
                         <img src="Projects/Semi/prototype 1.png" alt="Prototype 1" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
                     </div>
@@ -394,7 +520,7 @@
                 </div>
                 
                 <!-- Second Row with GIFs -->
-                <div style="display: flex; gap: 15px;">
+                <div class="semi-process-gallery" style="display: flex; gap: 15px;">
                     <div style="flex: 1;">
                         <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
                             <source src="Projects/Semi/printing.mp4?v=1.0" type="video/mp4">
