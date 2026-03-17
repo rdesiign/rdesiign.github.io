@@ -16,7 +16,6 @@
         })();
     </script>
     <link rel="stylesheet" href="styles.css?v=1.1">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
@@ -27,8 +26,6 @@
     <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
     <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
-    <style>
-    </style>
 </head>
 <body style="margin: 0; padding: 0; overflow-x: hidden;">
     <!-- Custom Cursor Elements -->
@@ -538,211 +535,23 @@
     </footer>
 
     <script src="script.js?v=1.0"></script>
-    
-    <!-- Theme-Aware Icon Switching -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to update concept icons based on theme
             function updateConceptIcons() {
-                // Check theme from html data-theme attribute
-                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-                const isLightMode = currentTheme === 'light';
-                
-                console.log('Current theme:', currentTheme, 'Is light mode:', isLightMode);
-                
-                // Get the concept icon elements
-                const preventIcon = document.querySelector('[alt="Prevent Icon"]');
-                const recordIcon = document.querySelector('[alt="Record Icon"]');
-                const relieveIcon = document.querySelector('[alt="Relieve Icon"]');
-                
-                console.log('Icons found:', {preventIcon: !!preventIcon, recordIcon: !!recordIcon, relieveIcon: !!relieveIcon});
-                
-                if (preventIcon) {
-                    const newSrc = isLightMode ? 'Projects/MMM/Prevent black.png' : 'Projects/MMM/Prevent.png';
-                    console.log('Updating Prevent icon to:', newSrc);
-                    preventIcon.src = newSrc;
-                }
-                
-                if (recordIcon) {
-                    const newSrc = isLightMode ? 'Projects/MMM/Record Icon balck.png' : 'Projects/MMM/Record Icon.png';
-                    console.log('Updating Record icon to:', newSrc);
-                    recordIcon.src = newSrc;
-                }
-                
-                if (relieveIcon) {
-                    const newSrc = isLightMode ? 'Projects/MMM/Relieve black.png' : 'Projects/MMM/Relieve.png';
-                    console.log('Updating Relieve icon to:', newSrc);
-                    relieveIcon.src = newSrc;
-                }
+                var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                var light = theme === 'light';
+                var icons = [
+                    { el: document.querySelector('[alt="Prevent Icon"]'), light: 'Projects/MMM/Prevent black.png', dark: 'Projects/MMM/Prevent.png' },
+                    { el: document.querySelector('[alt="Record Icon"]'), light: 'Projects/MMM/Record Icon balck.png', dark: 'Projects/MMM/Record Icon.png' },
+                    { el: document.querySelector('[alt="Relieve Icon"]'), light: 'Projects/MMM/Relieve black.png', dark: 'Projects/MMM/Relieve.png' }
+                ];
+                icons.forEach(function(i) { if (i.el) i.el.src = light ? i.light : i.dark; });
             }
-            
-            // Initial update
             updateConceptIcons();
-            
-            // Listen for theme changes on html element
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-                        if (mutation.target === document.documentElement) {
-                            console.log('Theme changed detected, updating icons');
-                            updateConceptIcons();
-                        }
-                    }
-                });
-            });
-            
-            // Start observing theme changes
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme']
-            });
-            
-            // Also listen for theme toggle button clicks
-            const themeToggle = document.getElementById('theme-toggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    // Small delay to ensure theme attribute is applied
-                    setTimeout(updateConceptIcons, 100);
+            new MutationObserver(function() { updateConceptIcons(); })
+                .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
                 });
             }
-        });
-    </script>
-    
-    <!-- Custom Cursor JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cursor = document.querySelector('.custom-cursor');
-            const links = document.querySelectorAll('a, button, .project-card');
-            
-            // Function to get average brightness of background at cursor position
-            function getBackgroundBrightness(x, y) {
-                // Create a temporary element to get the background color
-                const tempElement = document.elementFromPoint(x, y);
-                if (!tempElement) return 128; // Default to middle brightness
-                
-                // Get the background color of the element
-                const bgColor = window.getComputedStyle(tempElement).backgroundColor;
-                
-                // If it's transparent or rgba(0, 0, 0, 0), traverse up the DOM
-                if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-                    let parent = tempElement.parentElement;
-                    while (parent) {
-                        const parentBg = window.getComputedStyle(parent).backgroundColor;
-                        if (parentBg !== 'rgba(0, 0, 0, 0)' && parentBg !== 'transparent') {
-                            return calculateBrightness(parentBg);
-                        }
-                        parent = parent.parentElement;
-                    }
-                    // If we reach here, use body background
-                    const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-                    return calculateBrightness(bodyBg);
-                }
-                
-                return calculateBrightness(bgColor);
-            }
-            
-            // Function to calculate brightness from RGB values
-            function calculateBrightness(rgb) {
-                // Parse RGB values
-                const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-                if (!match) return 128; // Default to middle brightness
-                
-                const r = parseInt(match[1]);
-                const g = parseInt(match[2]);
-                const b = parseInt(match[3]);
-                
-                // Calculate brightness using luminance formula
-                return (r * 299 + g * 587 + b * 114) / 1000;
-            }
-            
-            // Function to update cursor color based on background
-            function updateCursorColor(x, y) {
-                const brightness = getBackgroundBrightness(x, y);
-                // Remove any existing background classes
-                cursor.classList.remove('light-bg', 'dark-bg');
-                
-                // Add appropriate class based on brightness
-                if (brightness > 128) {
-                    cursor.classList.add('light-bg');
-                } else {
-                    cursor.classList.add('dark-bg');
-                }
-            }
-            
-            // Mouse move event
-            document.addEventListener('mousemove', function(e) {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                
-                // Move main cursor immediately
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-                
-                // Update cursor color based on background
-                updateCursorColor(mouseX, mouseY);
-            });
-            
-            // Show custom cursor
-            cursor.style.display = 'block';
-            
-            // Hover effects for clickable elements
-            links.forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    // Transform cursor to target
-                    cursor.classList.add('target');
-                    
-                    // Check if this is a navigation link
-                    if (this.classList.contains('nav-link')) {
-                        // Add class to hide the dot for navigation links
-                        cursor.classList.add('no-dot');
-                    }
-                });
-                
-                link.addEventListener('mouseleave', function() {
-                    // Transform cursor back to normal
-                    cursor.classList.remove('target');
-                    // Remove background color classes
-                    cursor.classList.remove('light-bg', 'dark-bg');
-                    // Remove no-dot class
-                    cursor.classList.remove('no-dot');
-                });
-            });
-            
-            // Hide cursor when leaving window
-            document.addEventListener('mouseleave', function() {
-                cursor.style.display = 'none';
-            });
-            
-            // Show cursor when entering window
-            document.addEventListener('mouseenter', function() {
-                cursor.style.display = 'block';
-            });
-        });
-    </script>
-    
-
-    
-    <!-- Back to Top Button JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const backToTopButton = document.getElementById('back-to-top');
-            
-            // Show/hide button based on scroll position
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-            
-            // Scroll to top when button is clicked
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
         });
     </script>
     
@@ -828,7 +637,6 @@
                         
                         if (!isExpanded) {
                             // Expand - show content
-                            console.log('Expanding content');
                             
                             if (prototypeDescription) prototypeDescription.style.display = 'block';
                             if (prototype11) prototype11.style.display = 'block';
@@ -839,7 +647,6 @@
                             isExpanded = true;
                         } else {
                             // Collapse - hide content
-                            console.log('Collapsing content');
                             
                             if (prototypeDescription) prototypeDescription.style.display = 'none';
                             if (prototype11) prototype11.style.display = 'none';

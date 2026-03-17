@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Design source files (keep exports, not editables)
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xd
+*.indd
+
+# Reference material (not part of the live site)
+Website references/
+
+# Placeholder / draft assets
+Assets/placeholder-*
+Assets/layout.*
+Assets/square.*
