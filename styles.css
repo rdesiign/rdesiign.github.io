@@ -389,7 +389,7 @@ body {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 35px; /* Increased padding to add space between thumbnails and side elements */
+    padding: 0 20px; /* Balanced with button right margin */
 }
 
 /* Logo Square - Ensure it doesn't cause overflow */
@@ -428,8 +428,8 @@ body {
 
 /* Intro Section */
 #intro {
-    padding-top: 100px; /* Increased top padding to account for removed navbar */
-    overflow: visible; /* Ensure content is not clipped */
+    padding-top: 30px; /* Align with middle of + button */
+    overflow: visible;
 }
 
 /* About Section */
@@ -661,7 +661,7 @@ footer {
 
 /* Adjust intro section to account for removed navbar */
 #intro.section {
-    padding-top: 80px; /* Reduced padding to account for removed navbar */
+    padding-top: 20px; /* Align with + button */
 }
 
 /* Adjust about section to account for removed navbar */
@@ -710,7 +710,7 @@ footer {
         cursor: auto !important;
     }
     .container {
-        padding: 0 50px !important; /* Maximum breathing space from screen edges */
+        padding: 0 20px !important; /* Symmetric with button right margin */
         max-width: 100vw !important;
     }
     
@@ -755,15 +755,11 @@ footer {
     
     /* Adjust navigation bar button icon size and centering - mobile only */
     .nav-toggle {
-        width: 45px !important; /* Reduced from 50px */
-        height: 45px !important; /* Reduced from 50px */
         position: relative !important; /* Enable absolute positioning for child */
     }
     
     .nav-toggle-icon {
-        width: 20px !important; /* Reduced from 24px */
-        height: 20px !important; /* Reduced from 24px */
-        stroke-width: 3 !important; /* Reduced from 4 */
+        stroke-width: 3 !important;
         /* Improved centering technique */
         position: absolute !important;
         top: 50% !important;
@@ -829,7 +825,7 @@ footer {
 }
     
     #intro {
-        padding-top: 100px; /* Restore original padding for mobile */
+        padding-top: 25px; /* Align with middle of + button on mobile */
     }
     
     #about {
@@ -882,7 +878,7 @@ footer {
     }
     
     #intro {
-        padding-top: 70px; /* Adjusted padding for small mobile */
+        padding-top: 22px; /* Align with middle of + button on small mobile */
     }
     
     #about {
@@ -972,6 +968,17 @@ footer {
 .nav-toggle:focus {
     outline: none;
     /* Ensure no focus styles affect centering */
+    box-shadow: none;
+}
+
+/* Remove focus outlines from interactive icon buttons */
+.theme-toggle:focus,
+.contact-icon-link:focus,
+.contact-icon-circle:focus,
+.nav-link:focus,
+.nav-close:focus,
+.icon-circle:focus {
+    outline: none;
     box-shadow: none;
 }
 
@@ -1125,8 +1132,8 @@ footer {
 /* Contact Icons Container */
 .contact-icons-container {
     position: fixed;
-    top: 76px; /* Position below the navbar with equal spacing (20px navbar top + 40px navbar height + 16px gap) */
-    right: 15px; /* Moved outward slightly from center of gap */
+    top: 76px; /* 20px top + 40px button + 16px gap */
+    right: 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -1137,20 +1144,23 @@ footer {
 /* Adjust contact icons position to avoid overlap with navbar */
 @media (min-width: 768px) {
     .contact-icons-container {
-        top: 76px; /* Position below the navbar with equal spacing (20px navbar top + 40px navbar height + 16px gap) */
+        top: 76px; /* 20px top + 40px button + 16px gap */
     }
 }
 
 /* Ensure proper spacing on mobile devices */
 @media (max-width: 768px) {
     .contact-icons-container {
-        top: 81px; /* Position below the navbar with equal spacing (20px navbar top + 45px navbar height + 16px gap) */
+        top: 71px; /* 15px top + 40px button + 16px gap */
+        right: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .contact-icons-container {
-        top: 86px; /* Position below the navbar with equal spacing (15px navbar top + 50px navbar height + 21px gap to maintain visual balance) */
+        top: 57px; /* 15px top + 30px button + 12px gap */
+        right: 20px;
+        gap: 12px; /* Match the gap between + button and first icon */
     }
 }
 
@@ -1159,30 +1169,29 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
+    background: transparent;
+    color: #ffffff;
     text-decoration: none;
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease;
+    border: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 .contact-icon-link:hover {
-    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    transition: all 0.6s ease;
 }
 
 /* Contact Icon Styling */
 .contact-icon {
     width: 16px;
     height: 16px;
-    stroke: currentColor;
+    stroke: #ffffff;
     transition: all 0.6s ease;
     stroke-width: 2;
     stroke-linecap: round;
@@ -1193,7 +1202,7 @@ footer {
 
 /* Contact Icon Circles */
 .contact-icon-circle {
-    background: transparent;
+    background: #000000;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     width: 40px;
@@ -1202,59 +1211,35 @@ footer {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .contact-icon-circle:hover {
     transform: scale(1.1);
 }
 
-/* Theme styles for contact icons */
-[data-theme="dark"] .contact-icon-link {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-primary); /* White icons in dark mode */
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
-}
-
+/* Theme styles for contact icons - always black */
+[data-theme="dark"] .contact-icon-link,
 [data-theme="light"] .contact-icon-link {
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: var(--text-primary); /* Black icons in light mode */
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    transition: all 0.6s ease;
 }
 
-[data-theme="dark"] .contact-icon-circle {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
+[data-theme="dark"] .contact-icon-circle,
 [data-theme="light"] .contact-icon-circle {
+    background: #000000;
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="dark"] .contact-icon-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
-}
-
+[data-theme="dark"] .contact-icon-link:hover,
 [data-theme="light"] .contact-icon-link:hover {
-    background: rgba(0, 0, 0, 0.2);
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
+    background: transparent;
+    transition: all 0.6s ease;
 }
 
 
-
-/* Theme toggle button theme styles */
-[data-theme="dark"] .theme-toggle {
-    background: transparent; /* Remove background */
-    border: none; /* Remove border */
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
-}
-
-[data-theme="light"] .theme-toggle {
-    background: transparent; /* Remove background */
-    border: none; /* Remove border */
-    transition: all 0.6s ease; /* Match nav-toggle transition duration */
-}
 
 /* Mobile Contact Icon Links */
 .mobile-contact-icon-link {
@@ -1508,8 +1493,6 @@ footer {
 
 /* Theme Toggle Button - Enhanced Visibility */
 .theme-toggle {
-    background: transparent;
-    border: none; /* Removed circular border */
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -1520,8 +1503,8 @@ footer {
     padding: 0;
     margin: 0;
     flex-shrink: 0;
-    visibility: visible !important;
-    opacity: 1 !important;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 /* Theme Icon Container */
@@ -1568,7 +1551,7 @@ footer {
 @media (max-width: 1024px) {
     .nav-container {
         top: 15px;
-        right: 15px;
+        right: 20px;
     }
     
     .expanded-nav {
@@ -1655,10 +1638,6 @@ footer {
     .theme-toggle {
         width: 30px;
         height: 30px;
-    }
-
-    .theme-toggle {
-        margin-top: 4px;
     }
     
     .nav-toggle-icon, 
@@ -1792,7 +1771,7 @@ footer {
 .nav-container {
     position: fixed;
     top: 20px;
-    right: 15px; /* Moved outward slightly from center of gap */
+    right: 20px; /* Align with contact-icons-container */
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -2079,11 +2058,13 @@ footer {
 }
 
 [data-theme="light"] .contact-icon-circle {
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 [data-theme="light"] .contact-icon {
-    color: #000000;
+    color: #ffffff;
+    stroke: #ffffff;
 }
 
 /* Adjust for small screens */
@@ -2099,8 +2080,9 @@ footer {
     }
     
     .contact-icons-container {
-        top: 61px;
-        right: 20px; /* Moved inward by 5px to add space */
+        top: 57px; /* 15px top + 30px button + 12px gap */
+        right: 20px;
+        gap: 12px;
     }
     
     .nav-toggle,
@@ -2194,7 +2176,7 @@ footer {
 
 /* Intro Section */
 #intro.section {
-    padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
+    padding: 30px 0 0 0; /* Align text with middle of + button (20px top + ~10px to center) */
     text-align: left;
     /* Removed background-color to allow dotted background to show through */
     opacity: 1;
@@ -2246,9 +2228,9 @@ footer {
 .intro-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px; /* Add padding to match project grid */
+    padding: 0 30px; /* Match abstract-grid padding so text aligns with images */
     min-height: 150px;
-    margin-top: 0; /* Remove the previous margin as we're handling spacing with section padding */
+    margin-top: 0;
     position: relative;
     z-index: 110;
 }
@@ -2256,15 +2238,12 @@ footer {
 #intro-typewriter {
     position: relative;
     box-sizing: content-box;
-    /* Removed background-color to allow dotted background to show through */
-    /* Reserve space for the content to prevent shifting */
-    /* min-height: 100px; Removed to prevent content clipping */
-    max-width: 1280px; /* Match the showreel banner content width */
-    margin: 0 auto 0 0; /* Align to the left edge to match project thumbnails */
-    padding: 0 20px; /* Add padding to match project grid */
-    margin-top: 15px; /* Shifted more upwards for better alignment */
-    transform: scale(1); /* Removed scaling to restore original size */
-    transform-origin: left top; /* Scale from top-left corner */
+    max-width: 1280px;
+    margin: 0 auto 0 0; /* Align to the left edge */
+    padding: 0;
+    margin-top: 0;
+    transform: scale(1);
+    transform-origin: left top;
 }
 
 #intro-typewriter h1 {
@@ -3430,12 +3409,16 @@ footer .container {
 
 @media (max-width: 768px) {
     #intro.section {
-        padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
+        padding: 25px 0 0 0; /* Align with middle of + button on mobile */
     }
 
     #intro-typewriter {
-        padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 0; /* Remove margin that was for banner spacing */
+        padding: 0;
+        margin-top: 0;
+    }
+
+    .intro-content {
+        padding: 0; /* Container padding handles margins on mobile */
     }
 
     #intro-typewriter h1 {
@@ -3511,12 +3494,16 @@ footer .container {
 
 @media (max-width: 480px) {
     #intro.section {
-        padding: 80px 0 0 0; /* Reduced padding after removing showreel banner */
+        padding: 22px 0 0 0; /* Align with middle of + button on small mobile */
     }
 
     #intro-typewriter {
-        padding: 0; /* Remove padding to maintain alignment */
-        margin-top: 0; /* Remove margin that was for banner spacing */
+        padding: 0;
+        margin-top: 0;
+    }
+
+    .intro-content {
+        padding: 0; /* Container padding handles margins on small mobile */
     }
 
     #intro-typewriter h1 {
@@ -3559,9 +3546,10 @@ footer .container {
     }
 
     .contact-icons-container {
-        top: 61px;
-        right: 20px; /* Moved inward by 5px to add space */
+        top: 57px; /* 15px top + 30px button + 12px gap */
+        right: 20px;
         align-items: center;
+        gap: 12px;
     }
 
     .icon-circle {
@@ -3793,7 +3781,7 @@ footer .container {
 
     
     .contact-icons-container {
-        display: none !important;
+        display: flex !important;
     }
     
     /* Adjust mobile popup for smaller screens */
@@ -3990,18 +3978,14 @@ footer .container {
 }
 
 /* Theme toggle button */
-[data-theme="light"] .theme-toggle,
-[data-theme="dark"] .theme-toggle {
-    background: transparent !important;
-    border: none !important; /* Removed circular border */
-}
+/* Theme toggle appearance handled by .contact-icons-container > .theme-toggle rules */
 
-/* Ensure theme icons are white */
+/* Theme icons use currentColor so they adapt to light/dark mode */
 [data-theme="light"] .theme-toggle .sun-icon,
 [data-theme="dark"] .theme-toggle .sun-icon,
 [data-theme="light"] .theme-toggle .moon-icon,
 [data-theme="dark"] .theme-toggle .moon-icon {
-    stroke: #ffffff !important;
+    stroke: currentColor !important;
 }
 
 /* ===== IMAGE LOADING OPTIMIZATIONS FOR GITHUB PAGES ===== */
@@ -4456,65 +4440,33 @@ img::before {
     }
 }
 
-/* Theme toggle beside the nav trigger */
-.nav-container {
-    align-items: flex-end;
-}
+/* Theme toggle now lives inside contact-icons-container */
 
-.nav-container > .theme-toggle {
-    position: absolute;
-    top: 0;
-    right: 56px;
+/* Theme toggle styled consistently with other buttons - always black */
+.theme-toggle {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
     width: 40px;
     height: 40px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    z-index: 1301;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    color: #ffffff;
 }
 
-.nav-container > .theme-toggle .sun-icon,
-.nav-container > .theme-toggle .moon-icon {
-    width: 16px;
-    height: 16px;
-}
-
-.nav-container > .theme-toggle[data-theme="dark"],
-[data-theme="dark"] .nav-container > .theme-toggle {
-    background: #000000 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-}
-
-.nav-container > .theme-toggle[data-theme="light"],
-[data-theme="light"] .nav-container > .theme-toggle {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 1px solid rgba(0, 0, 0, 0.15) !important;
-}
-
-.nav-container > .theme-toggle:hover {
+.theme-toggle:hover {
     transform: scale(1.1);
 }
 
-@media (max-width: 1024px) {
-    .nav-container > .theme-toggle {
-        right: 46px;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-container > .theme-toggle {
-        right: 42px;
-        width: 30px;
-        height: 30px;
-    }
-
-    .nav-container > .theme-toggle .sun-icon,
-    .nav-container > .theme-toggle .moon-icon {
-        width: 14px;
-        height: 14px;
-    }
+[data-theme="dark"] .contact-icons-container > .theme-toggle,
+[data-theme="light"] .contact-icons-container > .theme-toggle {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
