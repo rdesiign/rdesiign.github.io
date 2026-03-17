@@ -1416,6 +1416,14 @@ footer {
     height: 16px;
 }
 
+.nav-toggle .plus-icon line {
+    transition: opacity 0.2s ease;
+}
+
+.nav-toggle.is-open .plus-icon line:first-child {
+    opacity: 0;
+}
+
 /* Expanded Navigation Bar */
 .expanded-nav {
     display: none;
@@ -1586,16 +1594,19 @@ footer {
     
     .nav-link {
         width: 100%;
+        display: block;
+        box-sizing: border-box;
         padding: 12px 16px;
         font-size: 16px;
         text-align: left;
         border-radius: 8px;
     }
-    
+
     .theme-toggle {
         width: 40px;
         height: 40px;
         margin-left: auto;
+        align-self: flex-end;
     }
     
     .nav-close {
@@ -1629,8 +1640,14 @@ footer {
     }
     
     .expanded-nav {
-        height: 30px;
-        padding: 0 8px;
+        top: 60px;
+        right: 16px;
+        width: min(280px, calc(100vw - 32px));
+        max-width: calc(100vw - 32px);
+        height: auto;
+        padding: 18px 14px 14px;
+        box-sizing: border-box;
+        gap: 10px;
     }
     
     .nav-toggle,
@@ -1638,6 +1655,10 @@ footer {
     .theme-toggle {
         width: 30px;
         height: 30px;
+    }
+
+    .theme-toggle {
+        margin-top: 4px;
     }
     
     .nav-toggle-icon, 
@@ -1647,18 +1668,6 @@ footer {
         height: 14px;
     }
 }
-    
-    .nav-toggle-icon, .contact-icon {
-        width: 14px;
-        height: 14px;
-    }
-    
-    /* Mobile styles for nav close button */
-    .nav-close {
-        width: 30px;
-        height: 30px;
-        margin: 0 0 0 6px; /* Adjusted margin for mobile */
-    }
 
 /* Logo circle theme styles */
 
@@ -1978,64 +1987,26 @@ footer {
     stroke-linejoin: round;
     width: 16px;
     height: 16px;
-    display: block;
+    display: none;
 }
 
-/* Sun and Moon icon styles - ENHANCED for both modes */
-html[data-theme="light"] .theme-toggle .sun-icon,
-[data-theme="light"] .theme-toggle .sun-icon,
-.theme-toggle .sun-icon {
-    stroke: #000000;
-    display: block !important;
-    visibility: visible !important;
-}
-
-html[data-theme="light"] .theme-toggle .moon-icon,
-[data-theme="light"] .theme-toggle .moon-icon,
-.theme-toggle .moon-icon {
-    stroke: #000000;
-    display: block !important;
-    visibility: visible !important;
-}
-
-html[data-theme="dark"] .theme-toggle .sun-icon,
-[data-theme="dark"] .theme-toggle .sun-icon,
-.theme-toggle .sun-icon {
-    stroke: #ffffff;
-    display: block !important;
-    visibility: visible !important;
-}
-
-html[data-theme="dark"] .theme-toggle .moon-icon,
-[data-theme="dark"] .theme-toggle .moon-icon,
-.theme-toggle .moon-icon {
-    stroke: #ffffff;
-    display: block !important;
-    visibility: visible !important;
-}
-
-/* Ensure theme icons are always visible - ULTIMATE OVERRIDE */
+/* Theme icon visibility */
 .theme-toggle .sun-icon,
 .theme-toggle .moon-icon {
     stroke: currentColor !important;
     stroke-width: 2 !important;
     stroke-linecap: round !important;
     stroke-linejoin: round !important;
-    display: block !important;
-    visibility: visible !important;
     opacity: 1 !important;
     fill: none !important;
 }
 
-/* Override any JavaScript display: none with higher specificity */
-[data-theme="light"] .theme-toggle .sun-icon[style*="display: none"],
-[data-theme="dark"] .theme-toggle .moon-icon[style*="display: none"] {
-    display: none !important;
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
 }
 
-[data-theme="light"] .theme-toggle .moon-icon[style*="display: block"],
-[data-theme="dark"] .theme-toggle .sun-icon[style*="display: block"] {
-    display: block !important;
+[data-theme="light"] .theme-toggle .moon-icon {
+    display: block;
 }
 
 /* Theme-specific styles for dark mode */
@@ -3550,14 +3521,12 @@ footer .container {
 
     #intro-typewriter h1 {
         font-size: clamp(1.3rem, 6vw, 2rem); /* Keep current font size */
-        /* height: 1.0em; Removed fixed height to prevent overflow */
         line-height: 1.2; /* Restore line height for better readability */
         margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
     }
 
     #intro-typewriter h2 {
         font-size: clamp(0.9rem, 4vw, 1.1rem); /* Keep current font size */
-        /* height: 1.2em; Removed fixed height to prevent overflow */
         line-height: 1.4; /* Restore line height for better readability */
         margin: 0; /* Remove negative margin for better spacing */
     }
@@ -3583,44 +3552,35 @@ footer .container {
     .showreel-placeholder p {
         font-size: 0.9rem;
     }
-    
 
-    
-/* Adjust for small screens */
-@media (max-width: 480px) {
     .nav-container {
         top: 15px;
         right: 20px; /* Moved inward by 5px to add space */
     }
-    
-    .expanded-nav {
-        height: 30px;
-        padding: 0 8px;
-    }
-    
+
     .contact-icons-container {
         top: 61px;
         right: 20px; /* Moved inward by 5px to add space */
         align-items: center;
     }
-    
+
     .icon-circle {
         width: 30px;
         height: 30px;
     }
-    
-    .nav-toggle-icon, .contact-icon {
+
+    .nav-toggle-icon,
+    .contact-icon {
         width: 14px;
         height: 14px;
     }
-    
-    /* Mobile styles for nav close button */
+
     .nav-close {
         width: 30px;
         height: 30px;
-        margin: 0; /* Reverted margin to 0 */
+        margin: 0;
     }
-}
+
     .projects-grid .project-col-right {
         display: grid;
         grid-template-columns: 1fr;
@@ -4434,5 +4394,127 @@ img::before {
         transform: none !important;
         will-change: auto !important;
         contain: none !important;
+    }
+}
+
+/* Final mobile navigation guardrail */
+@media (max-width: 1024px) {
+    .expanded-nav.show {
+        display: flex !important;
+        position: fixed !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        top: 72px !important;
+        right: 16px !important;
+        left: auto !important;
+        width: fit-content !important;
+        min-width: 176px !important;
+        max-width: calc(100vw - 32px) !important;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 18px 12px 12px !important;
+        box-sizing: border-box !important;
+        gap: 8px !important;
+        overflow: hidden !important;
+        border-radius: 20px !important;
+    }
+
+    .expanded-nav.show .nav-link {
+        display: block !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 8px 10px !important;
+        font-size: 15px !important;
+        line-height: 1.3 !important;
+        text-align: left !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    .expanded-nav.show .theme-toggle {
+        flex: 0 0 auto !important;
+        align-self: flex-end !important;
+        margin: 4px 0 0 0 !important;
+    }
+
+    .expanded-nav.show .nav-close {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .expanded-nav.show {
+        top: 60px !important;
+        min-width: 164px !important;
+        max-width: calc(100vw - 40px) !important;
+    }
+}
+
+/* Theme toggle beside the nav trigger */
+.nav-container {
+    align-items: flex-end;
+}
+
+.nav-container > .theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 56px;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 1301;
+}
+
+.nav-container > .theme-toggle .sun-icon,
+.nav-container > .theme-toggle .moon-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.nav-container > .theme-toggle[data-theme="dark"],
+[data-theme="dark"] .nav-container > .theme-toggle {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.nav-container > .theme-toggle[data-theme="light"],
+[data-theme="light"] .nav-container > .theme-toggle {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.nav-container > .theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+    .nav-container > .theme-toggle {
+        right: 46px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container > .theme-toggle {
+        right: 42px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav-container > .theme-toggle .sun-icon,
+    .nav-container > .theme-toggle .moon-icon {
+        width: 14px;
+        height: 14px;
     }
 }

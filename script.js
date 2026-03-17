@@ -295,11 +295,23 @@ function initializeNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navClose = document.getElementById('nav-close');
     const expandedNav = document.getElementById('expanded-nav');
+
+    function syncMobileNavState() {
+        if (!navToggle || !expandedNav) {
+            return;
+        }
+
+        const isMobileTablet = window.innerWidth <= 1024;
+        const isOpen = isMobileTablet && expandedNav.classList.contains('show');
+        navToggle.classList.toggle('is-open', isOpen);
+    }
     
     // Initially hide the nav-close button
     if (navClose) {
         navClose.style.display = 'none';
     }
+
+    syncMobileNavState();
     
     if (navToggle) {
         navToggle.addEventListener('click', function() {
@@ -310,6 +322,7 @@ function initializeNavigation() {
             if (isMobileTablet) {
                 // Mobile/Tablet: Use show class
                 expandedNav.classList.toggle('show');
+                syncMobileNavState();
             } else {
                 // Desktop: Use inline style display
                 if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
@@ -334,6 +347,7 @@ function initializeNavigation() {
             if (isMobileTablet) {
                 // Mobile/Tablet: Remove show class
                 expandedNav.classList.remove('show');
+                syncMobileNavState();
             } else {
                 // Desktop: Hide navigation
                 expandedNav.style.display = 'none';
@@ -359,6 +373,7 @@ function initializeNavigation() {
                                        expandedNav.contains(event.target);
                 if (!isClickInsideNav) {
                     expandedNav.classList.remove('show');
+                    syncMobileNavState();
                 }
             }
         } else {
@@ -381,6 +396,8 @@ function initializeNavigation() {
             }
         }
     });
+
+    window.addEventListener('resize', syncMobileNavState);
     
     // Add scroll event listener for navigation highlighting (only on index.html)
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
@@ -466,162 +483,31 @@ function initializeTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
-    
-    console.log('=== INITIALIZING THEME ===');
-    console.log('Current theme from localStorage:', currentTheme);
-    
+
     // Set the initial theme
     document.documentElement.setAttribute('data-theme', currentTheme);
-    
-    // Update icon based on current theme
-    updateThemeIcon(currentTheme);
-    
-    // Add manual test function to window for debugging
-    window.testThemeIcons = function() {
-        console.log('=== MANUAL THEME ICON TEST (SVG VERSION) ===');
-        const sunIcons = document.querySelectorAll('.sun-icon');
-        const moonIcons = document.querySelectorAll('.moon-icon');
-        
-        console.log('Sun icons found:', sunIcons.length);
-        console.log('Moon icons found:', moonIcons.length);
-        
-        sunIcons.forEach((icon, index) => {
-            console.log(`Sun icon ${index}:`, {
-                display: icon.style.display,
-                computedDisplay: window.getComputedStyle(icon).display,
-                visibility: window.getComputedStyle(icon).visibility,
-                opacity: window.getComputedStyle(icon).opacity
-            });
-        });
-        
-        moonIcons.forEach((icon, index) => {
-            console.log(`Moon icon ${index}:`, {
-                display: icon.style.display,
-                computedDisplay: window.getComputedStyle(icon).display,
-                visibility: window.getComputedStyle(icon).visibility,
-                opacity: window.getComputedStyle(icon).opacity
-            });
-        });
-    };
     
     // Function to toggle theme
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        console.log('=== TOGGLING THEME ===');
-        console.log('Current theme:', currentTheme);
-        console.log('New theme:', newTheme);
-        
+
         // Update the theme
         document.documentElement.setAttribute('data-theme', newTheme);
-        
-        // Update the icon
-        updateThemeIcon(newTheme);
-        
+
         // Save the theme to localStorage
         localStorage.setItem('theme', newTheme);
     }
     
     // Add event listener to desktop theme toggle
     if (themeToggle) {
-        console.log('Adding event listener to theme toggle');
         themeToggle.addEventListener('click', toggleTheme);
-    } else {
-        console.log('Theme toggle element not found!');
     }
     
     // Add event listener to mobile theme toggle
     if (mobileThemeToggle) {
         mobileThemeToggle.addEventListener('click', toggleTheme);
     }
-    
-    // Run initial test after a short delay
-    setTimeout(() => {
-        console.log('=== INITIAL PAGE LOAD TEST ===');
-        window.testThemeIcons();
-    }, 500);
-}
-
-// Function to update theme icon based on current theme
-function updateThemeIcon(theme) {
-    // Select all theme toggle icons to ensure we catch both desktop and mobile
-    const sunIcons = document.querySelectorAll('.sun-icon');
-    const moonIcons = document.querySelectorAll('.moon-icon');
-    
-    console.log('=== THEME ICON UPDATE (SVG VERSION) ===');
-    console.log('Updating theme icons for theme:', theme);
-    console.log('Found sun icons:', sunIcons.length);
-    console.log('Found moon icons:', moonIcons.length);
-    
-    // First, make sure all icons are visible by default
-    sunIcons.forEach((icon, index) => {
-        if (icon) {
-            console.log(`Sun icon ${index} before: display=${icon.style.display}, visibility=${window.getComputedStyle(icon).visibility}`);
-            icon.style.display = 'block';
-            icon.style.visibility = 'visible';
-            console.log(`Sun icon ${index} after: display=${icon.style.display}, visibility=${window.getComputedStyle(icon).visibility}`);
-        }
-    });
-    
-    moonIcons.forEach((icon, index) => {
-        if (icon) {
-            console.log(`Moon icon ${index} before: display=${icon.style.display}, visibility=${window.getComputedStyle(icon).visibility}`);
-            icon.style.display = 'block';
-            icon.style.visibility = 'visible';
-            console.log(`Moon icon ${index} after: display=${icon.style.display}, visibility=${window.getComputedStyle(icon).visibility}`);
-        }
-    });
-    
-    // Then apply theme-specific visibility
-    if (theme === 'light') {
-        // In light mode, show moon icon and hide sun icon
-        sunIcons.forEach((icon, index) => {
-            if (icon) {
-                icon.style.display = 'none';
-                icon.style.visibility = 'hidden';
-                console.log(`Hiding sun icon ${index} in light mode`);
-            }
-        });
-        moonIcons.forEach((icon, index) => {
-            if (icon) {
-                icon.style.display = 'block';
-                icon.style.visibility = 'visible';
-                console.log(`Showing moon icon ${index} in light mode`);
-            }
-        });
-    } else {
-        // In dark mode, show sun icon and hide moon icon
-        sunIcons.forEach((icon, index) => {
-            if (icon) {
-                icon.style.display = 'block';
-                icon.style.visibility = 'visible';
-                console.log(`Showing sun icon ${index} in dark mode`);
-            }
-        });
-        moonIcons.forEach((icon, index) => {
-            if (icon) {
-                icon.style.display = 'none';
-                icon.style.visibility = 'hidden';
-                console.log(`Hiding moon icon ${index} in dark mode`);
-            }
-        });
-    }
-    
-    // Final verification
-    setTimeout(() => {
-        console.log('=== FINAL VERIFICATION ===');
-        sunIcons.forEach((icon, index) => {
-            if (icon) {
-                console.log(`Final sun icon ${index}: display=${icon.style.display}, computed=${window.getComputedStyle(icon).display}`);
-            }
-        });
-        moonIcons.forEach((icon, index) => {
-            if (icon) {
-                console.log(`Final moon icon ${index}: display=${icon.style.display}, computed=${window.getComputedStyle(icon).display}`);
-            }
-        });
-    }, 100);
 }
 
 // Contact form functionality

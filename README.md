@@ -25,3 +25,5 @@ After these changes, the visual hierarchy should be:
 3. Showreel Banner (bottom layer)
 
 This ensures that the navigation elements appear properly above the banner but behind the logo circle, creating a clean visual hierarchy that matches your industrial design aesthetic preferences.
+
+## TODO
