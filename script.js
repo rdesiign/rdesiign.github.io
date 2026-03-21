@@ -297,6 +297,21 @@ function initializeNavigation() {
     const navClose = document.getElementById('nav-close');
     const expandedNav = document.getElementById('expanded-nav');
 
+    if (!navToggle || !expandedNav) {
+        return;
+    }
+
+    // Some pages call initializeNavigation more than once. Guard against
+    // duplicate listeners so mobile taps do not instantly toggle back closed.
+    if (navToggle.dataset.navBound === 'true') {
+        return;
+    }
+
+    navToggle.dataset.navBound = 'true';
+    if (navClose) {
+        navClose.dataset.navBound = 'true';
+    }
+
     function syncMobileNavState() {
         if (!navToggle || !expandedNav) {
             return;
@@ -314,31 +329,29 @@ function initializeNavigation() {
 
     syncMobileNavState();
     
-    if (navToggle) {
-        navToggle.addEventListener('click', function() {
-            // Check if we're in mobile/tablet view
-            const isMobileTablet = window.innerWidth <= 1024;
-            
-            // Toggle navigation visibility
-            if (isMobileTablet) {
-                // Mobile/Tablet: Use show class
-                expandedNav.classList.toggle('show');
-                syncMobileNavState();
-            } else {
-                // Desktop: Use inline style display
-                if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
-                    // Expand navigation
-                    expandedNav.style.display = 'flex';
-                    // Hide the nav toggle button
-                    navToggle.style.display = 'none';
-                    // Show the nav close button
-                    if (navClose) {
-                        navClose.style.display = 'flex';
-                    }
+    navToggle.addEventListener('click', function() {
+        // Check if we're in mobile/tablet view
+        const isMobileTablet = window.innerWidth <= 1024;
+        
+        // Toggle navigation visibility
+        if (isMobileTablet) {
+            // Mobile/Tablet: Use show class
+            expandedNav.classList.toggle('show');
+            syncMobileNavState();
+        } else {
+            // Desktop: Use inline style display
+            if (expandedNav.style.display === 'none' || expandedNav.style.display === '') {
+                // Expand navigation
+                expandedNav.style.display = 'flex';
+                // Hide the nav toggle button
+                navToggle.style.display = 'none';
+                // Show the nav close button
+                if (navClose) {
+                    navClose.style.display = 'flex';
                 }
             }
-        });
-    }
+        }
+    });
     
     if (navClose) {
         navClose.addEventListener('click', function() {
