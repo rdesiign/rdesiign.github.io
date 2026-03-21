@@ -501,12 +501,14 @@ function initializeTheme() {
     }
     
     // Add event listener to desktop theme toggle
-    if (themeToggle) {
+    if (themeToggle && !themeToggle.dataset.themeBound) {
+        themeToggle.dataset.themeBound = 'true';
         themeToggle.addEventListener('click', toggleTheme);
     }
     
     // Add event listener to mobile theme toggle
-    if (mobileThemeToggle) {
+    if (mobileThemeToggle && !mobileThemeToggle.dataset.themeBound) {
+        mobileThemeToggle.dataset.themeBound = 'true';
         mobileThemeToggle.addEventListener('click', toggleTheme);
     }
 }

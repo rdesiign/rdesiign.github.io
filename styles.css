@@ -2290,6 +2290,13 @@ footer {
     object-fit: contain; /* Contain the image */
 }
 
+#intro-typewriter .avatar-link {
+    display: inline-flex;
+    align-items: baseline;
+    text-decoration: none;
+    color: inherit;
+}
+
 .intro-heading-lock {
     display: inline-flex;
     align-items: baseline;
@@ -3302,17 +3309,6 @@ footer .container {
 .back-to-top:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-to-top:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-50%) translateY(-3px);
 }
 
 .back-to-top:focus {
@@ -4649,5 +4645,360 @@ img::before {
 @media (max-width: 1024px) {
     .index-page #intro.section {
         padding-top: 15px;
+    }
+}
+
+/* About page utility stack and layout alignment */
+.about-page .back-to-home-container {
+    top: 20px;
+    left: 8px;
+}
+
+.about-page .back-to-home {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.about-page .back-to-home svg {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.5;
+}
+
+.about-page .nav-container,
+.about-page .contact-icons-container {
+    right: 8px;
+}
+
+.about-page .contact-icons-container {
+    align-items: center;
+}
+
+.about-page .nav-toggle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.about-page .nav-toggle-icon {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.5;
+}
+
+.about-page .contact-icons-container > .theme-toggle,
+.about-page .contact-icons-container > .contact-icon-circle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.about-page .contact-icons-container .theme-icon,
+.about-page .contact-icons-container .contact-icon-link {
+    width: 100%;
+    height: 100%;
+}
+
+.about-page .contact-icons-container .sun-icon,
+.about-page .contact-icons-container .moon-icon,
+.about-page .contact-icons-container .contact-icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+.about-page #about.section {
+    padding-top: 122px;
+    padding-bottom: 96px;
+}
+
+.about-page .about-content {
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: minmax(500px, 640px) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.about-page .about-visual {
+    position: relative;
+}
+
+.about-page .about-feature-image {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 0;
+}
+
+.about-page .about-text {
+    width: 100%;
+}
+
+.about-page .about-text h3 {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    color: var(--text-primary);
+}
+
+.about-page .about-bridge {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    line-height: 1.85;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+    max-width: 34rem;
+}
+
+.about-page .about-body {
+    max-width: 37rem;
+}
+
+.about-page .about-body p {
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    line-height: 1.85;
+    margin-bottom: 18px;
+    color: var(--text-secondary);
+}
+
+.about-page .about-body p:last-child {
+    margin-bottom: 0;
+}
+
+.about-page .about-actions {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+    width: fit-content;
+}
+
+.about-page .about-resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0;
+    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.about-page .about-resume-link:hover {
+    color: var(--accent-secondary);
+}
+
+@media (max-width: 768px) {
+    .about-page .back-to-home-container {
+        left: 6px;
+    }
+
+    .about-page .back-to-home {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .back-to-home svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .about-page .nav-container,
+    .about-page .contact-icons-container {
+        right: 6px;
+    }
+
+    .about-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .nav-toggle-icon {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .about-page .contact-icons-container > .theme-toggle,
+    .about-page .contact-icons-container > .contact-icon-circle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .contact-icons-container .sun-icon,
+    .about-page .contact-icons-container .moon-icon,
+    .about-page .contact-icons-container .contact-icon {
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
+    }
+
+    .about-page #about.section {
+        padding-top: 108px;
+        padding-bottom: 64px;
+    }
+
+    .about-page .container {
+        padding: 0 20px 0 58px !important;
+    }
+
+    .about-page .about-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0;
+        text-align: left;
+    }
+
+    .about-page .about-visual {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .about-page .about-feature-image {
+        max-width: min(100%, 620px);
+    }
+
+    .about-page .about-text h3 {
+        font-size: clamp(1.8rem, 6vw, 2.35rem);
+        margin-bottom: 22px;
+    }
+
+    .about-page .about-bridge {
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-bottom: 16px;
+        max-width: none;
+    }
+
+    .about-page .about-body {
+        max-width: none;
+    }
+
+    .about-page .about-body p {
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-bottom: 16px;
+    }
+
+    .about-page .about-actions {
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-page .back-to-home-container {
+        top: 15px;
+        left: 4px;
+    }
+
+    .about-page .back-to-home {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .back-to-home svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .about-page .nav-container,
+    .about-page .contact-icons-container {
+        right: 4px;
+    }
+
+    .about-page .contact-icons-container {
+        gap: 12px;
+    }
+
+    .about-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .nav-toggle-icon {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .about-page .contact-icons-container > .theme-toggle,
+    .about-page .contact-icons-container > .contact-icon-circle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .about-page .contact-icons-container .sun-icon,
+    .about-page .contact-icons-container .moon-icon,
+    .about-page .contact-icons-container .contact-icon {
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
+    }
+
+    .about-page #about.section {
+        padding-top: 98px;
+    }
+
+    .about-page .container {
+        padding: 0 18px 0 60px !important;
+    }
+
+    .about-page .about-content {
+        gap: 24px;
+    }
+
+    .about-page .about-feature-image {
+        max-width: min(100%, 400px);
+    }
+
+    .about-page .about-text h3 {
+        font-size: 1.75rem;
+    }
+
+    .about-page .about-bridge {
+        font-size: 0.98rem;
+    }
+
+    .about-page .about-body p {
+        font-size: 0.98rem;
     }
 }

@@ -27,6 +27,7 @@ This document captures the current visual and interaction language of the portfo
 - The current site uses a structured, modern composition with strong spacing and clear sectional breaks.
 - Project presentation is image-first and card-based.
 - Circular utility elements and floating controls are part of the current interface language.
+- The About page now follows a restrained split composition: image and text are balanced in a clean two-part layout with generous whitespace and typography-led hierarchy.
 - Changes to layout, spacing rhythm, content hierarchy, or motion style should be treated as significant design decisions and confirmed first.
 
 ## Color And Theme
