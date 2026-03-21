@@ -2246,6 +2246,10 @@ footer {
     transform-origin: left top;
 }
 
+.mobile-and-break {
+    display: none;
+}
+
 #intro-typewriter h1 {
     font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem); /* Restore original font size for the main heading */
@@ -2281,9 +2285,15 @@ footer {
     width: auto; /* Maintain aspect ratio */
     vertical-align: baseline; /* Align with the baseline of the text */
     display: inline-block; /* Inline with text */
-    margin: 0 0.3em 0 0.02em; /* Increased space on right (between image and "Rishi") */
+    margin: 0 0.22em; /* Keep spacing before and after the avatar visually balanced */
     padding: 0; /* No padding */
     object-fit: contain; /* Contain the image */
+}
+
+.intro-heading-lock {
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
 }
 
 /* Ensure the H span maintains proper sizing */
@@ -2928,7 +2938,16 @@ footer {
     opacity: 1;
 }
 
+.project-card.mobile-details-visible .project-overlay {
+    opacity: 1;
+}
+
 .project-card:hover .project-image {
+    opacity: 1;
+    filter: brightness(0.8);
+}
+
+.project-card.mobile-details-visible .project-image {
     opacity: 1;
     filter: brightness(0.8);
 }
@@ -3398,37 +3417,45 @@ footer .container {
         min-height: 600px; /* Reduced height for tablet */
         padding: 80px; /* Reduced padding for tablet */
     }
-    #intro-typewriter h1 {
-        font-size: clamp(1.6rem, 3.5vw, 2.5rem); /* Adjusted for tablet */
-    }
-
-    #intro-typewriter h2 {
-        font-size: clamp(1rem, 1.8vw, 1.2rem); /* Adjusted for tablet */
-    }
 }
 
 @media (max-width: 768px) {
     #intro.section {
-        padding: 25px 0 0 0; /* Align with middle of + button on mobile */
+        padding: 28px 0 0 0; /* Restore original vertical position */
     }
 
     #intro-typewriter {
         padding: 0;
         margin-top: 0;
+        max-width: 100%;
     }
 
     .intro-content {
-        padding: 0; /* Container padding handles margins on mobile */
+        padding: 0 20px;
+        min-height: auto;
     }
 
     #intro-typewriter h1 {
-        font-size: clamp(1.6rem, 5vw, 2.2rem); /* Slightly reduced font size */
-        height: 1.3em; /* Adjust height */
+        font-size: clamp(2.35rem, 8vw, 3.25rem);
+        line-height: 1.06;
+        margin: 0 0 0.22em 0;
+        max-width: 100%;
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(1rem, 3vw, 1.2rem); /* Slightly reduced font size */
-        height: 1.5em; /* Adjust height */
+        font-size: clamp(1.22rem, 4vw, 1.48rem);
+        line-height: 1.28;
+        max-width: 31ch;
+    }
+
+    #intro-typewriter .location-text {
+        font-size: 1rem;
+        line-height: 1.22;
+        margin-top: 22px;
+    }
+
+    .mobile-and-break {
+        display: block;
     }
 
     #showreel-banner {
@@ -3494,28 +3521,40 @@ footer .container {
 
 @media (max-width: 480px) {
     #intro.section {
-        padding: 22px 0 0 0; /* Align with middle of + button on small mobile */
+        padding: 24px 0 0 0;
     }
 
     #intro-typewriter {
         padding: 0;
         margin-top: 0;
+        max-width: 100%;
     }
 
     .intro-content {
-        padding: 0; /* Container padding handles margins on small mobile */
+        padding: 0 20px;
     }
 
     #intro-typewriter h1 {
-        font-size: clamp(1.3rem, 6vw, 2rem); /* Keep current font size */
-        line-height: 1.2; /* Restore line height for better readability */
-        margin: 0 0 0.1em 0; /* Add small bottom margin for spacing */
+        font-size: clamp(2.15rem, 9.4vw, 2.85rem);
+        line-height: 1.05;
+        margin: 0 0 0.2em 0;
+        max-width: 100%;
     }
 
     #intro-typewriter h2 {
-        font-size: clamp(0.9rem, 4vw, 1.1rem); /* Keep current font size */
-        line-height: 1.4; /* Restore line height for better readability */
-        margin: 0; /* Remove negative margin for better spacing */
+        font-size: clamp(1.08rem, 4.9vw, 1.26rem);
+        line-height: 1.28;
+        max-width: 28ch;
+    }
+
+    #intro-typewriter .location-text {
+        font-size: 0.95rem;
+        line-height: 1.22;
+        margin-top: 20px;
+    }
+
+    .mobile-and-break {
+        display: block;
     }
 
     #showreel-banner {
@@ -3924,6 +3963,10 @@ footer .container {
 /* Show tag text on project card hover */
 .project-card:hover .project-tag {
     opacity: 1; /* Show on hover */
+}
+
+.project-card.mobile-details-visible .project-tag {
+    opacity: 1;
 }
 
 /* Force navigation bar to be black with white text/icons in both modes */
@@ -4474,20 +4517,34 @@ img::before {
 /* Homepage utility icon stack: keep clear of thumbnails and consistent on mobile */
 .index-page .nav-container,
 .index-page .contact-icons-container {
-    right: 12px;
+    right: 8px;
 }
 
 .index-page .contact-icons-container {
     align-items: center;
 }
 
+.index-page .nav-toggle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.index-page .nav-toggle-icon {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.5;
+}
+
 .index-page .contact-icons-container > .theme-toggle,
 .index-page .contact-icons-container > .contact-icon-circle {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
-    flex: 0 0 40px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
 }
 
 .index-page .contact-icons-container .theme-icon,
@@ -4499,59 +4556,98 @@ img::before {
 .index-page .contact-icons-container .sun-icon,
 .index-page .contact-icons-container .moon-icon,
 .index-page .contact-icons-container .contact-icon {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
 }
 
 @media (max-width: 768px) {
     .index-page .nav-container,
     .index-page .contact-icons-container {
-        right: 10px;
+        right: 6px;
+    }
+
+    .index-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .index-page .nav-toggle-icon {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
     }
 
     .index-page .contact-icons-container > .theme-toggle,
     .index-page .contact-icons-container > .contact-icon-circle {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-        min-height: 32px;
-        flex-basis: 32px;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
     }
 
     .index-page .contact-icons-container .sun-icon,
     .index-page .contact-icons-container .moon-icon,
     .index-page .contact-icons-container .contact-icon {
-        width: 14px;
-        height: 14px;
-        flex-basis: 14px;
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
     }
 }
 
 @media (max-width: 480px) {
     .index-page .nav-container,
     .index-page .contact-icons-container {
-        right: 8px;
+        right: 4px;
     }
 
     .index-page .contact-icons-container {
         gap: 12px;
     }
 
+    .index-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .index-page .nav-toggle-icon {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
     .index-page .contact-icons-container > .theme-toggle,
     .index-page .contact-icons-container > .contact-icon-circle {
-        width: 30px;
-        height: 30px;
-        min-width: 30px;
-        min-height: 30px;
-        flex-basis: 30px;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
     }
 
     .index-page .contact-icons-container .sun-icon,
     .index-page .contact-icons-container .moon-icon,
     .index-page .contact-icons-container .contact-icon {
-        width: 14px;
-        height: 14px;
-        flex-basis: 14px;
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
+    }
+}
+
+/* Keep intro text aligned with the top edge of the plus icon */
+.index-page #intro.section {
+    padding-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .index-page #intro.section {
+        padding-top: 15px;
     }
 }

@@ -288,6 +288,7 @@ function initializeShowreelBanner() {
 function initializeComponents() {
     // Initialize theme functionality
     initializeTheme();
+    initializeMobileProjectCards();
 }
 
 // Navigation functionality
@@ -512,6 +513,87 @@ function initializeTheme() {
 
 // Contact form functionality
 function initializeContactForm() {
+}
+
+function initializeMobileProjectCards() {
+    const projectCards = Array.from(document.querySelectorAll('.project-card'));
+
+    if (!projectCards.length) {
+        return;
+    }
+
+    let activeCard = null;
+
+    function isMobileLayout() {
+        return window.innerWidth <= 768;
+    }
+
+    function clearActiveCard() {
+        if (activeCard) {
+            activeCard.classList.remove('mobile-details-visible');
+            activeCard = null;
+        }
+    }
+
+    function activateCard(card) {
+        if (activeCard && activeCard !== card) {
+            activeCard.classList.remove('mobile-details-visible');
+        }
+
+        card.classList.add('mobile-details-visible');
+        activeCard = card;
+    }
+
+    projectCards.forEach(card => {
+        const projectLink = card.querySelector('.project-link');
+
+        if (projectLink) {
+            projectLink.addEventListener('click', function(event) {
+                if (!isMobileLayout()) {
+                    return;
+                }
+
+                if (card.classList.contains('mobile-details-visible')) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+                activateCard(card);
+            });
+        } else {
+            card.addEventListener('click', function(event) {
+                if (!isMobileLayout()) {
+                    return;
+                }
+
+                event.stopPropagation();
+
+                if (card.classList.contains('mobile-details-visible')) {
+                    return;
+                }
+
+                activateCard(card);
+            });
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!isMobileLayout()) {
+            clearActiveCard();
+            return;
+        }
+
+        if (!event.target.closest('.project-card')) {
+            clearActiveCard();
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        if (!isMobileLayout()) {
+            clearActiveCard();
+        }
+    });
 }
 
 // Project card hover effects removed as per user request
