@@ -4470,3 +4470,88 @@ img::before {
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
+
+/* Homepage utility icon stack: keep clear of thumbnails and consistent on mobile */
+.index-page .nav-container,
+.index-page .contact-icons-container {
+    right: 12px;
+}
+
+.index-page .contact-icons-container {
+    align-items: center;
+}
+
+.index-page .contact-icons-container > .theme-toggle,
+.index-page .contact-icons-container > .contact-icon-circle {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    flex: 0 0 40px;
+}
+
+.index-page .contact-icons-container .theme-icon,
+.index-page .contact-icons-container .contact-icon-link {
+    width: 100%;
+    height: 100%;
+}
+
+.index-page .contact-icons-container .sun-icon,
+.index-page .contact-icons-container .moon-icon,
+.index-page .contact-icons-container .contact-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+}
+
+@media (max-width: 768px) {
+    .index-page .nav-container,
+    .index-page .contact-icons-container {
+        right: 10px;
+    }
+
+    .index-page .contact-icons-container > .theme-toggle,
+    .index-page .contact-icons-container > .contact-icon-circle {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        flex-basis: 32px;
+    }
+
+    .index-page .contact-icons-container .sun-icon,
+    .index-page .contact-icons-container .moon-icon,
+    .index-page .contact-icons-container .contact-icon {
+        width: 14px;
+        height: 14px;
+        flex-basis: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .index-page .nav-container,
+    .index-page .contact-icons-container {
+        right: 8px;
+    }
+
+    .index-page .contact-icons-container {
+        gap: 12px;
+    }
+
+    .index-page .contact-icons-container > .theme-toggle,
+    .index-page .contact-icons-container > .contact-icon-circle {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+        flex-basis: 30px;
+    }
+
+    .index-page .contact-icons-container .sun-icon,
+    .index-page .contact-icons-container .moon-icon,
+    .index-page .contact-icons-container .contact-icon {
+        width: 14px;
+        height: 14px;
+        flex-basis: 14px;
+    }
+}
