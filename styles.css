@@ -2250,6 +2250,10 @@ footer {
     display: none;
 }
 
+.intro-location-break {
+    display: block;
+}
+
 #intro-typewriter h1 {
     font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem); /* Restore original font size for the main heading */
@@ -2363,7 +2367,7 @@ footer {
     display: inline-block;
     line-height: 1.1; /* Reduced line height for tighter spacing */
     opacity: 1; /* Make visible by default since we removed the animation */
-    margin-top: 25px; /* Increase space between the two lines */
+    margin-top: 0;
 }
 
 /* Blinking dot styling */
@@ -3427,7 +3431,7 @@ footer .container {
     }
 
     .intro-content {
-        padding: 0 20px;
+        padding: 0 96px 0 4px;
         min-height: auto;
     }
 
@@ -3441,7 +3445,7 @@ footer .container {
     #intro-typewriter h2 {
         font-size: clamp(1.22rem, 4vw, 1.48rem);
         line-height: 1.28;
-        max-width: 31ch;
+        max-width: none;
     }
 
     #intro-typewriter .location-text {
@@ -3451,6 +3455,14 @@ footer .container {
     }
 
     .mobile-and-break {
+        display: block;
+    }
+
+    .desktop-break {
+        display: none;
+    }
+
+    .intro-location-break {
         display: block;
     }
 
@@ -3527,7 +3539,7 @@ footer .container {
     }
 
     .intro-content {
-        padding: 0 20px;
+        padding: 0 88px 0 4px;
     }
 
     #intro-typewriter h1 {
@@ -3540,7 +3552,7 @@ footer .container {
     #intro-typewriter h2 {
         font-size: clamp(1.08rem, 4.9vw, 1.26rem);
         line-height: 1.28;
-        max-width: 28ch;
+        max-width: none;
     }
 
     #intro-typewriter .location-text {
@@ -3550,6 +3562,14 @@ footer .container {
     }
 
     .mobile-and-break {
+        display: block;
+    }
+
+    .desktop-break {
+        display: none;
+    }
+
+    .intro-location-break {
         display: block;
     }
 
@@ -4534,6 +4554,16 @@ img::before {
     stroke-width: 2.5;
 }
 
+.index-page .nav-toggle .plus-icon,
+.about-page .nav-toggle .plus-icon {
+    overflow: visible;
+}
+
+.index-page .nav-toggle .plus-icon line,
+.about-page .nav-toggle .plus-icon line {
+    vector-effect: non-scaling-stroke;
+}
+
 .index-page .contact-icons-container > .theme-toggle,
 .index-page .contact-icons-container > .contact-icon-circle {
     width: 42px;
@@ -4572,9 +4602,9 @@ img::before {
     }
 
     .index-page .nav-toggle-icon {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2.25;
+        width: 18px;
+        height: 18px;
+        stroke-width: 2.1;
     }
 
     .index-page .contact-icons-container > .theme-toggle,
@@ -4593,6 +4623,10 @@ img::before {
         height: 16px;
         flex-basis: 16px;
     }
+
+    .index-page .contact-icons-container {
+        top: calc(20px + 38px + 16px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -4602,6 +4636,7 @@ img::before {
     }
 
     .index-page .contact-icons-container {
+        top: calc(15px + 38px + 12px);
         gap: 12px;
     }
 
@@ -4614,9 +4649,9 @@ img::before {
     }
 
     .index-page .nav-toggle-icon {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2.25;
+        width: 18px;
+        height: 18px;
+        stroke-width: 2.1;
     }
 
     .index-page .contact-icons-container > .theme-toggle,
@@ -4853,9 +4888,9 @@ img::before {
     }
 
     .about-page .nav-toggle-icon {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2.25;
+        width: 18px;
+        height: 18px;
+        stroke-width: 2.1;
     }
 
     .about-page .contact-icons-container > .theme-toggle,
@@ -4873,6 +4908,10 @@ img::before {
         width: 16px;
         height: 16px;
         flex-basis: 16px;
+    }
+
+    .about-page .contact-icons-container {
+        top: calc(20px + 38px + 16px);
     }
 
     .about-page #about.section {
@@ -4954,6 +4993,7 @@ img::before {
     }
 
     .about-page .contact-icons-container {
+        top: calc(15px + 38px + 12px);
         gap: 12px;
     }
 
@@ -4966,9 +5006,9 @@ img::before {
     }
 
     .about-page .nav-toggle-icon {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2.25;
+        width: 18px;
+        height: 18px;
+        stroke-width: 2.1;
     }
 
     .about-page .contact-icons-container > .theme-toggle,
