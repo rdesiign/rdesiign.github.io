@@ -4619,6 +4619,8 @@ img::before {
         min-width: 38px;
         min-height: 38px;
         flex-basis: 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
     }
 
     .index-page .nav-toggle-icon {
@@ -4666,6 +4668,8 @@ img::before {
         min-width: 38px;
         min-height: 38px;
         flex-basis: 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
     }
 
     .index-page .nav-toggle-icon {
@@ -4906,6 +4910,8 @@ img::before {
         min-width: 38px;
         min-height: 38px;
         flex-basis: 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
     }
 
     .about-page .nav-toggle-icon {
@@ -5024,6 +5030,8 @@ img::before {
         min-width: 38px;
         min-height: 38px;
         flex-basis: 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
     }
 
     .about-page .nav-toggle-icon {
