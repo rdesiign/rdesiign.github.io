@@ -2299,12 +2299,17 @@ footer {
     align-items: baseline;
     text-decoration: none;
     color: inherit;
+    flex-shrink: 0;
 }
 
 .intro-heading-lock {
     display: inline-flex;
     align-items: baseline;
     white-space: nowrap;
+}
+
+#intro-typewriter .avatar-image {
+    flex-shrink: 0;
 }
 
 /* Ensure the H span maintains proper sizing */
@@ -3454,6 +3459,13 @@ footer .container {
         margin-top: 22px;
     }
 
+    #intro-typewriter .avatar-image {
+        height: 1.08em;
+        margin: 0 0.18em 0 0.24em;
+        position: relative;
+        top: 0.01em;
+    }
+
     .mobile-and-break {
         display: block;
     }
@@ -3559,6 +3571,13 @@ footer .container {
         font-size: 0.95rem;
         line-height: 1.22;
         margin-top: 20px;
+    }
+
+    #intro-typewriter .avatar-image {
+        height: 1.12em;
+        margin: 0 0.16em 0 0.24em;
+        position: relative;
+        top: 0.01em;
     }
 
     .mobile-and-break {
@@ -4636,8 +4655,8 @@ img::before {
     }
 
     .index-page .contact-icons-container {
-        top: calc(15px + 38px + 12px);
-        gap: 12px;
+        top: calc(15px + 38px + 14px);
+        gap: 14px;
     }
 
     .index-page .nav-toggle {
@@ -4649,9 +4668,9 @@ img::before {
     }
 
     .index-page .nav-toggle-icon {
-        width: 18px;
-        height: 18px;
-        stroke-width: 2.1;
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.9;
     }
 
     .index-page .contact-icons-container > .theme-toggle,
@@ -4993,8 +5012,8 @@ img::before {
     }
 
     .about-page .contact-icons-container {
-        top: calc(15px + 38px + 12px);
-        gap: 12px;
+        top: calc(15px + 38px + 14px);
+        gap: 14px;
     }
 
     .about-page .nav-toggle {
@@ -5006,9 +5025,9 @@ img::before {
     }
 
     .about-page .nav-toggle-icon {
-        width: 18px;
-        height: 18px;
-        stroke-width: 2.1;
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.9;
     }
 
     .about-page .contact-icons-container > .theme-toggle,
