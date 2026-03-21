@@ -4613,6 +4613,10 @@ img::before {
         right: 6px;
     }
 
+    .index-page .nav-container {
+        top: 30px;
+    }
+
     .index-page .nav-toggle {
         width: 38px;
         height: 38px;
@@ -4651,7 +4655,7 @@ img::before {
     }
 
     .index-page .contact-icons-container {
-        top: calc(20px + 38px + 16px);
+        top: calc(30px + 38px + 16px);
     }
 }
 
@@ -4661,8 +4665,12 @@ img::before {
         right: 4px;
     }
 
+    .index-page .nav-container {
+        top: 27px;
+    }
+
     .index-page .contact-icons-container {
-        top: calc(15px + 38px + 14px);
+        top: calc(27px + 38px + 14px);
         gap: 14px;
     }
 
