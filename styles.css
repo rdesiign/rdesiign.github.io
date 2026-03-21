@@ -4806,6 +4806,20 @@ img::before {
     color: var(--accent-secondary);
 }
 
+@media (min-width: 769px) {
+    .about-page .about-content {
+        max-width: 1280px;
+        grid-template-columns: minmax(460px, 600px) minmax(420px, 1fr);
+        gap: 64px;
+        margin: 0 auto;
+        transform: translateX(28px);
+    }
+
+    .about-page .about-body {
+        max-width: 40rem;
+    }
+}
+
 @media (max-width: 768px) {
     .about-page .back-to-home-container {
         left: 6px;
@@ -4867,7 +4881,7 @@ img::before {
     }
 
     .about-page .container {
-        padding: 0 64px 0 58px !important;
+        padding: 0 20px 0 58px !important;
     }
 
     .about-page .about-content {
