@@ -4668,9 +4668,10 @@ img::before {
     }
 
     .index-page .nav-toggle-icon {
-        width: 20px;
-        height: 20px;
-        stroke-width: 1.9;
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.1;
+        aspect-ratio: 1 / 1;
     }
 
     .index-page .contact-icons-container > .theme-toggle,
@@ -5025,9 +5026,10 @@ img::before {
     }
 
     .about-page .nav-toggle-icon {
-        width: 20px;
-        height: 20px;
-        stroke-width: 1.9;
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.1;
+        aspect-ratio: 1 / 1;
     }
 
     .about-page .contact-icons-container > .theme-toggle,
