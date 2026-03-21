@@ -3433,6 +3433,7 @@ footer .container {
         padding: 0;
         margin-top: 0;
         max-width: 100%;
+        transform: translateX(-10px);
     }
 
     .intro-content {
