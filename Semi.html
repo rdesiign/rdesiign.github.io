@@ -16,7 +16,6 @@
         })();
     </script>
     <link rel="stylesheet" href="styles.css?v=1.1">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <!-- Preload critical hero image -->
     <link rel="preload" href="Projects/Semi/Semi Hero.jpg" as="image">
@@ -97,6 +96,11 @@
                 max-width: 100% !important;
             }
 
+            body.semi-page .semi-project-main > p {
+                max-width: 27ch !important;
+                padding-right: 0;
+            }
+
             body.semi-page .semi-concept-grid {
                 display: grid !important;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -105,20 +109,21 @@
             }
 
             body.semi-page .semi-concept-card {
-                text-align: left !important;
-                align-items: flex-start !important;
+                text-align: center !important;
+                align-items: center !important;
             }
 
             body.semi-page .semi-concept-card p {
-                max-width: 100% !important;
-                margin: 0 !important;
+                max-width: 18ch !important;
+                margin: 0 auto !important;
             }
 
             body.semi-page .semi-concept-icon {
                 width: 100% !important;
-                max-width: 180px;
+                max-width: 220px;
                 height: auto !important;
                 aspect-ratio: 1 / 1;
+                object-fit: cover !important;
             }
 
             body.semi-page .semi-process-gallery {
@@ -134,6 +139,29 @@
             body.semi-page .carousel-arrow {
                 width: 36px !important;
                 height: 36px !important;
+            }
+
+            body.semi-page .semi-mobile-text-below {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            body.semi-page .semi-mobile-text-below .semi-mobile-image {
+                order: 1;
+            }
+
+            body.semi-page .semi-mobile-text-below .semi-mobile-copy {
+                order: 2;
+            }
+
+            body.semi-page .semi-mobile-full-bleed {
+                width: calc(100% + 104px) !important;
+                max-width: none !important;
+                margin-left: -52px !important;
+                margin-right: -52px !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center center !important;
             }
         }
 
@@ -152,9 +180,75 @@
                 grid-template-columns: 1fr;
             }
 
+            body.semi-page .semi-concept-icon {
+                max-width: 240px;
+            }
+
+            body.semi-page .semi-project-main > p {
+                max-width: 24ch !important;
+                padding-right: 0;
+            }
+
             body.semi-page .carousel-dots {
                 bottom: 10px !important;
             }
+        }
+
+        .semi-ideation-carousel {
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .semi-ideation-slide {
+            display: none;
+            width: 100%;
+        }
+
+        .semi-ideation-slide.is-active {
+            display: block;
+        }
+
+        .semi-ideation-slide img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .semi-ideation-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .semi-ideation-nav:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .semi-ideation-nav.prev {
+            left: 15px;
+        }
+
+        .semi-ideation-nav.next {
+            right: 15px;
+        }
+
+        .semi-ideation-nav svg {
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -178,25 +272,6 @@
 
     <!-- Navigation Container -->
     <div class="nav-container" id="nav-container">
-        <button class="icon-circle theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-            <span class="theme-icon">
-                <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-            </span>
-        </button>
-
         <!-- Plus Toggle Button -->
         <div class="icon-circle nav-toggle" id="nav-toggle">
             <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -207,8 +282,8 @@
         
         <!-- Expanded Navigation Bar (initially hidden) -->
         <div class="expanded-nav" id="expanded-nav" style="display: none;">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="#project" class="nav-link">Project</a>
+            <a href="index.html#intro" class="nav-link">Home</a>
+            <a href="#project" class="nav-link active">Project</a>
             <a href="about.html" class="nav-link">About</a>
             <a href="#" class="nav-link">More</a>
             <!-- Minus Icon (for closing the expanded nav) -->
@@ -222,6 +297,24 @@
 
     <!-- Contact Icons (outside the navigation bar) -->
     <div class="contact-icons-container">
+        <button class="icon-circle theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">
+                <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </span>
+        </button>
         <div class="contact-icon-circle">
             <a href="mailto:hello@rishiramesh.com" class="contact-icon-link" aria-label="Email">
                 <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -237,14 +330,6 @@
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect x="2" y="9" width="4" height="12"></rect>
                     <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-            </a>
-        </div>
-        
-        <div class="contact-icon-circle">
-            <a href="tel:+1234567890" class="contact-icon-link" aria-label="Phone">
-                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
             </a>
         </div>
@@ -286,7 +371,7 @@
     <section id="research-question" class="section" style="padding-top: 120px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
             <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
-                <img src="Projects/Semi/semi research question.jpg" alt="Semi Research Question" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
+                <img src="Projects/Semi/semi research question.jpg" alt="Semi Research Question" class="semi-mobile-full-bleed" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
             </div>
         </div>
     </section>
@@ -355,8 +440,25 @@
     <section class="section" style="padding-top: 100px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
             <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
-                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">The aesthetic direction was driven by the need for a "smart" look, informed by aesthetic patterns and features observed in products traditionally associated with smart technology, such as smartphones, laptops, and smart home interfaces. Sketches and CAD were developed in parallel, guided by the mood board and manufacturing constraints.</p>
-                <img src="Projects/Semi/semi ideation.jpg" alt="Semi Ideation" style="width: 100%; display: block; border-radius: 8px;">
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">The aesthetic aimed for a “smart” look, inspired by design patterns from devices like smartphones, laptops, and smart home interfaces. Sketches and CAD were developed in parallel, guided by the mood board and manufacturing constraints.</p>
+                <div class="semi-ideation-carousel" id="semi-ideation-carousel" aria-label="Semi ideation image carousel">
+                    <div class="semi-ideation-slide is-active">
+                        <img src="Projects/Semi/semi ideation.jpg" alt="Semi ideation sketches and CAD development">
+                    </div>
+                    <div class="semi-ideation-slide">
+                        <img src="Projects/Semi/semi prototypes overview.jpg" alt="Semi physical prototypes and development models">
+                    </div>
+                    <button class="semi-ideation-nav carousel-arrow prev" type="button" aria-label="Show previous ideation image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="semi-ideation-nav carousel-arrow next" type="button" aria-label="Show next ideation image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -387,7 +489,7 @@
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">A curated recipe library tailored to skill level and available ingredients, reducing decision-making time and simplifying the start of any meal.</p>
                         </div>
                         <div style="flex: 1;">
-                            <img src="Projects/Semi/recipe library.png" alt="Recipe Library" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                            <img src="Projects/Semi/recipe library.jpg" alt="Recipe Library" style="width: 100%; height: auto; display: block; border-radius: 8px;">
                         </div>
                     </div>
                     
@@ -483,12 +585,12 @@
                     </div>
                     
                     <!-- Precise Ingredient Measurement Section -->
-                    <div class="semi-process-row" style="display: flex; gap: 30px; align-items: center;">
-                        <div style="flex: 1;">
+                    <div class="semi-process-row semi-mobile-text-below" style="display: flex; gap: 30px; align-items: center;">
+                        <div class="semi-mobile-copy" style="flex: 1;">
                             <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Precise Ingredient Measurement</h4>
-                            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">[Placeholder text for precise ingredient measurement content]</p>
+                            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Semi comes with a built-in weighing scale, telling you exactly what to add and how much, while cooking your next meal.</p>
                         </div>
-                        <div style="flex: 1;">
+                        <div class="semi-mobile-image" style="flex: 1;">
                             <img src="Projects/Semi/what to add.jpg" alt="What to Add" style="width: 100%; height: auto; display: block; border-radius: 8px;">
                         </div>
                     </div>
@@ -575,6 +677,45 @@
     
     <script src="script.js"></script>
     <script src="image-loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ideationCarousel = document.getElementById('semi-ideation-carousel');
+
+            if (!ideationCarousel) {
+                return;
+            }
+
+            const ideationSlides = Array.from(ideationCarousel.querySelectorAll('.semi-ideation-slide'));
+            const previousButton = ideationCarousel.querySelector('.semi-ideation-nav.prev');
+            const nextButton = ideationCarousel.querySelector('.semi-ideation-nav.next');
+            let activeIdeationSlide = 0;
+
+            function renderIdeationSlide(index) {
+                ideationSlides.forEach(function(slide, slideIndex) {
+                    slide.classList.toggle('is-active', slideIndex === index);
+                });
+            }
+
+            function moveIdeationSlide(direction) {
+                activeIdeationSlide = (activeIdeationSlide + direction + ideationSlides.length) % ideationSlides.length;
+                renderIdeationSlide(activeIdeationSlide);
+            }
+
+            if (previousButton) {
+                previousButton.addEventListener('click', function() {
+                    moveIdeationSlide(-1);
+                });
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', function() {
+                    moveIdeationSlide(1);
+                });
+            }
+
+            renderIdeationSlide(activeIdeationSlide);
+        });
+    </script>
     
     <!-- Custom Cursor JavaScript -->
     <script>

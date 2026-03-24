@@ -5110,3 +5110,204 @@ img::before {
         font-size: 0.98rem;
     }
 }
+
+/* Semi page utility stack alignment */
+.semi-page .back-to-home-container {
+    top: 20px;
+    left: 8px;
+}
+
+.semi-page .back-to-home {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.semi-page .back-to-home svg {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.5;
+}
+
+.semi-page .nav-container,
+.semi-page .contact-icons-container {
+    right: 8px;
+}
+
+.semi-page .contact-icons-container {
+    align-items: center;
+}
+
+.semi-page .nav-toggle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.semi-page .nav-toggle-icon {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.5;
+}
+
+.semi-page .contact-icons-container > .theme-toggle,
+.semi-page .contact-icons-container > .contact-icon-circle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex: 0 0 42px;
+}
+
+.semi-page .contact-icons-container .theme-icon,
+.semi-page .contact-icons-container .contact-icon-link {
+    width: 100%;
+    height: 100%;
+}
+
+.semi-page .contact-icons-container .sun-icon,
+.semi-page .contact-icons-container .moon-icon,
+.semi-page .contact-icons-container .contact-icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+@media (max-width: 768px) {
+    .semi-page .back-to-home-container {
+        left: 6px;
+    }
+
+    .semi-page .back-to-home {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .semi-page .back-to-home svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .semi-page .nav-container,
+    .semi-page .contact-icons-container {
+        right: 6px;
+    }
+
+    .semi-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        max-width: 38px;
+        max-height: 38px;
+        flex-basis: 38px;
+        flex: 0 0 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .semi-page .nav-toggle-icon {
+        width: 18px;
+        height: 18px;
+        stroke-width: 2.1;
+    }
+
+    .semi-page .contact-icons-container > .theme-toggle,
+    .semi-page .contact-icons-container > .contact-icon-circle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .semi-page .contact-icons-container .sun-icon,
+    .semi-page .contact-icons-container .moon-icon,
+    .semi-page .contact-icons-container .contact-icon {
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
+    }
+
+    .semi-page .contact-icons-container {
+        top: calc(20px + 38px + 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .semi-page .back-to-home-container {
+        top: 15px;
+        left: 4px;
+    }
+
+    .semi-page .back-to-home {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .semi-page .back-to-home svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25;
+    }
+
+    .semi-page .nav-container,
+    .semi-page .contact-icons-container {
+        right: 4px;
+    }
+
+    .semi-page .contact-icons-container {
+        top: calc(15px + 38px + 14px);
+        gap: 14px;
+    }
+
+    .semi-page .nav-toggle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        max-width: 38px;
+        max-height: 38px;
+        flex-basis: 38px;
+        flex: 0 0 38px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .semi-page .nav-toggle-icon {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.1;
+        aspect-ratio: 1 / 1;
+    }
+
+    .semi-page .contact-icons-container > .theme-toggle,
+    .semi-page .contact-icons-container > .contact-icon-circle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        flex-basis: 38px;
+    }
+
+    .semi-page .contact-icons-container .sun-icon,
+    .semi-page .contact-icons-container .moon-icon,
+    .semi-page .contact-icons-container .contact-icon {
+        width: 16px;
+        height: 16px;
+        flex-basis: 16px;
+    }
+}
