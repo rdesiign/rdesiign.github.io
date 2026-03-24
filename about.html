@@ -15,7 +15,7 @@
             }
         })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="styles.css?v=3.6">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
@@ -28,9 +28,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=1.1">
     <link rel="apple-touch-icon" sizes="152x152" href="Assets/master-logo.png?v=1.1">
     <link rel="apple-touch-icon" sizes="120x120" href="Assets/master-logo.png?v=1.1">
-    <link rel="preload" href="Assets/Profile raw 4.jpg" as="image">
+    <link rel="preload" href="Assets/profile.png" as="image">
 </head>
-<body>
+<body class="about-page">
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor">
         <div class="custom-cursor-dot"></div>
@@ -48,28 +48,9 @@
 
     <!-- Navigation Container -->
     <div class="nav-container" id="nav-container">
-        <button class="icon-circle theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-            <span class="theme-icon">
-                <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-            </span>
-        </button>
-
         <!-- Plus Toggle Button -->
         <div class="icon-circle nav-toggle" id="nav-toggle">
-            <svg class="nav-toggle-icon plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="nav-toggle-icon plus-icon" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
@@ -90,6 +71,45 @@
         </div>
     </div>
 
+    <!-- Contact Icons (outside the navigation bar) -->
+    <div class="contact-icons-container">
+        <button class="icon-circle theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">
+                <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </span>
+        </button>
+        <div class="contact-icon-circle">
+            <a href="mailto:hello@rishiramesh.com" class="contact-icon-link" aria-label="Email">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+        </div>
+        <div class="contact-icon-circle">
+            <a href="https://www.linkedin.com/in/rishi-design/" class="contact-icon-link" target="_blank" aria-label="LinkedIn">
+                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+        </div>
+    </div>
+
 
 
 
@@ -97,33 +117,64 @@
     <section id="about" class="section">
         <div class="container">
             <div class="about-content">
-                <div class="about-image">
-                    <img src="Assets/Profile raw 4.jpg" alt="Rishi Ramesh - Industrial Designer" class="profile-image" loading="lazy">
+                <div class="about-visual">
+                    <img src="Assets/profile.png" alt="Rishi Ramesh" class="about-feature-image" loading="lazy">
                 </div>
                 <div class="about-text">
-                    <div id="about-content">
-                        <h3>Hi, I'm <span class="highlight">Rishi</span></h3>
-                        <p>I'm an Industrial Designer who enjoys working on thoughtful, hands-on projects that range from simple everyday tools to seamlessly integrated physical-digital experiences. I keep my design approach flexible; I like to adapt my choice of tools and methodologies to each project and the challenges it presents, rather than following a fixed process. This approach helps me broaden my skill set and keeps my process fresh, exciting, and open to new ideas.</p>
-                        <p></p>
-                        <a href="#" class="btn btn-primary">Download my CV</a>
+                    <div id="about-content" class="about-split-layout">
+                        <h3>Hello Again :)</h3>
+                        <p class="about-bridge">I design to make the complex simple and the simple, exciting.</p>
+                        <div class="about-body">
+                            <p>With a background in taking consumer products from idea to market, I approach design as a means to creating experiences that feel intuitive, meaningful, and inclusive.</p>
+                            <p>My approach is flexible and responsive, shaped by the unique challenges of each project. I’m constantly exploring new ideas, tools, and perspectives to evolve my craft.</p>
+                            <p>I believe products should have character. It should feel like an extension of the person using it. The best products don’t just work, they understand you.</p>
+                            <p>I value simplicity through reduction. In a world of excess, I focus on clarity, intention, and creating what truly matters.</p>
+                            <p>Outside of design, I find inspiration in music and illustration - two things that constantly influence how I think, create, and see the world.</p>
+                        </div>
+                        <div class="about-actions">
+                            <a href="Assets/Rishi%20Ramesh_Resume.pdf" class="about-resume-link" download="Rishi Ramesh_Resume.pdf">View CV</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p class="curious-by-design">Curious By Design.</p>
+                    <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+                    <div class="social-links-footer">
+                        <a href="https://www.linkedin.com/in/rishi-design/" target="_blank" class="social-link-footer">LinkedIn</a>
+                        <a href="mailto:rishirameshdesign@gmail.com" class="social-link-footer">Email</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var el = document.getElementById('about-content');
             if (!el) return;
-            var h = el.querySelector('h3'), p = el.querySelector('p'), a = el.querySelector('a');
-            if (!h || !p || !a) return;
-            h.style.opacity = '0'; p.style.opacity = '0'; a.style.opacity = '0';
-            h.style.transition = 'opacity 0.4s ease-in-out';
-            p.style.transition = 'opacity 0.4s ease-in-out 0.1s';
-            a.style.transition = 'opacity 0.4s ease-in-out 0.2s';
-            setTimeout(function() { h.style.opacity = '1'; p.style.opacity = '1'; a.style.opacity = '1'; }, 100);
+            var items = el.querySelectorAll('h3, p, a');
+            if (!items.length) return;
+            items.forEach(function(item, i) {
+                item.style.opacity = '0';
+                item.style.transition = 'opacity 0.4s ease-in-out ' + (i * 0.08) + 's';
+            });
+            setTimeout(function() { items.forEach(function(item) { item.style.opacity = '1'; }); }, 100);
         });
     </script>
 </body>
