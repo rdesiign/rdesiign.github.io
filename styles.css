@@ -751,12 +751,12 @@ img {
    ═══════════════════════════════════════════════════════════════════ */
 
 #intro {
-    padding-top: 30px;
+    padding-top: 20px;
     overflow: visible;
 }
 
 #intro.section {
-    padding: 30px 0 0 0;
+    padding: 20px 0 0 0;
     text-align: left;
     opacity: 1;
     min-height: auto;
@@ -779,10 +779,12 @@ img {
     position: relative;
     box-sizing: content-box;
     max-width: 800px;
+    min-height: 208px;
     margin: 0 auto 0 0;
     padding: 0;
-    transform: scale(1);
-    transform-origin: left top;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #intro-typewriter h1 {
@@ -1711,7 +1713,7 @@ footer .container {
 
     /* Sections */
     #intro.section {
-        padding: 25px 0 0 0;
+        padding: 20px 0 0 0;
     }
 
     .intro-content {
@@ -1857,7 +1859,11 @@ footer .container {
     }
 
     #intro.section {
-        padding: 22px 0 0 0;
+        padding: 15px 0 0 0;
+    }
+
+    #intro-typewriter {
+        min-height: 156px;
     }
 
     #intro-typewriter h1 {
