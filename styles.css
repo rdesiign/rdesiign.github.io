@@ -778,7 +778,7 @@ img {
 #intro-typewriter {
     position: relative;
     box-sizing: content-box;
-    max-width: 800px;
+    max-width: clamp(300px, 55vw, 800px);
     min-height: 208px;
     margin: 0 auto 0 0;
     padding: 0;
@@ -1504,14 +1504,14 @@ footer .container {
 
     /* Mobile/Tablet popup nav */
     .nav-container {
-        top: 15px;
+        top: 25px;
         right: 20px;
     }
 
     .expanded-nav {
         display: none !important;
         position: fixed;
-        top: 70px;
+        top: 77px;
         right: 15px;
         border-radius: 20px;
         padding: 20px;
@@ -1530,7 +1530,7 @@ footer .container {
         flex-wrap: nowrap !important;
         align-items: stretch !important;
         justify-content: flex-start !important;
-        top: 72px !important;
+        top: 77px !important;
         right: 16px !important;
         left: auto !important;
         width: fit-content !important;
@@ -1783,12 +1783,12 @@ footer .container {
     }
 
     .nav-container {
-        top: 15px;
+        top: 20px;
         right: 20px;
     }
 
     .expanded-nav {
-        top: 60px;
+        top: 62px;
         right: 16px;
         width: min(280px, calc(100vw - 32px));
         max-width: calc(100vw - 32px);
@@ -1799,7 +1799,7 @@ footer .container {
     }
 
     .expanded-nav.show {
-        top: 60px !important;
+        top: 62px !important;
         min-width: 164px !important;
         max-width: calc(100vw - 40px) !important;
     }
