@@ -24,23 +24,23 @@ This document captures the current visual and interaction language of the portfo
 
 ## Layout Character
 
-- The current site uses a structured, modern composition with strong spacing and clear sectional breaks.
+- The homepage now uses a structured, editorial composition with strong spacing, a slim floating header, and clear sectional breaks.
 - Project presentation is image-first and card-based.
-- Circular utility elements and floating controls are part of the current interface language.
+- Rounded cards and softened container shapes are part of the current interface language.
 - The About page now follows a restrained split composition: image and text are balanced in a clean two-part layout with generous whitespace and typography-led hierarchy.
 - Changes to layout, spacing rhythm, content hierarchy, or motion style should be treated as significant design decisions and confirmed first.
 
 ## Color And Theme
 
 - Stick to the colors currently used in the repository.
-- The current experience is centered on a dark visual base with a light-theme option.
+- The current homepage experience uses a light neutral foundation with soft pastel project panels.
 - Preserve the existing neutral foundation and current accent usage unless a change is explicitly approved.
 - Do not introduce new brand colors or shift the visual temperature without discussion.
 
 ## Typography
 
 - Stick to the typography currently used in the repository.
-- Preserve the existing typographic tone and hierarchy.
+- Preserve the existing typographic tone and hierarchy, which currently pairs a clean sans serif with a monospace accent for utility text.
 - Maintain the current writing voice and presentation style unless the user asks otherwise.
 
 ## Interaction And Motion

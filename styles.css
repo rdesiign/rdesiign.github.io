@@ -53,6 +53,22 @@
     font-display: swap;
 }
 
+/* Inter */
+@font-face {
+    font-family: 'Inter';
+    src: url('./assets/font/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('./assets/font/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* TT Turns */
 @font-face {
     font-family: 'TT Turns';
@@ -300,6 +316,10 @@ body {
     background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: 0 0;
+}
+
+body.index-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 img {
@@ -851,8 +871,8 @@ img {
     transform-origin: left top;
 }
 
-#intro-typewriter h1 {
-    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body.index-page #intro-typewriter h1 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     margin: 0 0 0.1em 0;
@@ -880,8 +900,8 @@ img {
     display: inline-block;
 }
 
-#intro-typewriter h2 {
-    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body.index-page #intro-typewriter h2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-weight: 500;
     margin: 0;
@@ -902,8 +922,8 @@ img {
     font-weight: 700;
 }
 
-#intro-typewriter .bold {
-    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body.index-page #intro-typewriter .bold {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-weight: 600;
 }
 
@@ -915,8 +935,8 @@ img {
     font-weight: 400;
 }
 
-.location-text {
-    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body.index-page .location-text {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: clamp(0.85rem, 1.8vw, 1.1rem);
     display: inline-block;
     line-height: 1.1;
@@ -946,8 +966,8 @@ img {
     font-weight: 700 !important;
 }
 
-.bold-white {
-    font-family: 'TT Turns', 'TT Firs Neue', 'Augsburg', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body.index-page .bold-white {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-weight: 600 !important;
     color: white !important;
 }
