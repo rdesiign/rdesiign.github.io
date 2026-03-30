@@ -26,8 +26,324 @@
     <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
     <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
+    <style>
+        .mmm-intro-shell {
+            margin-left: 65px;
+            max-width: calc(100% - 130px);
+            padding-top: 8px;
+        }
+
+        .mmm-project-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
+            align-items: start;
+            padding-top: 32px;
+        }
+
+        .mmm-project-main {
+            width: auto !important;
+            max-width: none !important;
+            padding-left: 0 !important;
+        }
+
+        .mmm-project-main h1 {
+            font-size: clamp(3.25rem, 6vw, 5.4rem) !important;
+            line-height: 0.92;
+            letter-spacing: -0.05em;
+            margin: 0 0 12px 0 !important;
+            color: var(--text-primary);
+            font-weight: 400 !important;
+            text-transform: uppercase;
+        }
+
+        .mmm-project-main h2 {
+            font-size: 1rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin: 0 0 24px 0 !important;
+            color: var(--text-secondary);
+        }
+
+        .mmm-project-main > p {
+            max-width: 48ch !important;
+            margin: 0;
+            font-size: 1.08rem !important;
+            line-height: 1.65 !important;
+            color: var(--text-primary);
+        }
+
+        .mmm-project-meta {
+            width: max-content !important;
+            max-width: 100%;
+            margin: 24px 0 0 0 !important;
+        }
+
+        .mmm-meta-row {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 132px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+            width: 100%;
+        }
+
+        .mmm-meta-label {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .mmm-meta-value {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--text-primary);
+            text-align: right;
+        }
+
+        [data-theme="light"] .mmm-meta-row {
+            border-bottom-color: rgba(0, 0, 0, 0.32);
+        }
+
+        .mmm-meta-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            justify-content: flex-end;
+        }
+
+        .mmm-meta-row.skills-row .mmm-meta-value {
+            margin-left: -340px;
+        }
+
+        .mmm-meta-skills span {
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            body.mmm-page .section {
+                padding: 72px 0 !important;
+            }
+
+            body.mmm-page #header.section {
+                padding: 0 !important;
+            }
+
+            body.mmm-page .header-image {
+                height: auto !important;
+                min-height: 0;
+                aspect-ratio: auto !important;
+                object-fit: contain !important;
+                object-position: center center !important;
+            }
+
+            body.mmm-page .section .container,
+            body.mmm-page footer .container {
+                padding: 0 20px !important;
+            }
+
+            body.mmm-page .mmm-intro-shell,
+            body.mmm-page .mmm-project-main {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding-left: 0 !important;
+            }
+
+            body.mmm-page .mmm-intro-shell,
+            body.mmm-page [style*="margin-left: 65px"],
+            body.mmm-page [style*="max-width: calc(100% - 130px)"] {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+
+            body.mmm-page .mmm-project-layout {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+                padding-top: 24px !important;
+            }
+
+            body.mmm-page .mmm-project-main h1 {
+                font-size: clamp(2.4rem, 11vw, 3rem) !important;
+                line-height: 0.95;
+            }
+
+            body.mmm-page .mmm-project-main h2 {
+                font-size: 1.2rem !important;
+            }
+
+            body.mmm-page .mmm-project-main p {
+                max-width: 100% !important;
+            }
+
+            body.mmm-page .mmm-project-main > p {
+                max-width: 32ch !important;
+            }
+
+            body.mmm-page .mmm-project-meta {
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            body.mmm-page .mmm-meta-row {
+                grid-template-columns: 92px minmax(0, 1fr);
+                gap: 16px;
+                padding: 14px 0;
+                width: 100%;
+                align-items: start;
+            }
+
+            body.mmm-page .mmm-meta-row.skills-row .mmm-meta-value {
+                margin-left: 0;
+            }
+
+            body.mmm-page .mmm-meta-value {
+                text-align: left;
+            }
+
+            body.mmm-page .mmm-meta-skills {
+                justify-content: flex-start;
+            }
+
+            body.mmm-page .mmm-meta-skills span {
+                white-space: normal;
+            }
+
+            body.mmm-page h3[style*="font-size: 1.5rem"] {
+                font-size: 1.32rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 12px !important;
+            }
+
+            body.mmm-page h4[style*="font-size: 1.3rem"],
+            body.mmm-page h4[style*="font-size: 1.2rem"] {
+                font-size: 1.1rem !important;
+                line-height: 1.25 !important;
+                margin-bottom: 10px !important;
+            }
+
+            body.mmm-page #problem-summary [style*="display: flex; justify-content: space-between"],
+            body.mmm-page #concept [style*="display: flex; justify-content: space-between"],
+            body.mmm-page #use [style*="display: flex; gap: 30px"],
+            body.mmm-page #digital-experience [style*="display: flex; gap: 25px"] {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+
+            body.mmm-page #ideation [style*="display: flex; justify-content: space-between"],
+            body.mmm-page #prototype-bottom-row,
+            body.mmm-page .day-carousel-slide {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            body.mmm-page #ideation [style*="width: calc(50% - 7.5px)"],
+            body.mmm-page #ideation img[style*="width: calc(50% - 7.5px)"] {
+                width: 100% !important;
+            }
+
+            body.mmm-page #showreel p[style*="max-width: 70%"] {
+                max-width: 100% !important;
+            }
+
+            body.mmm-page #problem-summary [style*="width: 140px; height: 140px"] {
+                width: 112px !important;
+                height: 112px !important;
+                margin-bottom: 16px !important;
+            }
+
+            body.mmm-page #problem-summary img[style*="width: 90px; height: 90px"] {
+                width: 72px !important;
+                height: 72px !important;
+            }
+
+            body.mmm-page #problem-summary #population-text {
+                font-size: 1.7rem !important;
+            }
+
+            body.mmm-page #concept img[style*="width: 360px; height: 360px"] {
+                width: min(100%, 280px) !important;
+                height: auto !important;
+                aspect-ratio: 1 / 1;
+            }
+
+            body.mmm-page .day-carousel-wrapper {
+                display: flex !important;
+            }
+
+            body.mmm-page .day-carousel-slide {
+                min-width: 100%;
+                padding: 0 10px !important;
+            }
+
+            body.mmm-page .day-carousel-slide > div [style*="height: 350px"] {
+                height: auto !important;
+                min-height: 240px;
+                margin-bottom: 18px !important;
+            }
+
+            body.mmm-page #product-overview [style*="text-align: center"],
+            body.mmm-page #problem-summary [style*="text-align: center"],
+            body.mmm-page #digital-experience [style*="text-align: center"] {
+                text-align: center !important;
+            }
+
+            body.mmm-page #product-overview p,
+            body.mmm-page #showreel p,
+            body.mmm-page #digital-experience p,
+            body.mmm-page #use p,
+            body.mmm-page #ideation p,
+            body.mmm-page #problem-summary p,
+            body.mmm-page #concept p,
+            body.mmm-page #day-with-headway p {
+                line-height: 1.55 !important;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body.mmm-page .section {
+                padding: 56px 0 !important;
+            }
+
+            body.mmm-page .header-image {
+                aspect-ratio: auto !important;
+                object-fit: contain !important;
+                object-position: center center !important;
+            }
+
+            body.mmm-page .mmm-project-main > p {
+                max-width: 30ch !important;
+            }
+
+            body.mmm-page .mmm-meta-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            body.mmm-page .mmm-meta-label {
+                font-size: 0.72rem;
+            }
+
+            body.mmm-page .day-carousel-slide > div [style*="height: 350px"] {
+                min-height: 200px;
+            }
+
+            body.mmm-page #problem-summary [style*="width: 140px; height: 140px"] {
+                width: 96px !important;
+                height: 96px !important;
+            }
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; overflow-x: hidden;">
+<body class="mmm-page" style="margin: 0; padding: 0; overflow-x: hidden;">
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor">
         <div class="custom-cursor-dot"></div>
@@ -48,31 +364,42 @@
 
     <!-- Header Image Section - Full width with proper image fit -->
     <section id="header" class="section" style="padding: 0 0 0 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
-        <img src="Projects/MMM/MMM Thumbnail.jpg" alt="MMM - Migraine Management System Header" class="header-image" style="width: 100vw !important; height: 70vh !important; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover !important; object-position: center 70% !important;">
+        <img src="Projects/MMM/MMM Thumbnail.jpg" alt="MMM - Migraine Management System Header" class="header-image" style="width: 100%; height: auto; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover; object-position: center 70%;" loading="eager" fetchpriority="high">
     </section>
 
     <!-- Project Content Section -->
     <section id="project" class="section">
         <div class="container" style="padding: 0 60px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <!-- Left Column: Title, Subtitle, and Description -->
-                <div class="project-content" style="width: 50%; max-width: none !important; padding-left: 65px;">
-                    <h1 style="font-size: 3rem; margin-bottom: 5px; color: var(--text-primary);">Headway</h1>
-                    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; color: var(--text-secondary);">Migraine Medication Management System</h2>
-                    <p style="font-size: 1rem; width: 100%; max-width: 90% !important; line-height: 1.6; color: var(--text-primary);">Headway addresses the issue of poor medication adherence and self-management among migraine sufferers, which leads to inconsistent dosing and risk of medication-overuse headaches. A centralised digital platform paired with a smart dose tracking hardware system was introduced to automate and simplify this process, allowing users to accurately track episodes, manage prescriptions, receive reminders, and generate data, thereby improving adherence, personalising treatment, and achieving safer, more effective treatment outcomes.</p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px;">
-                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Research</span>
-                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Industrial Design</span>
-                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">Visualisation</span>
-                        <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px; color: var(--text-primary);">UIUX</span>
+            <div class="mmm-intro-shell">
+                <div class="mmm-project-layout">
+                    <div class="project-content mmm-project-main">
+                        <h1>HEADWAY</h1>
+                        <h2>Migraine Medication Management System</h2>
+                        <p>Headway addresses the issue of poor medication adherence and self-management among migraine sufferers, which leads to inconsistent dosing and risk of medication-overuse headaches. A centralised digital platform paired with a smart dose tracking hardware system was introduced to automate and simplify this process, allowing users to accurately track episodes, manage prescriptions, receive reminders, and generate data, thereby improving adherence, personalising treatment, and achieving safer, more effective treatment outcomes.</p>
+                        <div class="mmm-project-meta">
+                            <div class="mmm-meta-row">
+                                <div class="mmm-meta-label">Client</div>
+                                <div class="mmm-meta-value">Personal Project</div>
+                            </div>
+                            <div class="mmm-meta-row">
+                                <div class="mmm-meta-label">Year</div>
+                                <div class="mmm-meta-value">2020</div>
+                            </div>
+                            <div class="mmm-meta-row">
+                                <div class="mmm-meta-label">Duration</div>
+                                <div class="mmm-meta-value">4 weeks</div>
+                            </div>
+                            <div class="mmm-meta-row skills-row">
+                                <div class="mmm-meta-label">Skills</div>
+                                <div class="mmm-meta-value mmm-meta-skills">
+                                    <span>Research</span>
+                                    <span>Industrial Design</span>
+                                    <span>Visualisation</span>
+                                    <span>UIUX</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Right Column: Project Details -->
-                <div style="width: 40%; margin-top: 115px; margin-left: auto;">
-                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Client:</strong> Personal Project</div>
-                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Year:</strong> 2020</div>
-                    <div style="margin-bottom: 15px; color: var(--text-primary);"><strong>Duration:</strong> 4 weeks</div>
                 </div>
             </div>
         </div>
@@ -449,18 +776,26 @@
     
     <!-- Footer -->
     <footer>
-        <div class="container" style="padding: 0 60px;">
+        <div class="container">
             <div class="footer-content">
-                <p class="designed-with-passion">Designed with passion for great products.</p>
-                <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+                <div class="footer-left">
+                    <p class="curious-by-design">Curious By Design.</p>
+                    <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+                    <div class="social-links-footer">
+                        <a href="https://www.linkedin.com/in/rishi-design/" target="_blank" class="social-link-footer">LinkedIn</a>
+                        <a href="mailto:rishirameshdesign@gmail.com" class="social-link-footer">Email</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        <button id="back-to-top" class="back-to-top" aria-label="Back to top">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="19" x2="12" y2="5"></line>
-                <polyline points="5 12 12 5 19 12"></polyline>
-            </svg>
-        </button>
     </footer>
 
     <script src="script.js?v=1.0"></script>

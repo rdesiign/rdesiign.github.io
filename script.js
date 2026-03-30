@@ -44,7 +44,7 @@ function renderButtonStack() {
         + '<svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
         + '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>'
         + '</svg></span></button>'
-        + '<div class="contact-icon-circle"><a href="mailto:hello@rishiramesh.com" class="contact-icon-link" aria-label="Email">'
+        + '<div class="contact-icon-circle"><a href="mailto:rishirameshdesign@gmail.com" class="contact-icon-link" aria-label="Email">'
         + '<svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
         + '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>'
         + '<polyline points="22,6 12,13 2,6"></polyline></svg></a></div>'

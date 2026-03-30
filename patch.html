@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Patch Audio</title>
+    <meta name="description" content="Patch Audio - industrial design exploration project by Rishi Ramesh">
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css?v=3.6">
+    <link rel="manifest" href="manifest.json">
+    <link rel="preload" href="Projects/patch/patch thumbnail.jpg" as="image">
+    <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
+    <style>
+        .patch-intro-shell {
+            margin-left: 65px;
+            max-width: calc(100% - 130px);
+            padding-top: 8px;
+        }
+
+        .patch-project-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
+            align-items: start;
+            padding-top: 32px;
+        }
+
+        .patch-project-main {
+            width: auto !important;
+            max-width: none !important;
+            padding-left: 0 !important;
+        }
+
+        .patch-project-main h1 {
+            font-size: clamp(3.25rem, 6vw, 5.4rem) !important;
+            line-height: 0.92;
+            letter-spacing: -0.05em;
+            margin: 0 0 12px 0 !important;
+            color: var(--text-primary);
+            font-weight: 400 !important;
+            text-transform: uppercase;
+        }
+
+        .patch-project-main h2 {
+            font-size: 1rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin: 0 0 24px 0 !important;
+            color: var(--text-secondary);
+        }
+
+        .patch-project-main > p {
+            max-width: 48ch !important;
+            margin: 0;
+            font-size: 1.08rem !important;
+            line-height: 1.65 !important;
+            color: var(--text-primary);
+        }
+
+        .patch-project-meta {
+            width: max-content !important;
+            max-width: 100%;
+            margin: 24px 0 0 0 !important;
+        }
+
+        .patch-meta-row {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 132px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+            width: 100%;
+        }
+
+        .patch-meta-label {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .patch-meta-value {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--text-primary);
+            text-align: right;
+        }
+
+        .patch-meta-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            justify-content: flex-end;
+        }
+
+        .patch-meta-row.skills-row .patch-meta-value {
+            margin-left: -340px;
+        }
+
+        .patch-meta-skills span {
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .patch-section-shell {
+            margin-left: 65px;
+            max-width: calc(100% - 130px);
+        }
+
+        .patch-grid-two {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .patch-card {
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 26px 28px;
+        }
+
+        .patch-card h4 {
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+            color: var(--text-primary);
+        }
+
+        .patch-card p,
+        .patch-section-shell p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .patch-outline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .patch-outline-item {
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .patch-outline-item h4 {
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+            color: var(--text-primary);
+        }
+
+        .patch-preview-image {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .patch-caption {
+            margin-top: 14px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 52ch;
+        }
+
+        [data-theme="light"] .patch-meta-row,
+        [data-theme="light"] .patch-outline-item {
+            border-bottom-color: rgba(0, 0, 0, 0.18);
+            border-top-color: rgba(0, 0, 0, 0.18);
+        }
+
+        [data-theme="light"] .patch-card {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            body.patch-page .section {
+                padding: 72px 0 !important;
+            }
+
+            body.patch-page #header.section {
+                padding: 0 !important;
+            }
+
+            body.patch-page .header-image {
+                height: 42vh !important;
+                min-height: 320px;
+                object-position: center center !important;
+            }
+
+            body.patch-page .section .container,
+            body.patch-page footer .container {
+                padding: 0 20px !important;
+            }
+
+            body.patch-page .patch-intro-shell,
+            body.patch-page .patch-section-shell,
+            body.patch-page .patch-project-main {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding-left: 0 !important;
+            }
+
+            body.patch-page .patch-project-layout,
+            body.patch-page .patch-grid-two,
+            body.patch-page .patch-outline-grid {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+
+            body.patch-page .patch-project-layout {
+                padding-top: 24px !important;
+            }
+
+            body.patch-page .patch-project-main h1 {
+                font-size: clamp(2.4rem, 11vw, 3rem) !important;
+                line-height: 0.95;
+            }
+
+            body.patch-page .patch-project-main h2 {
+                font-size: 1.2rem !important;
+            }
+
+            body.patch-page .patch-project-main p,
+            body.patch-page .patch-section-shell p {
+                max-width: 100% !important;
+            }
+
+            body.patch-page .patch-project-main > p {
+                max-width: 32ch !important;
+            }
+
+            body.patch-page .patch-project-meta {
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            body.patch-page .patch-meta-row {
+                grid-template-columns: 92px minmax(0, 1fr);
+                gap: 16px;
+                padding: 14px 0;
+                width: 100%;
+                align-items: start;
+            }
+
+            body.patch-page .patch-meta-row.skills-row .patch-meta-value {
+                margin-left: 0;
+            }
+
+            body.patch-page .patch-meta-skills span {
+                white-space: normal;
+            }
+
+            body.patch-page .patch-meta-value {
+                text-align: left;
+            }
+
+            body.patch-page .patch-meta-skills {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body.patch-page .section {
+                padding: 56px 0 !important;
+            }
+
+            body.patch-page .header-image {
+                height: 38vh !important;
+                min-height: 260px;
+            }
+
+            body.patch-page .patch-project-main > p {
+                max-width: 30ch !important;
+            }
+
+            body.patch-page .patch-meta-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            body.patch-page .patch-meta-label {
+                font-size: 0.72rem;
+            }
+
+            body.patch-page .patch-card {
+                padding: 22px 20px;
+            }
+        }
+    </style>
+</head>
+<body class="patch-page" style="margin: 0; padding: 0; overflow-x: hidden;">
+    <div class="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+
+    <div class="back-to-home-container">
+        <a href="index.html" class="back-to-home" aria-label="Back to home">
+            <svg class="back-to-home-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </a>
+    </div>
+
+    <div id="button-stack"></div>
+
+    <section id="header" class="section" style="padding: 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
+        <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio header image" class="header-image" style="width: 100%; height: auto; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover; object-position: center center;" loading="eager" fetchpriority="high">
+    </section>
+
+    <section id="project" class="section">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-intro-shell">
+                <div class="patch-project-layout">
+                    <div class="project-content patch-project-main">
+                        <h1>Patch Audio</h1>
+                        <h2>Making headphone repair intuitive, guided, and accessible.</h2>
+                        <p>Patch Audio reimagines repair as an intuitive, guided experience rather than a daunting task. Blending a modular, easy-to-fix headphone with an AI-powered assistant, it helps users diagnose issues and navigate repairs through clear, adaptive guidance. By turning uncertainty into understanding, it builds confidence, empowers users to take action, and extends the life of everyday electronics.</p>
+                        <div class="patch-project-meta">
+                            <div class="patch-meta-row">
+                                <div class="patch-meta-label">Collaborators</div>
+                                <div class="patch-meta-value">TU Delft, Accenture Industry X</div>
+                            </div>
+                            <div class="patch-meta-row">
+                                <div class="patch-meta-label">Year</div>
+                                <div class="patch-meta-value">2025</div>
+                            </div>
+                            <div class="patch-meta-row">
+                                <div class="patch-meta-label">Duration</div>
+                                <div class="patch-meta-value">20 weeks</div>
+                            </div>
+                            <div class="patch-meta-row skills-row">
+                                <div class="patch-meta-label">Skills</div>
+                                <div class="patch-meta-value patch-meta-skills">
+                                    <span>Industrial Design</span>
+                                    <span>User Research</span>
+                                    <span>Visualisation</span>
+                                    <span>Prototyping</span>
+                                    <span>AI Integration and Development</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research-question" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <img src="Projects/patch/patch research question.jpg" alt="Patch Audio research question" class="patch-preview-image" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section id="user-story" class="section" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <img src="Projects/patch/patch user story.jpg" alt="Patch Audio user story" class="patch-preview-image" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section id="snapshot" class="section" style="padding-top: 110px; padding-bottom: 60px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <div class="patch-grid-two">
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin: 0 0 14px 0; color: var(--text-primary);">Project Snapshot</h3>
+                        <p style="max-width: 56ch; margin: 0;">The page is intentionally structured to support a clear hiring-focused case study: strong opening image, concise project framing, and room for the story to unfold through research, development, and outcome sections. As more material comes in, this scaffold can expand without changing the visual baseline.</p>
+                    </div>
+                    <div class="patch-card">
+                        <h4>Current status</h4>
+                        <p style="margin: 0;">Foundation page created. Visual hierarchy, navigation, project metadata, and content sections are in place and ready for the next batch of Patch-specific content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preview" class="section" style="padding-top: 40px; padding-bottom: 70px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio preview image" class="patch-preview-image" loading="lazy">
+                <p class="patch-caption">Current visual placeholder using the Patch thumbnail. This can later be replaced with a hero render, research board, prototype image, or any stronger lead asset once you send the rest of the content.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="story-outline" class="section" style="padding-top: 70px; padding-bottom: 120px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <h3 style="font-size: 1.5rem; margin: 0 0 30px 0; color: var(--text-primary);">Story Outline</h3>
+                <div class="patch-outline-grid">
+                    <div class="patch-outline-item">
+                        <h4>Context</h4>
+                        <p style="margin: 0;">Space for the project brief, opportunity, and why the audio direction matters.</p>
+                    </div>
+                    <div class="patch-outline-item">
+                        <h4>Process</h4>
+                        <p style="margin: 0;">Space for sketches, experiments, iterations, and key decisions that shaped the project.</p>
+                    </div>
+                    <div class="patch-outline-item">
+                        <h4>Outcome</h4>
+                        <p style="margin: 0;">Space for the final proposition, hero visuals, and the takeaway recruiters should remember.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p class="curious-by-design">Curious By Design.</p>
+                    <p class="copyright">&copy; 2026 Rishi Ramesh. All rights reserved.</p>
+                    <div class="social-links-footer">
+                        <a href="https://www.linkedin.com/in/rishi-design/" target="_blank" class="social-link-footer">LinkedIn</a>
+                        <a href="mailto:rishirameshdesign@gmail.com" class="social-link-footer">Email</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

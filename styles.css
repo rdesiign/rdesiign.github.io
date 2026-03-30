@@ -304,7 +304,7 @@ html {
 }
 
 body {
-    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -523,31 +523,12 @@ img {
     color: #ff6b35;
 }
 
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
-}
-
-.nav-link:hover::before {
-    opacity: 1;
-}
-
 .nav-link.active {
-    color: var(--accent-primary);
-}
-
-.nav-link.active::before {
-    opacity: 1;
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
 }
 
 .nav-link:focus {
@@ -946,21 +927,8 @@ body.index-page .bold-white {
     margin: 0 auto;
     padding: 0 70px;
     width: 100%;
-}
-
-.project-col-left,
-.project-col-right {
-    display: block;
-}
-
-.abstract-grid .project-col-left .project-card,
-.abstract-grid .project-col-right .project-card {
-    margin-bottom: 5px;
-}
-
-.project-col-left .project-card:last-child,
-.project-col-right .project-card:last-child {
-    margin-bottom: 0;
+    box-sizing: border-box;
+    align-items: start;
 }
 
 /* Project Cards */
@@ -976,6 +944,10 @@ body.index-page .bold-white {
     height: auto;
     display: block;
     box-sizing: border-box;
+}
+
+.abstract-grid > .project-card:nth-child(3n + 1) {
+    grid-column: 1 / -1;
 }
 
 .project-card:hover {
@@ -1026,6 +998,14 @@ body.index-page .bold-white {
     padding-bottom: 50%;
     overflow: hidden;
     border-radius: 8px;
+}
+
+.abstract-grid > .project-card:nth-child(3n + 1) .project-image-container {
+    padding-bottom: 48%;
+}
+
+.abstract-grid > .project-card:not(:nth-child(3n + 1)) .project-image-container {
+    padding-bottom: 68%;
 }
 
 /* Project Images */
@@ -1199,7 +1179,7 @@ body.index-page .bold-white {
     border: none;
     cursor: pointer;
     text-align: center;
-    font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     letter-spacing: normal;
 }
 
@@ -1644,14 +1624,22 @@ footer .container {
         padding: 0 !important;
     }
 
-    .project-col-left,
-    .project-col-right {
-        grid-column: 1 !important;
+    .project-card {
         width: 100% !important;
     }
 
-    .project-card {
-        width: 100% !important;
+    .abstract-grid > .project-card:nth-child(3n + 1) {
+        grid-column: 1 !important;
+    }
+
+    .abstract-grid > .project-card:nth-child(3n + 1) .project-image-container.square,
+    .abstract-grid > .project-card:not(:nth-child(3n + 1)) .project-image-container.square {
+        padding-bottom: 110%;
+    }
+
+    .abstract-grid > .project-card:nth-child(3n + 1) .project-image-container.landscape,
+    .abstract-grid > .project-card:not(:nth-child(3n + 1)) .project-image-container.landscape {
+        padding-bottom: 56.25%;
     }
 
     .project-image-container.square {
@@ -1707,11 +1695,6 @@ footer .container {
         padding: 0;
         margin: 0;
         width: 100%;
-    }
-
-    .mobile-full-width-wrapper .project-col-left,
-    .mobile-full-width-wrapper .project-col-right {
-        display: contents;
     }
 
     .mobile-full-width-wrapper .project-card {
@@ -1771,7 +1754,7 @@ footer .container {
     }
 
     .contact-icons-container {
-        top: 73px;
+        top: 77px;
         right: 20px;
     }
 
@@ -1853,7 +1836,7 @@ footer .container {
     }
 
     .contact-icons-container {
-        top: 57px;
+        top: 60px;
         right: 20px;
         gap: 10px;
     }
