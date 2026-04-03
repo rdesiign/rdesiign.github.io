@@ -67,7 +67,7 @@
         }
 
         .patch-project-main > p {
-            max-width: 48ch !important;
+            max-width: 64ch !important;
             margin: 0;
             font-size: 1.08rem !important;
             line-height: 1.65 !important;
@@ -127,8 +127,8 @@
 
         .patch-grid-two {
             display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-            gap: 28px;
+            grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+            gap: 36px;
             align-items: start;
         }
 
@@ -136,7 +136,7 @@
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 26px 28px;
+            padding: 24px;
         }
 
         .patch-card h4 {
@@ -158,6 +158,101 @@
             gap: 18px;
         }
 
+        .patch-process-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.19fr) minmax(0, 1.19fr);
+            gap: 10px;
+            align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .patch-process-column {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .patch-process-column .patch-process-stack {
+            flex: 1 1 auto;
+        }
+
+        .patch-process-label {
+            display: block;
+            margin: 0 0 10px 0;
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+        }
+
+        .patch-process-grid-secondary {
+            display: grid;
+            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.19fr) minmax(0, 1.19fr);
+            gap: 10px;
+            align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 68px;
+        }
+
+        .patch-process-grid-secondary > .patch-process-column {
+            height: 100%;
+        }
+
+        .patch-process-grid-secondary > .patch-process-column > .patch-process-card {
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .patch-process-column.floating-label-column {
+            position: relative;
+        }
+
+        .patch-process-column.floating-label-column .patch-process-label {
+            position: absolute;
+            top: -28px;
+            left: 0;
+            margin: 0;
+        }
+
+        .patch-process-span-two {
+            grid-column: span 2;
+        }
+
+        .patch-process-stack {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            height: 100%;
+            min-width: 0;
+            width: 100%;
+        }
+
+        .patch-process-card {
+            overflow: hidden;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .patch-process-card.landscape-card {
+            aspect-ratio: 2700 / 2100;
+        }
+
+        .patch-process-card.portrait-card {
+            aspect-ratio: 2400 / 2834;
+        }
+
+        .patch-process-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .patch-outline-item {
             padding-top: 18px;
             border-top: 1px solid rgba(255, 255, 255, 0.18);
@@ -175,11 +270,63 @@
             border-radius: 8px;
         }
 
+        #patch-concept-image {
+            width: 100%;
+            margin: 0;
+        }
+
         .patch-caption {
             margin-top: 14px;
             font-size: 0.95rem;
             color: var(--text-secondary);
             max-width: 52ch;
+        }
+
+        .patch-introducing-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+        }
+
+        .patch-introducing-primary,
+        .patch-introducing-secondary img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .patch-introducing-secondary {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .patch-disassembly-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .patch-disassembly-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .patch-disassembly-slide:first-child {
+            position: relative;
+        }
+
+        .patch-disassembly-slide.is-active {
+            opacity: 1;
+        }
+
+        .patch-disassembly-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         [data-theme="light"] .patch-meta-row,
@@ -224,10 +371,33 @@
 
             body.patch-page .patch-project-layout,
             body.patch-page .patch-grid-two,
-            body.patch-page .patch-outline-grid {
+            body.patch-page .patch-outline-grid,
+            body.patch-page .patch-process-grid,
+            body.patch-page .patch-process-grid-secondary {
                 display: grid !important;
                 grid-template-columns: 1fr !important;
                 gap: 24px !important;
+            }
+
+            body.patch-page .patch-process-grid-secondary {
+                margin-top: 24px;
+            }
+
+            body.patch-page .patch-process-span-two {
+                grid-column: auto;
+            }
+
+            body.patch-page .patch-process-stack {
+                grid-template-rows: auto;
+                height: auto;
+            }
+
+            body.patch-page .patch-process-card {
+                height: auto;
+            }
+
+            body.patch-page .patch-process-card img {
+                height: auto;
             }
 
             body.patch-page .patch-project-layout {
@@ -343,7 +513,7 @@
                         <div class="patch-project-meta">
                             <div class="patch-meta-row">
                                 <div class="patch-meta-label">Collaborators</div>
-                                <div class="patch-meta-value">TU Delft, Accenture Industry X</div>
+                                <div class="patch-meta-value">Accenture Industry X, TU Delft</div>
                             </div>
                             <div class="patch-meta-row">
                                 <div class="patch-meta-label">Year</div>
@@ -354,13 +524,13 @@
                                 <div class="patch-meta-value">20 weeks</div>
                             </div>
                             <div class="patch-meta-row skills-row">
-                                <div class="patch-meta-label">Skills</div>
+                                <div class="patch-meta-label">Scope</div>
                                 <div class="patch-meta-value patch-meta-skills">
                                     <span>Industrial Design</span>
+                                    <span>AI Integration and Development</span>
                                     <span>User Research</span>
                                     <span>Visualisation</span>
                                     <span>Prototyping</span>
-                                    <span>AI Integration and Development</span>
                                 </div>
                             </div>
                         </div>
@@ -391,43 +561,96 @@
             <div class="patch-section-shell">
                 <div class="patch-grid-two">
                     <div>
-                        <h3 style="font-size: 1.5rem; margin: 0 0 14px 0; color: var(--text-primary);">Project Snapshot</h3>
-                        <p style="max-width: 56ch; margin: 0;">The page is intentionally structured to support a clear hiring-focused case study: strong opening image, concise project framing, and room for the story to unfold through research, development, and outcome sections. As more material comes in, this scaffold can expand without changing the visual baseline.</p>
+                        <h3 style="font-size: 1.5rem; margin: 0 0 14px 0; color: var(--text-primary);">The Concept</h3>
+                        <p style="max-width: 56ch; margin: 0;">A repairable headphone that reduces reliance on service centres by enabling users to diagnose and repair issues themselves through a modular design, AI-guided support, and minimal tools.</p>
                     </div>
                     <div class="patch-card">
-                        <h4>Current status</h4>
-                        <p style="margin: 0;">Foundation page created. Visual hierarchy, navigation, project metadata, and content sections are in place and ready for the next batch of Patch-specific content.</p>
+                        <img id="patch-concept-image" src="Projects/patch/patch concept.png" alt="Patch concept" class="patch-preview-image" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="preview" class="section" style="padding-top: 40px; padding-bottom: 70px;">
+    <section id="process-snapshot" class="section" style="padding-top: 70px; padding-bottom: 120px;">
         <div class="container" style="padding: 0 60px;">
             <div class="patch-section-shell">
-                <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio preview image" class="patch-preview-image" loading="lazy">
-                <p class="patch-caption">Current visual placeholder using the Patch thumbnail. This can later be replaced with a hero render, research board, prototype image, or any stronger lead asset once you send the rest of the content.</p>
+                <h3 style="font-size: 1.5rem; margin: 0 0 30px 0; color: var(--text-primary);">Process Snapshot</h3>
+                <div class="patch-process-grid">
+                    <div class="patch-process-column">
+                        <span class="patch-process-label">[Research_]</span>
+                        <div class="patch-process-stack">
+                            <div class="patch-process-card landscape-card">
+                                <img src="Projects/patch/repair cafe.jpg" alt="Repair cafe" loading="lazy">
+                            </div>
+                            <div class="patch-process-card landscape-card">
+                                <img src="Projects/patch/sony teardown.jpg" alt="Sony teardown" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="patch-process-column">
+                        <span class="patch-process-label">[Ideation_]</span>
+                        <div class="patch-process-card portrait-card">
+                            <img src="Projects/patch/patch sketch page.jpg" alt="Patch sketch page" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="patch-process-column">
+                        <span class="patch-process-label">[Development_]</span>
+                        <div class="patch-process-card portrait-card">
+                            <img src="Projects/patch/prototype images.jpg" alt="Patch prototype images" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="patch-process-grid-secondary">
+                    <div class="patch-process-column patch-process-span-two floating-label-column">
+                        <span class="patch-process-label">[Refinement_]</span>
+                        <div class="patch-process-card">
+                            <img src="Projects/patch/patch cmf.jpg" alt="Patch CMF exploration" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="patch-process-stack">
+                        <div class="patch-process-card landscape-card">
+                            <img src="Projects/patch/measuring.jpg" alt="Measuring process" loading="lazy">
+                        </div>
+                        <div class="patch-process-card landscape-card">
+                            <img src="Projects/patch/soldering.jpg" alt="Soldering process" loading="lazy">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="story-outline" class="section" style="padding-top: 70px; padding-bottom: 120px;">
+    <section id="introducing-patch" class="section" style="padding-top: 0; padding-bottom: 120px;">
         <div class="container" style="padding: 0 60px;">
             <div class="patch-section-shell">
-                <h3 style="font-size: 1.5rem; margin: 0 0 30px 0; color: var(--text-primary);">Story Outline</h3>
-                <div class="patch-outline-grid">
-                    <div class="patch-outline-item">
-                        <h4>Context</h4>
-                        <p style="margin: 0;">Space for the project brief, opportunity, and why the audio direction matters.</p>
+                <h3 style="font-size: 1.5rem; margin: 0 0 30px 0; color: var(--text-primary);">Introducing patch</h3>
+                <div class="patch-introducing-grid">
+                    <img src="Projects/patch/patch studio shot.jpg" alt="Patch studio shot" class="patch-introducing-primary" loading="lazy">
+                    <div class="patch-introducing-secondary">
+                        <img src="Projects/patch/button view.jpg" alt="Patch button view" loading="lazy">
+                        <img src="Projects/patch/side view .jpg" alt="Patch side view" loading="lazy">
                     </div>
-                    <div class="patch-outline-item">
-                        <h4>Process</h4>
-                        <p style="margin: 0;">Space for sketches, experiments, iterations, and key decisions that shaped the project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="patch-disassembly" class="section" style="padding-top: 0; padding-bottom: 120px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <div class="patch-disassembly-carousel" data-carousel-interval="1500" aria-label="Patch disassembly carousel">
+                    <div class="patch-disassembly-slide is-active">
+                        <img src="Projects/patch/dis.1.jpg" alt="Patch disassembly image 1" loading="lazy">
                     </div>
-                    <div class="patch-outline-item">
-                        <h4>Outcome</h4>
-                        <p style="margin: 0;">Space for the final proposition, hero visuals, and the takeaway recruiters should remember.</p>
+                    <div class="patch-disassembly-slide">
+                        <img src="Projects/patch/dis.2.jpg" alt="Patch disassembly image 2" loading="lazy">
+                    </div>
+                    <div class="patch-disassembly-slide">
+                        <img src="Projects/patch/dis.3.jpg" alt="Patch disassembly image 3" loading="lazy">
+                    </div>
+                    <div class="patch-disassembly-slide">
+                        <img src="Projects/patch/dis.4.jpg" alt="Patch disassembly image 4" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -458,5 +681,35 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updatePatchConceptImage() {
+                var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                var img = document.getElementById('patch-concept-image');
+                if (!img) return;
+                img.src = theme === 'light'
+                    ? 'Projects/patch/patch concept black.png'
+                    : 'Projects/patch/patch concept.png';
+            }
+
+            updatePatchConceptImage();
+            new MutationObserver(function() { updatePatchConceptImage(); })
+                .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+            document.querySelectorAll('.patch-disassembly-carousel').forEach(function(carousel) {
+                var slides = carousel.querySelectorAll('.patch-disassembly-slide');
+                var interval = Number(carousel.getAttribute('data-carousel-interval')) || 1500;
+                var activeIndex = 0;
+
+                if (slides.length < 2) return;
+
+                window.setInterval(function() {
+                    slides[activeIndex].classList.remove('is-active');
+                    activeIndex = (activeIndex + 1) % slides.length;
+                    slides[activeIndex].classList.add('is-active');
+                }, interval);
+            });
+        });
+    </script>
 </body>
 </html>

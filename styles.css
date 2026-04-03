@@ -1031,7 +1031,7 @@ body.index-page .bold-white {
     left: 0;
     width: 100%;
     background: transparent;
-    padding: 20px;
+    padding: 20px 20px 30px;
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 2;
@@ -1052,9 +1052,9 @@ body.index-page .bold-white {
 }
 
 .project-content h3 {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 16px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 0;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -1892,7 +1892,8 @@ footer .container {
     }
 
     .project-content h3 {
-        font-size: 20px;
+        font-size: 22px;
+        font-weight: 700;
     }
 
     .project-content p {
