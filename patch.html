@@ -359,6 +359,94 @@
             display: block;
         }
 
+        .patch-diagnosis-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(340px, 0.72fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .patch-diagnosis-copy {
+            min-width: 0;
+        }
+
+        .patch-diagnosis-copy h3 {
+            font-size: 1.5rem;
+            margin: 0 0 14px 0;
+            color: var(--text-primary);
+        }
+
+        .patch-diagnosis-copy p {
+            max-width: 52ch;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .patch-diagnosis-carousel,
+        .patch-diagnosis-placeholder {
+            min-width: 0;
+        }
+
+        .patch-diagnosis-carousel {
+            aspect-ratio: 5100 / 4500;
+        }
+
+        .patch-diagnosis-carousel .patch-disassembly-slide img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .patch-diagnosis-placeholder {
+            grid-column: 1 / -1;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .patch-diagnosis-placeholder img {
+            width: 100%;
+            display: block;
+        }
+
+        .patch-carousel-button {
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.34);
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.42);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+        .patch-carousel-button.previous {
+            left: 14px;
+        }
+
+        .patch-carousel-button.next {
+            right: 14px;
+        }
+
+        .patch-carousel-button svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        [data-theme="light"] .patch-carousel-button {
+            border-color: rgba(0, 0, 0, 0.24);
+            background: rgba(255, 255, 255, 0.72);
+            color: #111111;
+        }
+
         [data-theme="light"] .patch-meta-row,
         [data-theme="light"] .patch-outline-item {
             border-bottom-color: rgba(0, 0, 0, 0.18);
@@ -403,10 +491,15 @@
             body.patch-page .patch-grid-two,
             body.patch-page .patch-outline-grid,
             body.patch-page .patch-process-grid,
-            body.patch-page .patch-process-grid-secondary {
+            body.patch-page .patch-process-grid-secondary,
+            body.patch-page .patch-diagnosis-grid {
                 display: grid !important;
                 grid-template-columns: 1fr !important;
                 gap: 24px !important;
+            }
+
+            body.patch-page .patch-diagnosis-placeholder {
+                min-height: 0;
             }
 
             body.patch-page .patch-process-grid-secondary {
@@ -694,6 +787,58 @@
         </div>
     </section>
 
+    <section id="diagnosis-functions" class="section" style="padding-top: 0; padding-bottom: 120px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <div class="patch-diagnosis-grid">
+                    <div class="patch-diagnosis-copy">
+                        <h3>Diagnosis functions</h3>
+                        <p>Audio failure and charging failure are among the most common yet difficult-to-diagnose issues in headphones. To address this, the concept proposes two identical USB-C ports with interchangeable functionality for both audio and charging. By allowing either port and cable to perform both functions, users can isolate faults through simple cross-checking methods, making it easier to identify whether the issue lies in the port, cable, or internal circuitry.</p>
+                    </div>
+                    <div class="patch-disassembly-carousel patch-diagnosis-carousel" data-carousel-interval="2500" aria-label="Patch diagnosis functions carousel">
+                        <div class="patch-disassembly-slide is-active">
+                            <img src="Projects/patch/side view .jpg" alt="Patch side view" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img id="patch-diagnosis-diagram-image" src="Projects/patch/diagnosis diagram black.png" alt="Patch diagnosis diagram" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img id="patch-diagnosis-diagram-text-image" src="Projects/patch/diagnosis diagram text black.png" alt="Patch diagnosis diagram with text" loading="lazy">
+                        </div>
+                        <button class="patch-carousel-button previous" type="button" data-carousel-direction="-1" aria-label="Previous diagnosis image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M15 18l-6-6 6-6"></path>
+                            </svg>
+                        </button>
+                        <button class="patch-carousel-button next" type="button" data-carousel-direction="1" aria-label="Next diagnosis image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="patch-card patch-diagnosis-placeholder patch-disassembly-carousel" data-carousel-autoplay="false" aria-label="Diagnosis chart carousel">
+                        <div class="patch-disassembly-slide is-active">
+                            <img src="Projects/patch/charging diagnosis chart.jpg" alt="Charging diagnosis chart" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img src="Projects/patch/audio diagnosis chart.jpg" alt="Audio diagnosis chart" loading="lazy">
+                        </div>
+                        <button class="patch-carousel-button previous" type="button" data-carousel-direction="-1" aria-label="Previous diagnosis chart">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M15 18l-6-6 6-6"></path>
+                            </svg>
+                        </button>
+                        <button class="patch-carousel-button next" type="button" data-carousel-direction="1" aria-label="Next diagnosis chart">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -738,26 +883,65 @@
                     : 'Projects/patch/dis diagram white.png';
             }
 
+            function updatePatchDiagnosisImages() {
+                var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                var diagram = document.getElementById('patch-diagnosis-diagram-image');
+                var textDiagram = document.getElementById('patch-diagnosis-diagram-text-image');
+                if (diagram) {
+                    diagram.src = theme === 'light'
+                        ? 'Projects/patch/diagnosis diagram white.png'
+                        : 'Projects/patch/diagnosis diagram black.png';
+                }
+                if (textDiagram) {
+                    textDiagram.src = theme === 'light'
+                        ? 'Projects/patch/diagnosis diagram text white .png'
+                        : 'Projects/patch/diagnosis diagram text black.png';
+                }
+            }
+
             updatePatchConceptImage();
             updatePatchDisassemblyDiagram();
+            updatePatchDiagnosisImages();
             new MutationObserver(function() {
                 updatePatchConceptImage();
                 updatePatchDisassemblyDiagram();
+                updatePatchDiagnosisImages();
             })
                 .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
             document.querySelectorAll('.patch-disassembly-carousel').forEach(function(carousel) {
                 var slides = carousel.querySelectorAll('.patch-disassembly-slide');
+                var controls = carousel.querySelectorAll('[data-carousel-direction]');
                 var interval = Number(carousel.getAttribute('data-carousel-interval')) || 1500;
+                var autoplay = carousel.getAttribute('data-carousel-autoplay') !== 'false';
                 var activeIndex = 0;
+                var timerId = null;
 
                 if (slides.length < 2) return;
 
-                window.setInterval(function() {
+                function showSlide(nextIndex) {
                     slides[activeIndex].classList.remove('is-active');
-                    activeIndex = (activeIndex + 1) % slides.length;
+                    activeIndex = (nextIndex + slides.length) % slides.length;
                     slides[activeIndex].classList.add('is-active');
-                }, interval);
+                }
+
+                function startCarousel() {
+                    if (!autoplay) return;
+                    timerId = window.setInterval(function() {
+                        showSlide(activeIndex + 1);
+                    }, interval);
+                }
+
+                controls.forEach(function(control) {
+                    control.addEventListener('click', function() {
+                        var direction = Number(control.getAttribute('data-carousel-direction')) || 1;
+                        if (timerId) window.clearInterval(timerId);
+                        showSlide(activeIndex + direction);
+                        startCarousel();
+                    });
+                });
+
+                startCarousel();
             });
         });
     </script>
