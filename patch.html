@@ -308,6 +308,36 @@
             background: rgba(255, 255, 255, 0.04);
         }
 
+        .patch-disassembly-diagram {
+            width: 100%;
+            margin-bottom: 24px;
+            box-sizing: border-box;
+        }
+
+        .patch-disassembly-copy {
+            margin-bottom: 24px;
+        }
+
+        .patch-disassembly-copy h3 {
+            font-size: 1.5rem;
+            margin: 0 0 14px 0;
+            color: var(--text-primary);
+        }
+
+        .patch-disassembly-copy p {
+            max-width: 76ch;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .patch-disassembly-diagram img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
         .patch-disassembly-slide {
             position: absolute;
             inset: 0;
@@ -639,6 +669,13 @@
     <section id="patch-disassembly" class="section" style="padding-top: 0; padding-bottom: 120px;">
         <div class="container" style="padding: 0 60px;">
             <div class="patch-section-shell">
+                <div class="patch-disassembly-copy">
+                    <h3>Tier-Based Accessibility</h3>
+                    <p>Patch was designed using a tier-based accessibility system, where component placement was determined by function criticality and lifespan. Tier 1 and Tier 2 components could be accessed without tools due to their critical functions and shorter lifespans, while Tier 3 components were less accessible as they had longer lifespans and required less frequent replacement.</p>
+                </div>
+                <div class="patch-card patch-disassembly-diagram">
+                    <img id="patch-disassembly-diagram-image" src="Projects/patch/dis diagram white.png" alt="Patch disassembly diagram" loading="lazy">
+                </div>
                 <div class="patch-disassembly-carousel" data-carousel-interval="1500" aria-label="Patch disassembly carousel">
                     <div class="patch-disassembly-slide is-active">
                         <img src="Projects/patch/dis.1.jpg" alt="Patch disassembly image 1" loading="lazy">
@@ -692,8 +729,21 @@
                     : 'Projects/patch/patch concept.png';
             }
 
+            function updatePatchDisassemblyDiagram() {
+                var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                var img = document.getElementById('patch-disassembly-diagram-image');
+                if (!img) return;
+                img.src = theme === 'light'
+                    ? 'Projects/patch/dis diagram black.png'
+                    : 'Projects/patch/dis diagram white.png';
+            }
+
             updatePatchConceptImage();
-            new MutationObserver(function() { updatePatchConceptImage(); })
+            updatePatchDisassemblyDiagram();
+            new MutationObserver(function() {
+                updatePatchConceptImage();
+                updatePatchDisassemblyDiagram();
+            })
                 .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
             document.querySelectorAll('.patch-disassembly-carousel').forEach(function(carousel) {
