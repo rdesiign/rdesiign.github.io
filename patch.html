@@ -447,6 +447,54 @@
             color: #111111;
         }
 
+        .patch-app-grid {
+            display: grid;
+            grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
+            gap: 36px;
+            align-items: center;
+        }
+
+        .patch-app-grid + .patch-app-grid {
+            margin-top: 72px;
+        }
+
+        .patch-app-image,
+        .patch-app-carousel {
+            width: min(100%, 320px);
+            justify-self: center;
+            aspect-ratio: 1125 / 2436;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .patch-app-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .patch-app-carousel .patch-disassembly-slide img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .patch-app-copy {
+            min-width: 0;
+        }
+
+        .patch-app-copy h3 {
+            font-size: 1.5rem;
+            margin: 0 0 14px 0;
+            color: var(--text-primary);
+        }
+
+        .patch-app-copy p {
+            max-width: 56ch;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
         [data-theme="light"] .patch-meta-row,
         [data-theme="light"] .patch-outline-item {
             border-bottom-color: rgba(0, 0, 0, 0.18);
@@ -492,10 +540,15 @@
             body.patch-page .patch-outline-grid,
             body.patch-page .patch-process-grid,
             body.patch-page .patch-process-grid-secondary,
-            body.patch-page .patch-diagnosis-grid {
+            body.patch-page .patch-diagnosis-grid,
+            body.patch-page .patch-app-grid {
                 display: grid !important;
                 grid-template-columns: 1fr !important;
                 gap: 24px !important;
+            }
+
+            body.patch-page .patch-app-carousel {
+                width: min(100%, 260px);
             }
 
             body.patch-page .patch-diagnosis-placeholder {
@@ -839,6 +892,53 @@
         </div>
     </section>
 
+    <section id="app-guided-repair" class="section" style="padding-top: 0; padding-bottom: 120px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <div class="patch-app-grid">
+                    <div class="patch-app-image">
+                        <img src="Projects/patch/audio diagnosis.png" alt="Patch audio diagnosis app screen" loading="lazy">
+                    </div>
+                    <div class="patch-app-copy">
+                        <h3>App diagnosis</h3>
+                        <p>Placeholder text for the audio diagnosis app experience. This section can explain how the interface helps users understand symptoms, compare possible causes, and move toward the right repair path with confidence.</p>
+                    </div>
+                </div>
+                <div class="patch-app-grid">
+                    <div class="patch-app-copy">
+                        <h3>Purchase tools</h3>
+                        <p>Placeholder text for the purchase tools experience. This section can explain how users are guided toward the right replacement parts, tools, or repair resources based on the diagnosis outcome.</p>
+                    </div>
+                    <div class="patch-disassembly-carousel patch-app-carousel" data-carousel-interval="2000" aria-label="Patch purchase tools app carousel">
+                        <div class="patch-disassembly-slide is-active">
+                            <img src="Projects/patch/purchase 1.png" alt="Purchase app screen 1" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img src="Projects/patch/purchase 2.png" alt="Purchase app screen 2" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="patch-app-grid">
+                    <div class="patch-disassembly-carousel patch-app-carousel" data-carousel-interval="1500" data-carousel-start-delay="1000" aria-label="Patch guided repair app carousel">
+                        <div class="patch-disassembly-slide is-active">
+                            <img src="Projects/patch/guided repair 1.png" alt="Guided repair app screen 1" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img src="Projects/patch/guided repair 2.png" alt="Guided repair app screen 2" loading="lazy">
+                        </div>
+                        <div class="patch-disassembly-slide">
+                            <img src="Projects/patch/guided repair 3.png" alt="Guided repair app screen 3" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="patch-app-copy">
+                        <h3>Guided repair app</h3>
+                        <p>Placeholder text for the app experience. This section can describe how the guided repair interface supports diagnosis, step-by-step repair actions, and user confidence throughout the process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -913,6 +1013,7 @@
                 var slides = carousel.querySelectorAll('.patch-disassembly-slide');
                 var controls = carousel.querySelectorAll('[data-carousel-direction]');
                 var interval = Number(carousel.getAttribute('data-carousel-interval')) || 1500;
+                var startDelay = Number(carousel.getAttribute('data-carousel-start-delay')) || 0;
                 var autoplay = carousel.getAttribute('data-carousel-autoplay') !== 'false';
                 var activeIndex = 0;
                 var timerId = null;
@@ -941,7 +1042,11 @@
                     });
                 });
 
-                startCarousel();
+                if (autoplay && startDelay > 0) {
+                    window.setTimeout(startCarousel, startDelay);
+                } else {
+                    startCarousel();
+                }
             });
         });
     </script>
