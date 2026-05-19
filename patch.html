@@ -495,6 +495,28 @@
             color: var(--text-primary);
         }
 
+        .patch-app-placeholder {
+            min-height: 420px;
+            width: min(100%, 520px);
+            justify-self: center;
+        }
+
+        .patch-context-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .patch-context-grid img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .patch-context-wide {
+            grid-column: 1 / -1;
+        }
+
         [data-theme="light"] .patch-meta-row,
         [data-theme="light"] .patch-outline-item {
             border-bottom-color: rgba(0, 0, 0, 0.18);
@@ -541,7 +563,8 @@
             body.patch-page .patch-process-grid,
             body.patch-page .patch-process-grid-secondary,
             body.patch-page .patch-diagnosis-grid,
-            body.patch-page .patch-app-grid {
+            body.patch-page .patch-app-grid,
+            body.patch-page .patch-context-grid {
                 display: grid !important;
                 grid-template-columns: 1fr !important;
                 gap: 24px !important;
@@ -549,6 +572,11 @@
 
             body.patch-page .patch-app-carousel {
                 width: min(100%, 260px);
+            }
+
+            body.patch-page .patch-app-placeholder {
+                min-height: 280px;
+                width: 100%;
             }
 
             body.patch-page .patch-diagnosis-placeholder {
@@ -900,14 +928,14 @@
                         <img src="Projects/patch/audio diagnosis.png" alt="Patch audio diagnosis app screen" loading="lazy">
                     </div>
                     <div class="patch-app-copy">
-                        <h3>App diagnosis</h3>
-                        <p>Placeholder text for the audio diagnosis app experience. This section can explain how the interface helps users understand symptoms, compare possible causes, and move toward the right repair path with confidence.</p>
+                        <h3>Interactive AI-Assisted Fault Diagnosis</h3>
+                        <p>Guides users through a hands-on troubleshooting process using audio, image, and video inputs. It actively works with users to diagnose complex or non-obvious issues such as charging faults or audio problems, creating a “learn while repairing” experience.</p>
                     </div>
                 </div>
                 <div class="patch-app-grid">
                     <div class="patch-app-copy">
-                        <h3>Purchase tools</h3>
-                        <p>Placeholder text for the purchase tools experience. This section can explain how users are guided toward the right replacement parts, tools, or repair resources based on the diagnosis outcome.</p>
+                        <h3>Quick Access to Repair Resources</h3>
+                        <p>Provides direct links to compatible spare parts and repair tools, while also redirecting users to professional repair services for advanced or high-risk issues.</p>
                     </div>
                     <div class="patch-disassembly-carousel patch-app-carousel" data-carousel-interval="2000" aria-label="Patch purchase tools app carousel">
                         <div class="patch-disassembly-slide is-active">
@@ -931,9 +959,28 @@
                         </div>
                     </div>
                     <div class="patch-app-copy">
-                        <h3>Guided repair app</h3>
-                        <p>Placeholder text for the app experience. This section can describe how the guided repair interface supports diagnosis, step-by-step repair actions, and user confidence throughout the process.</p>
+                        <h3>Adaptive Step-by-Step Repair Guidance</h3>
+                        <p>Delivers conversational repair instructions with real-time clarification and adaptive support. When text instructions are not fully understood, the bot supplements guidance with visual and video demonstrations to simplify difficult repair steps.</p>
                     </div>
+                </div>
+                <div class="patch-app-grid">
+                    <div class="patch-app-copy">
+                        <h3>Cross-Platform Accessibility</h3>
+                        <p>Operates across familiar platforms such as Instagram, WhatsApp, Signal, and Messenger, making repair support easily accessible without requiring a dedicated app or navigating complex forums and FAQs.</p>
+                    </div>
+                    <div class="patch-card patch-app-placeholder" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="context" class="section" style="padding-top: 0; padding-bottom: 120px;">
+        <div class="container" style="padding: 0 60px;">
+            <div class="patch-section-shell">
+                <div class="patch-context-grid">
+                    <img src="Projects/patch/patch context 1.jpg" alt="Patch context image 1" loading="lazy">
+                    <img src="Projects/patch/patch context 2.jpg" alt="Patch context image 2" loading="lazy">
+                    <img class="patch-context-wide" src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio context hero" loading="lazy">
                 </div>
             </div>
         </div>
