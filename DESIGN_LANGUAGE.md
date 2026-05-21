@@ -27,6 +27,7 @@ This document captures the current visual and interaction language of the portfo
 - The homepage now uses a structured, editorial composition with strong spacing, a slim floating header, and clear sectional breaks.
 - Project presentation is image-first and card-based.
 - Rounded cards and softened container shapes are part of the current interface language.
+- Unavailable homepage projects may use a persistent subdued thumbnail tint with centered uppercase "Coming soon" text.
 - The About page now follows a restrained split composition: image and text are balanced in a clean two-part layout with generous whitespace and typography-led hierarchy.
 - Changes to layout, spacing rhythm, content hierarchy, or motion style should be treated as significant design decisions and confirmed first.
 

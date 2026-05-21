@@ -958,6 +958,14 @@ body.index-page .bold-white {
     filter: brightness(0.8);
 }
 
+.coming-soon-card .project-image {
+    filter: brightness(0.52) saturate(0.78);
+}
+
+.coming-soon-card:hover .project-image {
+    filter: brightness(0.48) saturate(0.72);
+}
+
 /* Headway project image positioning */
 .project-card:has(img[src*="MMM Thumbnail"]) .project-image,
 .project-card:has(img[alt*="Headway"]) .project-image {
@@ -1064,6 +1072,24 @@ body.index-page .bold-white {
     line-height: 1.5;
     margin-bottom: 15px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.coming-soon-label {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: clamp(1rem, 2vw, 1.45rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
 /* Project Tags */
