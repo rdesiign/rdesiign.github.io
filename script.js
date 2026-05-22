@@ -195,59 +195,6 @@ function highlightNavigation() {
     });
 }
 
-// ─── Custom Cursor ──────────────────────────────────────────────────
-function initializeCustomCursor() {
-    var cursor = document.querySelector('.custom-cursor');
-    if (!cursor) return;
-
-    var links = document.querySelectorAll('a, button, .project-card');
-
-    function getBackgroundBrightness(x, y) {
-        var el = document.elementFromPoint(x, y);
-        if (!el) return 128;
-        var bg = window.getComputedStyle(el).backgroundColor;
-        if (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') {
-            var parent = el.parentElement;
-            while (parent) {
-                var pbg = window.getComputedStyle(parent).backgroundColor;
-                if (pbg !== 'rgba(0, 0, 0, 0)' && pbg !== 'transparent') return calcBrightness(pbg);
-                parent = parent.parentElement;
-            }
-            return calcBrightness(window.getComputedStyle(document.body).backgroundColor);
-        }
-        return calcBrightness(bg);
-    }
-
-    function calcBrightness(rgb) {
-        var m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (!m) return 128;
-        return (parseInt(m[1]) * 299 + parseInt(m[2]) * 587 + parseInt(m[3]) * 114) / 1000;
-    }
-
-    document.addEventListener('mousemove', function (e) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        var brightness = getBackgroundBrightness(e.clientX, e.clientY);
-        cursor.classList.toggle('light-bg', brightness > 128);
-        cursor.classList.toggle('dark-bg', brightness <= 128);
-    });
-
-    cursor.style.display = 'block';
-
-    links.forEach(function (link) {
-        link.addEventListener('mouseenter', function () {
-            cursor.classList.add('target');
-            if (this.classList.contains('nav-link')) cursor.classList.add('no-dot');
-        });
-        link.addEventListener('mouseleave', function () {
-            cursor.classList.remove('target', 'light-bg', 'dark-bg', 'no-dot');
-        });
-    });
-
-    document.addEventListener('mouseleave', function () { cursor.style.display = 'none'; });
-    document.addEventListener('mouseenter', function () { cursor.style.display = 'block'; });
-}
-
 // ─── Back to Top ────────────────────────────────────────────────────
 function initializeBackToTop() {
     var btn = document.getElementById('back-to-top');
@@ -270,6 +217,5 @@ document.addEventListener('DOMContentLoaded', function () {
     renderButtonStack();
     initializeTheme();
     initializeNavigation();
-    initializeCustomCursor();
     initializeBackToTop();
 });

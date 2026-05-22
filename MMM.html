@@ -344,11 +344,6 @@
     </style>
 </head>
 <body class="mmm-page" style="margin: 0; padding: 0; overflow-x: hidden;">
-    <!-- Custom Cursor Elements -->
-    <div class="custom-cursor">
-        <div class="custom-cursor-dot"></div>
-    </div>
-
     <!-- Back to Home Button (top left) -->
     <div class="back-to-home-container">
         <a href="index.html" class="back-to-home" aria-label="Back to home">
@@ -507,10 +502,6 @@
                     <img src="Projects/MMM/Ideation 1.1.jpg" alt="MMM Ideation 1.1" style="width: 100%; height: auto; display: block; border-radius: 8px; margin-top: 0;">
                     <h3 style="font-size: 1.5rem; margin-top: 20px; margin-bottom: 10px;">Thinking out loud</h3>
                     <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 20px;">The brainstorming process began with rough post-it sketches, grouped by idea similarities. These clusters informed refined pencil sketches, guided by a mood board for a modern aesthetic, diverging from traditional medical design. Selected concepts were further developed through digital sketches.</p>
-                    <!-- Know More Button -->
-                    <div style="text-align: left;">
-                        <button class="btn" style="padding: 14px 28px; font-size: 1rem; background: var(--bg-primary); color: var(--text-primary); border: 2px solid var(--text-primary);">Show more</button>
-                    </div>
                 </div>
                 <img src="Projects/MMM/Ideation 1.2.jpg" alt="MMM Ideation 1.2" style="width: calc(50% - 7.5px); height: auto; display: block; border-radius: 8px; margin-top: 0;">
             </div>
@@ -521,12 +512,12 @@
     <section id="explorations" class="section" style="padding-top: 50px; padding-bottom: 50px;">
         <div class="container" style="padding: 0 60px;">
             <!-- Additional text that appears with prototypes -->
-            <div id="prototype-description" style="margin-left: 65px; max-width: calc(100% - 130px); margin-bottom: 20px; display: none;">
+            <div id="prototype-description" style="margin-left: 65px; max-width: calc(100% - 130px); margin-bottom: 20px;">
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Creating mockups made of card paper and foam board based on aesthetics and component size constraints gave a better idea of the overall form. The final form was selected on the basis of aesthetic guidelines established during the ideation stage, design practicality and ergonomics. The final model was 3D printed to create an aesthetic prototype of the proposed design.</p>
             </div>
             
-            <img id="prototype-1-1" src="Projects/MMM/MMM Prototypes 1.1.png" alt="MMM Prototypes 1.1" style="width: 100%; max-width: calc(100% - 130px); display: none; margin-left: 65px; border-radius: 8px; margin-top: 0;">
-            <div id="prototype-bottom-row" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 15px; margin-left: 65px; max-width: calc(100% - 130px); gap: 15px; display: none;">
+            <img id="prototype-1-1" src="Projects/MMM/MMM Prototypes 1.1.png" alt="MMM Prototypes 1.1" style="width: 100%; max-width: calc(100% - 130px); display: block; margin-left: 65px; border-radius: 8px; margin-top: 0;">
+            <div id="prototype-bottom-row" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 15px; margin-left: 65px; max-width: calc(100% - 130px); gap: 15px;">
 
                 <div style="flex: 1; text-align: center;">
                     <img src="Projects/MMM/MMM Prototypes 1.2.png" alt="MMM Prototypes 1.2" style="width: 100%; display: block; border-radius: 8px; object-fit: cover;">
@@ -814,8 +805,6 @@
             updateConceptIcons();
             new MutationObserver(function() { updateConceptIcons(); })
                 .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-                });
-            }
         });
     </script>
     
@@ -881,54 +870,10 @@
         // Also listen for custom theme change events
         document.addEventListener('themeChange', updateThemeElements);
         
-        // Show More/Show Less button functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Look for the Know more button specifically in the ideation section
-            const ideationSection = document.getElementById('ideation');
-            if (ideationSection) {
-                const toggleBtn = ideationSection.querySelector('button');
-                let isExpanded = false;
-                
-                if (toggleBtn) {
-                    toggleBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        // Elements to toggle
-                        const prototypeDescription = document.getElementById('prototype-description');
-                        const prototype11 = document.getElementById('prototype-1-1');
-                        const prototypeBottomRow = document.getElementById('prototype-bottom-row');
-                        const explorationsSection = document.getElementById('explorations');
-                        
-                        if (!isExpanded) {
-                            // Expand - show content
-                            
-                            if (prototypeDescription) prototypeDescription.style.display = 'block';
-                            if (prototype11) prototype11.style.display = 'block';
-                            if (prototypeBottomRow) prototypeBottomRow.style.display = 'flex';
-                            
-                            // Change button text
-                            toggleBtn.textContent = 'Show less';
-                            isExpanded = true;
-                        } else {
-                            // Collapse - hide content
-                            
-                            if (prototypeDescription) prototypeDescription.style.display = 'none';
-                            if (prototype11) prototype11.style.display = 'none';
-                            if (prototypeBottomRow) prototypeBottomRow.style.display = 'none';
-                            
-                            // Change button text back
-                            toggleBtn.textContent = 'Show more';
-                            isExpanded = false;
-                        }
-                    });
-                }
-            }
-        });
-        
         // Inhaler Carousel Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const slides = [
-                { id: 'inhaler-slide-1', title: 'Inhaler Close', description: 'Placeholder text for the inhaler close state. This describes how the device looks and functions when closed.' },
+                { id: 'inhaler-slide-1', title: 'Inhaler enclosure', description: 'The standard medication bottle can be securely inserted into the inhaler enclosure, which connects to the main application and automatically records usage instances. This data is then integrated into migraine diaries, enabling healthcare providers to access more accurate and reliable treatment insights.' },
                 { id: 'inhaler-slide-2', title: 'Inhaler Open', description: 'Placeholder text for the inhaler open state. This describes how the device looks and functions when opened.' },
                 { id: 'inhaler-slide-3', title: 'Inhaler Squeeze', description: 'Placeholder text for the inhaler squeeze state. This describes how the device works when squeezed.' },
                 { id: 'inhaler-slide-4', title: 'Inhaler Refill', description: 'Placeholder text for the inhaler refill state. This describes how to refill the device.' }
