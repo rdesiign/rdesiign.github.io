@@ -29,6 +29,7 @@ This document captures the current visual and interaction language of the portfo
 - Rounded cards and softened container shapes are part of the current interface language.
 - Unavailable homepage projects may use a persistent subdued thumbnail tint with centered uppercase "Coming soon" text.
 - The About page follows a restrained equal-height two-column composition: image on the left, text on the right, generous whitespace, and typography-led hierarchy.
+- On mobile, the About portrait may use a slight rightward crop adjustment to keep the image composition intentional inside its container.
 - Changes to layout, spacing rhythm, content hierarchy, or motion style should be treated as significant design decisions and confirmed first.
 
 ## Color And Theme

@@ -1721,6 +1721,10 @@ footer .container {
         padding: 0 20px;
     }
 
+    .about-feature-image {
+        object-position: 90% center !important;
+    }
+
     #intro-typewriter h1 {
         font-size: clamp(1.6rem, 5vw, 2.2rem);
     }
@@ -1742,11 +1746,19 @@ footer .container {
         min-height: 0;
     }
 
+    .about-visual {
+        overflow: hidden;
+    }
+
     .about-feature-image {
+        width: 100%;
         height: auto;
         min-height: 0;
         aspect-ratio: 4 / 5;
-        object-position: right center;
+        object-fit: cover;
+        object-position: 100% center;
+        transform: translateX(8%) scale(1.08);
+        transform-origin: center;
     }
 
     .about-text {
@@ -1784,6 +1796,11 @@ footer .container {
 @media (max-width: 480px) {
     .about-text h3 {
         font-size: 1.8rem;
+    }
+
+    body.about-page .about-feature-image {
+        object-fit: cover !important;
+        object-position: 100% center !important;
     }
 
     .nav-container {
