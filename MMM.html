@@ -48,20 +48,18 @@
         }
 
         .mmm-project-main h1 {
-            font-size: clamp(3.25rem, 6vw, 5.4rem) !important;
-            line-height: 0.92;
-            letter-spacing: -0.05em;
+            font-size: clamp(2.4rem, 5vw, 4.2rem) !important;
+            line-height: 1.04;
+            letter-spacing: 0;
             margin: 0 0 12px 0 !important;
             color: var(--text-primary);
-            font-weight: 400 !important;
-            text-transform: uppercase;
+            font-weight: 600 !important;
         }
 
         .mmm-project-main h2 {
-            font-size: 1rem !important;
-            font-weight: 400 !important;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            font-size: 1.15rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 0;
             margin: 0 0 24px 0 !important;
             color: var(--text-secondary);
         }
@@ -124,6 +122,16 @@
             white-space: nowrap;
         }
 
+        body.mmm-page .header-image {
+            aspect-ratio: 6900 / 3600;
+            height: calc(100vw * 3600 / 6900) !important;
+            object-fit: cover !important;
+        }
+
+        body.mmm-page #project.section {
+            padding-top: 36px;
+        }
+
         @media (max-width: 768px) {
             body.mmm-page .section {
                 padding: 72px 0 !important;
@@ -133,11 +141,14 @@
                 padding: 0 !important;
             }
 
+            body.mmm-page #project.section {
+                padding-top: 32px !important;
+            }
+
             body.mmm-page .header-image {
-                height: auto !important;
-                min-height: 0;
-                aspect-ratio: auto !important;
-                object-fit: contain !important;
+                height: 42vh !important;
+                min-height: 320px;
+                object-fit: cover !important;
                 object-position: center center !important;
             }
 
@@ -313,21 +324,15 @@
                 padding: 56px 0 !important;
             }
 
-            body.mmm-page #header {
-                position: relative !important;
-                width: 100vw !important;
-                max-width: 100vw !important;
-                padding-top: 100% !important;
-                height: 0 !important;
-                overflow: hidden !important;
+            body.mmm-page #project.section {
+                padding-top: 28px !important;
             }
 
             body.mmm-page .header-image {
-                position: absolute !important;
-                inset: 0 !important;
                 width: 100% !important;
-                height: 100% !important;
-                object-fit: contain !important;
+                height: 38vh !important;
+                min-height: 260px;
+                object-fit: cover !important;
                 object-position: center center !important;
             }
 
@@ -370,7 +375,7 @@
     <div id="button-stack"></div>
 
     <!-- Header Image Section - Full width with proper image fit -->
-    <section id="header" class="section" style="padding: 0 0 0 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
+    <section id="header" class="section" style="padding: 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
         <picture>
             <source media="(max-width: 560px)" srcset="Assets/Profile raw 4.jpg">
             <img src="Projects/MMM/MMM Thumbnail.jpg" alt="MMM - Migraine Management System Header" class="header-image" style="width: 100%; height: auto; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover; object-position: center 70%;" loading="eager" fetchpriority="high">
@@ -383,7 +388,7 @@
             <div class="mmm-intro-shell">
                 <div class="mmm-project-layout">
                     <div class="project-content mmm-project-main">
-                        <h1>HEADWAY</h1>
+                        <h1>Headway</h1>
                         <h2>Migraine Medication Management System</h2>
                         <p>Headway addresses the issue of poor medication adherence and self-management among migraine sufferers, which leads to inconsistent dosing and risk of medication-overuse headaches. A centralised digital platform paired with a smart dose tracking hardware system was introduced to automate and simplify this process, allowing users to accurately track episodes, manage prescriptions, receive reminders, and generate data, thereby improving adherence, personalising treatment, and achieving safer, more effective treatment outcomes.</p>
                         <div class="mmm-project-meta">
