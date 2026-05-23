@@ -216,6 +216,18 @@
             margin: 0;
         }
 
+        .patch-process-row-full {
+            grid-column: 1 / -1;
+            position: relative;
+        }
+
+        .patch-process-row-full .patch-process-label {
+            position: absolute;
+            top: -28px;
+            left: 0;
+            margin: 0;
+        }
+
         .patch-process-span-two {
             grid-column: span 2;
         }
@@ -244,6 +256,16 @@
 
         .patch-process-card.portrait-card {
             aspect-ratio: 2400 / 2834;
+        }
+
+        .patch-refinement-prototype-row {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .patch-refinement-prototype-row .patch-process-card {
+            aspect-ratio: 1 / 1;
         }
 
         .patch-process-card img {
@@ -675,6 +697,10 @@
                 height: auto;
             }
 
+            body.patch-page .patch-refinement-prototype-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
             body.patch-page .patch-process-card {
                 height: auto;
             }
@@ -881,8 +907,24 @@
                     </div>
                 </div>
                 <div class="patch-process-grid-secondary">
-                    <div class="patch-process-column patch-process-span-two floating-label-column">
+                    <div class="patch-process-row-full">
                         <span class="patch-process-label">[Refinement_]</span>
+                        <div class="patch-refinement-prototype-row">
+                            <div class="patch-process-card">
+                                <img src="Projects/patch/prototype 1.jpg" alt="Patch prototype 1" loading="lazy">
+                            </div>
+                            <div class="patch-process-card">
+                                <img src="Projects/patch/prototype 2.jpg" alt="Patch prototype 2" loading="lazy">
+                            </div>
+                            <div class="patch-process-card">
+                                <img src="Projects/patch/prototype 3.jpg" alt="Patch prototype 3" loading="lazy">
+                            </div>
+                            <div class="patch-process-card">
+                                <img src="Projects/patch/prototype 4.jpg" alt="Patch prototype 4" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="patch-process-column patch-process-span-two">
                         <div class="patch-process-card">
                             <img src="Projects/patch/patch cmf.jpg" alt="Patch CMF exploration" loading="lazy">
                         </div>
