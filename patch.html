@@ -502,23 +502,33 @@
         .patch-platform-badge {
             position: absolute;
             top: 50%;
-            left: -88px;
+            left: calc(100% + 16px);
             z-index: 3;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
+            width: auto;
+            height: 42px;
+            padding: 0 14px 0 10px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 9px;
             color: #ffffff;
             box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
             transform: translateY(-50%);
         }
 
         .patch-platform-badge svg {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
+            flex: 0 0 auto;
             display: block;
+        }
+
+        .patch-platform-label-text {
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .patch-platform-badge.instagram {
@@ -622,14 +632,24 @@
                 gap: 24px !important;
             }
 
+            body.patch-page .patch-app-image,
             body.patch-page .patch-app-carousel {
                 width: min(100%, 260px);
             }
 
             body.patch-page .patch-platform-badge {
-                left: 12px;
-                width: 42px;
-                height: 42px;
+                left: calc(100% + 10px);
+                height: 38px;
+                padding: 0 12px 0 9px;
+            }
+
+            body.patch-page .patch-platform-badge svg {
+                width: 21px;
+                height: 21px;
+            }
+
+            body.patch-page .patch-platform-label-text {
+                font-size: 0.78rem;
             }
 
             body.patch-page .patch-app-placeholder {
@@ -1047,6 +1067,7 @@
                                     <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="2"></circle>
                                     <circle cx="16.3" cy="7.7" r="1.1" fill="currentColor"></circle>
                                 </svg>
+                                <span class="patch-platform-label-text">Instagram</span>
                             </span>
                         </div>
                         <div class="patch-disassembly-slide">
@@ -1056,6 +1077,7 @@
                                     <path d="M6.4 18.4 7.3 15.2A7 7 0 1 1 9 17.1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
                                     <path d="M9.2 8.7c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2.1.4-.1.6l-.4.5c-.1.1-.2.3-.1.5.4.8 1.1 1.5 2 1.9.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.5 0 .5-.3 1.1-.7 1.3-.6.4-1.6.4-2.8-.2-2.3-1-4.1-2.8-5-5-.5-1-.5-1.8-.1-2.4Z" fill="currentColor"></path>
                                 </svg>
+                                <span class="patch-platform-label-text">Whatsapp</span>
                             </span>
                         </div>
                     </div>
