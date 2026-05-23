@@ -1093,41 +1093,42 @@ body.index-page .bold-white {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 60px;
-    align-items: flex-start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: stretch;
     max-width: 100%;
     margin: 0 auto 0 0;
     padding: 0 35px;
     position: relative;
+    min-height: min(680px, calc(100vh - 240px));
 }
 
-.about-image {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex: 0 0 300px;
-    max-width: 300px;
-    width: 90%;
+.about-visual {
+    min-width: 0;
+    height: 100%;
 }
 
-.profile-image {
-    max-width: 100%;
+.about-feature-image {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    height: 100%;
+    min-height: 100%;
+    border-radius: 8px;
     box-shadow: 0 4px 12px var(--shadow-color);
     transition: all 0.3s ease;
     display: block;
+    object-fit: cover;
+    object-position: center;
 }
 
-.profile-image:hover {
+.about-feature-image:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 .about-text {
-    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
 }
 
 .about-text h3 {
@@ -1141,6 +1142,35 @@ body.index-page .bold-white {
     line-height: 1.8;
     margin-bottom: 20px;
     color: var(--text-secondary);
+}
+
+.about-split-layout {
+    width: 100%;
+}
+
+.about-actions {
+    margin-top: 32px;
+}
+
+.about-resume-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 28px;
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.about-resume-link:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -1468,9 +1498,8 @@ footer .container {
         gap: 50px;
     }
 
-    .about-image {
-        flex: 0 0 250px;
-        max-width: 250px;
+    .about-content {
+        min-height: min(620px, calc(100vh - 220px));
     }
 
     #intro-typewriter h1 {
@@ -1710,10 +1739,18 @@ footer .container {
         grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
+        min-height: 0;
     }
 
-    .about-image {
-        justify-content: center;
+    .about-feature-image {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 4 / 5;
+        object-position: right center;
+    }
+
+    .about-text {
+        align-items: flex-start;
     }
 
     /* Contact */
@@ -1745,11 +1782,6 @@ footer .container {
    ═══════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 480px) {
-    .about-image {
-        max-width: 100%;
-        width: 100%;
-    }
-
     .about-text h3 {
         font-size: 1.8rem;
     }
