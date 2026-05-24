@@ -522,12 +522,12 @@
 
         .patch-platform-carousel {
             overflow: visible;
-            margin-bottom: 56px;
+            margin-bottom: 22px;
         }
 
         .patch-platform-badge {
             position: absolute;
-            top: calc(100% + 14px);
+            bottom: -12px;
             left: 50%;
             z-index: 3;
             width: auto;
@@ -563,6 +563,10 @@
 
         .patch-platform-badge.whatsapp {
             background: #25d366;
+        }
+
+        .patch-platform-badge.webchat {
+            background: #111111;
         }
 
         .patch-app-copy {
@@ -668,7 +672,7 @@
             }
 
             body.patch-page .patch-platform-badge {
-                top: calc(100% + 12px);
+                bottom: -10px;
                 height: 38px;
                 padding: 0 12px 0 9px;
             }
@@ -1112,6 +1116,13 @@
                     <div class="patch-disassembly-carousel patch-app-carousel patch-platform-carousel" data-carousel-interval="1500" aria-label="Patch cross-platform messaging carousel">
                         <div class="patch-disassembly-slide is-active">
                             <img src="Projects/patch/botpress.png" alt="Botpress message screen" loading="lazy">
+                            <span class="patch-platform-badge webchat" aria-label="Webchat Preview">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M5 6.8C5 5.8 5.8 5 6.8 5h10.4c1 0 1.8.8 1.8 1.8v7.4c0 1-.8 1.8-1.8 1.8h-5.4L8 19v-3H6.8c-1 0-1.8-.8-1.8-1.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                                    <path d="M8.5 9.5h7M8.5 12.5h4.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                </svg>
+                                <span class="patch-platform-label-text">Webchat Preview</span>
+                            </span>
                         </div>
                         <div class="patch-disassembly-slide">
                             <img src="Projects/patch/instagram message.png" alt="Instagram message screen" loading="lazy">

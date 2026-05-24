@@ -30,7 +30,7 @@ This document captures the current visual and interaction language of the portfo
 - Unavailable homepage projects may use a persistent subdued thumbnail tint with centered uppercase "Coming soon" text.
 - The About page follows a restrained equal-height two-column composition: image on the left, text on the right, generous whitespace, and typography-led hierarchy.
 - On mobile, the About portrait may use a slight rightward crop adjustment to keep the image composition intentional inside its container.
-- Patch platform carousel labels use compact icon-and-text badges centered below the relevant app images.
+- Patch platform carousel labels use compact icon-and-text badges centered near the bottom of the relevant app images.
 - The Patch refinement process area may include compact prototype image rows above larger refinement imagery, using the same card radius and grid rhythm.
 - Patch two-column explanation/carousel sections may vertically center the text against the carousel when it improves visual balance.
 - Project page header image containers use a full-width, zero-padding section treatment consistent across Patch, MMM, and Semi.
