@@ -37,21 +37,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=1.1">
     <link rel="apple-touch-icon" sizes="152x152" href="Assets/master-logo.png?v=1.1">
     <link rel="apple-touch-icon" sizes="120x120" href="Assets/master-logo.png?v=1.1">
-    <!-- Preload critical resources -->
-    <link rel="preload" href="Assets/Profile raw 4.jpg" as="image">
-    <link rel="preload" href="Projects/MMM/MMM8.png" as="image">
-    <link rel="preload" href="Projects/MMM/MMM1.png" as="image">
-    <link rel="preload" href="Projects/Semi/semi thumbnail alt.jpg" as="image">
-    <!-- Preload project thumbnails for faster loading -->
-    <link rel="preload" href="Projects/patch/patch thumbnail.jpg" as="image">
-    <link rel="preload" href="Projects/pawtrail/pawtrail thumbnail.jpg" as="image">
-    <link rel="preload" href="Projects/MMM/MMM Thumbnail.jpg" as="image">
-    <link rel="preload" href="Assets/square.png" as="image">
+    <!-- Preload only resources needed in the initial viewport -->
+    <link rel="preload" href="Projects/patch/patch thumbnail.jpg" as="image" fetchpriority="high">
     <link rel="preload" href="assets/font/Inter/Inter-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/font/Inter/Inter-Italic-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
-    <!-- Mobile-specific preloads -->
-    <link rel="prefetch" href="Projects/Semi/Semi Hero.jpg" as="image" media="(max-width: 768px)">
-    <link rel="prefetch" href="Projects/MMM/MMM Hero.jpg" as="image" media="(max-width: 768px)">
 </head>
 <body class="index-page">
 
@@ -80,7 +68,7 @@
                     <div class="project-card">
                         <a href="patch.html" class="project-link">
                             <div class="project-image-container square">
-                                <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio" class="project-image" loading="eager">
+                                <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio" class="project-image" loading="eager" fetchpriority="high">
                                 <div class="project-tag">Graduation Project</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -94,7 +82,7 @@
                     <div class="project-card">
                         <a href="MMM.html" class="project-link">
                             <div class="project-image-container landscape">
-                                <img src="Projects/MMM/MMM Thumbnail.jpg" alt="Headway - Migraine Management System" class="project-image" loading="eager">
+                                <img src="Projects/MMM/MMM Thumbnail.jpg" alt="Headway - Migraine Management System" class="project-image" loading="lazy" decoding="async">
                                 <div class="project-tag">Concept</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -108,7 +96,7 @@
                     <div class="project-card">
                         <a href="Semi.html" class="project-link">
                             <div class="project-image-container landscape">
-                                <img src="Projects/Semi/semi thumbnail alt.jpg" alt="Semi" class="project-image" loading="eager" sizes="(max-width: 768px) 50vw, 33vw">
+                                <img src="Projects/Semi/semi thumbnail alt.jpg" alt="Semi" class="project-image" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, 50vw">
                                 <div class="project-tag">In Market</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -121,7 +109,7 @@
 
                     <div class="project-card coming-soon-card">
                         <div class="project-image-container landscape">
-                            <img src="Projects/lumin/lumin.jpg" alt="Liminal Project" class="project-image" loading="eager">
+                            <img src="Projects/lumin/lumin.jpg" alt="Liminal Project" class="project-image" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Concept</div>
                             <div class="project-overlay">
@@ -134,7 +122,7 @@
 
                     <div class="project-card coming-soon-card">
                         <div class="project-image-container landscape">
-                            <img src="Projects/pawtrail/pawtrail thumbnail.jpg" alt="Pawtrail - Pet travel tracking" class="project-image" loading="eager">
+                            <img src="Projects/pawtrail/pawtrail thumbnail.jpg" alt="Pawtrail - Pet travel tracking" class="project-image" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Beta Testing</div>
                             <div class="project-overlay">
@@ -147,7 +135,7 @@
 
                     <div class="project-card guidely-card coming-soon-card">
                         <div class="project-image-container square">
-                            <img src="Projects/Guidely/guidley thumbnail.jpg" alt="Guidely Project" class="project-image" loading="eager">
+                            <img src="Projects/Guidely/guidley thumbnail.jpg" alt="Guidely Project" class="project-image" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Concept</div>
                             <div class="project-overlay">
