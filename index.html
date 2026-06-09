@@ -22,29 +22,22 @@
             }
         })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=3.6">
+    <link rel="stylesheet" href="styles.css?v=3.8">
     <link rel="manifest" href="manifest.json">
-
-
     <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
     <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
-    <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
-    <link rel="apple-touch-icon" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
-    <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
-    <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
-    <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
-    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=1.1">
-    <link rel="apple-touch-icon" sizes="152x152" href="Assets/master-logo.png?v=1.1">
-    <link rel="apple-touch-icon" sizes="120x120" href="Assets/master-logo.png?v=1.1">
+    <link rel="mask-icon" href="Assets/favicon/favicon black.svg" color="#000000">
+
+
     <!-- Preload only resources needed in the initial viewport -->
-    <link rel="preload" href="Projects/patch/patch thumbnail.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="Projects/patch/patch thumbnail.home-1600.jpg" as="image" imagesrcset="Projects/patch/patch thumbnail.home-900.jpg 900w, Projects/patch/patch thumbnail.home-1600.jpg 1600w" imagesizes="(max-width: 768px) 100vw, calc(100vw - 180px)" fetchpriority="high">
     <link rel="preload" href="assets/font/Inter/Inter-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
 </head>
 <body class="index-page">
 
 
-    <!-- Button Stack (injected by script.js) -->
+    <!-- Button Stack (injected by script.js?v=2.0) -->
     <div id="button-stack"></div>
 
 
@@ -53,7 +46,7 @@
         <div class="container">
             <div class="intro-content">
                 <div id="intro-typewriter">
-                    <h1><span class="intro-heading-lock">Hello! I'm <a href="about.html" class="avatar-link" aria-label="Go to About page"><img src="Assets/avatar trial.png" alt="" class="avatar-image" loading="eager"></a><span class="rishi-text">Rishi</span>.</span></h1>
+                    <h1><span class="intro-heading-lock">Hello! I'm <a href="about.html" class="avatar-link" aria-label="Go to About page"><img src="Assets/avatar trial.web.png" alt="" class="avatar-image" width="160" height="109" loading="eager" decoding="async"></a><span class="rishi-text">Rishi</span>.</span></h1>
                     <h2>A curiosity-driven industrial designer exploring the bridge between technology, aesthetics and user experience.<br class="intro-location-break"><span class="location-text">Currently based in <span class="blinking-dot">●</span>&nbsp;<span class="bold-white">Delft, The Netherlands</span></span></h2>
                 </div>
             </div>
@@ -68,7 +61,7 @@
                     <div class="project-card">
                         <a href="patch.html" class="project-link">
                             <div class="project-image-container square">
-                                <img src="Projects/patch/patch thumbnail.jpg" alt="Patch Audio" class="project-image" loading="eager" fetchpriority="high">
+                                <img src="Projects/patch/patch thumbnail.home-1600.jpg" srcset="Projects/patch/patch thumbnail.home-900.jpg 900w, Projects/patch/patch thumbnail.home-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, calc(100vw - 180px)" alt="Patch Audio" class="project-image" width="1600" height="835" loading="eager" fetchpriority="high">
                                 <div class="project-tag">Graduation Project</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -82,7 +75,7 @@
                     <div class="project-card">
                         <a href="MMM.html" class="project-link">
                             <div class="project-image-container landscape">
-                                <img src="Projects/MMM/MMM Thumbnail.jpg" alt="Headway - Migraine Management System" class="project-image" loading="lazy" decoding="async">
+                                <img src="Projects/MMM/MMM Thumbnail.jpg" alt="Headway - Migraine Management System" class="project-image" width="4800" height="2834" loading="lazy" decoding="async">
                                 <div class="project-tag">Concept</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -96,7 +89,7 @@
                     <div class="project-card">
                         <a href="Semi.html" class="project-link">
                             <div class="project-image-container landscape">
-                                <img src="Projects/Semi/semi thumbnail alt.jpg" alt="Semi" class="project-image" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, 50vw">
+                                <img src="Projects/Semi/semi thumbnail alt.home-1600.jpg" srcset="Projects/Semi/semi thumbnail alt.home-900.jpg 900w, Projects/Semi/semi thumbnail alt.home-1600.jpg 1600w" alt="Semi" class="project-image" width="1600" height="1129" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, 50vw">
                                 <div class="project-tag">In Market</div>
                                 <div class="project-overlay">
                                     <div class="project-content">
@@ -109,7 +102,7 @@
 
                     <div class="project-card coming-soon-card">
                         <div class="project-image-container landscape">
-                            <img src="Projects/lumin/lumin.jpg" alt="Liminal Project" class="project-image" loading="lazy" decoding="async">
+                            <img src="Projects/lumin/lumin.home-1600.jpg" srcset="Projects/lumin/lumin.home-900.jpg 900w, Projects/lumin/lumin.home-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, 50vw" alt="Liminal Project" class="project-image" width="1600" height="835" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Concept</div>
                             <div class="project-overlay">
@@ -122,7 +115,7 @@
 
                     <div class="project-card coming-soon-card">
                         <div class="project-image-container landscape">
-                            <img src="Projects/pawtrail/pawtrail thumbnail.jpg" alt="Pawtrail - Pet travel tracking" class="project-image" loading="lazy" decoding="async">
+                            <img src="Projects/pawtrail/pawtrail thumbnail.jpg" alt="Pawtrail - Pet travel tracking" class="project-image" width="4800" height="2834" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Beta Testing</div>
                             <div class="project-overlay">
@@ -135,7 +128,7 @@
 
                     <div class="project-card guidely-card coming-soon-card">
                         <div class="project-image-container square">
-                            <img src="Projects/Guidely/guidley thumbnail.jpg" alt="Guidely Project" class="project-image" loading="lazy" decoding="async">
+                            <img src="Projects/Guidely/guidley thumbnail.home-1600.jpg" srcset="Projects/Guidely/guidley thumbnail.home-900.jpg 900w, Projects/Guidely/guidley thumbnail.home-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, 50vw" alt="Guidely Project" class="project-image" width="1600" height="945" loading="lazy" decoding="async">
                             <div class="coming-soon-label">Coming soon</div>
                             <div class="project-tag">Concept</div>
                             <div class="project-overlay">
@@ -174,7 +167,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    
+    <script src="script.js?v=2.0"></script>
+
 </body>
 </html>

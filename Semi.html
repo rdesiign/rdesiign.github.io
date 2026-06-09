@@ -15,19 +15,15 @@
             }
         })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="styles.css?v=3.8">
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
+    <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
+    <link rel="mask-icon" href="Assets/favicon/favicon black.svg" color="#000000">
     <!-- Preload critical hero image -->
     <link rel="preload" href="Projects/Semi/Semi Hero.jpg" as="image">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
-    <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
-    <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
-    <link rel="apple-touch-icon" sizes="180x180" href="Assets/master-logo.png?v=2.7">
-    <link rel="apple-touch-icon" sizes="192x192" href="Assets/favicon/web-app-manifest-192x192.png?v=2.7">
-    <link rel="apple-touch-icon" sizes="512x512" href="Assets/favicon/web-app-manifest-512x512.png?v=2.7">
-    <link rel="shortcut icon" type="image/x-icon" href="Assets/favicon/favicon black 180 x 180.ico?v=2.7">
-    <link rel="mask-icon" href="Assets/favicon/favicon.svg" color="#000000">
     <style>
         .semi-intro-shell {
             margin-left: 65px;
@@ -456,12 +452,12 @@
         </a>
     </div>
 
-    <!-- Button Stack (injected by script.js) -->
+    <!-- Button Stack (injected by script.js?v=2.0) -->
     <div id="button-stack"></div>
 
     <!-- Header Image Section - Full width with proper image fit -->
     <section id="header" class="section" style="padding: 0 !important; margin: 0 !important; width: 100vw !important; max-width: none !important; overflow: hidden !important;">
-        <img src="Projects/Semi/Semi Hero.jpg" alt="Semi - Beginner's Cooktop Header" class="header-image" style="width: 100%; height: auto; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover; object-position: center 70%;" loading="eager" fetchpriority="high">
+        <img src="Projects/Semi/Semi Hero.jpg" alt="Semi - Beginner's Cooktop Header" class="header-image" width="4800" height="2834" style="width: 100%; height: auto; display: block !important; margin: 0 !important; padding: 0 !important; max-width: none !important; object-fit: cover; object-position: center 70%;" loading="eager" fetchpriority="high">
     </section>
 
     <!-- Project Content Section -->
@@ -506,7 +502,7 @@
     <section id="research-question" class="section" style="padding-top: 120px; padding-bottom: 80px;">
         <div class="container" style="padding: 0 60px;">
             <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
-                <img src="Projects/Semi/semi research question.jpg" alt="Semi Research Question" class="semi-mobile-full-bleed" style="width: 100%; display: block; border-radius: 8px;" loading="lazy">
+                <img width="2400" height="1500" src="Projects/Semi/semi research question.web.jpg" alt="Semi Research Question" class="semi-mobile-full-bleed" style="width: 100%; display: block; border-radius: 8px;" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -521,10 +517,10 @@
                 <!-- Side by side images -->
                 <div class="semi-story-gallery" style="display: flex; gap: 8px; margin-top: 30px;">
                     <div style="flex: 1; overflow: hidden;">
-                        <img src="Projects/Semi/beginners story.jpg" alt="Beginner's Story" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy">
+                        <img width="1800" height="2100" src="Projects/Semi/beginners story.jpg" alt="Beginner's Story" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                     </div>
                     <div style="flex: 1; overflow: hidden;">
-                        <img src="Projects/Semi/concept direction.jpg" alt="Concept Direction" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                        <img width="1800" height="2100" src="Projects/Semi/concept direction.jpg" alt="Concept Direction" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -540,28 +536,28 @@
             <div class="semi-concept-grid" style="display: flex; justify-content: space-between; margin-left: 65px; max-width: calc(100% - 130px); gap: 30px;">
                 <!-- Recipe Library -->
                 <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="recipe-library-icon" class="semi-concept-icon" src="Projects/Semi/recipe library white.png" alt="Recipe Library Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
+                    <img width="1024" height="1024" id="recipe-library-icon" class="semi-concept-icon" src="Projects/Semi/recipe library white.png" alt="Recipe Library Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Recipe Library</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Personalised recipe database tailored to your skill level and ingredients to reduce decision stress.</p>
                 </div>
                 
                 <!-- Guided Cooking -->
                 <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="guided-cooking-icon" class="semi-concept-icon" src="Projects/Semi/guide cooking white.png" alt="Guided Cooking Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
+                    <img width="1024" height="1024" id="guided-cooking-icon" class="semi-concept-icon" src="Projects/Semi/guide cooking white.png" alt="Guided Cooking Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Guided Cooking</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Step-by-step guidance that reduces anxiety and builds cooking confidence.</p>
                 </div>
                 
                 <!-- Built-in Weighing Scale -->
                 <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="weighing-scale-icon" class="semi-concept-icon" src="Projects/Semi/weighing scale white.png" alt="Built-in Weighing Scale Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
+                    <img width="1024" height="1024" id="weighing-scale-icon" class="semi-concept-icon" src="Projects/Semi/weighing scale white.png" alt="Built-in Weighing Scale Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Built-in Weighing Scale</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Integrated scale for accurate ingredient measurement and portion control.</p>
                 </div>
                 
                 <!-- Temperature Control -->
                 <div class="semi-concept-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img id="temperature-control-icon" class="semi-concept-icon" src="Projects/Semi/temp control white.png" alt="Temperature Control Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
+                    <img width="1024" height="1024" id="temperature-control-icon" class="semi-concept-icon" src="Projects/Semi/temp control white.png" alt="Temperature Control Icon" style="width: 280px; height: 280px; display: block; object-fit: cover; border-radius: 8px; margin-bottom: 20px;" loading="lazy" decoding="async">
                     <h4 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">Temperature Control</h4>
                     <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); max-width: 200px; margin: 0 auto;">Automatic temperature monitoring and adjustment for consistent cooking results.</p>
                 </div>
@@ -578,10 +574,10 @@
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">The aesthetic aimed for a “smart” look, inspired by design patterns from devices like smartphones, laptops, and smart home interfaces. Sketches and CAD were developed in parallel, guided by the mood board and manufacturing constraints.</p>
                 <div class="semi-ideation-carousel" id="semi-ideation-carousel" aria-label="Semi ideation image carousel">
                     <div class="semi-ideation-slide is-active">
-                        <img src="Projects/Semi/semi ideation.jpg" alt="Semi ideation sketches and CAD development" loading="lazy" decoding="async">
+                        <img width="3600" height="2100" src="Projects/Semi/semi ideation.jpg" alt="Semi ideation sketches and CAD development" loading="lazy" decoding="async">
                     </div>
                     <div class="semi-ideation-slide">
-                        <img src="Projects/Semi/semi prototypes overview.jpg" alt="Semi physical prototypes and development models" loading="lazy" decoding="async">
+                        <img width="2400" height="1400" src="Projects/Semi/semi prototypes overview.web.jpg" alt="Semi physical prototypes and development models" loading="lazy" decoding="async">
                     </div>
                     <button class="semi-ideation-nav carousel-arrow prev" type="button" aria-label="Show previous ideation image">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -605,7 +601,7 @@
                 <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); font-weight: bold;">Introducing Semi</h3>
                 <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 30px;">Semi is a supportive cooking system that helps remove uncertainty, making everyday cooking feel confident and effortless.</p>
                 <div class="progressive-image">
-                    <img src="Projects/Semi/semi introduction.jpg" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy" onerror="console.error('Failed to load semi introduction.jpg:', this.src); this.style.border='3px solid red'; this.alt='IMAGE LOAD FAILED';">
+                    <img width="2400" height="2117" src="Projects/Semi/semi introduction.web.jpg" alt="Semi Introduction" style="width: 100%; display: block; border-radius: 8px;" loading="lazy" onerror="console.error('Failed to load semi introduction.jpg:', this.src); this.style.border='3px solid red'; this.alt='IMAGE LOAD FAILED';" decoding="async">
                 </div>
             </div>
         </div>
@@ -624,7 +620,7 @@
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">A curated recipe library tailored to skill level and available ingredients, reducing decision-making time and simplifying the start of any meal.</p>
                         </div>
                         <div style="flex: 1;">
-                            <img src="Projects/Semi/app connection.jpg" alt="Recipe Library" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                            <img width="2700" height="2100" src="Projects/Semi/app connection.jpg" alt="Recipe Library" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                         </div>
                     </div>
                     
@@ -634,10 +630,10 @@
                             <!-- Carousel container -->
                             <div class="carousel-container" style="position: relative; width: 100%; height: auto; border-radius: 8px; overflow: hidden;">
                                 <div class="carousel-slide" style="display: none; width: 100%;">
-                                    <img src="Projects/Semi/temperature control.png" alt="Temperature Control" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                                    <img width="1800" height="1400" src="Projects/Semi/temperature control.web.jpg" alt="Temperature Control" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide" style="display: none; width: 100%;">
-                                    <img src="Projects/Semi/ext temperature probe.png" alt="External Temperature Probe" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                                    <img width="1800" height="1400" src="Projects/Semi/ext temperature probe.web.jpg" alt="External Temperature Probe" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                                 </div>
                                 
                                 <!-- Previous arrow -->
@@ -726,7 +722,7 @@
                             <p style="font-size: 1rem; line-height: 1.6; color: var(--text-primary);">Semi comes with a built-in weighing scale, telling you exactly what to add and how much, while cooking your next meal.</p>
                         </div>
                         <div class="semi-mobile-image" style="flex: 1;">
-                            <img src="Projects/Semi/what to add.jpg" alt="What to Add" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                            <img width="2700" height="2100" src="Projects/Semi/what to add.jpg" alt="What to Add" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -740,13 +736,13 @@
             <div class="semi-content" style="margin-left: 65px; max-width: calc(100% - 130px);">
                 <div class="semi-process-gallery" style="display: flex; gap: 15px; margin-bottom: 28px;">
                     <div style="flex: 1; border-radius: 8px; overflow: hidden;">
-                        <img src="Projects/Semi/smei cmf.jpg" alt="Semi CMF" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
+                        <img width="4350" height="2834" src="Projects/Semi/smei cmf.jpg" alt="Semi CMF" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                     </div>
                     <div style="flex: 1; border-radius: 8px; overflow: hidden;">
-                        <img src="Projects/Semi/semi front view.jpg" alt="Semi Front View" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
+                        <img width="2400" height="1563" src="Projects/Semi/semi front view.web.jpg" alt="Semi Front View" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                     </div>
                 </div>
-                <img src="Projects/Semi/closing shot.jpg" alt="Closing Shot" style="width: 100%; display: block; border-radius: 8px;" loading="lazy" decoding="async">
+                <img width="4800" height="2834" src="Projects/Semi/closing shot.jpg" alt="Closing Shot" style="width: 100%; display: block; border-radius: 8px;" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -760,33 +756,33 @@
                 <!-- First Row of Prototype Images -->
                 <div class="semi-process-gallery" style="display: flex; gap: 15px; margin-bottom: 15px;">
                     <div style="flex: 1;">
-                        <img src="Projects/Semi/prototype 1.png" alt="Prototype 1" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
+                        <img width="1800" height="1800" src="Projects/Semi/prototype 1.web.jpg" alt="Prototype 1" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
                     </div>
                     <div style="flex: 1;">
-                        <img src="Projects/Semi/prototype 2.png" alt="Prototype 2" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
+                        <img width="1080" height="1080" src="Projects/Semi/prototype 2.png" alt="Prototype 2" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
                     </div>
                     <div style="flex: 1;">
-                        <img src="Projects/Semi/semi closeup .jpg" alt="Prototype 3" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
+                        <img width="1524" height="1080" src="Projects/Semi/semi closeup .jpg" alt="Prototype 3" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;" loading="lazy" decoding="async">
                     </div>
                 </div>
                 
                 <!-- Second Row with GIFs -->
                 <div class="semi-process-gallery" style="display: flex; gap: 15px;">
                     <div style="flex: 1;">
-                        <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
-                            <source src="Projects/Semi/printing.mp4?v=1.0" type="video/mp4">
+                        <video autoplay muted loop playsinline preload="none" data-deferred-video style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
+                            <source data-src="Projects/Semi/printing.mp4?v=1.0" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <div style="flex: 1;">
-                        <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
-                            <source src="Projects/Semi/weighing.mp4?v=1.0" type="video/mp4">
+                        <video autoplay muted loop playsinline preload="none" data-deferred-video style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
+                            <source data-src="Projects/Semi/weighing.mp4?v=1.0" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <div style="flex: 1;">
-                        <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
-                            <source src="Projects/Semi/cooking.mp4?v=1.0" type="video/mp4">
+                        <video autoplay muted loop playsinline preload="none" data-deferred-video style="width: 100%; height: auto; display: block; border-radius: 8px; aspect-ratio: 1/1; object-fit: cover;">
+                            <source data-src="Projects/Semi/cooking.mp4?v=1.0" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -819,7 +815,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2.0"></script>
 
     <!-- Ideation Carousel -->
     <script>
