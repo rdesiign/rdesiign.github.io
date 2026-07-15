@@ -25,6 +25,7 @@ This document captures the current visual and interaction language of the portfo
 ## Layout Character
 
 - The homepage now uses a structured, editorial composition with strong spacing, a slim floating header, and clear sectional breaks.
+- The floating header navigation is a persistent compact pill ordered About, Work, and Email. It does not use expandable plus/minus controls or separate contact icon buttons.
 - Project presentation is image-first and card-based.
 - Rounded cards and softened container shapes are part of the current interface language.
 - Unavailable homepage projects may use a persistent subdued thumbnail tint with centered uppercase "Coming soon" text.
