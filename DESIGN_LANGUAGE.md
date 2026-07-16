@@ -42,8 +42,8 @@ This document captures the current visual and interaction language of the portfo
 ## Color And Theme
 
 - Stick to the colors currently used in the repository.
-- The current homepage experience uses a light neutral foundation with soft pastel project panels.
-- Preserve the existing neutral foundation and current accent usage unless a change is explicitly approved.
+- The current site experience uses a black foundation with soft pastel project panels on the homepage.
+- Preserve the existing black foundation and current accent usage unless a change is explicitly approved.
 - Do not introduce new brand colors or shift the visual temperature without discussion.
 
 ## Typography

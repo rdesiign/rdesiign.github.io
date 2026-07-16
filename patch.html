@@ -7,12 +7,7 @@
     <meta name="description" content="Patch Audio - industrial design exploration project by Rishi Ramesh">
     <script>
         (function() {
-            try {
-                var savedTheme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } catch (error) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
+            document.documentElement.setAttribute('data-theme', 'dark');
         })();
     </script>
     <link rel="stylesheet" href="styles.css?v=3.9">
